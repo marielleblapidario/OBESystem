@@ -23,6 +23,38 @@
         <servlet-name>ViewProgramList</servlet-name>
         <servlet-class>controller.ViewProgramList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewCurriculumList</servlet-name>
+        <servlet-class>controller.ViewCurriculumList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCourseList</servlet-name>
+        <servlet-class>controller.ViewCourseList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCreateProgram</servlet-name>
+        <servlet-class>controller.ViewCreateProgram</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCreateCurriculum</servlet-name>
+        <servlet-class>controller.ViewCreateCurriculum</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCreateCourse</servlet-name>
+        <servlet-class>controller.ViewCreateCourse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSearchPA</servlet-name>
+        <servlet-class>controller.ViewSearchPA</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSearchPO</servlet-name>
+        <servlet-class>controller.ViewSearchPO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewSearchPI</servlet-name>
+        <servlet-class>controller.ViewSearchPI</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -42,6 +74,38 @@
     <servlet-mapping>
         <servlet-name>ViewProgramList</servlet-name>
         <url-pattern>/ViewProgramList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCurriculumList</servlet-name>
+        <url-pattern>/ViewCurriculumList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCourseList</servlet-name>
+        <url-pattern>/ViewCourseList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCreateProgram</servlet-name>
+        <url-pattern>/ViewCreateProgram</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCreateCurriculum</servlet-name>
+        <url-pattern>/ViewCreateCurriculum</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCreateCourse</servlet-name>
+        <url-pattern>/ViewCreateCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSearchPA</servlet-name>
+        <url-pattern>/ViewSearchPA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSearchPO</servlet-name>
+        <url-pattern>/ViewSearchPO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSearchPI</servlet-name>
+        <url-pattern>/ViewSearchPI</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

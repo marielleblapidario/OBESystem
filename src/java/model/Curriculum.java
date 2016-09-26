@@ -22,6 +22,9 @@ public class Curriculum {
     private String description;
     private int contributor;
     
+    private String contributorFirstName;
+    private String contributorLastName;
+    
     private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
@@ -163,6 +166,34 @@ public class Curriculum {
      */
     public void setFormatter(DateFormat formatter) {
         this.formatter = formatter;
+    }
+
+    /**
+     * @return the contributorFirstName
+     */
+    public String getContributorFirstName() {
+        return contributorFirstName;
+    }
+
+    /**
+     * @param contributorFirstName the contributorFirstName to set
+     */
+    public void setContributorFirstName(String contributorFirstName) {
+        this.contributorFirstName = contributorFirstName;
+    }
+
+    /**
+     * @return the contributorLastName
+     */
+    public String getContributorLastName() {
+        return contributorLastName;
+    }
+
+    /**
+     * @param contributorLastName the contributorLastName to set
+     */
+    public void setContributorLastName(String contributorLastName) {
+        this.contributorLastName = contributorLastName;
     }
     
 }

@@ -24,6 +24,11 @@ public class PI {
     private int contributor;
     private int checker;
     
+    private String contributorFirstName;
+    private String contributorLastName;
+    private String checkerFirstName;
+    private String checkerLastName;
+    
     private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
@@ -180,6 +185,62 @@ public class PI {
      */
     public void setFormatter(DateFormat formatter) {
         this.formatter = formatter;
+    }
+
+    /**
+     * @return the contributorFirstName
+     */
+    public String getContributorFirstName() {
+        return contributorFirstName;
+    }
+
+    /**
+     * @param contributorFirstName the contributorFirstName to set
+     */
+    public void setContributorFirstName(String contributorFirstName) {
+        this.contributorFirstName = contributorFirstName;
+    }
+
+    /**
+     * @return the contributorLastName
+     */
+    public String getContributorLastName() {
+        return contributorLastName;
+    }
+
+    /**
+     * @param contributorLastName the contributorLastName to set
+     */
+    public void setContributorLastName(String contributorLastName) {
+        this.contributorLastName = contributorLastName;
+    }
+
+    /**
+     * @return the checkerFirstName
+     */
+    public String getCheckerFirstName() {
+        return checkerFirstName;
+    }
+
+    /**
+     * @param checkerFirstName the checkerFirstName to set
+     */
+    public void setCheckerFirstName(String checkerFirstName) {
+        this.checkerFirstName = checkerFirstName;
+    }
+
+    /**
+     * @return the checkerLastName
+     */
+    public String getCheckerLastName() {
+        return checkerLastName;
+    }
+
+    /**
+     * @param checkerLastName the checkerLastName to set
+     */
+    public void setCheckerLastName(String checkerLastName) {
+        this.checkerLastName = checkerLastName;
     }
     
 }
