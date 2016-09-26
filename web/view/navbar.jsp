@@ -126,7 +126,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="create_IGO.jsp"><i class="fa fa-circle-o"></i>Institutional Graduate Attributes</a></li>
-                                <li><a href="view_curriculum_list.jsp"><i class="fa fa-circle-o"></i>Programs</a></li>
+                                <li><a href="/OBESystem/ViewProgramList"><i class="fa fa-circle-o"></i>Programs</a></li>
                                 <li><a href="create_curriculum.jsp"><i class="fa fa-circle-o"></i>Curriculums</a></li>
                                 <li><a href="create_GO.jsp"><i class="fa fa-circle-o"></i>Courses</a></li>
                                 <li><a href="map_GO_to_IGO.jsp"><i class="fa fa-circle-o"></i>Map</a></li>

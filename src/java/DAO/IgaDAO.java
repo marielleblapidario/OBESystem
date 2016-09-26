@@ -63,7 +63,7 @@ public class IgaDAO {
             pstmt.setInt(4, newIGA.getContributor());
             pstmt.setString(5, newIGA.getCodeIGA());
 
-            int rows = pstmt.executeUpdate();
+            pstmt.executeUpdate();
             pstmt.close();
             conn.close();
             return true;
@@ -80,12 +80,12 @@ public class IgaDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT codeIGA, description, "
-                    + "remarks, dateMade, dateUpdated, "
-                    + "I.contributor, U.firstName, U.lastName\n"
+            String query = "SELECT codeIGA, description, remarks, dateMade, "
+                    + "dateUpdated, I.contributor, U.firstName, U.lastName\n"
                     + "FROM IGA I\n"
                     + "JOIN USER U\n"
-                    + "ON I.contributor = U.userID;";
+                    + "ON I.contributor = U.userID\n"
+                    + "WHERE I.isDeleted IS NULL;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             ResultSet rs = pstmt.executeQuery();
@@ -110,7 +110,28 @@ public class IgaDAO {
         }
         return null;
     }
-    
+
+    public boolean deleteIGA(String codeIGA) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "UPDATE IGA\n"
+                    + "SET isDELETED = TRUE\n"
+                    + "WHERE codeIGA = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            
+            pstmt.setString(1, codeIGA);
+            
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(IgaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     public String getLastCodeIGA() throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();

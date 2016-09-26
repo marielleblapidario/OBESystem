@@ -16,12 +16,12 @@
         <servlet-class>controller.EncodeIGA</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SetIGA</servlet-name>
-        <servlet-class>controller.SetIGA</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ViewIGA</servlet-name>
         <servlet-class>controller.ViewIGA</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewProgramList</servlet-name>
+        <servlet-class>controller.ViewProgramList</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -36,12 +36,12 @@
         <url-pattern>/EncodeIGA</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SetIGA</servlet-name>
-        <url-pattern>/SetIGA</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ViewIGA</servlet-name>
         <url-pattern>/ViewIGA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProgramList</servlet-name>
+        <url-pattern>/ViewProgramList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
