@@ -36,7 +36,7 @@ public class CurriculumDAO {
             pstmt.setString(5, newCurriculum.getDescription());
             pstmt.setInt(6, newCurriculum.getContributor());
 
-            int rows = pstmt.executeUpdate();
+            pstmt.executeUpdate();
             pstmt.close();
             conn.close();
             return true;
@@ -57,7 +57,7 @@ public class CurriculumDAO {
             pstmt.setString(1, newMap.getCodeCurriculum());
             pstmt.setString(2, newMap.getCodeCourse());
 
-            int rows = pstmt.executeUpdate();
+            pstmt.executeUpdate();
             pstmt.close();
             conn.close();
             return true;
@@ -75,7 +75,6 @@ public class CurriculumDAO {
                     + "SET isDeleted = TRUE\n"
                     + "WHERE codeCurriculum = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-
             pstmt.setString(1, codeCurriculum);
 
             pstmt.executeUpdate();

@@ -39,7 +39,7 @@
                 <section class="content">
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Search Program for Mapping</h3>
+                            <h3 class="box-title">Search Program for Mapping PA to IGA</h3>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
@@ -48,30 +48,21 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">College</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected">College of Computer Studies</option>
-                                            <option>College of Liberal Arts</option>
-                                            <option>College of Science</option>
-                                            <option>College of Engineering</option>
-                                            <option>College of Education</option>
-                                            <option>School of Economics</option>
-                                            <option>College of Business</option>
+                                        <select id = "select-college" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Course</label>
+                                    <label class="col-sm-2 control-label">Program</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected">BS in Information Systems</option>
-                                            <option>BS Computer Science</option>
+                                        <select id="select-program" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">  
-                                <button type="submit" class="btn btn-success pull-right">Confirm</button>
+                               <a id ="confirm-btn" href ="/OBESystem/RedirectToMapPAtoIGA"><button type="button" class="btn btn-success pull-right">Confirm</button></a>
                             </div>
                             <!-- /.box-footer -->
                         </form>
@@ -108,6 +99,8 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
+        <!--Search-->
+        <script src="/OBESystem/js/search_program.js"></script>
         <!-- Page script -->
         <script>
             $(function () {

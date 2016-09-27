@@ -36,14 +36,16 @@
         <div class="wrapper">
             <div class="content-wrapper">
                 <!-- form start -->
-                <form class="form-horizontal">
+                <form action="" method="post" name="">>
                     <!-- Main content -->
                     <section class="content">
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Create Performance Indicators</h3>
-                                <h5>Program: BS Information System</h5>
-                                <h5>College: College of Computer Studies</h5>
+                                <h3 class="box-title">Create Performance Indicators</h3><br>
+                                <h5>Program: <span id = "program-title"></span></h5>
+                                <input class="hidden" id="hidden-program-title" name="program-title">
+                                <h5>College: <span id = "college-title" ></span></h5>
+                                <input class="hidden" id="hidden-college-title" name="college-title">
                                 <br>
 
                                 <label>Approver</label>
@@ -113,6 +115,8 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
+        <!-- stored attributes from search-->
+        <script src="/OBESystem/js/store_program_search.js"></script>
         <!-- Page script -->
         <script>
             $(function () {

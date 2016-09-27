@@ -133,7 +133,7 @@
                                         </span>
                                     </a>
                                     <ul class="treeview-menu" style="display: none;">
-                                        <li><a href="/OBESystem/ViewProgramList"><i class="fa fa-circle-o"></i>Program List</a></li>
+                                        <li><a href="/OBESystem/RedirectToProgramList"><i class="fa fa-circle-o"></i>Program List</a></li>
                                         <li class="">
                                             <a href="#"><i class="fa fa-circle-o"></i>Creation
                                                 <span class="pull-right-container">
@@ -141,9 +141,9 @@
                                                 </span>
                                             </a>
                                             <ul class="treeview-menu" style="display: none;">
-                                                <li><a href="/OBESystem/ViewSearchPA"><i class="fa fa-circle-o"></i>Program Attribute</a></li>
-                                                <li><a href="/OBESystem/ViewSearchPO"><i class="fa fa-circle-o"></i>Program Outcome</a></li>
-                                                <li><a href="/OBESystem/ViewSearchPI"><i class="fa fa-circle-o"></i>Performance Indicator</a></li>
+                                                <li><a href="/OBESystem/RedirectToSearchPA"><i class="fa fa-circle-o"></i>Program Attribute</a></li>
+                                                <li><a href="/OBESystem/RedirectToSearchPO"><i class="fa fa-circle-o"></i>Program Outcome</a></li>
+                                                <li><a href="/OBESystem/RedirectToSearchPI"><i class="fa fa-circle-o"></i>Performance Indicator</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -157,11 +157,11 @@
                                         </span>
                                     </a>
                                     <ul class="treeview-menu" style="display: none;">
-                                        <li><a href="#"><i class="fa fa-circle-o"></i>PA to IGA</a></li>
-                                        <li><a href="#"><i class="fa fa-circle-o"></i>PO to PI</a></li>
-                                        <li><a href="#"><i class="fa fa-circle-o"></i>Curriculum</a></li>
-                                        <li><a href="#"><i class="fa fa-circle-o"></i>CO to PI</a></li>
-                                        <li><a href="#"><i class="fa fa-circle-o"></i>Assessment to CO</a></li>
+                                        <li><a href="/OBESystem/RedirectToSearchMapPAtoIGA"><i class="fa fa-circle-o"></i>PA to IGA</a></li>
+                                        <li><a href="/OBESystem/RedirectToSearchMapPOtoPA"><i class="fa fa-circle-o"></i>PO to PA</a></li>
+                                        <li><a href="/OBESystem/"><i class="fa fa-circle-o"></i>Curriculum</a></li>
+                                        <li><a href="/OBESystem/"><i class="fa fa-circle-o"></i>CO to PI</a></li>
+                                        <li><a href="/OBESystem/"><i class="fa fa-circle-o"></i>Assessment to CO</a></li>
                                     </ul>
                                 </li>
                             </ul>

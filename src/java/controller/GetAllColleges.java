@@ -5,12 +5,14 @@
  */
 package controller;
 
+import DAO.CollegeDAO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class ViewSearchPA extends BaseServlet {
+public class GetAllColleges extends BaseServlet {
 
     /**
      *
@@ -29,10 +31,14 @@ public class ViewSearchPA extends BaseServlet {
      */
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/view/search_PA.jsp");
-        request.setAttribute("sucesss", "success");
-        rd.forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");        
+        try(PrintWriter out = response.getWriter()){
+           Gson g = new Gson();
+           String s = g.toJson(new CollegeDAO().getAllCollege());
+           out.printf(s);
+        } catch (ParseException ex) {
+            Logger.getLogger(GetAllColleges.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

@@ -17,6 +17,8 @@ public class User {
     private String position;
     private String gender;
     private String password;
+    
+    private String fullName;
 
     /**
      * @return the userID
@@ -114,6 +116,20 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * @return the fullName
+     */
+    public String getFullName() {
+        return fullName;
+    }
+
+    /**
+     * @param fullName the fullName to set
+     */
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
     
 }

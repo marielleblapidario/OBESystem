@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class ViewSearchPI extends BaseServlet {
+public class RedirectToCreatePA extends BaseServlet {
 
     /**
      *
@@ -31,7 +31,7 @@ public class ViewSearchPI extends BaseServlet {
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/view/search_PA.jsp");
+        RequestDispatcher rd = context.getRequestDispatcher("/view/create_PA.jsp");
         request.setAttribute("sucesss", "success");
         rd.forward(request, response);
     }

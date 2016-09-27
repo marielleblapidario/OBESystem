@@ -25,13 +25,11 @@ public class PA {
     private int contributor;
     private int checker;
     
-    private String contributorFirstName;
-    private String contributorLastName;
-    private String checkerFirstName;
-    private String checkerLastName;
+    private String programTitle;
+    private String college;
+    private String contributorName;
+    private String checkerName;
     
-    private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
     /**
      * @return the codePA
      */
@@ -113,9 +111,10 @@ public class PA {
      * @param dateMade the dateMade to set
      */
     public void setDateMade() throws ParseException{
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date currentDate = new java.util.Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date currentDate1 = getFormatter().parse(df.format(currentDate));
+        java.util.Date currentDate1 = formatter.parse(df.format(currentDate));
         java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
         this.dateMade = sqlDate;
     }
@@ -135,9 +134,10 @@ public class PA {
      * @param dateUpdated the dateUpdated to set
      */
     public void setDateUpdated() throws ParseException{
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date currentDate = new java.util.Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date currentDate1 = getFormatter().parse(df.format(currentDate));
+        java.util.Date currentDate1 = formatter.parse(df.format(currentDate));
         java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
         this.dateUpdated = sqlDate;
     }
@@ -175,73 +175,58 @@ public class PA {
     }
 
     /**
-     * @return the formatter
+     * @return the programTitle
      */
-    public DateFormat getFormatter() {
-        return formatter;
+    public String getProgramTitle() {
+        return programTitle;
     }
 
     /**
-     * @param formatter the formatter to set
+     * @param programTitle the programTitle to set
      */
-    public void setFormatter(DateFormat formatter) {
-        this.formatter = formatter;
+    public void setProgramTitle(String programTitle) {
+        this.programTitle = programTitle;
     }
 
     /**
-     * @return the contributorFirstName
+     * @return the college
      */
-    public String getContributorFirstName() {
-        return contributorFirstName;
+    public String getCollege() {
+        return college;
     }
 
     /**
-     * @param contributorFirstName the contributorFirstName to set
+     * @param college the college to set
      */
-    public void setContributorFirstName(String contributorFirstName) {
-        this.contributorFirstName = contributorFirstName;
+    public void setCollege(String college) {
+        this.college = college;
     }
 
     /**
-     * @return the contributorLastName
+     * @return the contributorName
      */
-    public String getContributorLastName() {
-        return contributorLastName;
+    public String getContributorName() {
+        return contributorName;
     }
 
     /**
-     * @param contributorLastName the contributorLastName to set
+     * @param contributorName the contributorName to set
      */
-    public void setContributorLastName(String contributorLastName) {
-        this.contributorLastName = contributorLastName;
+    public void setContributorName(String contributorName) {
+        this.contributorName = contributorName;
     }
 
     /**
-     * @return the checkerFirstName
+     * @return the checkerName
      */
-    public String getCheckerFirstName() {
-        return checkerFirstName;
+    public String getCheckerName() {
+        return checkerName;
     }
 
     /**
-     * @param checkerFirstName the checkerFirstName to set
+     * @param checkerName the checkerName to set
      */
-    public void setCheckerFirstName(String checkerFirstName) {
-        this.checkerFirstName = checkerFirstName;
+    public void setCheckerName(String checkerName) {
+        this.checkerName = checkerName;
     }
-
-    /**
-     * @return the checkerLastName
-     */
-    public String getCheckerLastName() {
-        return checkerLastName;
-    }
-
-    /**
-     * @param checkerLastName the checkerLastName to set
-     */
-    public void setCheckerLastName(String checkerLastName) {
-        this.checkerLastName = checkerLastName;
-    }
-    
 }

@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Course;
@@ -71,9 +72,9 @@ public class CourseDAO {
         return false;
     }
 
-    public Course searchCourse(String program) throws ParseException {
-        Course course = new Course();
-
+    public ArrayList<Course> searchCourse(String program) throws ParseException {
+        ArrayList<Course> newCourse = new ArrayList<Course>();
+        
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
@@ -81,18 +82,43 @@ public class CourseDAO {
                     + "FROM course\n"
                     + "WHERE program = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-
             pstmt.setString(1, program);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
+                Course course = new Course();
                 course.setCodeCourse(rs.getString("codeCourse"));
                 course.setTitle(rs.getString("title"));
-
+                newCourse.add(course);
             }
             pstmt.close();
             conn.close();
-            return course;
+            return newCourse;
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ArrayList<Course> getAllCourseTitle() throws ParseException {
+        ArrayList<Course> newCourse = new ArrayList<Course>();
+        
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT codeCourse, title\n"
+                    + "FROM course;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Course course = new Course();
+                course.setCodeCourse(rs.getString("codeCourse"));
+                course.setTitle(rs.getString("title"));
+                newCourse.add(course);
+            }
+            pstmt.close();
+            conn.close();
+            return newCourse;
         } catch (SQLException ex) {
             Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -107,9 +133,7 @@ public class CourseDAO {
                     + "SET isDeleted = TRUE\n"
                     + "WHERE codeCourse = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-
             pstmt.setString(1, codeCourse);
-
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();

@@ -56,7 +56,6 @@ public class IgaDAO {
                     + "SET description = ?, remarks = ?, dateUpdated =?, contributor =?\n"
                     + "WHERE codeIGA = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-
             pstmt.setString(1, newIGA.getDescription());
             pstmt.setString(2, newIGA.getRemarks());
             pstmt.setDate(3, newIGA.getDateUpdated());
@@ -74,22 +73,19 @@ public class IgaDAO {
     }
 
     public ArrayList<IGA> getAllIGA() throws ParseException {
-
         ArrayList<IGA> newIGA = new ArrayList<IGA>();
-
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT codeIGA, description, remarks, dateMade, "
-                    + "dateUpdated, I.contributor, U.firstName, U.lastName\n"
+                    + "dateUpdated, I.contributor, "
+                    + "CONCAT(U.firstName, \" \" , U.LastName) as 'contributorName'\n"
                     + "FROM IGA I\n"
                     + "JOIN USER U\n"
                     + "ON I.contributor = U.userID\n"
                     + "WHERE I.isDeleted IS NULL;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-
             ResultSet rs = pstmt.executeQuery();
-
             while (rs.next()) {
                 IGA temp = new IGA();
                 temp.setCodeIGA(rs.getString("codeIGA"));
@@ -98,8 +94,7 @@ public class IgaDAO {
                 temp.setDateMade(rs.getDate("dateMade"));
                 temp.setDateUpdated(rs.getDate("dateUpdated"));
                 temp.setContributor(rs.getInt("contributor"));
-                temp.setContributorFirstName(rs.getString("firstName"));
-                temp.setContributorLastName(rs.getString("lastName"));
+                temp.setContributorName(rs.getString("contributorName"));
                 newIGA.add(temp);
             }
             pstmt.close();
@@ -118,10 +113,8 @@ public class IgaDAO {
             String query = "UPDATE IGA\n"
                     + "SET isDELETED = TRUE\n"
                     + "WHERE codeIGA = ?;";
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            
-            pstmt.setString(1, codeIGA);
-            
+            PreparedStatement pstmt = conn.prepareStatement(query);            
+            pstmt.setString(1, codeIGA);            
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -138,7 +131,6 @@ public class IgaDAO {
         String i = "";
         String query = "SELECT MAX(codeIGA) from IGA";
         PreparedStatement ps = conn.prepareStatement(query);
-
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             i = rs.getString("MAX(codeIGA)");

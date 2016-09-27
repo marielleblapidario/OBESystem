@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class ViewSearchPO extends BaseServlet {
+public class RedirectToSearchPO extends BaseServlet {
 
     /**
      *

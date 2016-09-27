@@ -17,10 +17,8 @@ public class MapPOtoPA {
     private int contributor;
     private int checker;
     
-    private String contributorFirstName;
-    private String contributorLastName;
-    private String checkerFirstName;
-    private String checkerLastName;
+    private String contributorName;
+    private String checkerName;
 
     /**
      * @return the codePO
@@ -107,58 +105,30 @@ public class MapPOtoPA {
     }
 
     /**
-     * @return the contributorFirstName
+     * @return the contributorName
      */
-    public String getContributorFirstName() {
-        return contributorFirstName;
+    public String getContributorName() {
+        return contributorName;
     }
 
     /**
-     * @param contributorFirstName the contributorFirstName to set
+     * @param contributorName the contributorName to set
      */
-    public void setContributorFirstName(String contributorFirstName) {
-        this.contributorFirstName = contributorFirstName;
+    public void setContributorName(String contributorName) {
+        this.contributorName = contributorName;
     }
 
     /**
-     * @return the contributorLastName
+     * @return the checkerName
      */
-    public String getContributorLastName() {
-        return contributorLastName;
+    public String getCheckerName() {
+        return checkerName;
     }
 
     /**
-     * @param contributorLastName the contributorLastName to set
+     * @param checkerName the checkerName to set
      */
-    public void setContributorLastName(String contributorLastName) {
-        this.contributorLastName = contributorLastName;
-    }
-
-    /**
-     * @return the checkerFirstName
-     */
-    public String getCheckerFirstName() {
-        return checkerFirstName;
-    }
-
-    /**
-     * @param checkerFirstName the checkerFirstName to set
-     */
-    public void setCheckerFirstName(String checkerFirstName) {
-        this.checkerFirstName = checkerFirstName;
-    }
-
-    /**
-     * @return the checkerLastName
-     */
-    public String getCheckerLastName() {
-        return checkerLastName;
-    }
-
-    /**
-     * @param checkerLastName the checkerLastName to set
-     */
-    public void setCheckerLastName(String checkerLastName) {
-        this.checkerLastName = checkerLastName;
+    public void setCheckerName(String checkerName) {
+        this.checkerName = checkerName;
     }
 }

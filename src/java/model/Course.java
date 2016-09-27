@@ -24,11 +24,8 @@ public class Course {
     private Date dateUpdated;
     private int contributor;
     
-    private String contributorFirstName;
-    private String contributorLastName;
+    private String contributorName;
     
-    private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
     /**
      * @return the codeCourse
      */
@@ -110,9 +107,10 @@ public class Course {
      * @param dateMade the dateMade to set
      */
     public void setDateMade() throws ParseException{
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date currentDate = new java.util.Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date currentDate1 = getFormatter().parse(df.format(currentDate));
+        java.util.Date currentDate1 = formatter.parse(df.format(currentDate));
         java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
         this.dateMade = sqlDate;
     }
@@ -132,9 +130,10 @@ public class Course {
      * @param dateUpdated the dateUpdated to set
      */
     public void setDateUpdated() throws ParseException{
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date currentDate = new java.util.Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date currentDate1 = getFormatter().parse(df.format(currentDate));
+        java.util.Date currentDate1 = formatter.parse(df.format(currentDate));
         java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
         this.dateUpdated = sqlDate;
     }
@@ -158,44 +157,16 @@ public class Course {
     }
 
     /**
-     * @return the formatter
+     * @return the contributorName
      */
-    public DateFormat getFormatter() {
-        return formatter;
+    public String getContributorName() {
+        return contributorName;
     }
 
     /**
-     * @param formatter the formatter to set
+     * @param contributorName the contributorName to set
      */
-    public void setFormatter(DateFormat formatter) {
-        this.formatter = formatter;
-    }
-
-    /**
-     * @return the contributorFirstName
-     */
-    public String getContributorFirstName() {
-        return contributorFirstName;
-    }
-
-    /**
-     * @param contributorFirstName the contributorFirstName to set
-     */
-    public void setContributorFirstName(String contributorFirstName) {
-        this.contributorFirstName = contributorFirstName;
-    }
-
-    /**
-     * @return the contributorLastName
-     */
-    public String getContributorLastName() {
-        return contributorLastName;
-    }
-
-    /**
-     * @param contributorLastName the contributorLastName to set
-     */
-    public void setContributorLastName(String contributorLastName) {
-        this.contributorLastName = contributorLastName;
+    public void setContributorName(String contributorName) {
+        this.contributorName = contributorName;
     }
 }

@@ -42,6 +42,10 @@
                         <!-- /.box-header -->
                         <div class="box-header">
                             <h3 class="box-title">Map Graduate Attributes to Institutional Graduate Attributes</h3><br>
+                            <h5>Program: <span id = "program-title"></span></h5>
+                            <input class="hidden" id="hidden-program-title" name="program-title">
+                            <h5>College: <span id = "college-title" ></span></h5>
+                            <input class="hidden" id="hidden-college-title" name="college-title">
                             <br>
                             <label class="col-sm-2 control-label">Approver</label>
                             <div class="col-sm-10">
@@ -132,6 +136,8 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
+        <!-- stored attributes from search-->
+        <script src="/OBESystem/js/store_program_search.js"></script>
         <!-- Page script -->
         <script>
             $(function () {

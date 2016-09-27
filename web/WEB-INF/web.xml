@@ -44,16 +44,72 @@
         <servlet-class>controller.ViewCreateCourse</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewSearchPA</servlet-name>
-        <servlet-class>controller.ViewSearchPA</servlet-class>
+        <servlet-name>RedirectToCreateProgram</servlet-name>
+        <servlet-class>controller.RedirectToCreateProgram</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewSearchPO</servlet-name>
-        <servlet-class>controller.ViewSearchPO</servlet-class>
+        <servlet-name>RedirectToProgramList</servlet-name>
+        <servlet-class>controller.RedirectToProgramList</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewSearchPI</servlet-name>
-        <servlet-class>controller.ViewSearchPI</servlet-class>
+        <servlet-name>GetAllCourse</servlet-name>
+        <servlet-class>controller.GetAllCourse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetCollegeByProgram</servlet-name>
+        <servlet-class>controller.GetCollegeByProgram</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetProgramByCollege</servlet-name>
+        <servlet-class>controller.GetProgramByCollege</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllColleges</servlet-name>
+        <servlet-class>controller.GetAllColleges</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToCreatePA</servlet-name>
+        <servlet-class>controller.RedirectToCreatePA</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToCreatePO</servlet-name>
+        <servlet-class>controller.RedirectToCreatePO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToCreatePI</servlet-name>
+        <servlet-class>controller.RedirectToCreatePI</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToMapPAtoIGA</servlet-name>
+        <servlet-class>controller.RedirectToMapPAtoIGA</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToMapPOtoPA</servlet-name>
+        <servlet-class>controller.RedirectToMapPOtoPA</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToSearchMapPAtoIGA</servlet-name>
+        <servlet-class>controller.RedirectToSearchMapPAtoIGA</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToSearchMapPOtoPA</servlet-name>
+        <servlet-class>controller.RedirectToSearchMapPOtoPA</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToSearchPA</servlet-name>
+        <servlet-class>controller.RedirectToSearchPA</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToSearchPI</servlet-name>
+        <servlet-class>controller.RedirectToSearchPI</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToSearchPO</servlet-name>
+        <servlet-class>controller.RedirectToSearchPO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllApprover</servlet-name>
+        <servlet-class>controller.GetAllApprover</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -96,16 +152,72 @@
         <url-pattern>/ViewCreateCourse</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewSearchPA</servlet-name>
-        <url-pattern>/ViewSearchPA</url-pattern>
+        <servlet-name>RedirectToCreateProgram</servlet-name>
+        <url-pattern>/RedirectToCreateProgram</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewSearchPO</servlet-name>
-        <url-pattern>/ViewSearchPO</url-pattern>
+        <servlet-name>RedirectToProgramList</servlet-name>
+        <url-pattern>/RedirectToProgramList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewSearchPI</servlet-name>
-        <url-pattern>/ViewSearchPI</url-pattern>
+        <servlet-name>GetAllCourse</servlet-name>
+        <url-pattern>/GetAllCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetCollegeByProgram</servlet-name>
+        <url-pattern>/GetCollegeByProgram</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetProgramByCollege</servlet-name>
+        <url-pattern>/GetProgramByCollege</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllColleges</servlet-name>
+        <url-pattern>/GetAllColleges</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToCreatePA</servlet-name>
+        <url-pattern>/RedirectToCreatePA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToCreatePO</servlet-name>
+        <url-pattern>/RedirectToCreatePO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToCreatePI</servlet-name>
+        <url-pattern>/RedirectToCreatePI</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToMapPAtoIGA</servlet-name>
+        <url-pattern>/RedirectToMapPAtoIGA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToMapPOtoPA</servlet-name>
+        <url-pattern>/RedirectToMapPOtoPA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToSearchMapPAtoIGA</servlet-name>
+        <url-pattern>/RedirectToSearchMapPAtoIGA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToSearchMapPOtoPA</servlet-name>
+        <url-pattern>/RedirectToSearchMapPOtoPA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToSearchPA</servlet-name>
+        <url-pattern>/RedirectToSearchPA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToSearchPI</servlet-name>
+        <url-pattern>/RedirectToSearchPI</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToSearchPO</servlet-name>
+        <url-pattern>/RedirectToSearchPO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllApprover</servlet-name>
+        <url-pattern>/GetAllApprover</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
