@@ -57,7 +57,7 @@
                                 <br>
                             </div>
                             <div class="box-body table-responsive">
-                                <table class="table table-hover">
+                                <table id="data" class="table table-hover">
                                     <tr>
                                         <th>Code</th>
                                         <th>
@@ -77,31 +77,11 @@
                                         </th>
                                         <th>Tools</th>
                                     </tr>
-                                    <tr>
-                                        <td>PA01</td>
-                                        <td>
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control no-border" id="inputEmail3" placeholder="Program Attribute">
-                                            </div> 
-                                        </td>
-                                        <td>
-                                            <span class="label label-success">approved</span>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control no-border" id="inputEmail3">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></button>
-                                            <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
-                                        </td>
-                                    </tr>
                                 </table>
                                 <br>
                             </div>
                             <div class="box-footer">  
-                                <button type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
+                                <button id="addRowButton" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
                                 <button type="button" class="btn btn-default pull-right">Cancel</button>
                                 <button type="submit" class="btn bg-green pull-right">Send for Approval</button>
                                 <button type="submit" class="btn bg-light-blue pull-right">Save</button>
@@ -149,6 +129,7 @@
         <script src="/OBESystem/js/store_program_search.js"></script>
         <!-- list of approvers -->
         <script src="/OBESystem/js/view_approver_list.js"></script>
+        <script src="/OBESystem/js/create_PA.js"></script>
         
         <!-- Page script -->
         <script>

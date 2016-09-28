@@ -43,55 +43,49 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form class="form-horizontal">
+                        <form action="EncodeProgram" method="post" name="EncodeProgram">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Program Title</label>
+                                    <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
 
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail3" placeholder="BS Information Systems">
+                                        <input name="title" type="text" class="form-control" id="inputEmail3" placeholder="BS Information Systems">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Code</label>
 
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail3" placeholder="BSINSYS">
+                                        <input name="codeProgram" type="text" class="form-control" id="inputEmail3" placeholder="BSINSYS">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">College</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected">College of Computer Studies</option>
-                                            <option>College of Liberal Arts</option>
-                                            <option>College of Science</option>
-                                            <option>College of Engineering</option>
-                                            <option>College of Education</option>
-                                            <option>School of Economics</option>
-                                            <option>College of Business</option>
+                                        <select name="college" id="select-college" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Units</label>
 
-                                    <div class="col-xs-1">
-                                        <input type="number" class="form-control" id="inputEmail3" placeholder="0">
+                                    <div class="col-xs-10">
+                                        <input name="units" type="number" class="form-control" id="inputEmail3" placeholder="0">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                    <div class="form-group"><br>
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        <textarea name="description" class="form-control" rows="3" placeholder="Enter ..."></textarea>
                                     </div>
                                 </div>
 
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">  
-                                <button type="submit" class="btn btn-default pull-right">Cancel</button>
+                                <button type="button" class="btn btn-default pull-right">Cancel</button>
                                 <button type="submit" class="btn btn-success pull-right">Create</button>
                             </div>
                             <!-- /.box-footer -->
@@ -129,6 +123,8 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
+        <!--Search-->
+        <script src="/OBESystem/js/search_program.js"></script>
         <!-- Page script -->
         <script>
             $(function () {

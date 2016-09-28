@@ -77,21 +77,23 @@ public class PaDAO {
         return false;
     }
 
-    public ArrayList<PA> getAllPA() throws ParseException {
+    public ArrayList<PA> getAllPA(String codeProgram) throws ParseException {
         ArrayList<PA> newPA = new ArrayList<PA>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT P.codePA, P.program, prog.title, prog.college, "
                     + "P.description, status, P.remarks, P.contributor, P.checker,\n"
-                    + "CONCAT(checker.firstName, \" \" , checker.LastName  ) as 'checkerName'\n"
+                    + "CONCAT(checker.firstName, \" \" , checker.LastName) as 'checkerName'\n"
                     + "FROM PA P\n"
                     + "JOIN user checker\n"
                     + "ON P.checker = checker.userID\n"
                     + "JOIN program prog\n"
-                    + "ON PA.program = prog.codeProgram\n"
+                    + "ON P.program = prog.codeProgram\n"
                     + "WHERE P.program = ? AND P.isDeleted IS NULL;";
             PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, codeProgram);
+            
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 PA temp = new PA();
@@ -134,13 +136,14 @@ public class PaDAO {
         }
         return false;
     }
-    
-    public String getLastCodePA() throws SQLException {
+
+    public String getLastCodePA(String codeProgram) throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
         String i = "";
-        String query = "SELECT MAX(codePA) from PA";
+        String query = "SELECT MAX(codePA) from PA where program = ?";
         PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, codeProgram);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             i = rs.getString("MAX(codePA)");

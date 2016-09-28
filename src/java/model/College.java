@@ -10,8 +10,8 @@ package model;
  * @author mariellelapidario
  */
 public class College {
+    private int collegeID;
     private String college;
-
     /**
      * @return the college
      */
@@ -24,6 +24,20 @@ public class College {
      */
     public void setCollege(String college) {
         this.college = college;
+    }
+
+    /**
+     * @return the collegeID
+     */
+    public int getCollegeID() {
+        return collegeID;
+    }
+
+    /**
+     * @param collegeID the collegeID to set
+     */
+    public void setCollegeID(int collegeID) {
+        this.collegeID = collegeID;
     }
     
 }

@@ -19,6 +19,7 @@ public class MapPAtoIGA {
     
     private String contributorName;
     private String checkerName;
+    private String program;
 
     /**
      * @return the codePA
@@ -130,6 +131,20 @@ public class MapPAtoIGA {
      */
     public void setCheckerName(String checkerName) {
         this.checkerName = checkerName;
+    }
+
+    /**
+     * @return the program
+     */
+    public String getProgram() {
+        return program;
+    }
+
+    /**
+     * @param program the program to set
+     */
+    public void setProgram(String program) {
+        this.program = program;
     }
     
 }

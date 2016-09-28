@@ -10,7 +10,7 @@ var examaple2 = $('#example2').DataTable({
 
 $(document).ready(function () {
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/OBESystem/ViewProgramList",
         dataType: 'json',
         success: function (data) {
@@ -27,13 +27,15 @@ $(document).ready(function () {
 function addRow(data) {
     var codeProgram = data.codeProgram;
     var title = data.title;
-    var college = data.college;
+    var collegeName = data.collegeName;
+    console.log("college name: " + collegeName);
     var contributorName = data.contributorName;
 
     var tools = "<button type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button>\n\
 <button type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button>\n\
 <button type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>"
-    example1.row.add([codeProgram, title, college, contributorName, tools]);
+    example1.row.add([codeProgram, title, collegeName, contributorName, tools]);
     example1.draw();
+    
 }
 

@@ -5,7 +5,7 @@ getAllCollege();
 getAllProgram();
 
 $(document).ready(function () {
-    
+
     programDropDown.change(function () {
         var program = $('#select-program option:selected').val();
         getCollegeByProgram(program);
@@ -13,7 +13,7 @@ $(document).ready(function () {
     }
     );
     collegeDropDown.change(function () {
-        var college = $('#select-college option:selected').text();
+        var college = $('#select-college option:selected').val();
         getProgramByCollege(college);
 
     }
@@ -22,9 +22,9 @@ $(document).ready(function () {
     $('#confirm-btn').click(function () {
         var programTitle = $('#select-program option:selected').text();
         var programCode = $('#select-program option:selected').val();
-        
-        var college =  $('#select-college option:selected').text();
-        
+
+        var college = $('#select-college option:selected').text();
+
         sessionStorage.setItem("programTitle", programTitle);
         var s = sessionStorage.getItem("programTitle");
         sessionStorage.setItem("programCode", programCode);
@@ -75,7 +75,7 @@ function getCollegeByProgram(program) {
         success: function (data) {
             console.log(data);
             $('#select-college').find('option').remove().end();
-            var s = "<option value = " + data.college + ">" + data.college + "</option>";
+            var s = "<option value = " + data.college + ">" + data.collegeName + "</option>";
             collegeDropDown.append(s);
             getAllCollege();
         },
@@ -103,13 +103,14 @@ function getProgramByCollege(college) {
 }
 
 function addProgram(data) {
-    console.log("Entered addProgram " + data.title);
+    console.log("Entered addProgram: " + data.codeProgram);
     var s = "<option value = " + data.codeProgram + ">" + data.title + "</option>";
     programDropDown.append(s);
 }
 
 function addCollege(data) {
-    var s = "<option value = " + data.college + ">" + data.college + "</option>";
+    console.log("Entered addCollege: " + data.college);
+    var s = "<option value = " + data.collegeID + ">" + data.college + "</option>";
     collegeDropDown.append(s);
 }
 

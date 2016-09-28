@@ -5,10 +5,12 @@
  */
 package controller;
 
+import DAO.PaDAO;
 import DAO.ProgramDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class GetProgramByCollege extends BaseServlet {
+public class GetLastPA extends BaseServlet {
 
     /**
      *
@@ -32,15 +34,17 @@ public class GetProgramByCollege extends BaseServlet {
      */
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");        
-        try(PrintWriter out = response.getWriter()){
-            String SelectedCollege = request.getParameter("SelectedCollege");
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            String SelectedProgram = request.getParameter("SelectedProgram");
             Gson g = new Gson();
-            String s = g.toJson(new ProgramDAO().searchProgram(Integer.parseInt(SelectedCollege)));
-            out.print(s);            
-        } catch (ParseException ex) {
-            Logger.getLogger(GetProgramByCollege.class.getName()).log(Level.SEVERE, null, ex);
+            String s = "";
+            try {
+                s = g.toJson(new PaDAO().getLastCodePA(SelectedProgram));
+            } catch (SQLException ex) {
+                Logger.getLogger(GetLastPA.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            out.print(s);
         }
-        
     }
 }

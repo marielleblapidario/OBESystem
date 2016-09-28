@@ -64,7 +64,7 @@
                         });
                         $(document).on('click', '#deleteRow', function (event) {
                             count -= 1;
-                            $(this).closest('tr').remove()
+                            $(this).closest('tr').remove();
                         });
                     }
             );

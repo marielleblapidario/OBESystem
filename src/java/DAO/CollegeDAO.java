@@ -27,7 +27,7 @@ public class CollegeDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT college\n"
+            String query = "SELECT collegeID, college\n"
                     + "from refCollege\n"
                     + "ORDER BY college;";
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -37,6 +37,8 @@ public class CollegeDAO {
             while (rs.next()) {
                 College college = new College();
                 college.setCollege(rs.getString("college"));
+                college.setCollegeID(rs.getInt("collegeID"));
+                
                 newCollege.add(college);
 
             }

@@ -17,13 +17,14 @@ import java.text.SimpleDateFormat;
 public class Program {
     private String codeProgram;
     private String title;
-    private String college;
+    private int college;
     private int units;
     private String description;
     private Date dateMade;
     private Date dateUpdated;
     private int contributor;
     
+    private String collegeName;
     private String contributorName;
     
 
@@ -58,14 +59,14 @@ public class Program {
     /**
      * @return the college
      */
-    public String getCollege() {
+    public int getCollege() {
         return college;
     }
 
     /**
      * @param college the college to set
      */
-    public void setCollege(String college) {
+    public void setCollege(int college) {
         this.college = college;
     }
 
@@ -171,5 +172,19 @@ public class Program {
      */
     public void setContributorName(String contributorName) {
         this.contributorName = contributorName;
+    }
+
+    /**
+     * @return the collegeName
+     */
+    public String getCollegeName() {
+        return collegeName;
+    }
+
+    /**
+     * @param collegeName the collegeName to set
+     */
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
     }
 }

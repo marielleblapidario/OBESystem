@@ -62,7 +62,7 @@
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">  
-                                 <a id ="confirm-btn" href ="/OBESystem/RedirectToCreatePI"><button type="button" class="btn btn-success pull-right">Confirm</button></a>
+                                 <a id ="confirm-btn" href ="/OBESystem/RedirectToCreatePO"><button type="button" class="btn btn-success pull-right">Confirm</button></a>
                             </div>
                             <!-- /.box-footer -->
                         </form>

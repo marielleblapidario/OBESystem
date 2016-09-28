@@ -111,6 +111,22 @@
         <servlet-name>GetAllApprover</servlet-name>
         <servlet-class>controller.GetAllApprover</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EncodeProgram</servlet-name>
+        <servlet-class>controller.EncodeProgram</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllPA</servlet-name>
+        <servlet-class>controller.GetAllPA</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetLastPA</servlet-name>
+        <servlet-class>controller.GetLastPA</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodePA</servlet-name>
+        <servlet-class>controller.EncodePA</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -218,6 +234,22 @@
     <servlet-mapping>
         <servlet-name>GetAllApprover</servlet-name>
         <url-pattern>/GetAllApprover</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeProgram</servlet-name>
+        <url-pattern>/EncodeProgram</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllPA</servlet-name>
+        <url-pattern>/GetAllPA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetLastPA</servlet-name>
+        <url-pattern>/GetLastPA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodePA</servlet-name>
+        <url-pattern>/EncodePA</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
