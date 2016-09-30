@@ -74,7 +74,7 @@ public class CourseDAO {
 
     public ArrayList<Course> searchCourse(String program) throws ParseException {
         ArrayList<Course> newCourse = new ArrayList<Course>();
-        
+
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
@@ -99,9 +99,38 @@ public class CourseDAO {
         }
         return null;
     }
+
+    public Course getSpecificCourse(String program) throws ParseException {
+        Course course = null;
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT codeCourse, title, units\n"
+                    + "FROM course\n"
+                    + "WHERE codeCourse = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, program);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                course = new Course();
+                course.setCodeCourse(rs.getString("codeCourse"));
+                course.setTitle(rs.getString("title"));
+                course.setUnits(rs.getInt("units"));
+            }
+            pstmt.close();
+            conn.close();
+            return course;
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public ArrayList<Course> getAllCourseTitle() throws ParseException {
         ArrayList<Course> newCourse = new ArrayList<Course>();
-        
+
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();

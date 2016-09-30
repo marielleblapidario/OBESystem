@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="/OBESystem/resources/plugins/daterangepicker/daterangepicker.css">
         <!-- bootstrap datepicker -->
         <link rel="stylesheet" href="/OBESystem/resources/plugins/datepicker/datepicker3.css">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="/OBESystem/resources/plugins/datatables/dataTables.bootstrap.css">
         <!-- iCheck for checkboxes and radio inputs -->
         <link rel="stylesheet" href="/OBESystem/resources/plugins/iCheck/all.css">
         <!-- Bootstrap Color Picker -->
@@ -56,14 +58,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">College</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected">College of Computer Studies</option>
-                                            <option>College of Liberal Arts</option>
-                                            <option>College of Science</option>
-                                            <option>College of Engineering</option>
-                                            <option>College of Education</option>
-                                            <option>School of Economics</option>
-                                            <option>College of Business</option>
+                                        <select id="select-college" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         </select>
                                     </div>
                                 </div>
@@ -71,14 +66,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Program</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected">BS Information Systems</option>
-                                            <option>BS Information Technology</option>
-                                            <option>BS Something</option>
-                                            <option>BS Something</option>
-                                            <option>BS Something</option>
-                                            <option>BS Something</option>
-                                            <option>BS Something</option>
+                                        <select id="select-program" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         </select>
                                     </div>
                                 </div>
@@ -112,19 +100,31 @@
                                 <div class="box-body no-border">
                                     <h5 class="box-info">Required Units: 200</h5>
                                     <h5 class="box-info">Left Units: 200</h5>
-                                    
+
                                     <div class="form-group">
-                                    <label class="col-sm-2 control-label">Search</label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected">DATBAS</option>
-                                            <option>USAENG</option>
-                                            <option>METRES</option>
-                                            <option>THSIS01</option>
-                                        </select>
+                                        <label class="col-sm-2 control-label">Search</label>
+                                        <div class="col-sm-10">
+                                            <select id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                                                            </select>
+                                        </div>
+
                                     </div>
-                                </div>
-                                    <button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add Course</button>
+                                    <button id="button-add" type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add Course</button>
+
+                                    <div id="table">
+                                        <table id="example1" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <th>Title</th>
+                                                    <th>Units</th>
+                                                    <th>Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
 
                             </div>
@@ -150,6 +150,9 @@
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.js"></script>
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <!-- DataTables -->
+        <script src="/OBESystem/resources/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="/OBESystem/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
         <!-- date-range-picker -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
         <script src="/OBESystem/resources/plugins/daterangepicker/daterangepicker.js"></script>
@@ -169,6 +172,8 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
+        <script src="/OBESystem/js/create_curriculum.js"></script>
+        <script src="/OBESystem/js/search_program.js"></script>
         <!-- Page script -->
         <script>
             $(function () {

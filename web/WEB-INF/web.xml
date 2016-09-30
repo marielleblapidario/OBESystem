@@ -127,6 +127,10 @@
         <servlet-name>EncodePA</servlet-name>
         <servlet-class>controller.EncodePA</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetCourseByCode</servlet-name>
+        <servlet-class>controller.GetCourseByCode</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -250,6 +254,10 @@
     <servlet-mapping>
         <servlet-name>EncodePA</servlet-name>
         <url-pattern>/EncodePA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetCourseByCode</servlet-name>
+        <url-pattern>/GetCourseByCode</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
