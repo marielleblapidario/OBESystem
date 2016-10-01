@@ -17,13 +17,13 @@ import java.text.SimpleDateFormat;
 public class Course {
     private String codeCourse;
     private String title;
-    private String program;
     private int units;
     private String description;
     private Date dateMade;
     private Date dateUpdated;
     private int contributor;
     
+    private String collegeName;
     private String contributorName;
     
     /**
@@ -52,20 +52,6 @@ public class Course {
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    /**
-     * @return the program
-     */
-    public String getProgram() {
-        return program;
-    }
-
-    /**
-     * @param program the program to set
-     */
-    public void setProgram(String program) {
-        this.program = program;
     }
 
     /**
@@ -168,5 +154,19 @@ public class Course {
      */
     public void setContributorName(String contributorName) {
         this.contributorName = contributorName;
+    }
+
+    /**
+     * @return the collegeName
+     */
+    public String getCollegeName() {
+        return collegeName;
+    }
+
+    /**
+     * @param collegeName the collegeName to set
+     */
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
     }
 }

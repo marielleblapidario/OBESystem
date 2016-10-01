@@ -13,7 +13,7 @@ $(document).ready(function () {
 function getCollegeByProgram(program) {
     $.ajax({
         type: "GET",
-        url: "/OBESystem/GetAllPA?SelectedProgram=" + program,
+        url: "/OBESystem/GetAllPO?SelectedProgram=" + program,
         dataType: 'json',
         success: function (data) {
             console.log(data);
@@ -28,31 +28,31 @@ function getCollegeByProgram(program) {
 function getLastPA(program) {
     $.ajax({
         type: "GET",
-        url: "/OBESystem/GetLastPA?SelectedProgram=" + program,
+        url: "/OBESystem/GetLastPO?SelectedProgram=" + program,
         dataType: 'json',
         success: function (data) {
             console.log(data);
 
             var count = 0;
-            var lastCodeIGA = data;
-            console.log(lastCodeIGA);
-            if (lastCodeIGA) {
-            count = parseFloat(lastCodeIGA.replace(/[^0-9\.]+/g, ''));
+            var lastCodePO = data;
+            console.log(lastCodePO);
+            if (lastCodePO) {
+            count = parseFloat(lastCodePO.replace(/[^0-9\.]+/g, ''));
             }
             console.log(count);
             $('#addRowButton').click(function () {
-                var newCodeIGA;
+                var newCodePO;
                 count += 1;
                 if (count > 9) {
-                    newCodeIGA = "PA" + count;
+                    newCodePO = "PO" + count;
                 } else {
-                    newCodeIGA = "PA0" + count;
+                    newCodePO = "PO0" + count;
                 }
-                console.log(newCodeIGA);
+                console.log(newCodePO);
                 $('#data').append(
                         '<tr>' +
-                        '<td>' + newCodeIGA + '</td>' +
-                        '<input type="hidden" name="codePA" class="readonlyWhite" id="codeIGA" value="' + newCodeIGA + '" />' +
+                        '<td>' + newCodePO + '</td>' +
+                        '<input type="hidden" name="codePO" class="readonlyWhite" id="codePO" value="' + newCodePO + '" />' +
                         '<td>' +
                         '<div class="col-sm-10">' +
                         '<input type="text" name="description" class="form-control no-border" id="description" placeholder="Enter Institutional Graduate Attribute">' +
@@ -82,15 +82,15 @@ function getLastPA(program) {
 }
 
 function addRow(data) {
-    var codePA = data.codePA;
+    var codePO = data.codePO;
     var description = data.description;
     var status = data.status;
     var remarks = data.remarks;
 
     table.append(
             '<tr>' +
-            '<td>' + codePA + '</td>' +
-            '<input type="hidden" name="codePA" class="readonlyWhite" id="codeIGA" value="' + codePA + '" />' +
+            '<td>' + codePO + '</td>' +
+            '<input type="hidden" name="codePO" class="readonlyWhite" id="codePO" value="' + codePO + '" />' +
             '<td>' +
             '<div class="col-sm-10">' +
             '<input type="text" name="description" class="form-control no-border" id="description" value="' + description + '">' +
@@ -98,7 +98,7 @@ function addRow(data) {
             '</td>' +
             '<td>' +
             '<span class="label label-success">' + status + '</span>' +
-            '<input type="hidden" name="status" class="readonlyWhite" id="codeIGA" value="' + status + '" />' +
+            '<input type="hidden" name="status" class="readonlyWhite" id="status" value="' + status + '" />' +
             '</td>' +
             '<td>' +
             '<div class="col-sm-10">' +
@@ -111,33 +111,4 @@ function addRow(data) {
             '</td>' +
             '</tr>'
             );
-}
-
-function addNewRow() {
-    table.append(
-            '<tr>' +
-            '<td>' +
-            '<input type="text" name="codePA" class="form-control no-border" id="codeIGA" placeholder="PA01" />' +
-            '<td>' +
-            '<div class="col-sm-10">' +
-            '<input type="text" name="description" class="form-control no-border" id="description">' +
-            '</div>' +
-            '</td>' +
-            '<td>' +
-            '<span class="label label-success"> pending </span>' +
-            '<input type="hidden" name="status" class="readonlyWhite" id="codeIGA" value="pending" />' +
-            '</td>' +
-            '<td>' +
-            '<div class="col-sm-10">' +
-            '<input type="text" name="remarks" class="form-control no-border" id="remarks">' +
-            '</div>' +
-            '</td>' +
-            '<td>' +
-            '<button type="button" class="btn btn-success btn-xs"><i class="fa fa-edit"> </i></button>' +
-            '<button type="button" id="deleteRow" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>' +
-            '</td>' +
-            '</tr>'
-            );
-
-
 }

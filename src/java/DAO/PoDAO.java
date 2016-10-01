@@ -14,58 +14,57 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.PA;
+import model.PO;
 
 /**
  *
  * @author mariellelapidario
  */
-public class PaDAO {
-
-    public boolean encodePA(PA newPA) {
+public class PoDAO {
+    public boolean encodePO(PO newPO) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO PA (codePA, program, description, "
+            String query = "INSERT INTO PO (codePO, program, description, "
                     + "status, remarks, dateMade, dateUpdated, contributor, checker)\n"
                     + "VALUES (?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setString(1, newPA.getCodePA());
-            pstmt.setString(2, newPA.getProgram());
-            pstmt.setString(3, newPA.getDescription());
-            pstmt.setString(4, newPA.getStatus());
-            pstmt.setString(5, newPA.getRemarks());
-            pstmt.setDate(6, newPA.getDateMade());
-            pstmt.setDate(7, newPA.getDateUpdated());
-            pstmt.setInt(8, newPA.getContributor());
-            pstmt.setInt(9, newPA.getChecker());
+            pstmt.setString(1, newPO.getCodePO());
+            pstmt.setString(2, newPO.getProgram());
+            pstmt.setString(3, newPO.getDescription());
+            pstmt.setString(4, newPO.getStatus());
+            pstmt.setString(5, newPO.getRemarks());
+            pstmt.setDate(6, newPO.getDateMade());
+            pstmt.setDate(7, newPO.getDateUpdated());
+            pstmt.setInt(8, newPO.getContributor());
+            pstmt.setInt(9, newPO.getChecker());
 
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(PaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    public boolean updatePA(PA newPA) {
+    public boolean updatePA(PO newPO) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "UPDATE PA\n"
+            String query = "UPDATE PO\n"
                     + "SET description = ?, status = ?, remarks = ?, dateUpdated = ?, contributor = ?\n"
-                    + "WHERE codePA = ?;";
+                    + "WHERE codePO = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setString(1, newPA.getDescription());
-            pstmt.setString(2, newPA.getStatus());
-            pstmt.setString(3, newPA.getRemarks());
-            pstmt.setDate(4, newPA.getDateUpdated());
-            pstmt.setInt(5, newPA.getContributor());
-            pstmt.setString(6, newPA.getCodePA());
+            pstmt.setString(1, newPO.getDescription());
+            pstmt.setString(2, newPO.getStatus());
+            pstmt.setString(3, newPO.getRemarks());
+            pstmt.setDate(4, newPO.getDateUpdated());
+            pstmt.setInt(5, newPO.getContributor());
+            pstmt.setString(6, newPO.getCodePO());
             
 
             pstmt.executeUpdate();
@@ -73,20 +72,20 @@ public class PaDAO {
             conn.close();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(IgaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    public ArrayList<PA> getAllPA(String codeProgram) throws ParseException {
-        ArrayList<PA> newPA = new ArrayList<PA>();
+    public ArrayList<PO> getAllPO(String codeProgram) throws ParseException {
+        ArrayList<PO> newPO = new ArrayList<PO>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT P.codePA, P.program, prog.title, prog.college, "
+            String query = "SELECT P.codePO, P.program, prog.title, prog.college, "
                     + "P.description, status, P.remarks, P.contributor, P.checker,\n"
                     + "CONCAT(checker.firstName, \" \" , checker.LastName) as 'checkerName'\n"
-                    + "FROM PA P\n"
+                    + "FROM PO P\n"
                     + "JOIN user checker\n"
                     + "ON P.checker = checker.userID\n"
                     + "JOIN program prog\n"
@@ -97,8 +96,8 @@ public class PaDAO {
             
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                PA temp = new PA();
-                temp.setCodePA(rs.getString("codePA"));
+                PO temp = new PO();
+                temp.setCodePO(rs.getString("codePO"));
                 temp.setProgram(rs.getString("program"));
                 temp.setProgramTitle(rs.getString("title"));
                 temp.setCollege(rs.getString("college"));
@@ -108,46 +107,46 @@ public class PaDAO {
                 temp.setContributor(rs.getInt("contributor"));
                 temp.setChecker(rs.getInt("checker"));
                 temp.setCheckerName(rs.getString("checkerName"));
-                newPA.add(temp);
+                newPO.add(temp);
             }
             pstmt.close();
             conn.close();
-            return newPA;
+            return newPO;
         } catch (SQLException ex) {
-            Logger.getLogger(PaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    public boolean deletePA(String codePA) {
+    public boolean deletePO(String codePO) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "UPDATE PA\n"
+            String query = "UPDATE PO\n"
                     + "SET isDELETED = TRUE\n"
-                    + "WHERE codePA = ?;";
+                    + "WHERE codePO = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, codePA);
+            pstmt.setString(1, codePO);
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(PaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    public String getLastCodePA(String codeProgram) throws SQLException {
+    public String getLastCodePO(String codeProgram) throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
         String i = "";
-        String query = "SELECT MAX(codePA) from PA where program = ?";
+        String query = "SELECT MAX(codePO) from PO where program = ?";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1, codeProgram);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            i = rs.getString("MAX(codePA)");
+            i = rs.getString("MAX(codePO)");
         }
         ps.close();
         rs.close();

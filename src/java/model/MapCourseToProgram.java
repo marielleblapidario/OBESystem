@@ -12,6 +12,8 @@ package model;
 public class MapCourseToProgram {
     private String codeCourse;
     private String codeProgram;
+    
+    private String programTitle;
 
     /**
      * @return the codeCourse
@@ -39,5 +41,19 @@ public class MapCourseToProgram {
      */
     public void setCodeProgram(String codeProgram) {
         this.codeProgram = codeProgram;
+    }
+
+    /**
+     * @return the programTitle
+     */
+    public String getProgramTitle() {
+        return programTitle;
+    }
+
+    /**
+     * @param programTitle the programTitle to set
+     */
+    public void setProgramTitle(String programTitle) {
+        this.programTitle = programTitle;
     }
 }

@@ -23,7 +23,7 @@ import model.PA;
  */
 public class MapPatoIgaDAO {
 
-    public boolean encodeMapPatoIgaDAO(MapPAtoIGA newMapping) {
+    public boolean encodeMapPatoIga(MapPAtoIGA newMapping) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
@@ -49,7 +49,7 @@ public class MapPatoIgaDAO {
         return false;
     }
 
-    public boolean updateMapPatoIgaDAO(MapPAtoIGA newMapping) {
+    public boolean updateMapPatoIga(MapPAtoIGA newMapping) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
@@ -77,7 +77,7 @@ public class MapPatoIgaDAO {
         return false;
     }
 
-    public ArrayList<MapPAtoIGA> getAllMapPatoIgaDAO(String codeProgram) throws ParseException {
+    public ArrayList<MapPAtoIGA> getAllMapPatoIga(String codeProgram) throws ParseException {
         ArrayList<MapPAtoIGA> newMapping = new ArrayList<MapPAtoIGA>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();

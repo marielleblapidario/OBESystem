@@ -27,19 +27,18 @@ public class CourseDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO course (codeCourse, title, program, "
+            String query = "INSERT INTO course (codeCourse, title, "
                     + "units, description, dateMade, dateUpdated, contributor)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?);";
+                    + "VALUES (?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, newCourse.getCodeCourse());
             pstmt.setString(2, newCourse.getTitle());
-            pstmt.setString(3, newCourse.getProgram());
-            pstmt.setInt(4, newCourse.getUnits());
-            pstmt.setString(5, newCourse.getDescription());
-            pstmt.setDate(6, newCourse.getDateMade());
-            pstmt.setDate(7, newCourse.getDateUpdated());
-            pstmt.setInt(8, newCourse.getContributor());
+            pstmt.setInt(3, newCourse.getUnits());
+            pstmt.setString(4, newCourse.getDescription());
+            pstmt.setDate(5, newCourse.getDateMade());
+            pstmt.setDate(6, newCourse.getDateUpdated());
+            pstmt.setInt(7, newCourse.getContributor());
 
             int rows = pstmt.executeUpdate();
             pstmt.close();
@@ -144,6 +143,40 @@ public class CourseDAO {
                 course.setCodeCourse(rs.getString("codeCourse"));
                 course.setTitle(rs.getString("title"));
                 newCourse.add(course);
+            }
+            pstmt.close();
+            conn.close();
+            return newCourse;
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ArrayList<Course> getAllCourse() throws ParseException {
+
+        ArrayList<Course> newCourse = new ArrayList<>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT codeCourse, title, C.contributor, "
+                    + "CONCAT(U.firstName, \" \" , U.LastName) as 'name'\n"
+                    + "FROM course C\n"
+                    + "JOIN user U\n"
+                    + "on C.contributor = U.userID\n"
+                    + "WHERE C.isDeleted IS NULL;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Course temp = new Course();
+                temp.setCodeCourse(rs.getString("codeCourse"));
+                temp.setTitle(rs.getString("title"));
+                temp.setContributor(rs.getInt("contributor"));
+                temp.setContributorName(rs.getString("name"));
+                newCourse.add(temp);
             }
             pstmt.close();
             conn.close();

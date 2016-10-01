@@ -43,56 +43,27 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form class="form-horizontal">
+                        <form action="EncodeCourse" method="post" name="EncodeCourse">
+                            <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Course Title</label>
 
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail3" placeholder="Database Administration">
+                                        <input name="title" type="text" class="form-control" placeholder="Database Administration">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Code</label>
 
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail3" placeholder="DATBAS">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">Floating</label>
-
-                                    <div class="col-sm-10">
-                                        <label class="">
-                                            <div class="icheckbox_flat-green" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="flat-red" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">College</label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected">College of Computer Studies</option>
-                                            <option>College of Liberal Arts</option>
-                                            <option>College of Science</option>
-                                            <option>College of Engineering</option>
-                                            <option>College of Education</option>
-                                            <option>School of Economics</option>
-                                            <option>College of Business</option>
-                                        </select>
+                                        <input name="codeCourse" type="text" class="form-control" placeholder="DATBAS">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Program</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control select2 select2-hidden-accessible"  multiple="" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option>BS Information Systems</option>
-                                            <option>BS Information Technology</option>
-                                            <option>BS Math</option>
-                                            <option>BS Science</option>
-                                            <option>BA Psychology</option>
-                                            <option>BA European Studies</option>
-                                            <option>BA International Studies</option>
+                                        <select id="select-program" name="select-program" class="form-control select2 select2-hidden-accessible"  multiple="" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         </select>
                                     </div>
                                 </div>
@@ -100,25 +71,25 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">Units</label>
 
                                     <div class="col-xs-1">
-                                        <select class="form-control">
-                                            <option>0</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
+                                        <select name="units" class="form-control">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        <textarea name="description" class="form-control" rows="3" placeholder="Enter ..."></textarea>
                                     </div>
                                 </div>
 
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">  
-                                <button type="submit" class="btn btn-default pull-right">Cancel</button>
+                                <button type="button" class="btn btn-default pull-right">Cancel</button>
                                 <button type="submit" class="btn btn-success pull-right">Create</button>
                             </div>
                             <!-- /.box-footer -->
@@ -156,6 +127,8 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
+        <!--self made-->
+        <script src="/OBESystem/js/search_program2.js"></script>
         <!-- Page script -->
         <script>
             $(function () {

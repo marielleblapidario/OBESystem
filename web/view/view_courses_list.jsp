@@ -57,18 +57,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>MOBIDEV</td>
-                                                <td>
-                                                    Mobile Development
-                                                </td>
-                                                <td>Marielle Lapidario</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></button>
-                                                    <button type="button" class="btn bg-purple btn-xs"><i class="fa  fa-eye"></i></button>
-                                                    <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -97,19 +85,8 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
-        <!-- page script -->
-        <script>
-            $(function () {
-                $("#example1").DataTable();
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false
-                });
-            });
-        </script>
+        <!-- self made -->
+        <script src="/OBESystem/js/view_course_list.js"></script>
+        
     </body>
 </html>

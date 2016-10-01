@@ -46,13 +46,12 @@ public class EncodeProgram extends BaseServlet {
             String codeProgram = request.getParameter("codeProgram");
             System.out.println("codeProgram: " + codeProgram);
             String college = request.getParameter("college");
-            System.out.println("selected college: " + college );
+            System.out.println("selected college: " + college);
             String units = request.getParameter("units");
             System.out.println("units: " + units);
             String description = request.getParameter("description");
             System.out.println("description: " + description);
-            
-            
+
             program.setCodeProgram(codeProgram);
             program.setTitle(title);
             program.setCollege(Integer.parseInt(college));
@@ -63,7 +62,10 @@ public class EncodeProgram extends BaseServlet {
             program.setContributor(Integer.parseInt(contributor));
 
             if (programDAO.encodeProgram(program)) {
-
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/view/view_programs_list.jsp");
+                request.setAttribute("Error", "Error");
+                rd.forward(request, response);
             } else {
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/view/Error.jsp");

@@ -37,7 +37,8 @@
             <div class="content-wrapper">
 
                 <!-- Main content -->
-                <form action="" method="post" name="">
+                <form action="EncodePA" method="post" name="encodePA">
+                    <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                     <section class="content">
                         <div class="box box-info">
                             <!-- /.box-header -->
@@ -125,12 +126,11 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
-        <!-- stored attributes from search-->
+        <!--self made-->
         <script src="/OBESystem/js/store_program_search.js"></script>
-        <!-- list of approvers -->
         <script src="/OBESystem/js/view_approver_list.js"></script>
         <script src="/OBESystem/js/create_PA.js"></script>
-        
+
         <!-- Page script -->
         <script>
             $(function () {

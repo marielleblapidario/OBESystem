@@ -24,6 +24,8 @@ public class PO {
     private int contributor;
     private int checker;
     
+    private String programTitle;
+    private String college;
     private String contributorName;
     private String checkerName;
     
@@ -197,5 +199,33 @@ public class PO {
      */
     public void setCheckerName(String checkerName) {
         this.checkerName = checkerName;
+    }
+
+    /**
+     * @return the programTitle
+     */
+    public String getProgramTitle() {
+        return programTitle;
+    }
+
+    /**
+     * @param programTitle the programTitle to set
+     */
+    public void setProgramTitle(String programTitle) {
+        this.programTitle = programTitle;
+    }
+
+    /**
+     * @return the college
+     */
+    public String getCollege() {
+        return college;
+    }
+
+    /**
+     * @param college the college to set
+     */
+    public void setCollege(String college) {
+        this.college = college;
     }
 }

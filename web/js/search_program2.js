@@ -1,23 +1,9 @@
 var programDropDown = $("#select-program");
 var collegeDropDown = $("#select-college");
 
-getAllCollege();
-getAllProgram();
-
 $(document).ready(function () {
-
-    programDropDown.change(function () {
-        var program = $('#select-program option:selected').val();
-        getCollegeByProgram(program);
-
-    }
-    );
-    collegeDropDown.change(function () {
-        var college = $('#select-college option:selected').val();
-        getProgramByCollege(college);
-
-    }
-    );
+    getAllCollege();
+    getAllProgram();
 
     $('#confirm-btn').click(function () {
         var programTitle = $('#select-program option:selected').text();
@@ -25,7 +11,7 @@ $(document).ready(function () {
 
         var college = $('#select-college option:selected').text();
         var collegeID = $('select-college option:selected').val();
-        
+
         sessionStorage.setItem("programTitle", programTitle);
         var s = sessionStorage.getItem("programTitle");
         sessionStorage.setItem("programCode", programCode);
@@ -34,8 +20,8 @@ $(document).ready(function () {
         var sss = sessionStorage.getItem("college");
         sessionStorage.setIteam("collegeID", collegeID);
         var ssss = sessionStorage.getItem("collegeID");
-        
-        console.log('title: ' + s + ' code: ' + ss + " college: " + sss +"collegeID: " + ssss);
+
+        console.log('title: ' + s + ' code: ' + ss + " college: " + sss + "collegeID: " + ssss);
     });
 }
 
@@ -64,41 +50,6 @@ function getAllProgram() {
         success: function (data) {
             console.log(data);
             data.forEach(addProgram);
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
-}
-
-function getCollegeByProgram(program) {
-    $.ajax({
-        type: "GET",
-        url: "/OBESystem/GetCollegeByProgram?SelectedProgram=" + program,
-        dataType: 'json',
-        success: function (data) {
-            console.log(data);
-            $('#select-college').find('option').remove().end();
-            var s = "<option value = " + data.college + ">" + data.collegeName + "</option>";
-            collegeDropDown.append(s);
-            getAllCollege();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
-}
-
-function getProgramByCollege(college) {
-    $.ajax({
-        type: "GET",
-        url: "/OBESystem/GetProgramByCollege?SelectedCollege=" + college,
-        dataType: 'json',
-        success: function (data) {
-            console.log(data);
-            $('#select-program').find('option').remove().end();
-            data.forEach(addProgram);
-            getAllProgram();
         },
         error: function (response) {
             console.log(response);

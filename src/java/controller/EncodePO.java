@@ -5,8 +5,7 @@
  */
 package controller;
 
-import DAO.IgaDAO;
-import DAO.PaDAO;
+import DAO.PoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -19,14 +18,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.IGA;
-import model.PA;
+import model.PO;
 
 /**
  *
  * @author mariellelapidario
  */
-public class EncodePA extends BaseServlet {
+public class EncodePO extends BaseServlet {
 
     /**
      *
@@ -37,8 +35,8 @@ public class EncodePA extends BaseServlet {
      */
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<PA> existingPA = new ArrayList<>();
-        PaDAO paDAO = new PaDAO();
+        ArrayList<PO> existingPO = new ArrayList<>();
+        PoDAO paDAO = new PoDAO();
         boolean x = true;
         boolean checkIfExist = false;
         
@@ -46,14 +44,14 @@ public class EncodePA extends BaseServlet {
         System.out.println("codeProgram: " + codeProgram);
         
         try {
-            existingPA = paDAO.getAllPA(codeProgram);
+            existingPO = paDAO.getAllPO(codeProgram);
         } catch (ParseException ex) {
             Logger.getLogger(EncodePA.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         String contributor = request.getParameter("contributor");
         String checker = request.getParameter("select-approver");
-        String[] codePA = request.getParameterValues("codePA");
+        String[] codePO = request.getParameterValues("codePO");
         String[] description = request.getParameterValues("description");
         String[] status = request.getParameterValues("status");
         String[] remarks = request.getParameterValues("remarks");
@@ -62,21 +60,21 @@ public class EncodePA extends BaseServlet {
 
         System.out.println("contributor: " + contributor);
         System.out.println("checker: " + checker);
-        System.out.println("array size: " + codePA.length);
+        System.out.println("array size: " + codePO.length);
 
-        for (int y = 0; y < codePA.length; y++) {
-            System.out.println("codePA: " + codePA[y]);
+        for (int y = 0; y < codePO.length; y++) {
+            System.out.println("codePO: " + codePO[y]);
             System.out.println("description: " + description[y]);
             System.out.println("status" + status[y]);
             System.out.println("remarks: " + remarks[y]);
 
-            PA pa = new PA();
+            PO po = new PO();
             int position = 0;
 
             //compare existing IGA in database with the IGA from JSP
-            for (int a = 0; a < existingPA.size(); a++) {
+            for (int a = 0; a < existingPO.size(); a++) {
                 //existing entry
-                if (existingPA.get(a).getCodePA().equalsIgnoreCase(codePA[y])) {
+                if (existingPO.get(a).getCodePO().equalsIgnoreCase(codePO[y])) {
                     checkIfExist = true;
                     //get place in array for comparing for update
                     position = a;
@@ -86,28 +84,28 @@ public class EncodePA extends BaseServlet {
             if (checkIfExist == true) {
                 System.out.println("entered existing");
                 //not updated
-                if (existingPA.get(position).getDescription().equalsIgnoreCase(description[y])
-                        && existingPA.get(position).getRemarks().equalsIgnoreCase(remarks[y])) {
+                if (existingPO.get(position).getDescription().equalsIgnoreCase(description[y])
+                        && existingPO.get(position).getRemarks().equalsIgnoreCase(remarks[y])) {
 
                 } //updated IGA
                 else {
                     try {
                         System.out.println("entered update");
-                        pa.setCodePA(codePA[y]);
-                        pa.setProgram(codeProgram);
-                        pa.setDescription(description[y]);
-                        pa.setStatus(status[y]);
-                        pa.setRemarks(remarks[y]);
-                        pa.setDateUpdated();
-                        pa.setContributor(Integer.parseInt(contributor));
-                        pa.setChecker(Integer.parseInt(checker));
-                        if (paDAO.updatePA(pa)) {
+                        po.setCodePO(codePO[y]);
+                        po.setProgram(codeProgram);
+                        po.setDescription(description[y]);
+                        po.setStatus(status[y]);
+                        po.setRemarks(remarks[y]);
+                        po.setDateUpdated();
+                        po.setContributor(Integer.parseInt(contributor));
+                        po.setChecker(Integer.parseInt(checker));
+                        if (paDAO.updatePA(po)) {
                             x = true;
                         } else {
                             x = false;
                         }
                     } catch (ParseException ex) {
-                        Logger.getLogger(EncodePA.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(EncodePO.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 checkIfExist = false;
@@ -115,16 +113,16 @@ public class EncodePA extends BaseServlet {
             else {
                 System.out.println("entered new IGA entity");
                 try {
-                    pa.setCodePA(codePA[y]);
-                    pa.setProgram(codeProgram);
-                    pa.setDescription(description[y]);
-                    pa.setStatus(status[y]);
-                    pa.setRemarks(remarks[y]);
-                    pa.setDateMade();
-                    pa.setDateUpdated();
-                    pa.setContributor(Integer.parseInt(contributor));
-                    pa.setChecker(Integer.parseInt(checker));
-                    if (paDAO.encodePA(pa)) {
+                    po.setCodePO(codePO[y]);
+                    po.setProgram(codeProgram);
+                    po.setDescription(description[y]);
+                    po.setStatus(status[y]);
+                    po.setRemarks(remarks[y]);
+                    po.setDateMade();
+                    po.setDateUpdated();
+                    po.setContributor(Integer.parseInt(contributor));
+                    po.setChecker(Integer.parseInt(checker));
+                    if (paDAO.encodePO(po)) {
                         System.out.println("entered creation");
                         x = true;
                     } else {

@@ -131,6 +131,26 @@
         <servlet-name>GetCourseByCode</servlet-name>
         <servlet-class>controller.GetCourseByCode</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetLastPO</servlet-name>
+        <servlet-class>controller.GetLastPO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllPO</servlet-name>
+        <servlet-class>controller.GetAllPO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodePO</servlet-name>
+        <servlet-class>controller.EncodePO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllCourseList</servlet-name>
+        <servlet-class>controller.GetAllCourseList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodeCourse</servlet-name>
+        <servlet-class>controller.EncodeCourse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -258,6 +278,26 @@
     <servlet-mapping>
         <servlet-name>GetCourseByCode</servlet-name>
         <url-pattern>/GetCourseByCode</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetLastPO</servlet-name>
+        <url-pattern>/GetLastPO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllPO</servlet-name>
+        <url-pattern>/GetAllPO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodePO</servlet-name>
+        <url-pattern>/EncodePO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllCourseList</servlet-name>
+        <url-pattern>/GetAllCourseList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeCourse</servlet-name>
+        <url-pattern>/EncodeCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
