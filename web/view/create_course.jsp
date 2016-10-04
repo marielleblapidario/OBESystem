@@ -50,14 +50,14 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">Course Title</label>
 
                                     <div class="col-sm-10">
-                                        <input name="title" type="text" class="form-control" placeholder="Database Administration">
+                                        <input name="title" type="text" class="form-control" placeholder="Database Administration" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Code</label>
 
                                     <div class="col-sm-10">
-                                        <input name="codeCourse" type="text" class="form-control" placeholder="DATBAS">
+                                        <input name="codeCourse" type="text" class="form-control" placeholder="DATBAS" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -82,7 +82,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea name="description" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        <textarea name="description" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
                                     </div>
                                 </div>
 

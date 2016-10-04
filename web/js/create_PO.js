@@ -1,5 +1,7 @@
 var table = $("#data");
 var programCode = sessionStorage.getItem("programCode");
+var rowCount = 0;
+var count = 0;
 
 $(document).ready(function () {
     getCollegeByProgram(programCode);
@@ -33,7 +35,6 @@ function getLastPA(program) {
         success: function (data) {
             console.log(data);
 
-            var count = 0;
             var lastCodePO = data;
             console.log(lastCodePO);
             if (lastCodePO) {
@@ -44,35 +45,40 @@ function getLastPA(program) {
                 var newCodePO;
                 count += 1;
                 if (count > 9) {
-                    newCodePO = "PO" + count;
+                    newCodePO = "PO-" + programCode + "-"+ count;
                 } else {
-                    newCodePO = "PO0" + count;
+                    newCodePO = "PO-" + programCode + "-0"+count;
                 }
                 console.log(newCodePO);
-                $('#data').append(
-                        '<tr>' +
-                        '<td>' + newCodePO + '</td>' +
-                        '<input type="hidden" name="codePO" class="readonlyWhite" id="codePO" value="' + newCodePO + '" />' +
-                        '<td>' +
-                        '<div class="col-sm-10">' +
-                        '<input type="text" name="description" class="form-control no-border" id="description" placeholder="Enter Institutional Graduate Attribute">' +
-                        '</div>' +
-                        '</td>' +
-                        '<td>' +
-                        '<span class="label label-success">pending</span>' +
-                        '<input type="hidden" name="status" class="readonlyWhite" id="codeIGA" value="pending"/>' +
-                        '</td>' +
-                        '<td>' +
-                        '<div class="col-sm-10">' +
-                        '<input type="text" name="remarks" class="form-control no-border" id="remarks">' +
-                        '</div>' +
-                        '</td>' +
-                        '<td>' +
-                        '<button type="button" class="btn btn-success btn-xs"><i class="fa fa-edit"> </i></button>' +
-                        '<button type="button" id="deleteRow" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>' +
-                        '</td>' +
-                        '</tr>'
-                        );
+                console.log("rowCount: " + rowCount);
+
+                var tr = document.createElement("tr");
+                tr.id = 'tr' + rowCount;
+                var codeIGACell = document.createElement("td");
+                codeIGACell.innerHTML = newCodePO
+                        + '<input type="hidden" name="codePO" class="readonlyWhite" id="codePO' + rowCount + '" value="' + newCodePO + '" />';
+                tr.appendChild(codeIGACell);
+
+                var descriptionCell = document.createElement("td");
+                descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" required></div>'
+                tr.appendChild(descriptionCell);
+
+                var statusCell = document.createElement("td");
+                statusCell.innerHTML = '<span class="label label-success">pending</span>'
+                        + '<input type="hidden" name="status" class="readonlyWhite" id="status' + rowCount + '" value="pending" />';
+                tr.appendChild(statusCell);
+
+                var remarksCell = document.createElement("td");
+                remarksCell.innerHTML = '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '"></div>'
+                tr.appendChild(remarksCell);
+
+                var toolsCell = document.createElement("td");
+                toolsCell.innerHTML = '<button type="button" id="edit' + rowCount + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"> </i></button>' +
+                        '<button type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button>';
+                tr.appendChild(toolsCell);
+
+                table.append(tr);
+                rowCount++;
             });
             },
                     error: function (response) {
@@ -87,28 +93,60 @@ function addRow(data) {
     var status = data.status;
     var remarks = data.remarks;
 
-    table.append(
-            '<tr>' +
-            '<td>' + codePO + '</td>' +
-            '<input type="hidden" name="codePO" class="readonlyWhite" id="codePO" value="' + codePO + '" />' +
-            '<td>' +
-            '<div class="col-sm-10">' +
-            '<input type="text" name="description" class="form-control no-border" id="description" value="' + description + '">' +
-            '</div>' +
-            '</td>' +
-            '<td>' +
-            '<span class="label label-success">' + status + '</span>' +
-            '<input type="hidden" name="status" class="readonlyWhite" id="status" value="' + status + '" />' +
-            '</td>' +
-            '<td>' +
-            '<div class="col-sm-10">' +
-            '<input type="text" name="remarks" class="form-control no-border" id="remarks" value="' + remarks + '">' +
-            '</div>' +
-            '</td>' +
-            '<td>' +
-            '<button type="button" class="btn btn-success btn-xs"><i class="fa fa-edit"> </i></button>' +
-            '<button type="button" id="deleteRow" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>' +
-            '</td>' +
-            '</tr>'
-            );
+    console.log("rowCount: " + rowCount);
+
+    var tr = document.createElement("tr");
+    tr.id = 'tr' + rowCount;
+    var codeIGACell = document.createElement("td");
+    codeIGACell.innerHTML = codePO
+            + '<input type="hidden" name="codePO" class="readonlyWhite" id="codePO' + rowCount + '" value="' + codePO + '" />';
+    tr.appendChild(codeIGACell);
+
+    var descriptionCell = document.createElement("td");
+    descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" value="' + description + '" required readOnly></div>'
+    tr.appendChild(descriptionCell);
+
+    var statusCell = document.createElement("td");
+    statusCell.innerHTML = '<span class="label label-success">' + status + '</span>'
+            + '<input type="hidden" name="status" class="readonlyWhite" id="status' + rowCount + '" value="' + status + '" />';
+    tr.appendChild(statusCell);
+
+    var remarksCell = document.createElement("td");
+    remarksCell.innerHTML = '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '" value="' + remarks + '" readOnly></div>'
+    tr.appendChild(remarksCell);
+
+    var toolsCell = document.createElement("td");
+    toolsCell.innerHTML = '<button type="button" id="edit' + rowCount + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"> </i></button>' +
+            '<button type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button>';
+    tr.appendChild(toolsCell);
+
+    table.append(tr);
+    rowCount++;
+}
+
+function makeRowEditable(count) {
+    var description = 'description' + count;
+    var remarks = 'remarks' + count;
+
+    if (document.getElementById(description).readOnly) {
+        document.getElementById(description).readOnly = false;
+        document.getElementById(remarks).readOnly = false;
+    } else {
+        document.getElementById(description).readOnly = true;
+        document.getElementById(remarks).readOnly = true;
+    }
+}
+
+function deleteRow(num) {
+    var retVal = confirm("Are you sure you want to delete this row?");
+    if (retVal === true) {
+        var tr = 'tr' + num;
+        document.getElementById(tr).remove();
+        rowCount--;
+        count--;
+        return true;
+    } else {
+        console.log("cancelled");
+        return false;
+    }
 }

@@ -36,7 +36,7 @@ public class EncodePO extends BaseServlet {
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<PO> existingPO = new ArrayList<>();
-        PoDAO paDAO = new PoDAO();
+        PoDAO poDAO = new PoDAO();
         boolean x = true;
         boolean checkIfExist = false;
         
@@ -44,7 +44,7 @@ public class EncodePO extends BaseServlet {
         System.out.println("codeProgram: " + codeProgram);
         
         try {
-            existingPO = paDAO.getAllPO(codeProgram);
+            existingPO = poDAO.getAllPO(codeProgram);
         } catch (ParseException ex) {
             Logger.getLogger(EncodePA.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -87,7 +87,7 @@ public class EncodePO extends BaseServlet {
                 if (existingPO.get(position).getDescription().equalsIgnoreCase(description[y])
                         && existingPO.get(position).getRemarks().equalsIgnoreCase(remarks[y])) {
 
-                } //updated IGA
+                } //updated
                 else {
                     try {
                         System.out.println("entered update");
@@ -99,8 +99,7 @@ public class EncodePO extends BaseServlet {
                         po.setDateUpdated();
                         po.setContributor(Integer.parseInt(contributor));
                         po.setChecker(Integer.parseInt(checker));
-                        if (paDAO.updatePA(po)) {
-                            x = true;
+                        if (poDAO.updatePA(po)) {
                         } else {
                             x = false;
                         }
@@ -109,7 +108,7 @@ public class EncodePO extends BaseServlet {
                     }
                 }
                 checkIfExist = false;
-            } // new IGA entity
+            } // new entity
             else {
                 System.out.println("entered new IGA entity");
                 try {
@@ -122,9 +121,7 @@ public class EncodePO extends BaseServlet {
                     po.setDateUpdated();
                     po.setContributor(Integer.parseInt(contributor));
                     po.setChecker(Integer.parseInt(checker));
-                    if (paDAO.encodePO(po)) {
-                        System.out.println("entered creation");
-                        x = true;
+                    if (poDAO.encodePO(po)) {
                     } else {
                         System.out.println("entered fail");
                         x = false;
@@ -134,11 +131,37 @@ public class EncodePO extends BaseServlet {
                 }
             }
         }
+        
+        //check for deleted
+        System.out.println("check for deleted");
+        ArrayList<String> code = new ArrayList<>();
+        boolean exist = false;
+        System.out.println("old PA list: " + existingPO.size());
+        System.out.println("new PA list: " + codePO.length);
+        for (int a = 0; a < existingPO.size(); a++) {
+            for (int b = 0; b < codePO.length; b++) {
+                if (existingPO.get(a).getCodePO().equalsIgnoreCase(codePO[b])) {
+                    exist = true;
+                }
+            }
+            if (exist == false) {
+                code.add(existingPO.get(a).getCodePO());
+                System.out.println("iga to delete: " + existingPO.get(a).getCodePO());
+            }
+            exist = false;
+        }
+        //delete PO
+        for (int c = 0; c < code.size(); c++) {
+            if (poDAO.deletePO(code.get(c))) {
+            } else {
+                x = false;
+            }
+        }
 
         if (x == true) {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("/view/view_course.jsp");
+            RequestDispatcher rd = context.getRequestDispatcher("/view/search_PO.jsp");
             request.setAttribute("sucesss", "success");
             rd.forward(request, response);
         } else {

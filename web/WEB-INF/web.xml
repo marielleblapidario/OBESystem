@@ -151,6 +151,62 @@
         <servlet-name>EncodeCourse</servlet-name>
         <servlet-class>controller.EncodeCourse</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetAllIGA</servlet-name>
+        <servlet-class>controller.GetAllIGA</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToSearchCO</servlet-name>
+        <servlet-class>controller.RedirectToSearchCO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToSearchAssessment</servlet-name>
+        <servlet-class>controller.RedirectToSearchAssessment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToCreateCO</servlet-name>
+        <servlet-class>controller.RedirectToCreateCO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToCreateAssessment</servlet-name>
+        <servlet-class>controller.RedirectToCreateAssessment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllCO</servlet-name>
+        <servlet-class>controller.GetAllCO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetLastCO</servlet-name>
+        <servlet-class>controller.GetLastCO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodeCO</servlet-name>
+        <servlet-class>controller.EncodeCO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllAssessment</servlet-name>
+        <servlet-class>controller.GetAllAssessment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllType</servlet-name>
+        <servlet-class>controller.GetAllType</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetLastAssessment</servlet-name>
+        <servlet-class>controller.GetLastAssessment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodeAssessment</servlet-name>
+        <servlet-class>controller.EncodeAssessment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodeCurriculum</servlet-name>
+        <servlet-class>controller.EncodeCurriculum</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetLastIGA</servlet-name>
+        <servlet-class>controller.GetLastIGA</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -298,6 +354,62 @@
     <servlet-mapping>
         <servlet-name>EncodeCourse</servlet-name>
         <url-pattern>/EncodeCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllIGA</servlet-name>
+        <url-pattern>/GetAllIGA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToSearchCO</servlet-name>
+        <url-pattern>/RedirectToSearchCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToSearchAssessment</servlet-name>
+        <url-pattern>/RedirectToSearchAssessment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToCreateCO</servlet-name>
+        <url-pattern>/RedirectToCreateCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToCreateAssessment</servlet-name>
+        <url-pattern>/RedirectToCreateAssessment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllCO</servlet-name>
+        <url-pattern>/GetAllCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetLastCO</servlet-name>
+        <url-pattern>/GetLastCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeCO</servlet-name>
+        <url-pattern>/EncodeCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllAssessment</servlet-name>
+        <url-pattern>/GetAllAssessment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllType</servlet-name>
+        <url-pattern>/GetAllType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetLastAssessment</servlet-name>
+        <url-pattern>/GetLastAssessment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeAssessment</servlet-name>
+        <url-pattern>/EncodeAssessment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeCurriculum</servlet-name>
+        <url-pattern>/EncodeCurriculum</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetLastIGA</servlet-name>
+        <url-pattern>/GetLastIGA</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

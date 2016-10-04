@@ -14,84 +14,85 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.MapCourseToProgram;
+import model.MapCurriculumToCourse;
 
 /**
  *
  * @author mariellelapidario
  */
-public class MapCourseToProgramDAO {
+public class MapCurriculumToCourseDAO {
 
-    public boolean encodeMapCourseToProgram(MapCourseToProgram newMapping) {
+    public boolean encodeMapCurriculumToCourse(MapCurriculumToCourse newMapping) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapCourseToProgram (codeCourse, codeProgram)\n"
+            String query = "INSERT INTO mapcurriculumtocourse (codeCurriculum, codeCourse)\n"
                     + "VALUES (?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setString(1, newMapping.getCodeCourse());
-            pstmt.setString(2, newMapping.getCodeProgram());
-
-            pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(MapCourseToProgramDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-
-    public boolean updateMapCourseToProgram(MapCourseToProgram newMapping) {
-        try {
-            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
-            Connection conn = myFactory.getConnection();
-            String query = "UPDATE mapCourseToProgram\n"
-                    + "SET codeProgram = ?"
-                    + "WHERE codeCourse = ? AND codeProgram = ?;";
-            PreparedStatement pstmt = conn.prepareStatement(query);
-
-            pstmt.setString(1, newMapping.getCodeProgram());
+            pstmt.setInt(1, newMapping.getCodeCurriculum());
             pstmt.setString(2, newMapping.getCodeCourse());
-            pstmt.setString(3, newMapping.getCodeProgram());
 
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(MapCourseToProgramDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MapCurriculumToCourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    public ArrayList<MapCourseToProgram> getAllMapCourseToProgram(String codeCourse) throws ParseException {
-        ArrayList<MapCourseToProgram> newMapping = new ArrayList<MapCourseToProgram>();
+    public boolean updateMapCurriculumToCourse(MapCurriculumToCourse newMapping) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT MCTP.codeCourse, MCTP.codeProgram, P.title\n"
-                    + "FROM mapCourseToProgram MCTP\n"
-                    + "JOIN program P\n"
-                    + "ON MCTP.codeProgram = P.codeProgram\n"
-                    + "WHERE MCTP.codeCourse = ?;";
+            String query = "UPDATE mapcurriculumtocourse\n"
+                    + "SET codeCourse = ?\n"
+                    + "WHERE codeCurriculum = ? and codeCourse = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, codeCourse);
+
+            pstmt.setString(1, newMapping.getCodeCourse());
+            pstmt.setInt(2, newMapping.getCodeCurriculum());
+            pstmt.setString(3, newMapping.getCodeCourse());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(MapCurriculumToCourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public ArrayList<MapCurriculumToCourse> getAllMapCurriculumToCourse(String codeCurriculum) throws ParseException {
+        ArrayList<MapCurriculumToCourse> newMapping = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT MCTC.codeCurriculum, MCTC.codeCourse, C.title, C.units\n"
+                    + "FROM mapcurriculumtocourse MCTC\n"
+                    + "JOIN course C\n"
+                    + "ON MCTC.codeCourse = C.codeCourse\n"
+                    + "WHERE MCTC.codeCurriculum = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, codeCurriculum);
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                MapCourseToProgram temp = new MapCourseToProgram();
+                MapCurriculumToCourse temp = new MapCurriculumToCourse();
+                temp.setCodeCurriculum(rs.getInt("codeCurriculum"));
                 temp.setCodeCourse(rs.getString("codeCourse"));
-                temp.setCodeProgram(rs.getString("codeProgram"));
-                temp.setProgramTitle(rs.getString("title"));
+                temp.setCourseTitle(rs.getString("title"));
+                temp.setUnits(rs.getInt("units"));
                 newMapping.add(temp);
             }
             pstmt.close();
             conn.close();
             return newMapping;
         } catch (SQLException ex) {
-            Logger.getLogger(MapCourseToProgramDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MapCurriculumToCourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

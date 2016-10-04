@@ -38,35 +38,27 @@
         <div class="wrapper">
             <div class="content-wrapper">
                 <!-- Main content -->
-                <section class="content">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Create Curriculum</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form class="form-horizontal">
+                <form action="EncodeCurriculum" method="post" name="EncodeCurriculum">
+                    <section class="content">
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Create Curriculum</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
 
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail3" placeholder="BS in CSE 2010-2016">
+                                        <input name="title" type="text" class="form-control" id="inputEmail3" placeholder="BS in CSE 2010-2016" required>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">College</label>
-                                    <div class="col-sm-10">
-                                        <select id="select-college" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                        </select>
-                                    </div>
-                                </div>
-
+                                
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Program</label>
                                     <div class="col-sm-10">
-                                        <select id="select-program" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        <select name="select-program" id="select-program" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         </select>
                                     </div>
                                 </div>
@@ -78,7 +70,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="reservation">
+                                            <input name="range" type="text" class="form-control pull-right" id="reservation">
                                         </div>
                                     </div>
                                     <!-- /.input group -->
@@ -87,7 +79,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        <textarea name="description" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
                                     </div>
                                 </div>
 
@@ -98,14 +90,20 @@
                                     <h4 class="box-title">Add Course</h4>
                                 </div>
                                 <div class="box-body no-border">
-                                    <h5 class="box-info">Required Units: 200</h5>
-                                    <h5 class="box-info">Left Units: 200</h5>
+                                    <h5 class="box-info">Required Units:
+                                        <span id = "required-units"></span>
+                                        <input name="hidden-required-units" id="hidden-required-units" class="hidden">
+                                    </h5>
+                                    <h5 class="box-info">Left Units:
+                                        <span id = "left-units"></span>
+                                        <input name="hidden-left-units" id="hidden-left-units" class="hidden">
+                                    </h5>
 
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Search</label>
                                         <div class="col-sm-10">
                                             <select id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                                                                            </select>
+                                            </select>
                                         </div>
 
                                     </div>
@@ -135,9 +133,9 @@
                                 <button type="submit" class="btn btn-success pull-right">Create</button>
                             </div>
                             <!-- /.box-footer -->
-                        </form>
-                    </div>
-                </section>
+                        </div>
+                    </section>
+                </form>
             </div>
         </div>
         <!-- jQuery 2.2.3 -->
@@ -173,7 +171,7 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <script src="/OBESystem/js/create_curriculum.js"></script>
-        <script src="/OBESystem/js/search_program.js"></script>
+        <script src="/OBESystem/js/search_program2.js"></script>
         <!-- Page script -->
         <script>
             $(function () {

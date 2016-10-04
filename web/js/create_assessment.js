@@ -1,17 +1,24 @@
 var table = $("#data");
-var programCode = sessionStorage.getItem("programCode");
+var typeDropDown = $(".type");
+var codeCourse = sessionStorage.getItem("codeCourse");
 var rowCount = 0;
 var count = 0;
+var AType = [];
 
 $(document).ready(function () {
-    getAllPA(programCode);
-    getLastPA(programCode);
+    getAllType();
+    getAllAssessment(codeCourse);
+    getLastAssessment(codeCourse);
+    $(document).on('click', '#deleteRow', function (event) {
+        $(this).closest('tr').remove();
+    });
+
 });
 
-function getAllPA(program) {
+function getAllAssessment(course) {
     $.ajax({
         type: "GET",
-        url: "/OBESystem/GetAllPA?SelectedProgram=" + program,
+        url: "/OBESystem/GetAllAssessment?SelectedCourse=" + course,
         dataType: 'json',
         success: function (data) {
             console.log(data);
@@ -23,14 +30,14 @@ function getAllPA(program) {
     });
 }
 
-function getLastPA(program) {
+function getLastAssessment(course) {
     $.ajax({
         type: "GET",
-        url: "/OBESystem/GetLastPA?SelectedProgram=" + program,
+        url: "/OBESystem/GetLastAssessment?SelectedCourse=" + course,
         dataType: 'json',
         success: function (data) {
             console.log(data);
-            
+
             var lastCodeIGA = data;
             console.log(lastCodeIGA);
             if (lastCodeIGA) {
@@ -41,9 +48,9 @@ function getLastPA(program) {
                 var newCodeIGA;
                 count += 1;
                 if (count > 9) {
-                    newCodeIGA = "PA-" + programCode + "-" + count;
+                    newCodeIGA = "AS-" + codeCourse + "-" + count;
                 } else {
-                    newCodeIGA = "PA-" + programCode + "-0" + count;
+                    newCodeIGA = "AS-" + codeCourse + "-0" + count;
                 }
                 console.log(newCodeIGA);
                 console.log("rowCount: " + rowCount);
@@ -52,12 +59,26 @@ function getLastPA(program) {
                 tr.id = 'tr' + rowCount;
                 var codeIGACell = document.createElement("td");
                 codeIGACell.innerHTML = newCodeIGA
-                        + '<input type="hidden" name="codePA" class="readonlyWhite" id="codePA' + rowCount + '" value="' + newCodeIGA + '" />';
+                        + '<input type="hidden" name="codeAssessment" class="readonlyWhite" id="codeAssessment' + rowCount + '" value="' + newCodeIGA + '" />';
                 tr.appendChild(codeIGACell);
+
+                var select = document.createElement("select");
+                select.name = "AType";
+                tr.appendChild(select);
+                for (var x = 0; x < AType.length; x++) {
+                    var option = document.createElement("option");
+                    option.label = AType[x].type;
+                    option.value = AType[x].typeID;
+                    select.appendChild(option);
+                }
 
                 var descriptionCell = document.createElement("td");
                 descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" required></div>'
                 tr.appendChild(descriptionCell);
+
+                var weightCell = document.createElement("td");
+                weightCell.innerHTML = '<div class="col-sm-10"><input type="text" class="form-control no-border" name="weight" id="weight' + rowCount + '" required></div>'
+                tr.appendChild(weightCell);
 
                 var statusCell = document.createElement("td");
                 statusCell.innerHTML = '<span class="label label-success">pending</span>'
@@ -84,8 +105,11 @@ function getLastPA(program) {
 }
 
 function addRow(data) {
-    var codePA = data.codePA;
+    var codeAssessment = data.codeAssessment;
+    var typeID = data.type;
+    var typeName = data.typeName;
     var description = data.description;
+    var weight = data.weight;
     var status = data.status;
     var remarks = data.remarks;
 
@@ -94,13 +118,22 @@ function addRow(data) {
     var tr = document.createElement("tr");
     tr.id = 'tr' + rowCount;
     var codeIGACell = document.createElement("td");
-    codeIGACell.innerHTML = codePA
-            + '<input type="hidden" name="codePA" class="readonlyWhite" id="codePA' + rowCount + '" value="' + codePA + '" />';
+    codeIGACell.innerHTML = codeAssessment
+            + '<input type="hidden" name="codeAssessment" class="readonlyWhite" id="codeAssessment' + rowCount + '" value="' + codeAssessment + '" />';
     tr.appendChild(codeIGACell);
 
+    var typeCell = document.createElement("td");
+    typeCell.innerHTML = '<div class="col-sm-10">'+typeName+'</div>'
+     + '<input type="hidden" name="AType" class="readonlyWhite" id="AType' + rowCount + '" value="' + typeID + '" />';
+    tr.appendChild(typeCell);
+    
     var descriptionCell = document.createElement("td");
     descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" value="' + description + '" required readOnly></div>'
     tr.appendChild(descriptionCell);
+
+    var weightCell = document.createElement("td");
+    weightCell.innerHTML = '<div class="col-sm-10"><input type="text" class="form-control no-border" name="weight" id="weight' + rowCount + '" value="' + weight + '" required readOnly></div>'
+    tr.appendChild(weightCell);
 
     var statusCell = document.createElement("td");
     statusCell.innerHTML = '<span class="label label-success">' + status + '</span>'
@@ -120,15 +153,42 @@ function addRow(data) {
     rowCount++;
 }
 
+function getAllType() {
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/GetAllType",
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            for (var x = 0; x < data.length; x++) {
+                AType.push(data[x]);
+            }
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+function addType(data) {
+    var s = "<option value = " + data.typeID + ">" + data.type + "</option>";
+    typeDropDown.append(s);
+
+}
+
+
 function makeRowEditable(count) {
     var description = 'description' + count;
+    var weight = 'weight' + count;
     var remarks = 'remarks' + count;
 
     if (document.getElementById(description).readOnly) {
         document.getElementById(description).readOnly = false;
+        document.getElementById(weight).readOnly = false;
         document.getElementById(remarks).readOnly = false;
     } else {
         document.getElementById(description).readOnly = true;
+        document.getElementById(weight).readOnly = true;
         document.getElementById(remarks).readOnly = true;
     }
 }

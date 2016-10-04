@@ -5,10 +5,9 @@
  */
 package controller;
 
-import DAO.IgaDAO;
+import DAO.CoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -19,13 +18,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.IGA;
+import model.CO;
 
 /**
  *
  * @author mariellelapidario
  */
-public class EncodeIGA extends BaseServlet {
+public class EncodeCO extends BaseServlet {
 
     /**
      *
@@ -36,38 +35,46 @@ public class EncodeIGA extends BaseServlet {
      */
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<IGA> existingIGA = new ArrayList<>();
-        IgaDAO igaDAO = new IgaDAO();
+        ArrayList<CO> existingCO = new ArrayList<>();
+        CoDAO coDAO = new CoDAO();
         boolean x = true;
         boolean checkIfExist = false;
-
+        
+        String codeCourse = request.getParameter("codeCourse");
+        System.out.println("codeCourse: " + codeCourse);
+        
         try {
-            existingIGA = igaDAO.getAllIGA();
+            existingCO = coDAO.getAllCO(codeCourse);
         } catch (ParseException ex) {
-            Logger.getLogger(EncodeIGA.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EncodeCO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         String contributor = request.getParameter("contributor");
-        String[] codeIGA = request.getParameterValues("codeIGA");
+        String checker = request.getParameter("select-approver");
+        String[] codeCO = request.getParameterValues("codeCO");
         String[] description = request.getParameterValues("description");
+        String[] weight = request.getParameterValues("weight");
+        String[] status = request.getParameterValues("status");
         String[] remarks = request.getParameterValues("remarks");
-
+        
         System.out.println("contributor: " + contributor);
-        System.out.println("array size: " + codeIGA.length);
-        System.out.println("description size: " + description.length);
+        System.out.println("checker: " + checker);
+        System.out.println("array size: " + codeCO.length);
 
-        for (int y = 0; y < codeIGA.length; y++) {
-            System.out.println("codeIGA: " + codeIGA[y]);
+        for (int y = 0; y < codeCO.length; y++) {
+            System.out.println("codePO: " + codeCO[y]);
             System.out.println("description: " + description[y]);
+            System.out.println("weight: " + weight[y]);
+            System.out.println("status" + status[y]);
             System.out.println("remarks: " + remarks[y]);
 
-            IGA iga = new IGA();
+            CO co = new CO();
             int position = 0;
 
             //compare existing IGA in database with the IGA from JSP
-            for (int a = 0; a < existingIGA.size(); a++) {
+            for (int a = 0; a < existingCO.size(); a++) {
                 //existing entry
-                if (existingIGA.get(a).getCodeIGA().equalsIgnoreCase(codeIGA[y])) {
+                if (existingCO.get(a).getCodeCO().equalsIgnoreCase(codeCO[y])) {
                     checkIfExist = true;
                     //get place in array for comparing for update
                     position = a;
@@ -77,24 +84,28 @@ public class EncodeIGA extends BaseServlet {
             if (checkIfExist == true) {
                 System.out.println("entered existing");
                 //not updated
-                if (existingIGA.get(position).getDescription().equalsIgnoreCase(description[y])
-                        && existingIGA.get(position).getRemarks().equalsIgnoreCase(remarks[y])) {
+                if (existingCO.get(position).getDescription().equalsIgnoreCase(description[y])
+                        && existingCO.get(position).getRemarks().equalsIgnoreCase(remarks[y])
+                        && existingCO.get(position).getWeight() == Double.parseDouble(weight[y])) {
 
                 } //updated IGA
                 else {
                     try {
                         System.out.println("entered update");
-                        iga.setCodeIGA(codeIGA[y]);
-                        iga.setDescription(description[y]);
-                        iga.setRemarks(remarks[y]);
-                        iga.setDateUpdated();
-                        iga.setContributor(Integer.parseInt(contributor));
-                        if (igaDAO.updateIGA(iga)) {
+                        
+                        co.setDescription(description[y]);
+                        co.setWeight(Double.parseDouble(weight[y]));
+                        co.setStatus(status[y]);
+                        co.setRemarks(remarks[y]);
+                        co.setDateUpdated();
+                        co.setContributor(Integer.parseInt(contributor));
+                        co.setCodeCO(codeCO[y]);
+                        if (coDAO.updateCO(co)) {
                         } else {
                             x = false;
                         }
                     } catch (ParseException ex) {
-                        Logger.getLogger(EncodeIGA.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(EncodePO.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 checkIfExist = false;
@@ -102,44 +113,48 @@ public class EncodeIGA extends BaseServlet {
             else {
                 System.out.println("entered new IGA entity");
                 try {
-                    iga.setCodeIGA(codeIGA[y]);
-                    iga.setDescription(description[y]);
-                    iga.setRemarks(remarks[y]);
-                    iga.setDateMade();
-                    iga.setDateUpdated();
-                    iga.setContributor(Integer.parseInt(contributor));
-                    if (igaDAO.EncodeIGA(iga)) {
+                    co.setCodeCO(codeCO[y]);
+                    co.setCourse(codeCourse);
+                    co.setDescription(description[y]);
+                    co.setWeight(Double.parseDouble(weight[y]));
+                    co.setStatus(status[y]);
+                    co.setRemarks(remarks[y]);
+                    co.setDateMade();
+                    co.setDateUpdated();
+                    co.setContributor(Integer.parseInt(contributor));
+                    co.setChecker(Integer.parseInt(checker));
+                    if (coDAO.encodeCO(co)) {
                     } else {
                         System.out.println("entered fail");
                         x = false;
                     }
                 } catch (ParseException ex) {
-                    Logger.getLogger(EncodeIGA.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(EncodeCO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
-
+        
         //check for deleted
         System.out.println("check for deleted");
         ArrayList<String> code = new ArrayList<>();
         boolean exist = false;
-        System.out.println("old IGA list: " + existingIGA.size());
-        System.out.println("new IGA list: " + codeIGA.length);
-        for (int a = 0; a < existingIGA.size(); a++) {
-            for (int b = 0; b <codeIGA.length; b++) {
-                if (existingIGA.get(a).getCodeIGA().equalsIgnoreCase(codeIGA[b])) {
+        System.out.println("old PA list: " + existingCO.size());
+        System.out.println("new PA list: " + codeCO.length);
+        for (int a = 0; a < existingCO.size(); a++) {
+            for (int b = 0; b < codeCO.length; b++) {
+                if (existingCO.get(a).getCodeCO().equalsIgnoreCase(codeCO[b])) {
                     exist = true;
                 }
             }
             if (exist == false) {
-                code.add(existingIGA.get(a).getCodeIGA());
-                System.out.println("iga to delete: " + existingIGA.get(a).getCodeIGA());
+                code.add(existingCO.get(a).getCodeCO());
+                System.out.println("iga to delete: " + existingCO.get(a).getCodeCO());
             }
             exist = false;
         }
-        //delete IGA
+        //delete CO
         for (int c = 0; c < code.size(); c++) {
-            if (igaDAO.deleteIGA(code.get(c))) {
+            if (coDAO.deleteCO(code.get(c))) {
             } else {
                 x = false;
             }
@@ -148,15 +163,9 @@ public class EncodeIGA extends BaseServlet {
         if (x == true) {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("/view/create_IGA.jsp");
+            RequestDispatcher rd = context.getRequestDispatcher("/view/search_CO.jsp");
             request.setAttribute("sucesss", "success");
             rd.forward(request, response);
-            /*
-            response.setContentType("text/html;charset=UTF-8");
-             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("/view/create_IGA.jsp");
-            request.setAttribute("success", "success");
-            rd.forward(request, response); */
         } else {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext context = getServletContext();

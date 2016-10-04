@@ -8,6 +8,7 @@ package DAO;
 import database.DBConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,7 +55,7 @@ public class CurriculumDAO {
                     + "VALUES (?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setString(1, newMap.getCodeCurriculum());
+            pstmt.setInt(1, newMap.getCodeCurriculum());
             pstmt.setString(2, newMap.getCodeCourse());
 
             pstmt.executeUpdate();
@@ -86,4 +87,20 @@ public class CurriculumDAO {
         }
         return false;
     }
+       
+    public Integer getLastCodeCurriculum() throws SQLException {
+        DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+        Connection conn = myFactory.getConnection();
+        int i = 1000;
+        String query = "SELECT MAX(codeCurriculum) from curriculum;";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            i = rs.getInt("MAX(codeCurriculum)");
+        }
+        ps.close();
+        rs.close();
+        return i;
+    }
+    
 }

@@ -25,87 +25,62 @@
             <div class="content-wrapper">
 
                 <!-- Main content -->
-                <section class="content">
-                    <div class="box box-info">
-                        <!-- /.box-header -->
-                        <div class="box-header">
-                            <h3 class="box-title">Course Outcome</h3><br>
-                            <h5>Course: Database Administration</h5>
-                            <h5>Program: BS Information System</h5>
-                            <h5>College: College of Computer Studies</h5>
-                            <br>
-                            
-                            <label class="col-sm-2 control-label">Approver</label>
-                            <div class="col-sm-10">
-                                <select class="form-control select2 select2-hidden-accessible" style="width: 30%;" tabindex="-1" aria-hidden="true">
-                                    <option selected="selected">Mr. Danny Cheng</option>
-                                    <option>Mr. Oliver Malabanan</option>
-                                </select>
+                <form action="EncodeCO" method="post" name="EncodeCO">
+                    <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
+                    <section class="content">
+                        <div class="box box-info">
+                            <!-- /.box-header -->
+                            <div class="box-header">
+                                <h3 class="box-title">Course Outcome</h3><br>
+                                <h5>Course: <span id="course-title"></span></h5>
+                                <input class="hidden" id="hidden-codeCourse" name="codeCourse">
+                                <br>
+
+                                <label class="col-sm-2 control-label">Approver</label>
+                                <div class="col-sm-10">
+                                    <select name="select-approver" id="select-approver" class="form-control select2 select2-hidden-accessible" style="width: 30%;" tabindex="-1" aria-hidden="true">
+                                    </select>
+                                </div>
+                                <br>
                             </div>
-                            <br>
+                            <div class="box-body table-responsive">
+                                <table id="data" class="table table-hover">
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>
+                                            <div class="col-sm-10">
+                                                Course Outcome
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="col-sm-10">
+                                                Weight
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="col-sm-10">
+                                                Status
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="col-sm-10">
+                                                Remarks
+                                            </div>
+                                        </th>
+                                        <th>Tools</th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="box-footer">  
+                                <button type="button" id="addRowButton" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
+                                <button type="button" class="btn btn-default pull-right">Cancel</button>
+                                <button type="submit" class="btn bg-green pull-right">Send for Approval</button>
+                                <button type="submit" class="btn bg-light-blue pull-right">Save</button>
+                            </div>
+                            <!-- /.box-footer -->
                         </div>
-                        <div class="box-body table-responsive">
-                            <table class="table table-hover">
-                                <tr>
-                                    <th>Code</th>
-                                    <th>
-                                        <div class="col-sm-10">
-                                            Course Outcome
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="col-sm-10">
-                                            Weight
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="col-sm-10">
-                                            Status
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="col-sm-10">
-                                            Remarks
-                                        </div>
-                                    </th>
-                                    <th>Tools</th>
-                                </tr>
-                                <tr>
-                                    <td>CO01</td>
-                                    <td>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control no-border" id="inputEmail3" placeholder="Program Attribute">
-                                        </div> 
-                                    </td>
-                                    <td>
-                                        <div class="col-sm-10">
-                                            <input type="number" class="form-control no-border" id="inputEmail3" placeholder="0">
-                                        </div> 
-                                    </td>
-                                    <td>
-                                        <span class="label label-success">approved</span>
-                                    </td>
-                                    <td>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control no-border" id="inputEmail3">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></button>
-                                        <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="box-footer">  
-                            <button type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
-                            <button type="submit" class="btn btn-default pull-right">Cancel</button>
-                            <button type="submit" class="btn bg-green pull-right">Send for Approval</button>
-                            <button type="submit" class="btn bg-light-blue pull-right">Save</button>
-                        </div>
-                        <!-- /.box-footer -->
-                    </div>
-                </section>
+                    </section>
+                </form>
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
@@ -124,6 +99,10 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
-        
+        <!--selfmade-->
+        <script src="/OBESystem/js/store_course_search.js"></script>
+        <script src="/OBESystem/js/view_approver_list.js"></script>
+        <script src="/OBESystem/js/create_CO.js"></script>
+
     </body>
 </html>

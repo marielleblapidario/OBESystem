@@ -77,6 +77,26 @@ public class MapPatoIgaDAO {
         return false;
     }
 
+    public boolean deleteMapPatoIga(MapPAtoIGA newMapping) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "DELETE FROM mappatoiga\n"
+                    + "WHERE codePA = ? AND codeIGA = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, newMapping.getCodePA());
+            pstmt.setString(2, newMapping.getCodeIGA());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(MapPatoIgaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     public ArrayList<MapPAtoIGA> getAllMapPatoIga(String codeProgram) throws ParseException {
         ArrayList<MapPAtoIGA> newMapping = new ArrayList<MapPAtoIGA>();
         try {

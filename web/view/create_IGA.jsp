@@ -21,54 +21,6 @@
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-        <script>
-            $(document).ready(
-                    
-                    function () {
-                        var count = 0;
-                        var lastCodeIGA = '${codeIGA}';
-                        console.log(lastCodeIGA);
-                        if (lastCodeIGA) {
-                            count = parseFloat(lastCodeIGA.replace(/[^0-9\.]+/g, ''));
-                        }
-                        console.log(count);
-                        $('#addRowButton').click(function () {
-                            var newCodeIGA;
-                            count += 1;
-                            if (count > 9){
-                                newCodeIGA = "IGA" + count;
-                            } else {
-                                newCodeIGA = "IGA0" + count;
-                            }
-                            console.log(newCodeIGA);
-                            $('#data').append(
-                                    '<tr>' +
-                                    '<td>'+ newCodeIGA +'</td>' +
-                                    '<input type="hidden" name="codeIGA" class="readonlyWhite" id="codeIGA" value="'+ newCodeIGA +'" />' +
-                                    '<td>' +
-                                    '<div class="col-sm-10">' +
-                                    '<input type="text" name="description" class="form-control no-border" id="description" placeholder="Enter Institutional Graduate Attribute">' +
-                                    '</div>' +
-                                    '</td>' +
-                                    '<td>' +
-                                    '<div class="col-sm-10">' +
-                                    '<input type="text" name="remarks" class="form-control no-border" id="remarks">' +
-                                    '</div>' +
-                                    '</td>' +
-                                    '<td>' +
-                                    '<button type="button" class="btn btn-success btn-xs"><i class="fa fa-edit"> </i></button>' +
-                                    '<button type="button" id="deleteRow" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>' +
-                                    '</td>' +
-                                    '</tr>'
-                                    );
-                        });
-                        $(document).on('click', '#deleteRow', function (event) {
-                            count -= 1;
-                            $(this).closest('tr').remove();
-                        });
-                    }
-            );
-        </script> 
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -76,7 +28,7 @@
             <div class="content-wrapper">
 
                 <!-- Main content -->
-                <form action="EncodeIGA" method="post" name="createIGA">
+                <form action="EncodeIGA" method="post" name="EncodeIGA">
                     <section class="content">
                         <div class="box box-info">
                             <!-- /.box-header -->
@@ -87,7 +39,7 @@
                             <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                             <!--encoding IGA table-->
                             <div class="box-body table-responsive">
-                                <table id= "data" class="table table-hover">
+                                <table id="data" class="table table-hover">
                                     <tr>
                                         <th>Code</th>
                                         <th>
@@ -102,36 +54,6 @@
                                         </th>
                                         <th>Tools</th>
                                     </tr>
-                                    <% ArrayList<IGA> listIGA = (ArrayList<IGA>) request.getAttribute("listIGA");
-                                        String codeIGA = (String) request.getAttribute("codeIGA");
-
-                                        for (int i = 0; i < listIGA.size(); i++) {
-                                            if (!listIGA.isEmpty()) {
-                                    %>
-                                    <tr>
-                                        <td>
-                                            <%= listIGA.get(i).getCodeIGA()%>
-                                            <input type="hidden" name="codeIGA" class="readonlyWhite" id="codeIGA" value="<%= listIGA.get(i).getCodeIGA()%>" />
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-10">
-                                                <input type="text" name="description" class="form-control no-border" id="description" value ="<%= listIGA.get(i).getDescription()%>">
-                                            </div> 
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-10">
-                                                <input type="text" name="remarks" class="form-control no-border" id="remarks" value ="<%= listIGA.get(i).getRemarks()%>">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></button>
-                                            <button type="button" id="deleteRow" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <%
-                                            }
-                                        }
-                                    %>
                                 </table>
                             </div>
                             <div class="box-footer">  
@@ -163,5 +85,6 @@
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!-- Delete Row -->
         <script src="/OBESystem/resources/bootstrap/js/deleteRow.js"></script>
+        <script src="/OBESystem/js/create_IGA.js"></script>
     </body>
 </html>

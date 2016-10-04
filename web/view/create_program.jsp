@@ -50,14 +50,14 @@
                                     <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
 
                                     <div class="col-sm-10">
-                                        <input name="title" type="text" class="form-control" id="inputEmail3" placeholder="BS Information Systems">
+                                        <input name="title" type="text" class="form-control" id="inputEmail3" placeholder="BS Information Systems" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Code</label>
 
                                     <div class="col-sm-10">
-                                        <input name="codeProgram" type="text" class="form-control" id="inputEmail3" placeholder="BSINSYS">
+                                        <input name="codeProgram" type="text" class="form-control" id="inputEmail3" placeholder="BSINSYS" required>
                                     </div>
                                 </div>
 
@@ -72,13 +72,13 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">Units</label>
 
                                     <div class="col-xs-10">
-                                        <input name="units" type="number" class="form-control" id="inputEmail3" placeholder="0">
+                                        <input name="units" type="number" class="form-control" id="inputEmail3" placeholder="0" required>
                                     </div>
                                 </div>
                                     <div class="form-group"><br>
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea name="description" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        <textarea name="description" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
                                     </div>
                                 </div>
 

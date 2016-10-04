@@ -77,26 +77,26 @@ public class Curriculum {
     /**
      * @param startYear the startYear to set
      */
-    public void setStartYear(java.sql.Date startYear) throws ParseException {
-        @SuppressWarnings("deprecation")
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date madeDate0 = new java.util.Date();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date madeDate1 = formatter.parse(df.format(madeDate0));
-        java.sql.Date sqlreceivedDate1 = new java.sql.Date(madeDate1.getTime());
-        this.startYear = sqlreceivedDate1;
-    }
+//    public void setStartYear(java.sql.Date startYear) throws ParseException {
+//        @SuppressWarnings("deprecation")
+//        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        java.util.Date madeDate0 = new java.util.Date();
+//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//        java.util.Date madeDate1 = formatter.parse(df.format(madeDate0));
+//        java.sql.Date sqlreceivedDate1 = new java.sql.Date(madeDate1.getTime());
+//        this.startYear = sqlreceivedDate1;
+//    }
 
-    /**
-     * @param deliveryDate the deliveryDate to set
-     * @throws java.text.ParseException
-     */
-    public void setStartDate(String startYear) throws ParseException {
+    public void setStartYear(String startYear) throws ParseException {
         @SuppressWarnings("deprecation")
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date deliveryDate2 = formatter.parse(startYear);
-        java.sql.Date deliveryDate1 = new java.sql.Date(deliveryDate2.getTime());
-        this.setStartYear(deliveryDate1);
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        java.util.Date startYear1 = formatter.parse(startYear);
+        java.sql.Date startYear2 = new java.sql.Date(startYear1.getTime());
+        this.setStartYear(startYear2);
+    }
+    
+    public void setStartYear(java.sql.Date startYear) {
+        this.startYear = startYear;
     }
 
     /**
@@ -109,22 +109,26 @@ public class Curriculum {
     /**
      * @param endYear the endYear to set
      */
-    public void setEndYear(java.sql.Date endYear) throws ParseException {
+//    public void setEndYear(java.sql.Date endYear) throws ParseException {
+//        @SuppressWarnings("deprecation")
+//        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        java.util.Date madeDate0 = new java.util.Date();
+//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//        java.util.Date madeDate1 = formatter.parse(df.format(madeDate0));
+//        java.sql.Date sqlreceivedDate1 = new java.sql.Date(madeDate1.getTime());
+//        this.endYear = sqlreceivedDate1;
+//    }
+//    
+    public void setEndYear(String endYear) throws ParseException {
         @SuppressWarnings("deprecation")
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date madeDate0 = new java.util.Date();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date madeDate1 = formatter.parse(df.format(madeDate0));
-        java.sql.Date sqlreceivedDate1 = new java.sql.Date(madeDate1.getTime());
-        this.endYear = sqlreceivedDate1;
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        java.util.Date endYear1 = formatter.parse(endYear);
+        java.sql.Date endYear2 = new java.sql.Date(endYear1.getTime());
+        this.setEndYear(endYear2);
     }
-
-    public void setEndDate(String startYear) throws ParseException {
-        @SuppressWarnings("deprecation")
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date deliveryDate2 = formatter.parse(startYear);
-        java.sql.Date deliveryDate1 = new java.sql.Date(deliveryDate2.getTime());
-        this.setEndYear(deliveryDate1);
+    
+    public void setEndYear(java.sql.Date endYear) {
+        this.endYear = endYear;
     }
 
     /**

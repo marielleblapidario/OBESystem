@@ -1,17 +1,21 @@
 var table = $("#data");
-var programCode = sessionStorage.getItem("programCode");
+var codeCourse = sessionStorage.getItem("codeCourse");
 var rowCount = 0;
 var count = 0;
 
 $(document).ready(function () {
-    getAllPA(programCode);
-    getLastPA(programCode);
+    getAllCO(codeCourse);
+    getLastCO(codeCourse);
+    $(document).on('click', '#deleteRow', function (event) {
+        $(this).closest('tr').remove();
+    });
+
 });
 
-function getAllPA(program) {
+function getAllCO(course) {
     $.ajax({
         type: "GET",
-        url: "/OBESystem/GetAllPA?SelectedProgram=" + program,
+        url: "/OBESystem/GetAllCO?SelectedCourse=" + course,
         dataType: 'json',
         success: function (data) {
             console.log(data);
@@ -23,14 +27,14 @@ function getAllPA(program) {
     });
 }
 
-function getLastPA(program) {
+function getLastCO(course) {
     $.ajax({
         type: "GET",
-        url: "/OBESystem/GetLastPA?SelectedProgram=" + program,
+        url: "/OBESystem/GetLastCO?SelectedCourse=" + course,
         dataType: 'json',
         success: function (data) {
             console.log(data);
-            
+
             var lastCodeIGA = data;
             console.log(lastCodeIGA);
             if (lastCodeIGA) {
@@ -41,9 +45,9 @@ function getLastPA(program) {
                 var newCodeIGA;
                 count += 1;
                 if (count > 9) {
-                    newCodeIGA = "PA-" + programCode + "-" + count;
+                    newCodeIGA = "CO-" + codeCourse + "-" + count;
                 } else {
-                    newCodeIGA = "PA-" + programCode + "-0" + count;
+                    newCodeIGA = "CO-" + codeCourse + "-0" + count;
                 }
                 console.log(newCodeIGA);
                 console.log("rowCount: " + rowCount);
@@ -52,12 +56,16 @@ function getLastPA(program) {
                 tr.id = 'tr' + rowCount;
                 var codeIGACell = document.createElement("td");
                 codeIGACell.innerHTML = newCodeIGA
-                        + '<input type="hidden" name="codePA" class="readonlyWhite" id="codePA' + rowCount + '" value="' + newCodeIGA + '" />';
+                        + '<input type="hidden" name="codeCO" class="readonlyWhite" id="codeCO' + rowCount + '" value="' + newCodeIGA + '" />';
                 tr.appendChild(codeIGACell);
 
                 var descriptionCell = document.createElement("td");
                 descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" required></div>'
                 tr.appendChild(descriptionCell);
+
+                var weightCell = document.createElement("td");
+                weightCell.innerHTML = '<div class="col-sm-10"><input type="text" class="form-control no-border" name="weight" id="weight' + rowCount + '" required></div>'
+                tr.appendChild(weightCell);
 
                 var statusCell = document.createElement("td");
                 statusCell.innerHTML = '<span class="label label-success">pending</span>'
@@ -84,8 +92,9 @@ function getLastPA(program) {
 }
 
 function addRow(data) {
-    var codePA = data.codePA;
+    var codeCO = data.codeCO;
     var description = data.description;
+    var weight = data.weight;
     var status = data.status;
     var remarks = data.remarks;
 
@@ -94,13 +103,17 @@ function addRow(data) {
     var tr = document.createElement("tr");
     tr.id = 'tr' + rowCount;
     var codeIGACell = document.createElement("td");
-    codeIGACell.innerHTML = codePA
-            + '<input type="hidden" name="codePA" class="readonlyWhite" id="codePA' + rowCount + '" value="' + codePA + '" />';
+    codeIGACell.innerHTML = codeCO
+            + '<input type="hidden" name="codeCO" class="readonlyWhite" id="codeCO' + rowCount + '" value="' + codeCO + '" />';
     tr.appendChild(codeIGACell);
 
     var descriptionCell = document.createElement("td");
     descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" value="' + description + '" required readOnly></div>'
     tr.appendChild(descriptionCell);
+
+    var weightCell = document.createElement("td");
+    weightCell.innerHTML = '<div class="col-sm-10"><input type="text" class="form-control no-border" name="weight" id="weight' + rowCount + '" value="' + weight + '" required readOnly></div>'
+    tr.appendChild(weightCell);
 
     var statusCell = document.createElement("td");
     statusCell.innerHTML = '<span class="label label-success">' + status + '</span>'
@@ -122,13 +135,16 @@ function addRow(data) {
 
 function makeRowEditable(count) {
     var description = 'description' + count;
+    var weight = 'weight' + count;
     var remarks = 'remarks' + count;
 
     if (document.getElementById(description).readOnly) {
         document.getElementById(description).readOnly = false;
+        document.getElementById(weight).readOnly = false;
         document.getElementById(remarks).readOnly = false;
     } else {
         document.getElementById(description).readOnly = true;
+        document.getElementById(weight).readOnly = true;
         document.getElementById(remarks).readOnly = true;
     }
 }

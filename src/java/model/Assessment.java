@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 public class Assessment {
     private String codeAssessment;
     private String course;
-    private String type;
+    private  int type;
     private String description;
     private double weight;
     private String status;
@@ -26,6 +26,7 @@ public class Assessment {
     private int contributor;
     private int checker; 
     
+    private String typeName;
     private String contributorName;
     private String checkerName;
 
@@ -60,14 +61,14 @@ public class Assessment {
     /**
      * @return the type
      */
-    public String getType() {
+    public int getType() {
         return type;
     }
 
     /**
      * @param type the type to set
      */
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
@@ -226,6 +227,20 @@ public class Assessment {
      */
     public void setCheckerName(String checkerName) {
         this.checkerName = checkerName;
+    }
+
+    /**
+     * @return the typeName
+     */
+    public String getTypeName() {
+        return typeName;
+    }
+
+    /**
+     * @param typeName the typeName to set
+     */
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
     
 }

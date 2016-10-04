@@ -149,7 +149,18 @@
                                     </ul>
                                 </li>
                                 <li><a href="/OBESystem/ViewCurriculumList"><i class="fa fa-circle-o"></i>Curriculum</a></li>
-                                <li><a href="/OBESystem/ViewCourseList"><i class="fa fa-circle-o"></i>Course</a></li>
+                                <li class="">
+                                            <a href="#"><i class="fa fa-circle-o"></i>Course
+                                                <span class="pull-right-container">
+                                                    <i class="fa fa-angle-left pull-right"></i>
+                                                </span>
+                                            </a>
+                                            <ul class="treeview-menu" style="display: none;">
+                                                <li><a href="/OBESystem/ViewCourseList"><i class="fa fa-circle-o"></i>Course List</a></li>
+                                                <li><a href="/OBESystem/RedirectToSearchCO"><i class="fa fa-circle-o"></i>Course Outcome</a></li>
+                                                <li><a href="/OBESystem/RedirectToSearchAssessment"><i class="fa fa-circle-o"></i>Assessment</a></li>
+                                            </ul>
+                                        </li>
                                 <li class="">
                                     <a href="#"><i class="fa fa-circle-o"></i>Map
                                         <span class="pull-right-container">

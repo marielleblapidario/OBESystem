@@ -13,10 +13,12 @@ $("#button-add").click(function () {
     console.log("selected:" + selectedCourse);
     list.push(selectedCourse);
     console.log("before: " + courseList.length);
-    courseList = jQuery.grep(courseList, function(value){
-        return value != selectedCourse;
-    });
-     console.log("after: " + courseList.length);
+    var x = courseList.indexOf(selectedCourse);
+    courseList.splice(x,1);
+//    courseList = jQuery.grep(courseList, function (value) {
+//        return value !== selectedCourse;
+//    });
+    console.log("after: " + courseList.length);
     showCourses();
     if (list.length > 0) {
         $.ajax({
@@ -25,11 +27,15 @@ $("#button-add").click(function () {
             dataType: 'json',
             success: function (data) {
                 console.log(data);
-                var code = data.codeCourse;
-                var title = data.title;
-                var units = data.units;
+                var code = data.codeCourse 
+                        + '<input type="hidden" name="codeCourse" class="readonlyWhite" value="' + data.codeCourse + '" />' ;
+                var title = data.title 
+                        + '<input type="hidden" name="title" class="readonlyWhite"  value="' + data.title + '" />';
+                var units = data.units 
+                        + '<input type="hidden" name="units" class="readonlyWhite" value="' + data.units + '" />';
+                var tool = "<button type=\"button\" id=\"deleteRow\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>";
 
-                table.row.add([code, title, units]);
+                table.row.add([code, title, units, tool]);
                 table.draw();
             },
             error: function (response) {
@@ -71,13 +77,4 @@ function showCourses() {
         var s = "<option value=" + courseList[x].codeCourse + ">" + courseList[x].title + "</option>";
         dropDownCourse.append(s);
     }
-}
-
-function addRow(data) {
-    var code = data.codeCourse;
-    var title = data.title;
-    var units = data.units;
-
-    dataTable.row.add(code, title, units);
-    table.draw();
 }

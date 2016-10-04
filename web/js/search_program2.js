@@ -58,13 +58,11 @@ function getAllProgram() {
 }
 
 function addProgram(data) {
-    console.log("Entered addProgram: " + data.codeProgram);
     var s = "<option value = " + data.codeProgram + ">" + data.title + "</option>";
     programDropDown.append(s);
 }
 
 function addCollege(data) {
-    console.log("Entered addCollege: " + data.college);
     var s = "<option value = " + data.collegeID + ">" + data.college + "</option>";
     collegeDropDown.append(s);
 }

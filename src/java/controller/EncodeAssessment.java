@@ -5,7 +5,7 @@
  */
 package controller;
 
-import DAO.PaDAO;
+import DAO.AssessmentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -18,13 +18,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.PA;
+import model.Assessment;
 
 /**
  *
  * @author mariellelapidario
  */
-public class EncodePA extends BaseServlet {
+public class EncodeAssessment extends BaseServlet {
 
     /**
      *
@@ -35,44 +35,48 @@ public class EncodePA extends BaseServlet {
      */
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<PA> existingPA = new ArrayList<>();
-        PaDAO paDAO = new PaDAO();
+        ArrayList<Assessment> existingAssessment = new ArrayList<>();
+        AssessmentDAO assessmentDAO = new AssessmentDAO();
         boolean x = true;
         boolean checkIfExist = false;
-
-        String codeProgram = request.getParameter("program-title");
-        System.out.println("codeProgram: " + codeProgram);
-
+        
+        String codeCourse = request.getParameter("codeCourse");
+        System.out.println("codeCourse: " + codeCourse);
+        
         try {
-            existingPA = paDAO.getAllPA(codeProgram);
+            existingAssessment = assessmentDAO.getAllAssessment(codeCourse);
         } catch (ParseException ex) {
-            Logger.getLogger(EncodePA.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EncodeAssessment.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         String contributor = request.getParameter("contributor");
         String checker = request.getParameter("select-approver");
-        String[] codePA = request.getParameterValues("codePA");
+        String[] codeAssessment = request.getParameterValues("codeAssessment");
+        String[] type = request.getParameterValues("AType");
         String[] description = request.getParameterValues("description");
+        String[] weight = request.getParameterValues("weight");
         String[] status = request.getParameterValues("status");
         String[] remarks = request.getParameterValues("remarks");
-
+        
         System.out.println("contributor: " + contributor);
         System.out.println("checker: " + checker);
-        System.out.println("array size: " + codePA.length);
+        System.out.println("array size: " + codeAssessment.length);
 
-        for (int y = 0; y < codePA.length; y++) {
-            System.out.println("codePA: " + codePA[y]);
+        for (int y = 0; y < codeAssessment.length; y++) {
+            System.out.println("codePO: " + codeAssessment[y]);
+            System.out.println("type: " + type[y]);
             System.out.println("description: " + description[y]);
+            System.out.println("weight: " + weight[y]);
             System.out.println("status" + status[y]);
             System.out.println("remarks: " + remarks[y]);
 
-            PA pa = new PA();
+            Assessment assessment = new Assessment();
             int position = 0;
 
             //compare existing IGA in database with the IGA from JSP
-            for (int a = 0; a < existingPA.size(); a++) {
+            for (int a = 0; a < existingAssessment.size(); a++) {
                 //existing entry
-                if (existingPA.get(a).getCodePA().equalsIgnoreCase(codePA[y])) {
+                if (existingAssessment.get(a).getCodeAssessment().equalsIgnoreCase(codeAssessment[y])) {
                     checkIfExist = true;
                     //get place in array for comparing for update
                     position = a;
@@ -82,27 +86,29 @@ public class EncodePA extends BaseServlet {
             if (checkIfExist == true) {
                 System.out.println("entered existing");
                 //not updated
-                if (existingPA.get(position).getDescription().equalsIgnoreCase(description[y])
-                        && existingPA.get(position).getRemarks().equalsIgnoreCase(remarks[y])) {
+                if (existingAssessment.get(position).getDescription().equalsIgnoreCase(description[y])
+                        && existingAssessment.get(position).getRemarks().equalsIgnoreCase(remarks[y])
+                        && existingAssessment.get(position).getWeight() == Double.parseDouble(weight[y])) {
 
                 } //updated IGA
                 else {
                     try {
                         System.out.println("entered update");
-                        pa.setCodePA(codePA[y]);
-                        pa.setProgram(codeProgram);
-                        pa.setDescription(description[y]);
-                        pa.setStatus(status[y]);
-                        pa.setRemarks(remarks[y]);
-                        pa.setDateUpdated();
-                        pa.setContributor(Integer.parseInt(contributor));
-                        pa.setChecker(Integer.parseInt(checker));
-                        if (paDAO.updatePA(pa)) {
+                        assessment.setType(Integer.parseInt(type[y]));
+                        assessment.setDescription(description[y]);
+                        assessment.setWeight(Double.parseDouble(weight[y]));
+                        assessment.setStatus(status[y]);
+                        assessment.setRemarks(remarks[y]);
+                        assessment.setDateUpdated();
+                        assessment.setContributor(Integer.parseInt(contributor));
+                        assessment.setCodeAssessment(codeAssessment[y]);
+                        if (assessmentDAO.updateAssessment(assessment)) {
+                            x = true;
                         } else {
                             x = false;
                         }
                     } catch (ParseException ex) {
-                        Logger.getLogger(EncodePA.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(EncodeAssessment.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 checkIfExist = false;
@@ -110,57 +116,60 @@ public class EncodePA extends BaseServlet {
             else {
                 System.out.println("entered new IGA entity");
                 try {
-                    pa.setCodePA(codePA[y]);
-                    pa.setProgram(codeProgram);
-                    pa.setDescription(description[y]);
-                    pa.setStatus(status[y]);
-                    pa.setRemarks(remarks[y]);
-                    pa.setDateMade();
-                    pa.setDateUpdated();
-                    pa.setContributor(Integer.parseInt(contributor));
-                    pa.setChecker(Integer.parseInt(checker));
-                    if (paDAO.encodePA(pa)) {
+                    assessment.setCodeAssessment(codeAssessment[y]);
+                    assessment.setCourse(codeCourse);
+                    assessment.setType(Integer.parseInt(type[y]));
+                    assessment.setDescription(description[y]);
+                    assessment.setWeight(Double.parseDouble(weight[y]));
+                    assessment.setStatus(status[y]);
+                    assessment.setRemarks(remarks[y]);
+                    assessment.setDateMade();
+                    assessment.setDateUpdated();
+                    assessment.setContributor(Integer.parseInt(contributor));
+                    assessment.setChecker(Integer.parseInt(checker));
+                    if (assessmentDAO.encodeCO(assessment)) {
                         System.out.println("entered creation");
+                        x = true;
                     } else {
                         System.out.println("entered fail");
                         x = false;
                     }
                 } catch (ParseException ex) {
-                    Logger.getLogger(EncodeIGA.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(EncodeAssessment.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
-
+        
         //check for deleted
         System.out.println("check for deleted");
         ArrayList<String> code = new ArrayList<>();
         boolean exist = false;
-        System.out.println("old PA list: " + existingPA.size());
-        System.out.println("new PA list: " + codePA.length);
-        for (int a = 0; a < existingPA.size(); a++) {
-            for (int b = 0; b < codePA.length; b++) {
-                if (existingPA.get(a).getCodePA().equalsIgnoreCase(codePA[b])) {
+        System.out.println("old PA list: " + existingAssessment.size());
+        System.out.println("new PA list: " + codeAssessment.length);
+        for (int a = 0; a < existingAssessment.size(); a++) {
+            for (int b = 0; b < codeAssessment.length; b++) {
+                if (existingAssessment.get(a).getCodeAssessment().equalsIgnoreCase(codeAssessment[b])) {
                     exist = true;
                 }
             }
             if (exist == false) {
-                code.add(existingPA.get(a).getCodePA());
-                System.out.println("iga to delete: " + existingPA.get(a).getCodePA());
+                code.add(existingAssessment.get(a).getCodeAssessment());
+                System.out.println("iga to delete: " + existingAssessment.get(a).getCodeAssessment());
             }
             exist = false;
         }
-        //delete PA
+        //delete Assessment
         for (int c = 0; c < code.size(); c++) {
-            if (paDAO.deletePA(code.get(c))) {
+            if (assessmentDAO.deleteAssessment(code.get(c))) {
             } else {
                 x = false;
             }
         }
-        
+
         if (x == true) {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("/view/search_PA.jsp");
+            RequestDispatcher rd = context.getRequestDispatcher("/view/search_assessment.jsp");
             request.setAttribute("sucesss", "success");
             rd.forward(request, response);
         } else {

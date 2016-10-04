@@ -48,53 +48,24 @@
                             <input class="hidden" id="hidden-college-title" name="college-title">
                             <br>
                             <label class="col-sm-2 control-label">Approver</label>
-                            <div class="col-sm-10">
-                                <select class="form-control select2 select2-hidden-accessible" style="width: 30%;" tabindex="-1" aria-hidden="true">
-                                    <option selected="selected">Mr. Danny Cheng</option>
-                                    <option>Mr. Oliver Malabanan</option>
-                                </select>
-                            </div>
+                           <div class="col-sm-10">
+                                    <select name="select-approver" id = "select-approver" class="form-control select2 select2-hidden-accessible" style="width: 30%;" tabindex="-1" aria-hidden="true">
+                                    </select>
+                                </div>
                             <br>
                         </div>
                         <div class="box-body table-responsive">
-                            <table class="table table-hover">
+                            <table id="data" class="table table-hover">
                                 <tr>
                                     <th>Program Attribute</th>
                                     <th>Institutional Graduate Attribute</th>
                                     <th>Status</th>
                                     <th>Remarks</th>
                                 </tr>
-                                <tr>
-                                    <td>Something Graduate Attribute</td>
-                                    <td>
-                                        <div class="form-group">
-
-                                            <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select IGA" style="width: 50%;" tabindex="-1" aria-hidden="true">
-                                                <option>IGO1</option>
-                                                <option>IGO2</option>
-                                                <option>IGO3</option>
-                                                <option>IGO4</option>
-                                                <option>IGO5</option>
-                                                <option>IGO6</option>
-                                                <option>IGO7</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <span class="label label-success">approved</span>
-                                    </td>
-                                    <td>
-                                        <div class="col-sm-7">
-                                            <input type="email" class="form-control no-border" id="inputEmail3" placeholder="">
-                                        </div>
-                                    </td>
-                                </tr>
-
-
                             </table>
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-default pull-right">Cancel</button>
+                            <button type="button" class="btn btn-default pull-right">Cancel</button>
                             <button type="submit" class="btn btn-success pull-right">Send for Approval</button>
                             <button type="submit" class="btn btn-primary pull-right">Save</button>
                         </div>
@@ -136,8 +107,11 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
-        <!-- stored attributes from search-->
+        <!-- self made-->
         <script src="/OBESystem/js/store_program_search.js"></script>
+        <script src="/OBESystem/js/view_approver_list.js"></script>
+        <script src="/OBESystem/js/map_PA_IGA.js"></script>
+        
         <!-- Page script -->
         <script>
             $(function () {
