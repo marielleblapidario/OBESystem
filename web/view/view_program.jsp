@@ -48,43 +48,43 @@
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Program Title</label>
 
-                                    <div class="col-sm-10">
-                                        BS in Information Systems
+                                    <div  class="col-sm-10">
+                                        <input name="title" type="text" class="form-control" id="title" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Code</label>
 
                                     <div class="col-sm-10">
-                                        BSINSYS
+                                         <input name="codeProgram" type="text" class="form-control" id="codeProgram" disabled>
+                                         <input type="hidden" name="hidden-codeProgram" class="readonlyWhite" id="hidden-codeProgram"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">College</label>
                                     <div class="col-sm-10">
-                                        College of Computer Studies
+                                         <input name="college" type="text" class="form-control" id="college" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">Units</label>
-
-                                    <div class="col-xs-1">
-                                        260
+                                    <label class="col-sm-2 control-label">Units</label>
+                                    <div class="col-sm-10">
+                                         <input name="units" type="text" class="form-control" id="units" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        something here
+                                        <textarea id="description" class="form-control" rows="3" disabled></textarea>
                                     </div>
                                 </div>
 
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">  
-                                <button type="submit" class="btn btn-default pull-right">Back</button>
-                                <button type="submit" class="btn btn-success pull-right">Edit</button>
+                                <a href="/OBESystem/RedirectToProgramList"><button id="back" type="button" class="btn btn-default pull-right">Back</button></a>
+                                <a href="/OBESystem/RedirectToEditProgram"><button id="edit" type="button" class="btn btn-success pull-right">Edit</button></a>
                             </div>
                             <!-- /.box-footer -->
                         </form>
@@ -121,6 +121,8 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
+        <!--selfMade -->
+        <script src="/OBESystem/js/view_program.js"></script>
         <!-- Page script -->
         <script>
             $(function () {

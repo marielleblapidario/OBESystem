@@ -54,11 +54,11 @@ public class CourseDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapCourseToProgram (codeCourse, codeProgram)\n"
+            String query = "INSERT INTO mapCourseToProgram (courseID, codeProgram)\n"
                     + "VALUES (?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setString(1, newMap.getCodeCourse());
+            pstmt.setInt(1, newMap.getCourseID());
             pstmt.setString(2, newMap.getCodeProgram());
 
             int rows = pstmt.executeUpdate();
@@ -77,17 +77,21 @@ public class CourseDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT codeCourse, title\n"
-                    + "FROM course\n"
-                    + "WHERE program = ?;";
+            String query = "SELECT C.courseID, C.codeCourse, C.title, C.units\n"
+                    + "FROM course C\n"
+                    + "JOIN mapcoursetoprogram M\n"
+                    + "ON C.courseID = M.courseID\n"
+                    + "WHERE M.codeProgram = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, program);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Course course = new Course();
+                course.setCourseID(rs.getInt("courseID"));
                 course.setCodeCourse(rs.getString("codeCourse"));
                 course.setTitle(rs.getString("title"));
+                course.setUnits(rs.getInt("units"));
                 newCourse.add(course);
             }
             pstmt.close();
@@ -99,21 +103,51 @@ public class CourseDAO {
         return null;
     }
 
-    public Course getSpecificCourse(String program) throws ParseException {
+    public Course getSpecificCourse(int courseID) throws ParseException {
         Course course = null;
 
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT codeCourse, title, units\n"
+            String query = "SELECT courseID, codeCourse, title, units\n"
                     + "FROM course\n"
-                    + "WHERE codeCourse = ?;";
+                    + "WHERE courseID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, program);
+            pstmt.setInt(1, courseID);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 course = new Course();
+                course.setCourseID(rs.getInt("courseID"));
+                course.setCodeCourse(rs.getString("codeCourse"));
+                course.setTitle(rs.getString("title"));
+                course.setUnits(rs.getInt("units"));
+            }
+            pstmt.close();
+            conn.close();
+            return course;
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public Course getSpecificCourse(String codeCourse) throws ParseException {
+        Course course = null;
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT courseID, codeCourse, title, units\n"
+                    + "FROM course\n"
+                    + "WHERE codeCourse = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, codeCourse);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                course = new Course();
+                course.setCourseID(rs.getInt("courseID"));
                 course.setCodeCourse(rs.getString("codeCourse"));
                 course.setTitle(rs.getString("title"));
                 course.setUnits(rs.getInt("units"));
@@ -133,13 +167,14 @@ public class CourseDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT codeCourse, title\n"
+            String query = "SELECT courseID, codeCourse, title\n"
                     + "FROM course;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Course course = new Course();
+                course.setCourseID(rs.getInt("courseID"));
                 course.setCodeCourse(rs.getString("codeCourse"));
                 course.setTitle(rs.getString("title"));
                 newCourse.add(course);
@@ -160,7 +195,7 @@ public class CourseDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT codeCourse, title, C.contributor, "
+            String query = "SELECT courseID, codeCourse, title, C.contributor, "
                     + "CONCAT(U.firstName, \" \" , U.LastName) as 'name'\n"
                     + "FROM course C\n"
                     + "JOIN user U\n"
@@ -172,6 +207,7 @@ public class CourseDAO {
 
             while (rs.next()) {
                 Course temp = new Course();
+                temp.setCourseID(rs.getInt("courseID"));
                 temp.setCodeCourse(rs.getString("codeCourse"));
                 temp.setTitle(rs.getString("title"));
                 temp.setContributor(rs.getInt("contributor"));
@@ -187,15 +223,15 @@ public class CourseDAO {
         return null;
     }
 
-    public boolean deleteCourse(String codeCourse) {
+    public boolean deleteCourse(int courseID) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE course\n"
                     + "SET isDeleted = TRUE\n"
-                    + "WHERE codeCourse = ?;";
+                    + "WHERE courseID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, codeCourse);
+            pstmt.setInt(1, courseID);
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();

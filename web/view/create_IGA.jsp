@@ -47,6 +47,11 @@
                                                 Institutional Graduate Attribute
                                             </div>
                                         </th>
+                                         <th>
+                                            <div class="col-sm-10">
+                                                Description
+                                            </div>
+                                        </th>
                                         <th>
                                             <div class="col-sm-10">
                                                 Remarks

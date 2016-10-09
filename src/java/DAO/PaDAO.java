@@ -66,7 +66,6 @@ public class PaDAO {
             pstmt.setDate(4, newPA.getDateUpdated());
             pstmt.setInt(5, newPA.getContributor());
             pstmt.setString(6, newPA.getCodePA());
-            
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -79,35 +78,30 @@ public class PaDAO {
     }
 
     public ArrayList<PA> getAllPA(String codeProgram) throws ParseException {
-        ArrayList<PA> newPA = new ArrayList<PA>();
+        ArrayList<PA> newPA = new ArrayList<>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT P.codePA, P.program, prog.title, prog.college, "
-                    + "P.description, status, P.remarks, P.contributor, P.checker,\n"
-                    + "CONCAT(checker.firstName, \" \" , checker.LastName) as 'checkerName'\n"
+            String query = "SELECT P.codePA, P.description, "
+                    + "MPTI.codeIGA, I.title, P.status, P.remarks\n"
                     + "FROM PA P\n"
-                    + "JOIN user checker\n"
-                    + "ON P.checker = checker.userID\n"
-                    + "JOIN program prog\n"
-                    + "ON P.program = prog.codeProgram\n"
+                    + "JOIN mappatoiga MPTI\n"
+                    + "ON P.codePA = MPTI.codePA\n"
+                    + "JOIN IGA I\n"
+                    + "ON MPTI.codeIGA = I.codeIGA\n"
                     + "WHERE P.program = ? AND P.isDeleted IS NULL;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, codeProgram);
-            
+
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 PA temp = new PA();
                 temp.setCodePA(rs.getString("codePA"));
-                temp.setProgram(rs.getString("program"));
-                temp.setProgramTitle(rs.getString("title"));
-                temp.setCollege(rs.getString("college"));
                 temp.setDescription(rs.getString("description"));
+                temp.setCodeIGA(rs.getString("codeIGA"));
+                temp.setIgaTitle(rs.getString("title"));
                 temp.setStatus(rs.getString("status"));
                 temp.setRemarks(rs.getString("remarks"));
-                temp.setContributor(rs.getInt("contributor"));
-                temp.setChecker(rs.getInt("checker"));
-                temp.setCheckerName(rs.getString("checkerName"));
                 newPA.add(temp);
             }
             pstmt.close();

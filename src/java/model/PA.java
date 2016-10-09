@@ -29,6 +29,8 @@ public class PA {
     private String college;
     private String contributorName;
     private String checkerName;
+    private String codeIGA;
+    private String igaTitle;
     
     /**
      * @return the codePA
@@ -228,5 +230,33 @@ public class PA {
      */
     public void setCheckerName(String checkerName) {
         this.checkerName = checkerName;
+    }
+
+    /**
+     * @return the igaTitle
+     */
+    public String getIgaTitle() {
+        return igaTitle;
+    }
+
+    /**
+     * @param igaTitle the igaTitle to set
+     */
+    public void setIgaTitle(String igaTitle) {
+        this.igaTitle = igaTitle;
+    }
+
+    /**
+     * @return the codeIGA
+     */
+    public String getCodeIGA() {
+        return codeIGA;
+    }
+
+    /**
+     * @param codeIGA the codeIGA to set
+     */
+    public void setCodeIGA(String codeIGA) {
+        this.codeIGA = codeIGA;
     }
 }

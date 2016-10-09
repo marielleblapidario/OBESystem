@@ -36,7 +36,8 @@
         <div class="wrapper">
             <div class="content-wrapper">
                 <!-- form start -->
-                <form action="" method="post" name="">>
+                <form action="EncodePI" method="post" name="EncodePI">
+                    <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                     <!-- Main content -->
                     <section class="content">
                         <div class="box box-info">
@@ -50,35 +51,48 @@
 
                                 <label>Approver</label>
                                 <div>
-                                    <select class="form-control select2 select2-hidden-accessible" style="width: 30%;" tabindex="-1" aria-hidden="true">
-                                        <option selected="selected">Mr. Danny Cheng</option>
-                                        <option>Mr. Oliver Malabanan</option>
+                                    <select name="select-approver" id="select-approver" class="form-control select2 select2-hidden-accessible" style="width: 30%;" tabindex="-1" aria-hidden="true" required>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h3 class="box-title">GO1: Identify unmet or under-served ethical and innovative service and product needs of specific customer groups and markets.</h3>
+                                <label>Choose Program Outcome</label>
+                                <select id="select-PO" name="select-PO" class="form-control select2 select2-hidden-accessible" style="width: 30%;" tabindex="-1" aria-hidden="true">
+                                </select>
+                                <br><br>
+                                <input class="hidden" id="hidden-codePO" name="codePO">
+                                <h3 class="box-title"><span id = "PO-description"></span></h3>
+                                <br>
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
-                            <form class="form-horizontal">
-                                <!-- /.b ox-body -->
-                                <div class="box-body no-border">
-                                    <div class="input-group input-group-sm">
-                                        <input type="text" class="form-control" placeholder="Add Performance Indicator">
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn bg-green btn-flat"><i class="fa fa-edit"></i></button>
-                                            <button type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button>
-                                        </span>
-                                    </div>
-                                    <button type="submit" class="btn bg-blue pull-left no-border"><i class="fa fa-plus"></i> Add</button>
+                            <!-- /.b ox-body -->
+                            <div class="box-body no-border">
+                                <div id="PI-inputs">
                                 </div>
-                                <!-- /.box-footer -->
+                                <button id="addRowButton" type="button" class="btn bg-blue pull-left no-border"><i class="fa fa-plus"></i> Add</button>
+
+                                <br><br><br>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Remark</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="remarks" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                    </div>
+                                </div>
+                                <br>
+                                <h5 class="box-title pull-right">
+                                    <span id = "PO-description">12</span>
+                                    out of
+                                    <span id = "PO-description">45</span>
+                                    left to Map
+                                </h5>
+                            </div>
+                            <!-- /.box-footer -->
                         </div>
                         <div class="">
-                            <button type="submit" class="btn btn-default pull-right">Cancel</button>
+                            <button type="button" class="btn btn-default pull-right">Cancel</button>
                             <button type="submit" class="btn bg-green pull-right">Send for Approval</button>
                             <button type="submit" class="btn bg-light-blue pull-right">Save</button>
                         </div>
@@ -117,6 +131,9 @@
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!-- stored attributes from search-->
         <script src="/OBESystem/js/store_program_search.js"></script>
+        <script src="/OBESystem/js/view_approver_list.js"></script>
+        <script src="/OBESystem/js/search_PO.js"></script>
+        <script src="/OBESystem/js/create_PI.js"></script>
         <!-- Page script -->
         <script>
             $(function () {

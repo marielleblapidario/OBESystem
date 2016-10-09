@@ -40,30 +40,23 @@ public class EncodeIGA extends BaseServlet {
         IgaDAO igaDAO = new IgaDAO();
         boolean x = true;
         boolean checkIfExist = false;
-
         try {
             existingIGA = igaDAO.getAllIGA();
         } catch (ParseException ex) {
             Logger.getLogger(EncodeIGA.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         String contributor = request.getParameter("contributor");
         String[] codeIGA = request.getParameterValues("codeIGA");
+        String[] title = request.getParameterValues("title");
         String[] description = request.getParameterValues("description");
         String[] remarks = request.getParameterValues("remarks");
 
         System.out.println("contributor: " + contributor);
         System.out.println("array size: " + codeIGA.length);
-        System.out.println("description size: " + description.length);
 
         for (int y = 0; y < codeIGA.length; y++) {
-            System.out.println("codeIGA: " + codeIGA[y]);
-            System.out.println("description: " + description[y]);
-            System.out.println("remarks: " + remarks[y]);
-
             IGA iga = new IGA();
             int position = 0;
-
             //compare existing IGA in database with the IGA from JSP
             for (int a = 0; a < existingIGA.size(); a++) {
                 //existing entry
@@ -77,14 +70,15 @@ public class EncodeIGA extends BaseServlet {
             if (checkIfExist == true) {
                 System.out.println("entered existing");
                 //not updated
-                if (existingIGA.get(position).getDescription().equalsIgnoreCase(description[y])
+                if (existingIGA.get(position).getTitle().equalsIgnoreCase(title[y])
+                        && existingIGA.get(position).getDescription().equalsIgnoreCase(description[y])
                         && existingIGA.get(position).getRemarks().equalsIgnoreCase(remarks[y])) {
-
                 } //updated IGA
                 else {
                     try {
                         System.out.println("entered update");
                         iga.setCodeIGA(codeIGA[y]);
+                        iga.setTitle(title[y]);
                         iga.setDescription(description[y]);
                         iga.setRemarks(remarks[y]);
                         iga.setDateUpdated();
@@ -103,6 +97,7 @@ public class EncodeIGA extends BaseServlet {
                 System.out.println("entered new IGA entity");
                 try {
                     iga.setCodeIGA(codeIGA[y]);
+                    iga.setTitle(title[y]);
                     iga.setDescription(description[y]);
                     iga.setRemarks(remarks[y]);
                     iga.setDateMade();
@@ -118,7 +113,6 @@ public class EncodeIGA extends BaseServlet {
                 }
             }
         }
-
         //check for deleted
         System.out.println("check for deleted");
         ArrayList<String> code = new ArrayList<>();
@@ -126,7 +120,7 @@ public class EncodeIGA extends BaseServlet {
         System.out.println("old IGA list: " + existingIGA.size());
         System.out.println("new IGA list: " + codeIGA.length);
         for (int a = 0; a < existingIGA.size(); a++) {
-            for (int b = 0; b <codeIGA.length; b++) {
+            for (int b = 0; b < codeIGA.length; b++) {
                 if (existingIGA.get(a).getCodeIGA().equalsIgnoreCase(codeIGA[b])) {
                     exist = true;
                 }
@@ -144,19 +138,12 @@ public class EncodeIGA extends BaseServlet {
                 x = false;
             }
         }
-
         if (x == true) {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext context = getServletContext();
             RequestDispatcher rd = context.getRequestDispatcher("/view/create_IGA.jsp");
             request.setAttribute("sucesss", "success");
             rd.forward(request, response);
-            /*
-            response.setContentType("text/html;charset=UTF-8");
-             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("/view/create_IGA.jsp");
-            request.setAttribute("success", "success");
-            rd.forward(request, response); */
         } else {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext context = getServletContext();
@@ -165,5 +152,4 @@ public class EncodeIGA extends BaseServlet {
             rd.forward(request, response);
         }
     }
-
 }

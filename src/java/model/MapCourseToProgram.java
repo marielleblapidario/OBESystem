@@ -10,7 +10,7 @@ package model;
  * @author mariellelapidario
  */
 public class MapCourseToProgram {
-    private String codeCourse;
+    private int courseID;
     private String codeProgram;
     
     private String programTitle;
@@ -18,15 +18,15 @@ public class MapCourseToProgram {
     /**
      * @return the codeCourse
      */
-    public String getCodeCourse() {
-        return codeCourse;
+    public int getCourseID() {
+        return courseID;
     }
 
     /**
      * @param codeCourse the codeCourse to set
      */
-    public void setCodeCourse(String codeCourse) {
-        this.codeCourse = codeCourse;
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 
     /**

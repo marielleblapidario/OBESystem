@@ -25,7 +25,7 @@ $(document).ready(function () {
 
         var college = $('#select-college option:selected').text();
         var collegeID = $('select-college option:selected').val();
-        
+
         sessionStorage.setItem("programTitle", programTitle);
         var s = sessionStorage.getItem("programTitle");
         sessionStorage.setItem("programCode", programCode);
@@ -34,8 +34,8 @@ $(document).ready(function () {
         var sss = sessionStorage.getItem("college");
         sessionStorage.setIteam("collegeID", collegeID);
         var ssss = sessionStorage.getItem("collegeID");
-        
-        console.log('title: ' + s + ' code: ' + ss + " college: " + sss +"collegeID: " + ssss);
+
+        console.log('title: ' + s + ' code: ' + ss + " college: " + sss + "collegeID: " + ssss);
     });
 }
 
@@ -48,6 +48,8 @@ function getAllCollege() {
         dataType: 'json',
         success: function (data) {
             console.log(data);
+            var s = "<option disabled selected value> -- select an option -- </option>";
+            collegeDropDown.append(s);
             data.forEach(addCollege);
         },
         error: function (response) {
@@ -63,6 +65,8 @@ function getAllProgram() {
         dataType: 'json',
         success: function (data) {
             console.log(data);
+            var s = "<option disabled selected value> -- select an option -- </option>";
+            programDropDown.append(s);
             data.forEach(addProgram);
         },
         error: function (response) {
@@ -81,7 +85,6 @@ function getCollegeByProgram(program) {
             $('#select-college').find('option').remove().end();
             var s = "<option value = " + data.college + ">" + data.collegeName + "</option>";
             collegeDropDown.append(s);
-            getAllCollege();
         },
         error: function (response) {
             console.log(response);
@@ -98,7 +101,6 @@ function getProgramByCollege(college) {
             console.log(data);
             $('#select-program').find('option').remove().end();
             data.forEach(addProgram);
-            getAllProgram();
         },
         error: function (response) {
             console.log(response);

@@ -66,8 +66,9 @@ public class EncodeCurriculum extends BaseServlet {
             
             //how to get the courses
             String[] codeCourse = request.getParameterValues("codeCourse");
+            String[] courseID = request.getParameterValues("courseID");
 
-            System.out.println("codeCourse array size: " + codeCourse.length);
+            System.out.println("codeCourse array size: " + courseID.length);
 
             if (curriculumDAO.encodeCurriculum(curriculum)) {
                 System.out.println("created curriculum");
@@ -80,11 +81,11 @@ public class EncodeCurriculum extends BaseServlet {
                     Logger.getLogger(EncodeCurriculum.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                for (int x = 0; x < codeCourse.length; x++) {
+                for (int x = 0; x < courseID.length; x++) {
                     MapCurriculumToCourse temp = new MapCurriculumToCourse();
-                    System.out.println("codeCourse: " + codeCourse[x]);
-                    temp.setCodeCurriculum(createdCurriculum);
-                    temp.setCodeCourse(codeCourse[x]);
+                    System.out.println("courseID: " + courseID[x]);
+                    temp.setCurriculumID(createdCurriculum);
+                    temp.setCourseID(Integer.parseInt(courseID[x]));
 
                     if (mapping.encodeMapCurriculumToCourse(temp) == false) {
                         checkCreation = false;

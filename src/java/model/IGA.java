@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
  */
 public class IGA {
     private String codeIGA;
+    private String title;
     private String description;
     private String remarks;
     private Date dateMade;
@@ -137,5 +138,19 @@ public class IGA {
      */
     public void setContributorName(String contributorName) {
         this.contributorName = contributorName;
+    }
+
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

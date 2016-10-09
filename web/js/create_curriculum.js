@@ -2,23 +2,31 @@ var list = [];
 var courseList = [];
 var table = $("#example1").DataTable();
 var dropDownCourse = $("#select-course");
+var programDropDown = $("#select-program");
 
 $(document).ready(function () {
-    getAllCourse();
     $("#table").hide();
+    programDropDown.change(function () {
+        table.clear().draw();
+        courseList = [];
+        var program = programDropDown.val();
+        console.log("program selected: " + program);
+        getAllCourse(program);
+    });
 });
 
 $("#button-add").click(function () {
     var selectedCourse = $("#select-course option:selected").val();
-    console.log("selected:" + selectedCourse);
     list.push(selectedCourse);
-    console.log("before: " + courseList.length);
-    var x = courseList.indexOf(selectedCourse);
-    courseList.splice(x,1);
-//    courseList = jQuery.grep(courseList, function (value) {
-//        return value !== selectedCourse;
-//    });
-    console.log("after: " + courseList.length);
+
+    for (var i = 0; i < courseList.length; i++) {
+        console.log("for loop: " + courseList[i].courseID + " compare to " + selectedCourse);
+        if (courseList[i].courseID == selectedCourse) {
+            console.log("entered boolean of compare");
+            courseList.splice(i, 1);
+            break;
+        }
+    }
     showCourses();
     if (list.length > 0) {
         $.ajax({
@@ -27,11 +35,12 @@ $("#button-add").click(function () {
             dataType: 'json',
             success: function (data) {
                 console.log(data);
-                var code = data.codeCourse 
-                        + '<input type="hidden" name="codeCourse" class="readonlyWhite" value="' + data.codeCourse + '" />' ;
-                var title = data.title 
+                var code = data.codeCourse
+                        + '<input type="hidden" name="codeCourse" class="readonlyWhite" value="' + data.coudeCourse + '" />'
+                        + '<input type="hidden" name="courseID" class="readonlyWhite" value="' + data.courseID + '" />';
+                var title = data.title
                         + '<input type="hidden" name="title" class="readonlyWhite"  value="' + data.title + '" />';
-                var units = data.units 
+                var units = data.units
                         + '<input type="hidden" name="units" class="readonlyWhite" value="' + data.units + '" />';
                 var tool = "<button type=\"button\" id=\"deleteRow\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>";
 
@@ -50,16 +59,15 @@ $("#button-add").click(function () {
 
 });
 
-function getAllCourse() {
+function getAllCourse(program) {
     $.ajax({
         type: "GET",
-        url: "/OBESystem/GetAllCourse",
+        url: "/OBESystem/GetCoursesOnProgram?SelectedProgram=" + program,
         dataType: 'json',
         success: function (data) {
-
             console.log(data);
             for (var x = 0; x < data.length; x++) {
-                var course = {codeCourse: data[x].codeCourse, title: data[x].title};
+                var course = {courseID: data[x].courseID, title: data[x].title};
                 courseList.push(course);
 
             }
@@ -73,8 +81,10 @@ function getAllCourse() {
 
 function showCourses() {
     dropDownCourse.find('option').remove().end();
+    var a = "<option disabled selected value> -- select an option -- </option>";
+    dropDownCourse.append(a);
     for (var x = 0; x < courseList.length; x++) {
-        var s = "<option value=" + courseList[x].codeCourse + ">" + courseList[x].title + "</option>";
+        var s = "<option value=" + courseList[x].courseID + ">" + courseList[x].title + "</option>";
         dropDownCourse.append(s);
     }
 }

@@ -35,7 +35,7 @@ public class GetAllCourse extends BaseServlet {
         Gson g = new Gson();
         String s = null;
         try {
-            s = g.toJson(new CourseDAO().getAllCourseTitle());
+            s = g.toJson(new CourseDAO().getAllCourse());
         } catch (ParseException ex) {
             Logger.getLogger(GetAllCourse.class.getName()).log(Level.SEVERE, null, ex);
         }

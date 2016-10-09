@@ -27,18 +27,19 @@ public class IgaDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "INSERT INTO IGA "
-                    + "(codeIGA, description,remarks, dateMade, dateUpdated, contributor)\n"
-                    + "VALUES (?,?,?,?,?,?);";
+                    + "(codeIGA, title, description, remarks, dateMade, dateUpdated, contributor)\n"
+                    + "VALUES (?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, newIGA.getCodeIGA());
-            pstmt.setString(2, newIGA.getDescription());
-            pstmt.setString(3, newIGA.getRemarks());
-            pstmt.setDate(4, newIGA.getDateMade());
-            pstmt.setDate(5, newIGA.getDateUpdated());
-            pstmt.setInt(6, newIGA.getContributor());
+             pstmt.setString(2, newIGA.getTitle());
+            pstmt.setString(3, newIGA.getDescription());
+            pstmt.setString(4, newIGA.getRemarks());
+            pstmt.setDate(5, newIGA.getDateMade());
+            pstmt.setDate(6, newIGA.getDateUpdated());
+            pstmt.setInt(7, newIGA.getContributor());
 
-            int rows = pstmt.executeUpdate();
+            pstmt.executeUpdate();
             pstmt.close();
             conn.close();
             return true;
@@ -53,14 +54,15 @@ public class IgaDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE  IGA\n"
-                    + "SET description = ?, remarks = ?, dateUpdated =?, contributor =?\n"
+                    + "SET title = ?, description = ?, remarks = ?, dateUpdated =?, contributor =?\n"
                     + "WHERE codeIGA = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, newIGA.getDescription());
-            pstmt.setString(2, newIGA.getRemarks());
-            pstmt.setDate(3, newIGA.getDateUpdated());
-            pstmt.setInt(4, newIGA.getContributor());
-            pstmt.setString(5, newIGA.getCodeIGA());
+            pstmt.setString(1, newIGA.getTitle());
+            pstmt.setString(2, newIGA.getDescription());
+            pstmt.setString(3, newIGA.getRemarks());
+            pstmt.setDate(4, newIGA.getDateUpdated());
+            pstmt.setInt(5, newIGA.getContributor());
+            pstmt.setString(6, newIGA.getCodeIGA());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -77,7 +79,7 @@ public class IgaDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT codeIGA, description, remarks, dateMade, "
+            String query = "SELECT codeIGA, title, description, remarks, dateMade, "
                     + "dateUpdated, I.contributor, "
                     + "CONCAT(U.firstName, \" \" , U.LastName) as 'contributorName'\n"
                     + "FROM IGA I\n"
@@ -89,6 +91,7 @@ public class IgaDAO {
             while (rs.next()) {
                 IGA temp = new IGA();
                 temp.setCodeIGA(rs.getString("codeIGA"));
+                temp.setTitle(rs.getString("title"));
                 temp.setDescription(rs.getString("description"));
                 temp.setRemarks(rs.getString("remarks"));
                 temp.setDateMade(rs.getDate("dateMade"));

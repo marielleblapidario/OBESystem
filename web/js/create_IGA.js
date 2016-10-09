@@ -54,6 +54,10 @@ function getLastIGA() {
                         + '<input type="hidden" name="codeIGA" class="readonlyWhite" id="codeIGA' + rowCount + '" value="' + newCodeIGA + '" />';
                 tr.appendChild(codeIGACell);
 
+                var titleCell = document.createElement("td");
+                titleCell.innerHTML = '<div class="col-sm-10"><input type="text" name="title" class="form-control no-border" id="title' + rowCount + '" required></div>'
+                tr.appendChild(titleCell);
+
                 var descriptionCell = document.createElement("td");
                 descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" required></div>'
                 tr.appendChild(descriptionCell);
@@ -79,6 +83,7 @@ function getLastIGA() {
 
 function addRow(data) {
     var codeIGA = data.codeIGA;
+    var title = data.title;
     var description = data.description;
     var remarks = data.remarks;
 
@@ -90,6 +95,10 @@ function addRow(data) {
     codeIGACell.innerHTML = codeIGA
             + '<input type="hidden" name="codeIGA" class="readonlyWhite" id="codeIGA' + rowCount + '" value="' + codeIGA + '" />';
     tr.appendChild(codeIGACell);
+
+    var titleCell = document.createElement("td");
+    titleCell.innerHTML = '<div class="col-sm-10"><input type="text" name="title" class="form-control no-border" id="title' + rowCount + '" value="' + title + '" required readOnly></div>'
+    tr.appendChild(titleCell);
 
     var descriptionCell = document.createElement("td");
     descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" value="' + description + '" required readOnly></div>'
@@ -109,13 +118,16 @@ function addRow(data) {
 }
 
 function makeRowEditable(count) {
+    var title = 'title'+count;
     var description = 'description' + count;
     var remarks = 'remarks' + count;
 
     if (document.getElementById(description).readOnly) {
+        document.getElementById(title).readOnly = false
         document.getElementById(description).readOnly = false;
         document.getElementById(remarks).readOnly = false;
     } else {
+        document.getElementById(title).readOnly = true;
         document.getElementById(description).readOnly = true;
         document.getElementById(remarks).readOnly = true;
     }

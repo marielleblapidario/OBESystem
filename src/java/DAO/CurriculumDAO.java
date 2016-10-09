@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Curriculum;
@@ -51,12 +53,12 @@ public class CurriculumDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapCurriculumToCourse (codeCurriculum, codeCourse)\n"
+            String query = "INSERT INTO mapCurriculumToCourse (ciurriculumID, courseID)\n"
                     + "VALUES (?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setInt(1, newMap.getCodeCurriculum());
-            pstmt.setString(2, newMap.getCodeCourse());
+            pstmt.setInt(1, newMap.getCurriculumID());
+            pstmt.setInt(2, newMap.getCourseID());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -74,7 +76,7 @@ public class CurriculumDAO {
             Connection conn = myFactory.getConnection();
             String query = "UPDATE curriculum\n"
                     + "SET isDeleted = TRUE\n"
-                    + "WHERE codeCurriculum = ?;";
+                    + "WHERE curriculumID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, codeCurriculum);
 
@@ -87,20 +89,91 @@ public class CurriculumDAO {
         }
         return false;
     }
-       
+
+    public ArrayList<Curriculum> getAllCurriculum() throws ParseException {
+        ArrayList<Curriculum> newCurriculum = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT C.curriculumID, C.title as 'crTitle', "
+                    + "P.title as 'pTitle', CO.college, C.startYear, C.endYear, "
+                    + "CONCAT(U.firstName, \" \" , U.LastName) as 'name'\n"
+                    + "FROM curriculum C\n"
+                    + "JOIN program P \n"
+                    + "ON C.program = P.codeProgram\n"
+                    + "JOIN refcollege CO \n"
+                    + "ON P.college = CO.collegeID\n"
+                    + "JOIN user U\n"
+                    + "ON C.contributor = U.userID\n"
+                    + "WHERE C.isDeleted IS NULL;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Curriculum temp = new Curriculum();
+                temp.setCodeCurriculum(rs.getString("curriculumID"));
+                temp.setTitle(rs.getString("crTitle"));
+                temp.setProgramName(rs.getString("pTitle"));
+                temp.setCollegeName(rs.getString("college"));
+                temp.setViewStartYear(rs.getString("startYear"));
+                temp.setViewEndYear(rs.getString("endYear"));
+                temp.setContributorName(rs.getString("name"));
+                newCurriculum.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return newCurriculum;
+        } catch (SQLException ex) {
+            Logger.getLogger(CurriculumDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public Curriculum getSpecificCurriculum(String codeCurriculum) throws ParseException {
+        Curriculum newCurriculum = new Curriculum();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT C.curriculumID, C.title as 'crTitle', "
+                    + "P.title as 'pTitle', C.startYear, C.endYear, C.description\n"
+                    + "FROM curriculum C\n"
+                    + "JOIN program P \n"
+                    + "ON C.program = P.codeProgram\n"
+                    + "WHERE curriculumID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, codeCurriculum);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                newCurriculum.setCodeCurriculum(rs.getString("curriculumID"));
+                newCurriculum.setTitle(rs.getString("crTitle"));
+                newCurriculum.setProgramName(rs.getString("pTitle"));
+                newCurriculum.setViewStartYear(rs.getString("startYear"));
+                newCurriculum.setViewEndYear(rs.getString("endYear"));
+                newCurriculum.setDescription(rs.getString("description"));
+            }
+            pstmt.close();
+            conn.close();
+            return newCurriculum;
+        } catch (SQLException ex) {
+            Logger.getLogger(CurriculumDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public Integer getLastCodeCurriculum() throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
         int i = 1000;
-        String query = "SELECT MAX(codeCurriculum) from curriculum;";
+        String query = "SELECT MAX(curriculumID) from curriculum;";
         PreparedStatement ps = conn.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            i = rs.getInt("MAX(codeCurriculum)");
+            i = rs.getInt("MAX(curriculumID)");
         }
         ps.close();
         rs.close();
         return i;
     }
-    
+
 }

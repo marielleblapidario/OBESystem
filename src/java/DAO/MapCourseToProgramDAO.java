@@ -26,12 +26,14 @@ public class MapCourseToProgramDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapCourseToProgram (codeCourse, codeProgram)\n"
+            String query = "INSERT INTO mapCourseToProgram (courseID, codeProgram)\n"
                     + "VALUES (?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setString(1, newMapping.getCodeCourse());
+            pstmt.setInt(1, newMapping.getCourseID());
+            System.out.println("id: " + newMapping.getCourseID());
             pstmt.setString(2, newMapping.getCodeProgram());
+            System.out.println("program: " + newMapping.getCodeProgram());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -49,11 +51,11 @@ public class MapCourseToProgramDAO {
             Connection conn = myFactory.getConnection();
             String query = "UPDATE mapCourseToProgram\n"
                     + "SET codeProgram = ?"
-                    + "WHERE codeCourse = ? AND codeProgram = ?;";
+                    + "WHERE courseID = ? AND codeProgram = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, newMapping.getCodeProgram());
-            pstmt.setString(2, newMapping.getCodeCourse());
+            pstmt.setInt(2, newMapping.getCourseID());
             pstmt.setString(3, newMapping.getCodeProgram());
 
             pstmt.executeUpdate();
@@ -66,23 +68,23 @@ public class MapCourseToProgramDAO {
         return false;
     }
 
-    public ArrayList<MapCourseToProgram> getAllMapCourseToProgram(String codeCourse) throws ParseException {
-        ArrayList<MapCourseToProgram> newMapping = new ArrayList<MapCourseToProgram>();
+    public ArrayList<MapCourseToProgram> getSpecificMapCourseToProgram(int courseID) throws ParseException {
+        ArrayList<MapCourseToProgram> newMapping = new ArrayList<>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT MCTP.codeCourse, MCTP.codeProgram, P.title\n"
+            String query = "SELECT MCTP.courseID, MCTP.codeProgram, P.title\n"
                     + "FROM mapCourseToProgram MCTP\n"
                     + "JOIN program P\n"
                     + "ON MCTP.codeProgram = P.codeProgram\n"
-                    + "WHERE MCTP.codeCourse = ?;";
+                    + "WHERE MCTP.courseID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, codeCourse);
+            pstmt.setInt(1, courseID);
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 MapCourseToProgram temp = new MapCourseToProgram();
-                temp.setCodeCourse(rs.getString("codeCourse"));
+                temp.setCourseID(rs.getInt("courseID"));
                 temp.setCodeProgram(rs.getString("codeProgram"));
                 temp.setProgramTitle(rs.getString("title"));
                 newMapping.add(temp);

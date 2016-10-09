@@ -2,8 +2,10 @@ var table = $("#data");
 var programCode = sessionStorage.getItem("programCode");
 var rowCount = 0;
 var count = 0;
+var arrIGA = [];
 
 $(document).ready(function () {
+    getAllIGA();
     getAllPA(programCode);
     getLastPA(programCode);
 });
@@ -23,14 +25,32 @@ function getAllPA(program) {
     });
 }
 
+function getAllIGA() {
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/GetAllIGA",
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            for (var x = 0; x < data.length; x++) {
+                arrIGA.push(data[x]);
+            }
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
 function getLastPA(program) {
+
     $.ajax({
         type: "GET",
         url: "/OBESystem/GetLastPA?SelectedProgram=" + program,
         dataType: 'json',
         success: function (data) {
             console.log(data);
-            
+
             var lastCodeIGA = data;
             console.log(lastCodeIGA);
             if (lastCodeIGA) {
@@ -59,6 +79,16 @@ function getLastPA(program) {
                 descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" required></div>'
                 tr.appendChild(descriptionCell);
 
+                var select = document.createElement("select");
+                select.name = "mapIGA";
+                tr.appendChild(select);
+                for (var x = 0; x < arrIGA.length; x++) {
+                    var option = document.createElement("option");
+                    option.label = arrIGA[x].title;
+                    option.value = arrIGA[x].codeIGA;
+                    select.appendChild(option);
+                }
+
                 var statusCell = document.createElement("td");
                 statusCell.innerHTML = '<span class="label label-success">pending</span>'
                         + '<input type="hidden" name="status" class="readonlyWhite" id="status' + rowCount + '" value="pending" />';
@@ -86,6 +116,8 @@ function getLastPA(program) {
 function addRow(data) {
     var codePA = data.codePA;
     var description = data.description;
+    var codeIGA = data.codeIGA;
+    var igaTitle = data.igaTitle;
     var status = data.status;
     var remarks = data.remarks;
 
@@ -101,6 +133,11 @@ function addRow(data) {
     var descriptionCell = document.createElement("td");
     descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" value="' + description + '" required readOnly></div>'
     tr.appendChild(descriptionCell);
+
+    var mapIGACell = document.createElement("td");
+    mapIGACell.innerHTML = '<div class="col-sm-10"><input type="text" class="form-control no-border" value="' + igaTitle + '" required readOnly></div>'
+     + '<input type="hidden" name="mapIGA" class="readonlyWhite" id="mapIGA' + rowCount + '" value="' + codeIGA + '" />';
+    tr.appendChild(mapIGACell);
 
     var statusCell = document.createElement("td");
     statusCell.innerHTML = '<span class="label label-success">' + status + '</span>'

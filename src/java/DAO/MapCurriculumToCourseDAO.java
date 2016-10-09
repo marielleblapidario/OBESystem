@@ -26,12 +26,12 @@ public class MapCurriculumToCourseDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapcurriculumtocourse (codeCurriculum, codeCourse)\n"
+            String query = "INSERT INTO mapcurriculumtocourse (ciurriculumID, courseID)\n"
                     + "VALUES (?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setInt(1, newMapping.getCodeCurriculum());
-            pstmt.setString(2, newMapping.getCodeCourse());
+            pstmt.setInt(1, newMapping.getCurriculumID());
+            pstmt.setInt(2, newMapping.getCourseID());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -48,13 +48,13 @@ public class MapCurriculumToCourseDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE mapcurriculumtocourse\n"
-                    + "SET codeCourse = ?\n"
-                    + "WHERE codeCurriculum = ? and codeCourse = ?;";
+                    + "SET courseID = ?\n"
+                    + "WHERE ciurriculumID = ? and courseID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setString(1, newMapping.getCodeCourse());
-            pstmt.setInt(2, newMapping.getCodeCurriculum());
-            pstmt.setString(3, newMapping.getCodeCourse());
+            pstmt.setInt(1, newMapping.getCourseID());
+            pstmt.setInt(2, newMapping.getCurriculumID());
+            pstmt.setInt(3, newMapping.getCourseID());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -66,23 +66,24 @@ public class MapCurriculumToCourseDAO {
         return false;
     }
 
-    public ArrayList<MapCurriculumToCourse> getAllMapCurriculumToCourse(String codeCurriculum) throws ParseException {
+    public ArrayList<MapCurriculumToCourse> getSpecificMapCurriculumToCourse(String codeCurriculum) throws ParseException {
         ArrayList<MapCurriculumToCourse> newMapping = new ArrayList<>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT MCTC.codeCurriculum, MCTC.codeCourse, C.title, C.units\n"
+            String query = "SELECT MCTC.ciurriculumID, C.codeCourse, MCTC.courseID, C.title, C.units\n"
                     + "FROM mapcurriculumtocourse MCTC\n"
-                    + "JOIN course C\n"
-                    + "ON MCTC.codeCourse = C.codeCourse\n"
-                    + "WHERE MCTC.codeCurriculum = ?;";
+                    + "JOIN course C \n"
+                    + "ON MCTC.courseID = C. courseID\n"
+                    + "WHERE ciurriculumID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, codeCurriculum);
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 MapCurriculumToCourse temp = new MapCurriculumToCourse();
-                temp.setCodeCurriculum(rs.getInt("codeCurriculum"));
+                temp.setCurriculumID(rs.getInt("ciurriculumID"));
+                temp.setCourseID(rs.getInt("courseID"));
                 temp.setCodeCourse(rs.getString("codeCourse"));
                 temp.setCourseTitle(rs.getString("title"));
                 temp.setUnits(rs.getInt("units"));

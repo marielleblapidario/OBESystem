@@ -28,6 +28,8 @@ public class PO {
     private String college;
     private String contributorName;
     private String checkerName;
+    private String codePA;
+    private String titlePA;
     
     /**
      * @return the codePO
@@ -227,5 +229,33 @@ public class PO {
      */
     public void setCollege(String college) {
         this.college = college;
+    }
+
+    /**
+     * @return the codePA
+     */
+    public String getCodePA() {
+        return codePA;
+    }
+
+    /**
+     * @param codePA the codePA to set
+     */
+    public void setCodePA(String codePA) {
+        this.codePA = codePA;
+    }
+
+    /**
+     * @return the titlePA
+     */
+    public String getTitlePA() {
+        return titlePA;
+    }
+
+    /**
+     * @param titlePA the titlePA to set
+     */
+    public void setTitlePA(String titlePA) {
+        this.titlePA = titlePA;
     }
 }

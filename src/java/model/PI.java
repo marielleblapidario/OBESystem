@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
  * @author mariellelapidario
  */
 public class PI {
+
     private String codePI;
     private String program;
     private String description;
@@ -23,10 +24,11 @@ public class PI {
     private java.sql.Date dateUpdated;
     private int contributor;
     private int checker;
-    
+
     private String contributorName;
     private String checkerName;
-    
+    private String codePO;
+
     /**
      * @return the codePI
      */
@@ -107,7 +109,7 @@ public class PI {
     /**
      * @param dateMade the dateMade to set
      */
-    public void setDateMade() throws ParseException{
+    public void setDateMade() throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date currentDate = new java.util.Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -115,7 +117,7 @@ public class PI {
         java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
         this.dateMade = sqlDate;
     }
-    
+
     public void setDateMade(java.sql.Date dateMade) {
         this.dateMade = dateMade;
     }
@@ -130,7 +132,7 @@ public class PI {
     /**
      * @param dateUpdated the dateUpdated to set
      */
-    public void setDateUpdated() throws ParseException{
+    public void setDateUpdated() throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date currentDate = new java.util.Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -138,7 +140,7 @@ public class PI {
         java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
         this.dateUpdated = sqlDate;
     }
-    
+
     public void setDateUpdated(java.sql.Date dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
@@ -198,5 +200,19 @@ public class PI {
     public void setCheckerName(String checkerName) {
         this.checkerName = checkerName;
     }
-    
+
+    /**
+     * @return the codePO
+     */
+    public String getCodePO() {
+        return codePO;
+    }
+
+    /**
+     * @param codePO the codePO to set
+     */
+    public void setCodePO(String codePO) {
+        this.codePO = codePO;
+    }
+
 }

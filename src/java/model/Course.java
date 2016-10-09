@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
  * @author mariellelapidario
  */
 public class Course {
+    private int courseID;
     private String codeCourse;
     private String title;
     private int units;
@@ -168,5 +169,19 @@ public class Course {
      */
     public void setCollegeName(String collegeName) {
         this.collegeName = collegeName;
+    }
+
+    /**
+     * @return the courseID
+     */
+    public int getCourseID() {
+        return courseID;
+    }
+
+    /**
+     * @param courseID the courseID to set
+     */
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 }

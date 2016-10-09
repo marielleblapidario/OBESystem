@@ -4,12 +4,12 @@ $(document).ready(function () {
     getAllCourse();
     $('#confirm-btn').click(function () {
         var title = $('#select-course option:selected').text();
-        var codeCourse = $('#select-course option:selected').val();
+        var courseID = $('#select-course option:selected').val();
 
         sessionStorage.setItem("title", title);
         var s = sessionStorage.getItem("title");
-        sessionStorage.setItem("codeCourse", codeCourse);
-        var ss = sessionStorage.getItem("codeCourse");
+        sessionStorage.setItem("courseID", courseID);
+        var ss = sessionStorage.getItem("courseID");
 
         console.log('code: ' + ss + ' title: ' + s);
     });
@@ -24,6 +24,8 @@ function getAllCourse() {
         dataType: 'json',
         success: function (data) {
             console.log(data);
+            var s = "<option disabled selected value> -- select an option -- </option>";
+            programDropDown.append(s);
             data.forEach(addCourse);
         },
         error: function (response) {
@@ -34,6 +36,6 @@ function getAllCourse() {
 
 function addCourse(data) {
     console.log("Entered addCourse: " + data.codeCourse);
-    var s = "<option value = " + data.codeCourse + ">" + data.title + "</option>";
+    var s = "<option value = " + data.courseID + ">" + data.title + "</option>";
     programDropDown.append(s);
 }

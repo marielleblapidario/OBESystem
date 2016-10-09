@@ -68,6 +68,11 @@
                                         </th>
                                         <th>
                                             <div class="col-sm-10">
+                                                IGA Mapping
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="col-sm-10">
                                                 Status
                                             </div>
                                         </th>

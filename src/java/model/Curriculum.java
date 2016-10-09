@@ -24,6 +24,9 @@ public class Curriculum {
     private int contributor;
 
     private String contributorName;
+    private String programName;
+    private String collegeName;
+    
 
     /**
      * @return the codeCurriculum
@@ -95,6 +98,14 @@ public class Curriculum {
         this.setStartYear(startYear2);
     }
     
+    public void setViewStartYear(String startYear) throws ParseException {
+        @SuppressWarnings("deprecation")
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date startYear1 = formatter.parse(startYear);
+        java.sql.Date startYear2 = new java.sql.Date(startYear1.getTime());
+        this.setStartYear(startYear2);
+    }
+    
     public void setStartYear(java.sql.Date startYear) {
         this.startYear = startYear;
     }
@@ -122,6 +133,14 @@ public class Curriculum {
     public void setEndYear(String endYear) throws ParseException {
         @SuppressWarnings("deprecation")
         DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        java.util.Date endYear1 = formatter.parse(endYear);
+        java.sql.Date endYear2 = new java.sql.Date(endYear1.getTime());
+        this.setEndYear(endYear2);
+    }
+    
+    public void setViewEndYear(String endYear) throws ParseException {
+        @SuppressWarnings("deprecation")
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date endYear1 = formatter.parse(endYear);
         java.sql.Date endYear2 = new java.sql.Date(endYear1.getTime());
         this.setEndYear(endYear2);
@@ -157,5 +176,47 @@ public class Curriculum {
      */
     public void setContributor(int contributor) {
         this.contributor = contributor;
+    }
+
+    /**
+     * @return the contributorName
+     */
+    public String getContributorName() {
+        return contributorName;
+    }
+
+    /**
+     * @param contributorName the contributorName to set
+     */
+    public void setContributorName(String contributorName) {
+        this.contributorName = contributorName;
+    }
+
+    /**
+     * @return the programName
+     */
+    public String getProgramName() {
+        return programName;
+    }
+
+    /**
+     * @param programName the programName to set
+     */
+    public void setProgramName(String programName) {
+        this.programName = programName;
+    }
+
+    /**
+     * @return the collegeName
+     */
+    public String getCollegeName() {
+        return collegeName;
+    }
+
+    /**
+     * @param collegeName the collegeName to set
+     */
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
     }
 }

@@ -12,14 +12,8 @@ package model;
 public class MapPAtoIGA {
     private String codePA;
     private String codeIGA;
-    private String status;
-    private String remarks;
-    private int contributor;
-    private int checker;
     
-    private String contributorName;
-    private String checkerName;
-    private String program;
+    private String titleIGA;
 
     /**
      * @return the codePA
@@ -50,101 +44,16 @@ public class MapPAtoIGA {
     }
 
     /**
-     * @return the status
+     * @return the titleIGA
      */
-    public String getStatus() {
-        return status;
+    public String getTitleIGA() {
+        return titleIGA;
     }
 
     /**
-     * @param status the status to set
+     * @param titleIGA the titleIGA to set
      */
-    public void setStatus(String status) {
-        this.status = status;
+    public void setTitleIGA(String titleIGA) {
+        this.titleIGA = titleIGA;
     }
-
-    /**
-     * @return the remarks
-     */
-    public String getRemarks() {
-        return remarks;
-    }
-
-    /**
-     * @param remarks the remarks to set
-     */
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
-
-    /**
-     * @return the contributor
-     */
-    public int getContributor() {
-        return contributor;
-    }
-
-    /**
-     * @param contributor the contributor to set
-     */
-    public void setContributor(int contributor) {
-        this.contributor = contributor;
-    }
-
-    /**
-     * @return the checker
-     */
-    public int getChecker() {
-        return checker;
-    }
-
-    /**
-     * @param checker the checker to set
-     */
-    public void setChecker(int checker) {
-        this.checker = checker;
-    }
-    
-    /**
-     * @return the contributorName
-     */
-    public String getContributorName() {
-        return contributorName;
-    }
-
-    /**
-     * @param contributorName the contributorName to set
-     */
-    public void setContributorName(String contributorName) {
-        this.contributorName = contributorName;
-    }
-
-    /**
-     * @return the checkerName
-     */
-    public String getCheckerName() {
-        return checkerName;
-    }
-
-    /**
-     * @param checkerName the checkerName to set
-     */
-    public void setCheckerName(String checkerName) {
-        this.checkerName = checkerName;
-    }
-
-    /**
-     * @return the program
-     */
-    public String getProgram() {
-        return program;
-    }
-
-    /**
-     * @param program the program to set
-     */
-    public void setProgram(String program) {
-        this.program = program;
-    }
-    
 }

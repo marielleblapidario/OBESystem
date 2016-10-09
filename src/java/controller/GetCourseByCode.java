@@ -38,7 +38,7 @@ public class GetCourseByCode extends BaseServlet {
             String SelectedCourse = request.getParameter("SelectedCourse");
             System.out.println("selected: " + SelectedCourse);
             Gson g = new Gson();
-            String s = g.toJson(new CourseDAO().getSpecificCourse(SelectedCourse));
+            String s = g.toJson(new CourseDAO().getSpecificCourse(Integer.parseInt(SelectedCourse)));
             out.print(s);            
         } catch (ParseException ex) {
             Logger.getLogger(GetProgramByCollege.class.getName()).log(Level.SEVERE, null, ex);

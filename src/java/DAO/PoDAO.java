@@ -21,6 +21,7 @@ import model.PO;
  * @author mariellelapidario
  */
 public class PoDAO {
+
     public boolean encodePO(PO newPO) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -65,7 +66,6 @@ public class PoDAO {
             pstmt.setDate(4, newPO.getDateUpdated());
             pstmt.setInt(5, newPO.getContributor());
             pstmt.setString(6, newPO.getCodePO());
-            
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -82,32 +82,52 @@ public class PoDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT P.codePO, P.program, prog.title, prog.college, "
-                    + "P.description, status, P.remarks, P.contributor, P.checker,\n"
-                    + "CONCAT(checker.firstName, \" \" , checker.LastName) as 'checkerName'\n"
+            String query = "SELECT P.codePO, P.description, "
+                    + "MPTP.codePA, A.description as 'titlePA', P.status, P.remarks\n"
                     + "FROM PO P\n"
-                    + "JOIN user checker\n"
-                    + "ON P.checker = checker.userID\n"
-                    + "JOIN program prog\n"
-                    + "ON P.program = prog.codeProgram\n"
+                    + "JOIN mappotopa MPTP\n"
+                    + "ON P.codePO = MPTP.codePO\n"
+                    + "JOIN PA A\n"
+                    + "ON MPTP.codePA = A.codePA\n"
                     + "WHERE P.program = ? AND P.isDeleted IS NULL;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, codeProgram);
-            
+
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 PO temp = new PO();
                 temp.setCodePO(rs.getString("codePO"));
-                temp.setProgram(rs.getString("program"));
-                temp.setProgramTitle(rs.getString("title"));
-                temp.setCollege(rs.getString("college"));
                 temp.setDescription(rs.getString("description"));
+                temp.setCodePA(rs.getString("codePA"));
+                temp.setTitlePA(rs.getString("titlePA"));
                 temp.setStatus(rs.getString("status"));
                 temp.setRemarks(rs.getString("remarks"));
-                temp.setContributor(rs.getInt("contributor"));
-                temp.setChecker(rs.getInt("checker"));
-                temp.setCheckerName(rs.getString("checkerName"));
                 newPO.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return newPO;
+        } catch (SQLException ex) {
+            Logger.getLogger(PoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public PO getSpecificPOTitle(String codePO) throws ParseException {
+        PO newPO = new PO();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT P.codePO, P.description\n"
+                    + "FROM PO P\n"
+                    + "WHERE P.codePO = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, codePO);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                newPO.setCodePO(rs.getString("codePO"));
+                newPO.setDescription(rs.getString("description"));
             }
             pstmt.close();
             conn.close();

@@ -34,6 +34,8 @@ function getAllCollege() {
         dataType: 'json',
         success: function (data) {
             console.log(data);
+            var s = "<option disabled selected value> -- select an option -- </option>";
+            collegeDropDown.append(s);
             data.forEach(addCollege);
         },
         error: function (response) {
@@ -49,6 +51,8 @@ function getAllProgram() {
         dataType: 'json',
         success: function (data) {
             console.log(data);
+            var s = "<option disabled selected value> -- select an option -- </option>";
+            programDropDown.append(s);
             data.forEach(addProgram);
         },
         error: function (response) {

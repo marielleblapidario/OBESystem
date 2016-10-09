@@ -50,38 +50,17 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>Curriculum</th>
                                                 <th>Program</th>
                                                 <th>College</th>
                                                 <th>From Date</th>
                                                 <th>To Date</th>
-                                                <th>Mapping</th>
                                                 <th>Contributor</th>
-                                                <th>Updated</th>
                                                 <th>Tools</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>BS in Information Technology 2015-2016</td>
-                                                <td>
-                                                    BS in Information Technology
-                                                </td>
-                                                <td>College of Computer Studies</td>
-                                                <td>2015</td>
-                                                <td>2016</td>
-                                                <td>
-                                                    <span class="label label-success">approved</span>
-                                                </td>
-                                                <td>Marielle Lapidario</td>
-                                                <td>May 26, 2015</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></button>
-                                                    <button type="button" class="btn bg-purple btn-xs"><i class="fa  fa-eye"></i></button>
-                                                    <button type="button" class="btn bg-orange btn-xs"><i class="fa  fa-map-o"></i></button>
-                                                    <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -110,6 +89,8 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
+        <!--selfMade-->
+        <script src="/OBESystem/js/view_curriculum_list.js"></script>
         <!-- page script -->
         <script>
             $(function () {

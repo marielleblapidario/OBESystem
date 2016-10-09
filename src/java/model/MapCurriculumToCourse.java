@@ -10,38 +10,39 @@ package model;
  * @author mariellelapidario
  */
 public class MapCurriculumToCourse {
-    private int codeCurriculum;
-    private String codeCourse;
+    private int curriculumID;
+    private int courseID;
     
+    private String codeCourse;
     private String courseTitle;
     private int units;
 
     /**
-     * @return the codeCurriculum
+     * @return the curriculumID
      */
-    public int getCodeCurriculum() {
-        return codeCurriculum;
+    public int getCurriculumID() {
+        return curriculumID;
     }
 
     /**
-     * @param codeCurriculum the codeCurriculum to set
+     * @param curriculumID the curriculumID to set
      */
-    public void setCodeCurriculum(int codeCurriculum) {
-        this.codeCurriculum = codeCurriculum;
+    public void setCurriculumID(int curriculumID) {
+        this.curriculumID = curriculumID;
     }
 
     /**
-     * @return the codeCourse
+     * @return the courseID
      */
-    public String getCodeCourse() {
-        return codeCourse;
+    public int getCourseID() {
+        return courseID;
     }
 
     /**
-     * @param codeCourse the codeCourse to set
+     * @param courseID the courseID to set
      */
-    public void setCodeCourse(String codeCourse) {
-        this.codeCourse = codeCourse;
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 
     /**
@@ -71,4 +72,19 @@ public class MapCurriculumToCourse {
     public void setUnits(int units) {
         this.units = units;
     }
+
+    /**
+     * @return the codeCourse
+     */
+    public String getCodeCourse() {
+        return codeCourse;
+    }
+
+    /**
+     * @param codeCourse the codeCourse to set
+     */
+    public void setCodeCourse(String codeCourse) {
+        this.codeCourse = codeCourse;
+    }
+
 }

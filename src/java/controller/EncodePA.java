@@ -5,6 +5,7 @@
  */
 package controller;
 
+import DAO.MapPatoIgaDAO;
 import DAO.PaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.MapPAtoIGA;
 import model.PA;
 
 /**
@@ -53,6 +55,7 @@ public class EncodePA extends BaseServlet {
         String checker = request.getParameter("select-approver");
         String[] codePA = request.getParameterValues("codePA");
         String[] description = request.getParameterValues("description");
+        String[] codeIGA = request.getParameterValues("mapIGA");
         String[] status = request.getParameterValues("status");
         String[] remarks = request.getParameterValues("remarks");
 
@@ -106,9 +109,8 @@ public class EncodePA extends BaseServlet {
                     }
                 }
                 checkIfExist = false;
-            } // new IGA entity
+            } // new PA entity
             else {
-                System.out.println("entered new IGA entity");
                 try {
                     pa.setCodePA(codePA[y]);
                     pa.setProgram(codeProgram);
@@ -120,7 +122,18 @@ public class EncodePA extends BaseServlet {
                     pa.setContributor(Integer.parseInt(contributor));
                     pa.setChecker(Integer.parseInt(checker));
                     if (paDAO.encodePA(pa)) {
-                        System.out.println("entered creation");
+                        System.out.println("PA created");
+                        MapPatoIgaDAO dao = new MapPatoIgaDAO();
+                        MapPAtoIGA mapping = new MapPAtoIGA();
+
+                        mapping.setCodePA(codePA[y]);
+                        mapping.setCodeIGA(codeIGA[y]);
+
+                        if (dao.encodeMapPatoIga(mapping)) {
+                        } else {
+                            x = false;
+                        }
+
                     } else {
                         System.out.println("entered fail");
                         x = false;
@@ -156,7 +169,7 @@ public class EncodePA extends BaseServlet {
                 x = false;
             }
         }
-        
+
         if (x == true) {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext context = getServletContext();

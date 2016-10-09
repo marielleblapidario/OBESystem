@@ -5,6 +5,7 @@
  */
 package controller;
 
+import DAO.MapPoToPaDAO;
 import DAO.PoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.MapPOtoPA;
 import model.PO;
 
 /**
@@ -39,24 +41,23 @@ public class EncodePO extends BaseServlet {
         PoDAO poDAO = new PoDAO();
         boolean x = true;
         boolean checkIfExist = false;
-        
+
         String codeProgram = request.getParameter("program-title");
         System.out.println("codeProgram: " + codeProgram);
-        
+
         try {
             existingPO = poDAO.getAllPO(codeProgram);
         } catch (ParseException ex) {
             Logger.getLogger(EncodePA.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         String contributor = request.getParameter("contributor");
         String checker = request.getParameter("select-approver");
         String[] codePO = request.getParameterValues("codePO");
         String[] description = request.getParameterValues("description");
+        String[] codePA = request.getParameterValues("mapPA");
         String[] status = request.getParameterValues("status");
         String[] remarks = request.getParameterValues("remarks");
-        
-       
 
         System.out.println("contributor: " + contributor);
         System.out.println("checker: " + checker);
@@ -110,7 +111,6 @@ public class EncodePO extends BaseServlet {
                 checkIfExist = false;
             } // new entity
             else {
-                System.out.println("entered new IGA entity");
                 try {
                     po.setCodePO(codePO[y]);
                     po.setProgram(codeProgram);
@@ -122,16 +122,26 @@ public class EncodePO extends BaseServlet {
                     po.setContributor(Integer.parseInt(contributor));
                     po.setChecker(Integer.parseInt(checker));
                     if (poDAO.encodePO(po)) {
+                        System.out.println("PO created");
+                        MapPoToPaDAO dao = new MapPoToPaDAO();
+                        MapPOtoPA mapping = new MapPOtoPA();
+
+                        mapping.setCodePO(codePO[y]);
+                        mapping.setCodePA(codePA[y]);
+                        if (dao.encodeMapPatoIga(mapping)) {
+                        } else {
+                            x = false;
+                        }
                     } else {
                         System.out.println("entered fail");
                         x = false;
                     }
                 } catch (ParseException ex) {
-                    Logger.getLogger(EncodeIGA.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(EncodePO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
-        
+
         //check for deleted
         System.out.println("check for deleted");
         ArrayList<String> code = new ArrayList<>();
@@ -172,5 +182,4 @@ public class EncodePO extends BaseServlet {
             rd.forward(request, response);
         }
     }
-
 }

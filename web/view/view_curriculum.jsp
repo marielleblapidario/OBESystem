@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="/OBESystem/resources/plugins/daterangepicker/daterangepicker.css">
         <!-- bootstrap datepicker -->
         <link rel="stylesheet" href="/OBESystem/resources/plugins/datepicker/datepicker3.css">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="/OBESystem/resources/plugins/datatables/dataTables.bootstrap.css">
         <!-- iCheck for checkboxes and radio inputs -->
         <link rel="stylesheet" href="/OBESystem/resources/plugins/iCheck/all.css">
         <!-- Bootstrap Color Picker -->
@@ -36,49 +38,40 @@
         <div class="wrapper">
             <div class="content-wrapper">
                 <!-- Main content -->
-                <section class="content">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Create Curriculum</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form class="form-horizontal">
+                <form action="EncodeCurriculum" method="post" name="EncodeCurriculum">
+                    <section class="content">
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Create Curriculum</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
 
                                     <div class="col-sm-10">
-                                        BS in CSE 2010-2016
+                                        <input name="title" type="text" class="form-control" id="title" readOnly>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">College</label>
-                                    <div class="col-sm-10">
-                                        College of Liberal Arts
-                                    </div>
-                                </div>
-
+                                
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Program</label>
                                     <div class="col-sm-10">
-                                        BS Information Technology
+                                         <input name="programName" type="text" class="form-control" id="programName" readOnly>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Academic Year Range</label>
                                     <div class="col-sm-10">
-                                        2016 - 2017
+                                         <input name="range" type="text" class="form-control" id="range" readOnly>
                                     </div>
-                                    <!-- /.input group -->
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        Something here
+                                        <textarea name="description" id="description" class="form-control" rows="3" readOnly></textarea>
                                     </div>
                                 </div>
 
@@ -89,11 +82,26 @@
                                     <h4 class="box-title">Add Course</h4>
                                 </div>
                                 <div class="box-body no-border">
-                                    <h5 class="box-info">Required Units: 200</h5>
-                                    <h5 class="box-info">Left Units: 200</h5>
-
-                                    <div class="form-group">
-                                        courses here
+                                    <h5 class="box-info">Required Units:
+                                        <span id = "required-units"></span>
+                                        <input name="hidden-required-units" id="hidden-required-units" class="hidden">
+                                    </h5>
+                                    <h5 class="box-info">Left Units:
+                                        <span id = "left-units"></span>
+                                        <input name="hidden-left-units" id="hidden-left-units" class="hidden">
+                                    </h5>
+                                    <div id="table">
+                                        <table id="example1" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <th>Title</th>
+                                                    <th>Units</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
 
@@ -101,13 +109,13 @@
                             <!-- /Add Courses-->
                             <!-- /.box-body -->
                             <div class="box-footer">  
-                                <button type="submit" class="btn btn-default pull-right">Back</button>
-                                <button type="submit" class="btn btn-success pull-right">Edit</button>
+                                <a href="/OBESystem/ViewCurriculumList"><button id="back" type="button" class="btn btn-default pull-right">Back</button></a>
+                                <a href="/OBESystem/RedirectToEditCurriculum"><button type="button" class="btn btn-success pull-right">Edit</button></a>
                             </div>
                             <!-- /.box-footer -->
-                        </form>
-                    </div>
-                </section>
+                        </div>
+                    </section>
+                </form>
             </div>
         </div>
         <!-- jQuery 2.2.3 -->
@@ -120,6 +128,9 @@
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.js"></script>
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <!-- DataTables -->
+        <script src="/OBESystem/resources/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="/OBESystem/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
         <!-- date-range-picker -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
         <script src="/OBESystem/resources/plugins/daterangepicker/daterangepicker.js"></script>
@@ -139,6 +150,7 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
+        <script src="/OBESystem/js/view_curriculum.js"></script>
         <!-- Page script -->
         <script>
             $(function () {

@@ -2,17 +2,36 @@ var table = $("#data");
 var programCode = sessionStorage.getItem("programCode");
 var rowCount = 0;
 var count = 0;
+var arrPA = [];
 
 $(document).ready(function () {
-    getCollegeByProgram(programCode);
-    getLastPA(programCode);
+    getAllPA(programCode);
+    getAllPO(programCode);
+    getLastPO(programCode);
     $(document).on('click', '#deleteRow', function (event) {
         $(this).closest('tr').remove();
     });
 
 });
 
-function getCollegeByProgram(program) {
+function getAllPA(program) {
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/GetAllPA?SelectedProgram=" + program,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            for (var x = 0; x < data.length; x++) {
+                arrPA.push(data[x]);
+            }
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+function getAllPO(program) {
     $.ajax({
         type: "GET",
         url: "/OBESystem/GetAllPO?SelectedProgram=" + program,
@@ -27,7 +46,7 @@ function getCollegeByProgram(program) {
     });
 }
 
-function getLastPA(program) {
+function getLastPO(program) {
     $.ajax({
         type: "GET",
         url: "/OBESystem/GetLastPO?SelectedProgram=" + program,
@@ -62,6 +81,16 @@ function getLastPA(program) {
                 var descriptionCell = document.createElement("td");
                 descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" required></div>'
                 tr.appendChild(descriptionCell);
+                
+                var select = document.createElement("select");
+                select.name = "mapPA";
+                tr.appendChild(select);
+                for (var x = 0; x < arrPA.length; x++) {
+                    var option = document.createElement("option");
+                    option.label = arrPA[x].description;
+                    option.value = arrPA[x].codePA;
+                    select.appendChild(option);
+                }
 
                 var statusCell = document.createElement("td");
                 statusCell.innerHTML = '<span class="label label-success">pending</span>'
@@ -90,6 +119,8 @@ function getLastPA(program) {
 function addRow(data) {
     var codePO = data.codePO;
     var description = data.description;
+    var codePA = data.codePA;
+    var titlePA = data.titlePA;
     var status = data.status;
     var remarks = data.remarks;
 
@@ -105,6 +136,11 @@ function addRow(data) {
     var descriptionCell = document.createElement("td");
     descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" value="' + description + '" required readOnly></div>'
     tr.appendChild(descriptionCell);
+    
+    var mapPACell = document.createElement("td");
+    mapPACell.innerHTML = '<div class="col-sm-10"><input type="text" class="form-control no-border" value="' + titlePA + '" required readOnly></div>'
+     + '<input type="hidden" name="mapPA" class="readonlyWhite" id="mapPA' + rowCount + '" value="' + codePA + '" />';
+    tr.appendChild(mapPACell);
 
     var statusCell = document.createElement("td");
     statusCell.innerHTML = '<span class="label label-success">' + status + '</span>'

@@ -65,8 +65,10 @@ public class EncodeCourse extends BaseServlet {
                 MapCourseToProgramDAO mapping = new MapCourseToProgramDAO();
                 for (int x = 0; x < program.length; x++) {
                     MapCourseToProgram temp = new MapCourseToProgram();
-                    System.out.println("codeProgram: " + program[x]);
-                    temp.setCodeCourse(codeCourse);
+                    int courseID = courseDAO.getSpecificCourse(codeCourse).getCourseID();
+                    System.out.println("courseID: " + courseID);
+                    System.out.println("codeProgram:" + program[x]);
+                    temp.setCourseID(courseID);
                     temp.setCodeProgram(program[x]);
 
                     if (mapping.encodeMapCourseToProgram(temp) == false) {
@@ -75,7 +77,7 @@ public class EncodeCourse extends BaseServlet {
                 }
                 if (checkCreation) {
                     ServletContext context = getServletContext();
-                    RequestDispatcher rd = context.getRequestDispatcher("/view/create_course.jsp");
+                    RequestDispatcher rd = context.getRequestDispatcher("/view/view_courses_list.jsp");
                     request.setAttribute("success", "success");
                     rd.forward(request, response);
                 } else {

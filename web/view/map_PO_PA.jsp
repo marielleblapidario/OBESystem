@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>AdminLTE 2 | Simple Tables</title>
+        <title> Map PO to PA</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
@@ -13,6 +13,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="/OBESystem/resources/plugins/datatables/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="/OBESystem/resources/plugins/datatables/datatable/select.dataTables.min.css">
         <!-- Theme style -->
         <!-- daterange picker -->
         <link rel="stylesheet" href="/OBESystem/resources/plugins/daterangepicker/daterangepicker.css">
@@ -32,6 +35,29 @@
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
+        <div id="map-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Map Program Outcome to Program Attribute</h3>
+                    </div>
+                    <div class="modal-body col-sm-12">
+                        <p>Please select the following Program Attribute for <span id="selected-POs"></span>: </p>
+                        <div class="row">
+                            <div class="col-sm-6" id="checkbox-div">
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="modal-close" data-dismiss="modal">CLOSE</button>
+                        <button type="button" class="btn btn-success" id="modal-confirm-btn" data-dismiss="modal">CONFIRM</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="wrapper">
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -58,36 +84,27 @@
                             <br>
                         </div>
                         <div class="box-body table-responsive">
-                            <table class="table table-hover">
-                                <tr>
-                                    <th>Program Outcome</th>
-                                    <th>Program Attribute</th>
-                                    <th>Status</th>
-                                    <th>Remarks</th>
-                                    <th>Tools</th>
-                                </tr>
+                            <table id="map-table" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Program Outcome</th>
+                                        <th>Program Attribute</th>
+                                        <th>Status</th>
+                                        <th>Remarks</th>
+                                        <th>Tools</th>
+                                    </tr>
+                                </thead>
                                 <tr>
                                     <td>Something Program Outcome</td>
                                     <td>
-                                        <div class="form-group">
-
-                                            <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select PA" style="width: 50%;" tabindex="-1" aria-hidden="true">
-                                                <option>PA1</option>
-                                                <option>PA2</option>
-                                                <option>PA3</option>
-                                                <option>PA4</option>
-                                                <option>PA5</option>
-                                                <option>PA6</option>
-                                                <option>PA7</option>
-                                            </select>
-                                        </div>
+                                        No assigned Program Attribute
                                     </td>
                                     <td>
                                         <span class="label label-success">approved</span>
                                     </td>
                                     <td>
                                         <div class="col-sm-7">
-                                            <input type="email" class="form-control no-border" id="inputEmail3" placeholder="">
+                                            <input type="text" class="form-control no-border" id="remarks" placeholder="">
                                         </div>
                                     </td>
                                     <td>
@@ -95,9 +112,10 @@
                                         <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
-
-
                             </table>
+                            <button id="map-btn" type="button" class="btn btn-primary pull-right" data-toggle='modal' data-target='#map-modal'>
+                                Map PO to PA
+                            </button>
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-default pull-right">Cancel</button>
@@ -117,6 +135,10 @@
         <script src="/OBESystem/resources/plugins/jQuery/jquery-2.2.3.min.js"></script>
         <!-- Bootstrap 3.3.6 -->
         <script src="/OBESystem/resources/bootstrap/js/bootstrap.min.js"></script>
+        <!-- DataTables -->
+        <script src="/OBESystem/resources/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="/OBESystem/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="/OBESystem/resources/plugins/datatables/datatable/dataTables.select.min.js"></script>
         <!-- Select2 -->
         <script src="/OBESystem/resources/plugins/select2/select2.full.min.js"></script>
         <!-- InputMask -->
@@ -145,8 +167,9 @@
         <!-- stored attributes from search-->
         <script src="/OBESystem/js/store_program_search.js"></script>
         <!-- Page script -->
+        <script src="/OBESystem/js/map_PO_PA.js"></script>
         <script>
-            $(function () {
+            $(function() {
                 //Initialize Select2 Elements
                 $(".select2").select2();
 
@@ -175,9 +198,9 @@
                             startDate: moment().subtract(29, 'days'),
                             endDate: moment()
                         },
-                        function (start, end) {
-                            $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                        }
+                function(start, end) {
+                    $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                }
                 );
 
                 //Date picker

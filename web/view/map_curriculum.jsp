@@ -43,64 +43,21 @@
                         <div class="box-header">
                             <h3 class="box-title">Curriculum Mapping</h3><br>
                             <br>
-                            
+
                             <label class="col-sm-2 control-label">Approver</label>
                             <div class="col-sm-10">
-                                <select class="form-control select2 select2-hidden-accessible" style="width: 30%;" tabindex="-1" aria-hidden="true">
+                                <select class="form-control select2 select2-hidden-accessible" style="width: 30%; text-align: center" tabindex="-1" aria-hidden="true">
                                     <option selected="selected">Mr. Danny Cheng</option>
                                     <option>Mr. Oliver Malabanan</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="box-body table-responsive">
-                            <table class="table table-hover">
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Course</th>
-                                    <th>Units</th>
-                                    <th>GO1</th>
-                                    <th>GO2</th>
-                                    <th>GO3</th>
-                                    <th>GO4</th>
-                                </tr>
-                                <tr>
-                                    <td>MOBIDEV</td>
-                                    <td>Mobile Development</td>
-                                    <td>3</td>
-                                    <td>
-                                        <label class="">
-                                            <div class="icheckbox_flat-green" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="flat-red" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="">
-                                            <div class="icheckbox_flat-green" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="flat-red" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="">
-                                            <div class="icheckbox_flat-green" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="flat-red" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label class="">
-                                            <div class="icheckbox_flat-green" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="flat-red" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
-                                        </label>
-                                    </td>
-                                </tr>
-                            </table>
-                            <br><br>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Remark</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                                </div>
-                            </div>
+                        <div id="table-div" class="box-body table-bordered" style="overflow-y: auto">    
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-default pull-right">Cancel</button>
                             <button type="submit" class="btn btn-success pull-right">Send for Approval</button>
-                            <button type="button" class="btn btn-primary pull-right">Save</button>
+                            <button id="save-btn" type="button" class="btn btn-primary pull-right">Save</button>
                         </div>
                         <!-- /.box-footer -->
                     </div>
@@ -140,8 +97,9 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!-- Page script -->
+        <script src="/OBESystem/js/map_curriculum.js"></script>
         <script>
-            $(function () {
+            $(function() {
                 //Initialize Select2 Elements
                 $(".select2").select2();
 
@@ -170,9 +128,9 @@
                             startDate: moment().subtract(29, 'days'),
                             endDate: moment()
                         },
-                        function (start, end) {
-                            $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                        }
+                function(start, end) {
+                    $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                }
                 );
 
                 //Date picker

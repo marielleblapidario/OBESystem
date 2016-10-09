@@ -49,48 +49,33 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">Course Title</label>
 
                                     <div class="col-sm-10">
-                                       Mobile Development
+                                        <input name="title" type="text" class="form-control" id="title" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Code</label>
 
                                     <div class="col-sm-10">
-                                        DATBAS
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">Floating</label>
-
-                                    <div class="col-sm-10">
-                                        <label class="">
-                                            <div class="icheckbox_flat-green" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" class="flat-red" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">College</label>
-                                    <div class="col-sm-10">
-                                        College of Computer Studies
+                                         <input name="codeCourse" type="text" class="form-control" id="codeCourse" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Program</label>
                                     <div class="col-sm-10">
-                                        BS Information Systems
+                                         <input name="program" type="text" class="form-control" id="program" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Units</label>
 
-                                    <div class="col-xs-1">
-                                        3
+                                    <div class="col-xs-10">
+                                         <input name="units" type="text" class="form-control" id="units" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        something here
+                                        <textarea id="description" class="form-control" rows="3" disabled></textarea>
                                     </div>
                                 </div>
 
