@@ -33,7 +33,7 @@ function addRow(data) {
     var startYear = data.startYear;
     var endYear = data.endYear;
     var contributor = data.contributorName;
-
+    
     console.log("rowCount: " + rowCount);
 
     var tools = "<a href=\"/OBESystem/RedirectToEditCurriculum\"><button onclick=\"save('" + codeCurriculum + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>" +

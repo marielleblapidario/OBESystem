@@ -5,8 +5,7 @@
  */
 package controller;
 
-import DAO.CoDAO;
-import DAO.PaDAO;
+import DAO.PiDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class GetAllCO extends BaseServlet {
+public class GetAllPIforCurriculum extends BaseServlet {
 
     /**
      *
@@ -34,19 +33,14 @@ public class GetAllCO extends BaseServlet {
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Gson g = new Gson();
-        String s = null;
-        try {
-            int curriculumID = Integer.parseInt(request.getParameter("curriculumID"));
-            int courseID = Integer.parseInt(request.getParameter("courseID"));
-            int term = Integer.parseInt(request.getParameter("term"));
-            
-            s = g.toJson(new CoDAO().getAllCO(curriculumID, courseID, term));
+        try (PrintWriter out = response.getWriter()) {
+            String program = request.getParameter("program");
+            Gson g = new Gson();
+            String s = "";
+            s = g.toJson(new PiDAO().GetAllPIforCurriulum(program));
+            out.print(s);
         } catch (ParseException ex) {
-            Logger.getLogger(GetAllCO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetAllMapPItoPO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        PrintWriter out = response.getWriter();
-        out.print(s);
     }
 }

@@ -34,6 +34,7 @@ function addRow(data) {
 
     var tools = "<button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button>\n\
 <a href=\"/OBESystem/RedirectToViewCourse\"><button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>\n\
+<a href=\"/OBESystem/RedirectToViewCourse\"><button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn bg-orange btn-xs\"><i class=\"fa  fa-list-alt\"></i></button></a>\n\
 <button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>"
     example1.row.add([codeCourse, title, contributorName, tools]);
     example1.draw();

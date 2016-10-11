@@ -95,7 +95,7 @@ public class CurriculumDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT C.curriculumID, C.title as 'crTitle', "
+            String query = "SELECT C.curriculumID, C.program, C.title as 'crTitle', "
                     + "P.title as 'pTitle', CO.college, C.startYear, C.endYear, "
                     + "CONCAT(U.firstName, \" \" , U.LastName) as 'name'\n"
                     + "FROM curriculum C\n"
@@ -112,6 +112,7 @@ public class CurriculumDAO {
             while (rs.next()) {
                 Curriculum temp = new Curriculum();
                 temp.setCodeCurriculum(rs.getString("curriculumID"));
+                temp.setProgram(rs.getString("program"));
                 temp.setTitle(rs.getString("crTitle"));
                 temp.setProgramName(rs.getString("pTitle"));
                 temp.setCollegeName(rs.getString("college"));
@@ -134,7 +135,7 @@ public class CurriculumDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT C.curriculumID, C.title as 'crTitle', "
+            String query = "SELECT C.curriculumID, C.program, C.title as 'crTitle', "
                     + "P.title as 'pTitle', C.startYear, C.endYear, C.description\n"
                     + "FROM curriculum C\n"
                     + "JOIN program P \n"
@@ -146,6 +147,7 @@ public class CurriculumDAO {
 
             while (rs.next()) {
                 newCurriculum.setCodeCurriculum(rs.getString("curriculumID"));
+                newCurriculum.setProgram(rs.getString("program"));
                 newCurriculum.setTitle(rs.getString("crTitle"));
                 newCurriculum.setProgramName(rs.getString("pTitle"));
                 newCurriculum.setViewStartYear(rs.getString("startYear"));

@@ -129,6 +129,37 @@ public class PiDAO {
         return null;
     }
 
+    public ArrayList<PI> GetAllPIforCurriulum(String program) throws ParseException {
+        ArrayList<PI> newPA = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT MPTP.codePI, MPTP.codePO, P.description\n"
+                    + "FROM mappitopo MPTP\n"
+                    + "JOIN PI P\n"
+                    + "ON MPTP.codePI = P.codePI\n"
+                    + "WHERE P.program = ? AND P.isDeleted IS NULL "
+                    + "ORDER BY MPTP.codePI;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, program);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                PI temp = new PI();
+                temp.setCodePI(rs.getString("codePI"));
+                temp.setCodePO(rs.getString("codePO"));
+                temp.setDescription(rs.getString("description"));
+                newPA.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return newPA;
+        } catch (SQLException ex) {
+            Logger.getLogger(PiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public String getLastCodePI(String codePO) throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();

@@ -14,20 +14,20 @@ import java.text.SimpleDateFormat;
  * @author mariellelapidario
  */
 public class CO {
-
+    private int curriculumID;
+    private int courseID;
+    private int term;
     private String codeCO;
-    private String course;
     private String description;
-    private double weight;
     private String status;
     private String remarks;
     private java.sql.Date dateMade;
     private java.sql.Date dateUpdated;
     private int contributor;
-    private int checker;
 
     private String contributorName;
     private String checkerName;
+    private String codePI;
 
     /**
      * @return the codeCO
@@ -44,20 +44,6 @@ public class CO {
     }
 
     /**
-     * @return the course
-     */
-    public String getCourse() {
-        return course;
-    }
-
-    /**
-     * @param course the course to set
-     */
-    public void setCourse(String course) {
-        this.course = course;
-    }
-
-    /**
      * @return the description
      */
     public String getDescription() {
@@ -69,20 +55,6 @@ public class CO {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    /**
-     * @return the weight
-     */
-    public double getWeight() {
-        return weight;
-    }
-
-    /**
-     * @param weight the weight to set
-     */
-    public void setWeight(double weight) {
-        this.weight = weight;
     }
 
     /**
@@ -122,6 +94,7 @@ public class CO {
 
     /**
      * @param dateMade the dateMade to set
+     * @throws java.text.ParseException
      */
     public void setDateMade() throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -145,6 +118,7 @@ public class CO {
 
     /**
      * @param dateUpdated the dateUpdated to set
+     * @throws java.text.ParseException
      */
     public void setDateUpdated() throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -174,20 +148,6 @@ public class CO {
     }
 
     /**
-     * @return the checker
-     */
-    public int getChecker() {
-        return checker;
-    }
-
-    /**
-     * @param checker the checker to set
-     */
-    public void setChecker(int checker) {
-        this.checker = checker;
-    }
-
-    /**
      * @return the contributorName
      */
     public String getContributorName() {
@@ -213,5 +173,61 @@ public class CO {
      */
     public void setCheckerName(String checkerName) {
         this.checkerName = checkerName;
+    }
+
+    /**
+     * @return the curriculumID
+     */
+    public int getCurriculumID() {
+        return curriculumID;
+    }
+
+    /**
+     * @param curriculumID the curriculumID to set
+     */
+    public void setCurriculumID(int curriculumID) {
+        this.curriculumID = curriculumID;
+    }
+
+    /**
+     * @return the courseID
+     */
+    public int getCourseID() {
+        return courseID;
+    }
+
+    /**
+     * @param courseID the courseID to set
+     */
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
+    }
+
+    /**
+     * @return the term
+     */
+    public int getTerm() {
+        return term;
+    }
+
+    /**
+     * @param term the term to set
+     */
+    public void setTerm(int term) {
+        this.term = term;
+    }
+
+    /**
+     * @return the codePI
+     */
+    public String getCodePI() {
+        return codePI;
+    }
+
+    /**
+     * @param codePI the codePI to set
+     */
+    public void setCodePI(String codePI) {
+        this.codePI = codePI;
     }
 }

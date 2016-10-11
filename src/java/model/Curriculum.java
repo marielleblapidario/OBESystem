@@ -57,20 +57,6 @@ public class Curriculum {
     }
 
     /**
-     * @return the program
-     */
-    public String getProgram() {
-        return program;
-    }
-
-    /**
-     * @param program the program to set
-     */
-    public void setProgram(String program) {
-        this.program = program;
-    }
-
-    /**
      * @return the startYear
      */
     public java.sql.Date getStartYear() {
@@ -218,5 +204,19 @@ public class Curriculum {
      */
     public void setCollegeName(String collegeName) {
         this.collegeName = collegeName;
+    }
+
+    /**
+     * @return the program
+     */
+    public String getProgram() {
+        return program;
+    }
+
+    /**
+     * @param program the program to set
+     */
+    public void setProgram(String program) {
+        this.program = program;
     }
 }

@@ -26,21 +26,21 @@ public class CoDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO CO (codeCO, course, description, weight, "
-                    + "status, remarks, dateMade, dateUpdated, contributor, checker)\n"
+            String query = "INSERT INTO CO (curriculumID, courseID, term, codeCO, "
+                    + "description, status, remarks, dateMade, dateUpdated, contributor)\n"
                     + "VALUES (?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setString(1, newCO.getCodeCO());
-            pstmt.setString(2, newCO.getCourse());
-            pstmt.setString(3, newCO.getDescription());
-            pstmt.setDouble(4, newCO.getWeight());
-            pstmt.setString(5, newCO.getStatus());
-            pstmt.setString(6, newCO.getRemarks());
-            pstmt.setDate(7, newCO.getDateMade());
-            pstmt.setDate(8, newCO.getDateUpdated());
-            pstmt.setInt(9, newCO.getContributor());
-            pstmt.setInt(10, newCO.getChecker());
+            pstmt.setInt(1, newCO.getCurriculumID());
+            pstmt.setInt(2, newCO.getCourseID());
+            pstmt.setInt(3, newCO.getTerm());
+            pstmt.setString(4, newCO.getCodeCO());
+            pstmt.setString(5, newCO.getDescription());
+            pstmt.setString(6, newCO.getStatus());
+            pstmt.setString(7, newCO.getRemarks());
+            pstmt.setDate(8, newCO.getDateMade());
+            pstmt.setDate(9, newCO.getDateUpdated());
+            pstmt.setInt(10, newCO.getContributor());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -57,18 +57,19 @@ public class CoDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE CO\n"
-                    + "SET description = ?, weight = ?, status = ?, remarks = ?, "
-                    + "dateUpdated = ?, contributor = ?\n"
-                    + "WHERE codeCO = ?;";
+                    + "SET description = ?, status = ?, remarks = ?, dateUpdated = ?, contributor = ?\n"
+                    + "WHERE curriculumID = ? AND courseID = ? AND term = ? AND CodeCO = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, newCO.getDescription());
-            pstmt.setDouble(2, newCO.getWeight());
-            pstmt.setString(3, newCO.getStatus());
-            pstmt.setString(4, newCO.getRemarks());
-            pstmt.setDate(5, newCO.getDateUpdated());
-            pstmt.setInt(6, newCO.getContributor());
-            pstmt.setString(7, newCO.getCodeCO());
+            pstmt.setString(2, newCO.getStatus());
+            pstmt.setString(3, newCO.getRemarks());
+            pstmt.setDate(4, newCO.getDateUpdated());
+            pstmt.setInt(5, newCO.getContributor());
+            pstmt.setInt(6, newCO.getCurriculumID());
+            pstmt.setInt(7, newCO.getCourseID());
+            pstmt.setInt(8, newCO.getTerm());
+            pstmt.setString(9, newCO.getCodeCO());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -80,29 +81,31 @@ public class CoDAO {
         return false;
     }
 
-    public ArrayList<CO> getAllCO(String codeCourse) throws ParseException {
+    public ArrayList<CO> getAllCO(int curriculumID, int courseID, int term) throws ParseException {
         ArrayList<CO> newCO = new ArrayList<CO>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT codeCO, course, description, weight, status, "
-                    + "remarks, contributor, checker\n"
+            String query = "SELECT curriculumID, courseID, term, codeCO, "
+                    + "description, status, remarks, contributor\n"
                     + "FROM CO\n"
-                    + "WHERE course = ? AND isDeleted IS NULL;";
+                    + "WHERE curriculumID = ? AND courseID = ? AND term = ? AND isDelete IS NULL;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, codeCourse);
+            pstmt.setInt(1, curriculumID);
+            pstmt.setInt(2, courseID);
+            pstmt.setInt(3, term);
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 CO temp = new CO();
+                temp.setCurriculumID(rs.getInt("curriculumID"));
+                temp.setCourseID(rs.getInt("courseID"));
+                temp.setTerm(rs.getInt("term"));
                 temp.setCodeCO(rs.getString("codeCO"));
-                temp.setCourse(rs.getString("course"));
                 temp.setDescription(rs.getString("description"));
-                temp.setWeight(rs.getDouble("weight"));
                 temp.setStatus(rs.getString("status"));
                 temp.setRemarks(rs.getString("remarks"));
                 temp.setContributor(rs.getInt("contributor"));
-                temp.setChecker(rs.getInt("checker"));
                 newCO.add(temp);
             }
             pstmt.close();
@@ -114,15 +117,19 @@ public class CoDAO {
         return null;
     }
 
-    public boolean deleteCO(String codeCO) {
+    public boolean deleteCO(int curriculumID, int courseID, int term, String codeCO) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE CO\n"
                     + "SET isDELETED = TRUE\n"
-                    + "WHERE codeCO = ?;";
+                    + "WHERE curriculumID = ? AND courseID = ? "
+                    + "AND term = ? AND codeCO = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, codeCO);
+            pstmt.setInt(1, curriculumID);
+            pstmt.setInt(2, courseID);
+            pstmt.setInt(3, term);
+            pstmt.setString(4, codeCO);
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -133,15 +140,17 @@ public class CoDAO {
         return false;
     }
 
-    public String getLastCodeCO(String codeCourse) throws SQLException {
+    public String getLastCodeCO(int curriculumID, int courseID, int term) throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
         String i = "";
         String query = "SELECT MAX(codeCO)\n"
                 + "FROM CO\n"
-                + "WHERE course = ?;";
+                + "WHERE curriculumID = ? AND courseID = ? AND term = ?;";
         PreparedStatement ps = conn.prepareStatement(query);
-        ps.setString(1, codeCourse);
+        ps.setInt(1, curriculumID);
+        ps.setInt(2, courseID);
+        ps.setInt(3, term);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             i = rs.getString("MAX(codeCO)");
@@ -151,4 +160,27 @@ public class CoDAO {
         return i;
     }
 
+    public boolean mapCOtoPI(CO newCO) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO mapcotopi (curriculumID, courseID, codePI, term, codeCO)\n"
+                    + "VALUES (?,?,?,?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setInt(1, newCO.getCurriculumID());
+            pstmt.setInt(2, newCO.getCourseID());
+            pstmt.setString(3, newCO.getCodePI());
+            pstmt.setInt(4, newCO.getTerm());
+            pstmt.setString(5, newCO.getCodeCO());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

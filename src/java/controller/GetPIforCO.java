@@ -5,8 +5,7 @@
  */
 package controller;
 
-import DAO.CoDAO;
-import DAO.PaDAO;
+import DAO.MapCurriculumToPiDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class GetAllCO extends BaseServlet {
+public class GetPIforCO extends BaseServlet {
 
     /**
      *
@@ -39,9 +38,7 @@ public class GetAllCO extends BaseServlet {
         try {
             int curriculumID = Integer.parseInt(request.getParameter("curriculumID"));
             int courseID = Integer.parseInt(request.getParameter("courseID"));
-            int term = Integer.parseInt(request.getParameter("term"));
-            
-            s = g.toJson(new CoDAO().getAllCO(curriculumID, courseID, term));
+            s = g.toJson(new MapCurriculumToPiDAO().getPIforCO(curriculumID, courseID));
         } catch (ParseException ex) {
             Logger.getLogger(GetAllCO.class.getName()).log(Level.SEVERE, null, ex);
         }

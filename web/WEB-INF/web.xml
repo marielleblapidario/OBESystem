@@ -180,10 +180,6 @@
         <servlet-class>controller.GetLastCO</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EncodeCO</servlet-name>
-        <servlet-class>controller.EncodeCO</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>GetAllAssessment</servlet-name>
         <servlet-class>controller.GetAllAssessment</servlet-class>
     </servlet>
@@ -278,6 +274,38 @@
     <servlet>
         <servlet-name>RedirectToMapCurriculum</servlet-name>
         <servlet-class>controller.RedirectToMapCurriculum</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllPIforCurriculum</servlet-name>
+        <servlet-class>controller.GetAllPIforCurriculum</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodeMapCurriculumToPI</servlet-name>
+        <servlet-class>controller.EncodeMapCurriculumToPI</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetMapCurriculumToPI</servlet-name>
+        <servlet-class>controller.GetMapCurriculumToPI</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToViewSyllabusList</servlet-name>
+        <servlet-class>controller.RedirectToViewSyllabusList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToCreateSyllabus</servlet-name>
+        <servlet-class>controller.RedirectToCreateSyllabus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPIforCO</servlet-name>
+        <servlet-class>controller.GetPIforCO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodeSyllabus</servlet-name>
+        <servlet-class>controller.EncodeSyllabus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllSyllabus</servlet-name>
+        <servlet-class>controller.GetAllSyllabus</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -456,10 +484,6 @@
         <url-pattern>/GetLastCO</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EncodeCO</servlet-name>
-        <url-pattern>/EncodeCO</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>GetAllAssessment</servlet-name>
         <url-pattern>/GetAllAssessment</url-pattern>
     </servlet-mapping>
@@ -554,6 +578,38 @@
     <servlet-mapping>
         <servlet-name>RedirectToMapCurriculum</servlet-name>
         <url-pattern>/RedirectToMapCurriculum</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllPIforCurriculum</servlet-name>
+        <url-pattern>/GetAllPIforCurriculum</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeMapCurriculumToPI</servlet-name>
+        <url-pattern>/EncodeMapCurriculumToPI</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetMapCurriculumToPI</servlet-name>
+        <url-pattern>/GetMapCurriculumToPI</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToViewSyllabusList</servlet-name>
+        <url-pattern>/RedirectToViewSyllabusList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToCreateSyllabus</servlet-name>
+        <url-pattern>/RedirectToCreateSyllabus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPIforCO</servlet-name>
+        <url-pattern>/GetPIforCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeSyllabus</servlet-name>
+        <url-pattern>/EncodeSyllabus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllSyllabus</servlet-name>
+        <url-pattern>/GetAllSyllabus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

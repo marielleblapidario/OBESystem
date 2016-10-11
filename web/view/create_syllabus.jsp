@@ -29,37 +29,99 @@
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
+        <link rel="stylesheet" href="resources/dist/css/skins/_all-skins.min.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
+        <!-- ./wrapper -->
         <div class="wrapper">
-            <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-
                 <!-- Main content -->
                 <section class="content">
                     <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Create Syllabus</h3>
+                        </div>
                         <!-- /.box-header -->
-                        <div class="box-header">
-                            <h3 class="box-title">Curriculum Mapping</h3><br>
-                            <h5>Curriculum title: <span id = "title"></span></h5>
-                            <br>                            
-                        </div>
-                        <div id="table-div" class="box-body table-bordered" style="overflow-y: auto">    
-                        </div>
-                        <div class="box-footer">
-                            <button type="button" class="btn btn-default pull-right">Cancel</button>
-                            <button type="button" class="btn btn-success pull-right">Send for Approval</button>
-                            <a href="/OBESystem/ViewCurriculumList"><button id="save-btn" type="button" class="btn btn-primary pull-right">Save</button></a>
-                        </div>
-                        <!-- /.box-footer -->
+                        <!-- form start -->
+                        <form action="EncodeSyllabus" method="post" name="EncodeSyllabus">
+                            <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Curriculum</label>
+                                    <div class="col-sm-10">
+                                        <select name="curriculumID" id="select-curriculum" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Course</label>
+                                    <div class="col-sm-10">
+                                        <select name="courseID" id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Term</label>
+
+                                    <div class="col-sm-10">
+                                        <select name="term" id="select-term" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add CO -->
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">Add Course Outcome</h4>
+                                </div>
+                                <div class="box-body table-responsive">
+                                    <table id="data" class="table table-hover">
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>
+                                                <div class="col-sm-10">
+                                                    Course Outcome
+                                                </div>
+                                            </th>
+                                            <th>
+                                                <div class="col-sm-10">
+                                                    Performance Indicator
+                                                </div>
+                                            </th>
+                                            <th>
+                                                <div class="col-sm-10">
+                                                    Status
+                                                </div>
+                                            </th>
+                                            <th>
+                                                <div class="col-sm-10">
+                                                    Remarks
+                                                </div>
+                                            </th>
+                                            <th>Tools</th>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer">  
+                                    <button id="addRowButton" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
+                                    <button type="button" class="btn btn-default pull-right">Cancel</button>
+                                    <button type="submit" class="btn bg-green pull-right">Send for Approval</button>
+                                    <button type="submit" class="btn bg-light-blue pull-right">Save</button>
+                                </div>
+                                <!-- /.box-footer -->
+                            </div>
+                            <!-- /add CO -->
+
+                        </form>
                     </div>
                 </section>
-                <!-- /.content -->
             </div>
-            <!-- /.content-wrapper -->
         </div>
-        <!-- ./wrapper -->
         <!-- jQuery 2.2.3 -->
         <script src="/OBESystem/resources/plugins/jQuery/jquery-2.2.3.min.js"></script>
         <!-- Bootstrap 3.3.6 -->
@@ -89,8 +151,9 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
+        <!--self made-->
+        <script src="/OBESystem/js/create_syllabus.js"></script>
         <!-- Page script -->
-        <script src="/OBESystem/js/map_curriculum.js"></script>
         <script>
             $(function () {
                 //Initialize Select2 Elements
