@@ -176,24 +176,12 @@
         <servlet-class>controller.GetAllCO</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetLastCO</servlet-name>
-        <servlet-class>controller.GetLastCO</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetAllAssessment</servlet-name>
-        <servlet-class>controller.GetAllAssessment</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>GetAllType</servlet-name>
         <servlet-class>controller.GetAllType</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetLastAssessment</servlet-name>
         <servlet-class>controller.GetLastAssessment</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EncodeAssessment</servlet-name>
-        <servlet-class>controller.EncodeAssessment</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EncodeCurriculum</servlet-name>
@@ -306,6 +294,30 @@
     <servlet>
         <servlet-name>GetAllSyllabus</servlet-name>
         <servlet-class>controller.GetAllSyllabus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToOfferingsList</servlet-name>
+        <servlet-class>controller.RedirectToOfferingsList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllFaculty</servlet-name>
+        <servlet-class>controller.GetAllFaculty</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToCreateOffering</servlet-name>
+        <servlet-class>controller.RedirectToCreateOffering</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllRoom</servlet-name>
+        <servlet-class>controller.GetAllRoom</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetSpecificSyllabus</servlet-name>
+        <servlet-class>controller.GetSpecificSyllabus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodeCourseOffering</servlet-name>
+        <servlet-class>controller.EncodeCourseOffering</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -480,24 +492,12 @@
         <url-pattern>/GetAllCO</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GetLastCO</servlet-name>
-        <url-pattern>/GetLastCO</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetAllAssessment</servlet-name>
-        <url-pattern>/GetAllAssessment</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>GetAllType</servlet-name>
         <url-pattern>/GetAllType</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetLastAssessment</servlet-name>
         <url-pattern>/GetLastAssessment</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EncodeAssessment</servlet-name>
-        <url-pattern>/EncodeAssessment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EncodeCurriculum</servlet-name>
@@ -610,6 +610,30 @@
     <servlet-mapping>
         <servlet-name>GetAllSyllabus</servlet-name>
         <url-pattern>/GetAllSyllabus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToOfferingsList</servlet-name>
+        <url-pattern>/RedirectToOfferingsList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllFaculty</servlet-name>
+        <url-pattern>/GetAllFaculty</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToCreateOffering</servlet-name>
+        <url-pattern>/RedirectToCreateOffering</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllRoom</servlet-name>
+        <url-pattern>/GetAllRoom</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetSpecificSyllabus</servlet-name>
+        <url-pattern>/GetSpecificSyllabus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeCourseOffering</servlet-name>
+        <url-pattern>/EncodeCourseOffering</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

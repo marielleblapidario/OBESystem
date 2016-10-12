@@ -217,4 +217,32 @@ public class UserDAO {
         }
         return null;
     }
+    public ArrayList<User> getAllFaculty() throws ParseException {
+
+        ArrayList<User> listUser = new ArrayList<User>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT userID, CONCAT(firstName, \" \" , LastName) as 'name'\n"
+                    + "FROM user\n"
+                    + "where position = 'faculty';";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                User temp = new User();
+                temp.setUserID(rs.getInt("userID"));
+                temp.setFullName(rs.getString("name"));
+                listUser.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return listUser;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

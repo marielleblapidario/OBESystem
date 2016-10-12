@@ -26,23 +26,19 @@ public class AssessmentDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO assessment (codeAssessment, course, "
-                    + "type, description, weight, status, remarks, dateMade, "
-                    + "dateUpdated, contributor, checker)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+            String query = "INSERT INTO assessment (curriculumID, courseID, term, "
+                    + "section, codeAT, title, description, weight)\n"
+                    + "VALUES (?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setString(1, newAssessment.getCodeAssessment());
-            pstmt.setString(2, newAssessment.getCourse());
-            pstmt.setInt(3, newAssessment.getType());
-            pstmt.setString(4, newAssessment.getDescription());
-            pstmt.setDouble(5, newAssessment.getWeight());
-            pstmt.setString(6, newAssessment.getStatus());
-            pstmt.setString(7, newAssessment.getRemarks());
-            pstmt.setDate(8, newAssessment.getDateMade());
-            pstmt.setDate(9, newAssessment.getDateUpdated());
-            pstmt.setInt(10, newAssessment.getContributor());
-            pstmt.setInt(11, newAssessment.getChecker());
+            pstmt.setInt(1, newAssessment.getCurriculumID());
+            pstmt.setInt(2, newAssessment.getCourseID());
+            pstmt.setInt(3, newAssessment.getTerm());
+            pstmt.setString(4, newAssessment.getSection());
+            pstmt.setString(5, newAssessment.getCodeAT());
+            pstmt.setString(6, newAssessment.getTitle());
+            pstmt.setString(7, newAssessment.getDescription());
+            pstmt.setDouble(8, newAssessment.getWeight());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -54,62 +50,61 @@ public class AssessmentDAO {
         return false;
     }
 
-    public boolean updateAssessment(Assessment newAssessment) {
+//    public boolean updateAssessment(Assessment newAssessment) {
+//        try {
+//            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+//            Connection conn = myFactory.getConnection();
+//            String query = "UPDATE assessment\n"
+//                    + "SET type = ?, description = ?, weight = ?, status = ?, "
+//                    + "remarks = ?, dateUpdated = ?, contributor = ?\n"
+//                    + "WHERE codeAssessment = ?";
+//            PreparedStatement pstmt = conn.prepareStatement(query);
+//
+//            pstmt.setInt(1, newAssessment.getType());
+//            pstmt.setString(2, newAssessment.getDescription());
+//            pstmt.setDouble(3, newAssessment.getWeight());
+//            pstmt.setString(4, newAssessment.getStatus());
+//            pstmt.setString(5, newAssessment.getRemarks());
+//            pstmt.setDate(6, newAssessment.getDateUpdated());
+//            pstmt.setInt(7, newAssessment.getContributor());
+//            pstmt.setString(8, newAssessment.getCodeAssessment());
+//
+//            pstmt.executeUpdate();
+//            pstmt.close();
+//            conn.close();
+//            return true;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(AssessmentDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return false;
+//    }
+    public ArrayList<Assessment> getAllAssessment(int curriculumID, int courseID, int term, String section) throws ParseException {
+        ArrayList<Assessment> newAssessment = new ArrayList<>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "UPDATE assessment\n"
-                    + "SET type = ?, description = ?, weight = ?, status = ?, "
-                    + "remarks = ?, dateUpdated = ?, contributor = ?\n"
-                    + "WHERE codeAssessment = ?";
+            String query = "SELECT assessmentID, curriculumID, courseID, term, "
+                    + "section, codeAT, title, description, weight\n"
+                    + "FROM assessment\n"
+                    + "WHERE curriculumID = ? AND courseID = ? AND term = ? AND section = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-
-            pstmt.setInt(1, newAssessment.getType());
-            pstmt.setString(2, newAssessment.getDescription());
-            pstmt.setDouble(3, newAssessment.getWeight());
-            pstmt.setString(4, newAssessment.getStatus());
-            pstmt.setString(5, newAssessment.getRemarks());
-            pstmt.setDate(6, newAssessment.getDateUpdated());
-            pstmt.setInt(7, newAssessment.getContributor());
-            pstmt.setString(8, newAssessment.getCodeAssessment());
-
-            pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(AssessmentDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-
-    public ArrayList<Assessment> getAllAssessment(String codeCourse) throws ParseException {
-        ArrayList<Assessment> newAssessment = new ArrayList<Assessment>();
-        try {
-            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
-            Connection conn = myFactory.getConnection();
-            String query = "SELECT A.codeAssessment, A.course, A.type as 'atype', T.type as 'ttype', "
-                    + "A.description, A.weight, A.status, remarks, A.contributor, A.checker\n"
-                    + "FROM assessment A\n"
-                    + "JOIN reftype T\n"
-                    + "ON A.type = T.typeID\n"
-                    + "WHERE course = ? AND isDeleted IS NULL;";
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, codeCourse);
-
+            pstmt.setInt(1, curriculumID);
+            pstmt.setInt(2, courseID);
+            pstmt.setInt(3, term);
+            pstmt.setString(4, section);
+            
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Assessment temp = new Assessment();
-                temp.setCodeAssessment(rs.getString("codeAssessment"));
-                temp.setCourse(rs.getString("course"));
-                temp.setType(rs.getInt("atype"));
-                temp.setTypeName(rs.getString("ttype"));
+                temp.setAssessmentID(rs.getInt("assessmentID"));
+                temp.setCurriculumID(rs.getInt("curriculumID"));
+                temp.setCourseID(rs.getInt("courseID"));
+                temp.setTerm(rs.getInt("term"));
+                temp.setSection(rs.getString("section"));
+                temp.setCodeAT(rs.getString("codeAT"));
+                temp.setTitle(rs.getString("title"));
                 temp.setDescription(rs.getString("description"));
                 temp.setWeight(rs.getDouble("weight"));
-                temp.setStatus(rs.getString("status"));
-                temp.setRemarks(rs.getString("remarks"));
-                temp.setContributor(rs.getInt("contributor"));
-                temp.setChecker(rs.getInt("checker"));
                 newAssessment.add(temp);
             }
             pstmt.close();
@@ -120,16 +115,39 @@ public class AssessmentDAO {
         }
         return null;
     }
-
-    public boolean deleteAssessment(String codeAssessment) {
+    
+    public boolean mapAToOffering(Assessment newOffering) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "UPDATE assessment\n"
-                    + "SET isDeleted = TRUE\n"
-                    + "WHERE codeAssessment = ?;";
+            String query = "INSERT INTO mapassessmenttooffering (offeringID, assessmentID)\n"
+                    + "VALUES (?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, codeAssessment);
+
+            pstmt.setInt(1, newOffering.getOfferingID());
+            pstmt.setInt(2, newOffering.getAssessmentID());
+            
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(AssessmentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean mapAToCO(Assessment newOffering) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO mapassesmenttoco (coID, assessmentID)\n"
+                    + "VALUES (?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setInt(1, newOffering.getCoID());
+            pstmt.setInt(2, newOffering.getAssessmentID());
+            
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -140,6 +158,24 @@ public class AssessmentDAO {
         return false;
     }
 
+//    public boolean deleteAssessment(String codeAssessment) {
+//        try {
+//            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+//            Connection conn = myFactory.getConnection();
+//            String query = "UPDATE assessment\n"
+//                    + "SET isDeleted = TRUE\n"
+//                    + "WHERE codeAssessment = ?;";
+//            PreparedStatement pstmt = conn.prepareStatement(query);
+//            pstmt.setString(1, codeAssessment);
+//            pstmt.executeUpdate();
+//            pstmt.close();
+//            conn.close();
+//            return true;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(AssessmentDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return false;
+//    }
     public String getLastCodeAssessment(String codeCourse) throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();

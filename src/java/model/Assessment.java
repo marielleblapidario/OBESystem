@@ -14,62 +14,101 @@ import java.text.SimpleDateFormat;
  * @author mariellelapidario
  */
 public class Assessment {
-    private String codeAssessment;
-    private String course;
-    private  int type;
+    private int assessmentID;
+    private int curriculumID;
+    private int courseID;
+    private int term;
+    private String section;
+    private String codeAT;
+    private String title;
     private String description;
     private double weight;
-    private String status;
-    private String remarks;
-    private java.sql.Date dateMade;
-    private java.sql.Date dateUpdated;
-    private int contributor;
-    private int checker; 
     
-    private String typeName;
-    private String contributorName;
-    private String checkerName;
+    private int offeringID;
+    private int coID;
 
     /**
-     * @return the codeAssessment
+     * @return the curriculumID
      */
-    public String getCodeAssessment() {
-        return codeAssessment;
+    public int getCurriculumID() {
+        return curriculumID;
     }
 
     /**
-     * @param codeAssessment the codeAssessment to set
+     * @param curriculumID the curriculumID to set
      */
-    public void setCodeAssessment(String codeAssessment) {
-        this.codeAssessment = codeAssessment;
+    public void setCurriculumID(int curriculumID) {
+        this.curriculumID = curriculumID;
     }
 
     /**
-     * @return the course
+     * @return the courseID
      */
-    public String getCourse() {
-        return course;
+    public int getCourseID() {
+        return courseID;
     }
 
     /**
-     * @param course the course to set
+     * @param courseID the courseID to set
      */
-    public void setCourse(String course) {
-        this.course = course;
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 
     /**
-     * @return the type
+     * @return the term
      */
-    public int getType() {
-        return type;
+    public int getTerm() {
+        return term;
     }
 
     /**
-     * @param type the type to set
+     * @param term the term to set
      */
-    public void setType(int type) {
-        this.type = type;
+    public void setTerm(int term) {
+        this.term = term;
+    }
+
+    /**
+     * @return the section
+     */
+    public String getSection() {
+        return section;
+    }
+
+    /**
+     * @param section the section to set
+     */
+    public void setSection(String section) {
+        this.section = section;
+    }
+
+    /**
+     * @return the codeAT
+     */
+    public String getCodeAT() {
+        return codeAT;
+    }
+
+    /**
+     * @param codeAT the codeAT to set
+     */
+    public void setCodeAT(String codeAT) {
+        this.codeAT = codeAT;
+    }
+
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
@@ -101,146 +140,45 @@ public class Assessment {
     }
 
     /**
-     * @return the status
+     * @return the assessmentID
      */
-    public String getStatus() {
-        return status;
+    public int getAssessmentID() {
+        return assessmentID;
     }
 
     /**
-     * @param status the status to set
+     * @param assessmentID the assessmentID to set
      */
-    public void setStatus(String status) {
-        this.status = status;
+    public void setAssessmentID(int assessmentID) {
+        this.assessmentID = assessmentID;
     }
 
     /**
-     * @return the remarks
+     * @return the offeringID
      */
-    public String getRemarks() {
-        return remarks;
+    public int getOfferingID() {
+        return offeringID;
     }
 
     /**
-     * @param remarks the remarks to set
+     * @param offeringID the offeringID to set
      */
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
+    public void setOfferingID(int offeringID) {
+        this.offeringID = offeringID;
     }
 
     /**
-     * @return the dateMade
+     * @return the coID
      */
-    public java.sql.Date getDateMade() {
-        return dateMade;
+    public int getCoID() {
+        return coID;
     }
 
     /**
-     * @param dateMade the dateMade to set
+     * @param coID the coID to set
      */
-    public void setDateMade() throws ParseException{
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date currentDate = new java.util.Date();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date currentDate1 = formatter.parse(df.format(currentDate));
-        java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
-        this.dateMade = sqlDate;
-    }
-    
-    public void setDateMade(java.sql.Date dateMade) {
-        this.dateMade = dateMade;
-    }
-    /**
-     * @return the dateUpdated
-     */
-    public java.sql.Date getDateUpdated() {
-        return dateUpdated;
-    }
-
-    /**
-     * @param dateUpdated the dateUpdated to set
-     */
-    public void setDateUpdated() throws ParseException{
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date currentDate = new java.util.Date();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date currentDate1 = formatter.parse(df.format(currentDate));
-        java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
-        this.dateUpdated = sqlDate;
-    }
-    
-    public void setDateUpdated(java.sql.Date dateUpdated) {
-        this.dateUpdated = dateUpdated;
-    }
-
-    /**
-     * @return the contributor
-     */
-    public int getContributor() {
-        return contributor;
-    }
-
-    /**
-     * @param contributor the contributor to set
-     */
-    public void setContributor(int contributor) {
-        this.contributor = contributor;
-    }
-
-    /**
-     * @return the checker
-     */
-    public int getChecker() {
-        return checker;
-    }
-
-    /**
-     * @param checker the checker to set
-     */
-    public void setChecker(int checker) {
-        this.checker = checker;
-    }
-
-    /**
-     * @return the contributorName
-     */
-    public String getContributorName() {
-        return contributorName;
-    }
-
-    /**
-     * @param contributorName the contributorName to set
-     */
-    public void setContributorName(String contributorName) {
-        this.contributorName = contributorName;
-    }
-
-    /**
-     * @return the checkerName
-     */
-    public String getCheckerName() {
-        return checkerName;
-    }
-
-    /**
-     * @param checkerName the checkerName to set
-     */
-    public void setCheckerName(String checkerName) {
-        this.checkerName = checkerName;
-    }
-
-    /**
-     * @return the typeName
-     */
-    public String getTypeName() {
-        return typeName;
-    }
-
-    /**
-     * @param typeName the typeName to set
-     */
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setCoID(int coID) {
+        this.coID = coID;
     }
     
 }

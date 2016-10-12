@@ -89,7 +89,7 @@ public class PoDAO {
                     + "ON P.codePO = MPTP.codePO\n"
                     + "JOIN PA A\n"
                     + "ON MPTP.codePA = A.codePA\n"
-                    + "WHERE P.program = ? AND P.isDeleted IS NULL;";
+                    + "WHERE P.program = ? AND P.isDeleted IS NULL ORDER BY P.codePO;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, codeProgram);
 

@@ -82,14 +82,14 @@ public class CoDAO {
     }
 
     public ArrayList<CO> getAllCO(int curriculumID, int courseID, int term) throws ParseException {
-        ArrayList<CO> newCO = new ArrayList<CO>();
+        ArrayList<CO> newCO = new ArrayList<>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT curriculumID, courseID, term, codeCO, "
+            String query = "SELECT coID, curriculumID, courseID, term, codeCO, "
                     + "description, status, remarks, contributor\n"
                     + "FROM CO\n"
-                    + "WHERE curriculumID = ? AND courseID = ? AND term = ? AND isDelete IS NULL;";
+                    + "WHERE curriculumID = ? AND courseID = ? AND term = ?;";;
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, curriculumID);
             pstmt.setInt(2, courseID);
@@ -98,6 +98,7 @@ public class CoDAO {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 CO temp = new CO();
+                temp.setCoID(rs.getInt("coID"));
                 temp.setCurriculumID(rs.getInt("curriculumID"));
                 temp.setCourseID(rs.getInt("courseID"));
                 temp.setTerm(rs.getInt("term"));
@@ -164,15 +165,35 @@ public class CoDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapcotopi (curriculumID, courseID, codePI, term, codeCO)\n"
-                    + "VALUES (?,?,?,?,?);";
+            String query = "INSERT INTO mapcotopi (curriculumID, courseID, codePI, coID)\n"
+                    + "VALUES (?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newCO.getCurriculumID());
             pstmt.setInt(2, newCO.getCourseID());
             pstmt.setString(3, newCO.getCodePI());
-            pstmt.setInt(4, newCO.getTerm());
-            pstmt.setString(5, newCO.getCodeCO());
+            pstmt.setInt(4, newCO.getCoID());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean mapCO(CO newCO) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO mapsyllabustoco (syllabusID, coID)\n"
+                    + "VALUES (?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setInt(1, newCO.getSyllabusID());
+            pstmt.setInt(2, newCO.getCoID());
 
             pstmt.executeUpdate();
             pstmt.close();

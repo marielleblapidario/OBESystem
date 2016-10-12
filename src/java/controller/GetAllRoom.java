@@ -5,8 +5,7 @@
  */
 package controller;
 
-import DAO.AssessmentDAO;
-import DAO.CoDAO;
+import DAO.RoomDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class GetAllAssessment extends BaseServlet {
+public class GetAllRoom extends BaseServlet {
 
     /**
      *
@@ -37,13 +36,11 @@ public class GetAllAssessment extends BaseServlet {
         Gson g = new Gson();
         String s = null;
         try {
-            String SelectedCourse = request.getParameter("SelectedCourse");
-            System.out.println("selected program: " + SelectedCourse);
-            s = g.toJson(new AssessmentDAO().getAllAssessment(SelectedCourse));
+            s = g.toJson(new RoomDAO().getAllRoom());
         } catch (ParseException ex) {
-            Logger.getLogger(GetAllAssessment.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetAllApprover.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         PrintWriter out = response.getWriter();
         out.print(s);
     }

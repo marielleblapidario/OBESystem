@@ -49,7 +49,7 @@ public class SyllabusDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT S.curriculumID, S.courseID, S.term, "
+            String query = "SELECT S.syllabusID, S.curriculumID, S.courseID, S.term, "
                     + "CS.codeCourse, CS.title as 'courseTitle', "
                     + "P.title as 'programTitle', C.title as 'curriculumTitle'\n"
                     + "FROM syllabus S \n"
@@ -64,6 +64,7 @@ public class SyllabusDAO {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Syllabus temp = new Syllabus();
+                temp.setSyllabusID(rs.getInt("syllabusID"));
                 temp.setCurriculumID(rs.getInt("curriculumID"));
                 temp.setCourseID(rs.getInt("courseID"));
                 temp.setTerm(rs.getInt("term"));
@@ -80,5 +81,54 @@ public class SyllabusDAO {
             Logger.getLogger(SyllabusDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public Syllabus getSpecificSyllabus(int curriculumID, int courseID, int term) throws ParseException {
+        Syllabus syllabus = new Syllabus();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT S.curriculumID, S.courseID, S.term, "
+                    + "CS.title as 'courseTitle', C.title as 'curriculumTitle'\n"
+                    + "FROM syllabus S \n"
+                    + "JOIN curriculum C \n"
+                    + "ON S.curriculumID = C.curriculumID\n"
+                    + "JOIN course CS\n"
+                    + "ON S.courseID = CS.courseID\n"
+                    + "WHERE  S.curriculumID = ? AND  S.courseID = ? AND  S.term = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, curriculumID);
+            pstmt.setInt(2, courseID);
+            pstmt.setInt(3, term);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                syllabus.setCurriculumID(rs.getInt("curriculumID"));
+                syllabus.setCourseID(rs.getInt("courseID"));
+                syllabus.setTerm(rs.getInt("term"));
+                syllabus.setCourseTitle(rs.getString("courseTitle"));
+                syllabus.setCurriculumTitle(rs.getString("curriculumTitle"));
+            }
+            pstmt.close();
+            conn.close();
+            return syllabus;
+        } catch (SQLException ex) {
+            Logger.getLogger(SyllabusDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public Integer getLastSyllabusID() throws SQLException {
+        DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+        Connection conn = myFactory.getConnection();
+        int i = 1000;
+        String query = "SELECT MAX(syllabusID) from syllabus;";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            i = rs.getInt("MAX(syllabusID)");
+        }
+        ps.close();
+        rs.close();
+        return i;
     }
 }

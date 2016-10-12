@@ -10,6 +10,7 @@ package model;
  * @author mariellelapidario
  */
 public class Syllabus {
+    private int syllabusID;
     private int curriculumID;
     private int courseID;
     private int term;
@@ -115,6 +116,20 @@ public class Syllabus {
      */
     public void setCodeCourse(String codeCourse) {
         this.codeCourse = codeCourse;
+    }
+
+    /**
+     * @return the syllabusID
+     */
+    public int getSyllabusID() {
+        return syllabusID;
+    }
+
+    /**
+     * @param syllabusID the syllabusID to set
+     */
+    public void setSyllabusID(int syllabusID) {
+        this.syllabusID = syllabusID;
     }
     
 }

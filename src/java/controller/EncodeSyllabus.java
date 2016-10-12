@@ -9,6 +9,7 @@ import DAO.CoDAO;
 import DAO.SyllabusDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -42,7 +43,9 @@ public class EncodeSyllabus extends BaseServlet {
         Syllabus syllabus = new Syllabus();
         SyllabusDAO syllabusDAO = new SyllabusDAO();
         boolean x = true;
-        
+        int syllabusID = 0;
+        ArrayList<CO> coID = new ArrayList<>();
+
         String curriculumID = request.getParameter("curriculumID");
         String courseID = request.getParameter("courseID");
         String term = request.getParameter("term");
@@ -52,19 +55,20 @@ public class EncodeSyllabus extends BaseServlet {
         String[] remarks = request.getParameterValues("remarks");
         String[] codePI = request.getParameterValues("codePI");
         String contributor = request.getParameter("contributor");
-        
+
         System.out.println("curriculumID: " + curriculumID);
         System.out.println("courseID: " + courseID);
         System.out.println("term: " + term);
         System.out.println("codeCO length: " + codeCO.length);
         System.out.println("codePI length: " + codePI.length);
+        System.out.println("contributor: " + contributor);
         syllabus.setCurriculumID(Integer.parseInt(curriculumID));
         syllabus.setCourseID(Integer.parseInt(courseID));
         syllabus.setTerm(Integer.parseInt(term));
-        
-        if(syllabusDAO.encodeSyllabus(syllabus)){
+
+        if (syllabusDAO.encodeSyllabus(syllabus)) {
             System.out.println("create syllabus success");
-            for(int y = 0; y < codeCO.length; y++){
+            for (int y = 0; y < codeCO.length; y++) {
                 try {
                     CO co = new CO();
                     co.setCurriculumID(Integer.parseInt(curriculumID));
@@ -77,27 +81,55 @@ public class EncodeSyllabus extends BaseServlet {
                     co.setDateMade();
                     co.setDateUpdated();
                     co.setContributor(Integer.parseInt(contributor));
-                    if(coDAO.encodeCO(co)){
-                        System.out.println("create CO success");
-                        CO mapCO = new CO();
-                        mapCO.setCurriculumID(Integer.parseInt(curriculumID));
-                        mapCO.setCourseID(Integer.parseInt(courseID));
-                        mapCO.setTerm(Integer.parseInt(term));
-                        mapCO.setCodeCO(codeCO[y]);
-                        mapCO.setCodePI(codePI[y]);
-                        if(coDAO.mapCOtoPI(mapCO)){
-                            System.out.println("create mapping sucess");
-                        }
-                        else{
-                            x = false;
-                        }
+                    if (coDAO.encodeCO(co)) {
                     } else {
-                        x = false;                    
-                    }                    
+                        x = false;
+                    }
                 } catch (ParseException ex) {
                     Logger.getLogger(EncodeSyllabus.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+            }
+            if (x == true) {
+                try {
+                    System.out.println("create CO success");
+                    try {
+                        syllabusID = syllabusDAO.getLastSyllabusID();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(EncodeSyllabus.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    coID = coDAO.getAllCO(Integer.parseInt(curriculumID), Integer.parseInt(courseID), Integer.parseInt(term));
+                    System.out.println("syllabusID: " + syllabusID);
+                    System.out.println("coID size: " + coID.size());
+                    
+                    CO mapCOS = new CO();
+                    mapCOS.setSyllabusID(syllabusID);
+                    for (int c = 0; c < coID.size(); c++) {
+                        mapCOS.setCoID(coID.get(c).getCoID());
+                        if (coDAO.mapCO(mapCOS)) {
+                        } else {
+                            x = false;
+                        }
+                    }
+                    if (x == true) {
+                        for (int y = 0; y < codePI.length; y++) {
+                                CO mapCO = new CO();
+                                mapCO.setCurriculumID(Integer.parseInt(curriculumID));
+                                mapCO.setCourseID(Integer.parseInt(courseID));
+                                mapCO.setTerm(Integer.parseInt(term));
+                                mapCO.setCodePI(codePI[y]);
+                                mapCO.setCoID(coID.get(y).getCoID());
+                                if (coDAO.mapCOtoPI(mapCO)) {
+                                    System.out.println("create mapping sucess");
+                                } else {
+                                    x = false;
+                                }
+                        }
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(EncodeSyllabus.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                x = false;
             }
         } else {
             x = false;

@@ -5,12 +5,11 @@
  */
 package controller;
 
-import DAO.CoDAO;
-import DAO.PaDAO;
+import DAO.UserDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class GetLastCO extends BaseServlet {
+public class GetAllFaculty extends BaseServlet {
 
     /**
      *
@@ -34,16 +33,15 @@ public class GetLastCO extends BaseServlet {
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String SelectedCourse = request.getParameter("SelectedCourse");
-            Gson g = new Gson();
-            String s = "";
-            try {
-                s = g.toJson(new CoDAO().getLastCodeCO(SelectedCourse));
-            } catch (SQLException ex) {
-                Logger.getLogger(GetLastPA.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            out.print(s);
+        Gson g = new Gson();
+        String s = null;
+        try {
+            s = g.toJson(new UserDAO().getAllFaculty());
+        } catch (ParseException ex) {
+            Logger.getLogger(GetAllApprover.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        PrintWriter out = response.getWriter();
+        out.print(s);
     }
 }

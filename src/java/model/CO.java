@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
  * @author mariellelapidario
  */
 public class CO {
+    private int coID;
     private int curriculumID;
     private int courseID;
     private int term;
@@ -28,6 +29,7 @@ public class CO {
     private String contributorName;
     private String checkerName;
     private String codePI;
+    private int syllabusID;
 
     /**
      * @return the codeCO
@@ -229,5 +231,33 @@ public class CO {
      */
     public void setCodePI(String codePI) {
         this.codePI = codePI;
+    }
+
+    /**
+     * @return the coID
+     */
+    public int getCoID() {
+        return coID;
+    }
+
+    /**
+     * @param coID the coID to set
+     */
+    public void setCoID(int coID) {
+        this.coID = coID;
+    }
+
+    /**
+     * @return the syllabusID
+     */
+    public int getSyllabusID() {
+        return syllabusID;
+    }
+
+    /**
+     * @param syllabusID the syllabusID to set
+     */
+    public void setSyllabusID(int syllabusID) {
+        this.syllabusID = syllabusID;
     }
 }

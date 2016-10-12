@@ -39,9 +39,9 @@
                             <!-- /.box -->
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">View Syllabus List</h3>
+                                    <h3 class="box-title">View Course Offerings List</h3>
                                     <br>
-                                    <a href="/OBESystem/RedirectToCreateSyllabus"><button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New Syllabus</button></a>
+                                    <a href="/OBESystem/RedirectToCreateOffering"><button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New Course Offering</button></a>
 
                                 </div>
 
@@ -52,9 +52,12 @@
                                             <tr>
                                                 <th>Code</th>
                                                 <th>Course</th>
-                                                <th>Degree</th>
                                                 <th>Term</th>
-                                                <th>Curriculum</th>
+                                                <th>Section</th>
+                                                <th>Days</th>
+                                                <th>Time</th>
+                                                <th>Room</th>
+                                                <th>Faculty</th>
                                                 <th>Tools</th>
                                             </tr>
                                         </thead>
@@ -88,6 +91,5 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!-- self made -->
-        <script src="/OBESystem/js/view_syllabus_list.js"></script>
     </body>
 </html>

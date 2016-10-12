@@ -5,8 +5,7 @@
  */
 package controller;
 
-import DAO.CoDAO;
-import DAO.PaDAO;
+import DAO.SyllabusDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class GetAllCO extends BaseServlet {
+public class GetSpecificSyllabus  extends BaseServlet {
 
     /**
      *
@@ -38,12 +37,14 @@ public class GetAllCO extends BaseServlet {
         String s = null;
         try {
             int curriculumID = Integer.parseInt(request.getParameter("curriculumID"));
+            System.out.println("selected curriculumID: " + curriculumID);
             int courseID = Integer.parseInt(request.getParameter("courseID"));
+            System.out.println("selected courseID: " + courseID);
             int term = Integer.parseInt(request.getParameter("term"));
-            System.out.println("curriculumID: " + curriculumID);
-            s = g.toJson(new CoDAO().getAllCO(curriculumID, courseID, term));
+            System.out.println("selected term: " + term);
+            s = g.toJson(new SyllabusDAO().getSpecificSyllabus(curriculumID,courseID,term));
         } catch (ParseException ex) {
-            Logger.getLogger(GetAllCO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetSpecificCurriculum.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         PrintWriter out = response.getWriter();
