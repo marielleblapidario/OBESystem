@@ -18,8 +18,8 @@ public class Curriculum {
     private String codeCurriculum;
     private String title;
     private String program;
-    private java.sql.Date startYear;
-    private java.sql.Date endYear;
+    private int startYear;
+    private int endYear;
     private String description;
     private int contributor;
 
@@ -54,86 +54,6 @@ public class Curriculum {
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    /**
-     * @return the startYear
-     */
-    public java.sql.Date getStartYear() {
-        return startYear;
-    }
-
-    /**
-     * @param startYear the startYear to set
-     */
-//    public void setStartYear(java.sql.Date startYear) throws ParseException {
-//        @SuppressWarnings("deprecation")
-//        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//        java.util.Date madeDate0 = new java.util.Date();
-//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-//        java.util.Date madeDate1 = formatter.parse(df.format(madeDate0));
-//        java.sql.Date sqlreceivedDate1 = new java.sql.Date(madeDate1.getTime());
-//        this.startYear = sqlreceivedDate1;
-//    }
-
-    public void setStartYear(String startYear) throws ParseException {
-        @SuppressWarnings("deprecation")
-        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        java.util.Date startYear1 = formatter.parse(startYear);
-        java.sql.Date startYear2 = new java.sql.Date(startYear1.getTime());
-        this.setStartYear(startYear2);
-    }
-    
-    public void setViewStartYear(String startYear) throws ParseException {
-        @SuppressWarnings("deprecation")
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date startYear1 = formatter.parse(startYear);
-        java.sql.Date startYear2 = new java.sql.Date(startYear1.getTime());
-        this.setStartYear(startYear2);
-    }
-    
-    public void setStartYear(java.sql.Date startYear) {
-        this.startYear = startYear;
-    }
-
-    /**
-     * @return the endYear
-     */
-    public java.sql.Date getEndYear() {
-        return endYear;
-    }
-
-    /**
-     * @param endYear the endYear to set
-     */
-//    public void setEndYear(java.sql.Date endYear) throws ParseException {
-//        @SuppressWarnings("deprecation")
-//        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//        java.util.Date madeDate0 = new java.util.Date();
-//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-//        java.util.Date madeDate1 = formatter.parse(df.format(madeDate0));
-//        java.sql.Date sqlreceivedDate1 = new java.sql.Date(madeDate1.getTime());
-//        this.endYear = sqlreceivedDate1;
-//    }
-//    
-    public void setEndYear(String endYear) throws ParseException {
-        @SuppressWarnings("deprecation")
-        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        java.util.Date endYear1 = formatter.parse(endYear);
-        java.sql.Date endYear2 = new java.sql.Date(endYear1.getTime());
-        this.setEndYear(endYear2);
-    }
-    
-    public void setViewEndYear(String endYear) throws ParseException {
-        @SuppressWarnings("deprecation")
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date endYear1 = formatter.parse(endYear);
-        java.sql.Date endYear2 = new java.sql.Date(endYear1.getTime());
-        this.setEndYear(endYear2);
-    }
-    
-    public void setEndYear(java.sql.Date endYear) {
-        this.endYear = endYear;
     }
 
     /**
@@ -218,5 +138,33 @@ public class Curriculum {
      */
     public void setProgram(String program) {
         this.program = program;
+    }
+
+    /**
+     * @return the startYear
+     */
+    public int getStartYear() {
+        return startYear;
+    }
+
+    /**
+     * @param startYear the startYear to set
+     */
+    public void setStartYear(int startYear) {
+        this.startYear = startYear;
+    }
+
+    /**
+     * @return the endYear
+     */
+    public int getEndYear() {
+        return endYear;
+    }
+
+    /**
+     * @param endYear the endYear to set
+     */
+    public void setEndYear(int endYear) {
+        this.endYear = endYear;
     }
 }

@@ -10,6 +10,7 @@ package model;
  * @author mariellelapidario
  */
 public class MapCurriculumCoursesToPI {
+    private int mapCurID;
     private int curriculumID;
     private int courseID;
     private String codePI;
@@ -54,6 +55,20 @@ public class MapCurriculumCoursesToPI {
      */
     public void setCodePI(String codePI) {
         this.codePI = codePI;
+    }
+
+    /**
+     * @return the mapCurID
+     */
+    public int getMapCurID() {
+        return mapCurID;
+    }
+
+    /**
+     * @param mapCurID the mapCurID to set
+     */
+    public void setMapCurID(int mapCurID) {
+        this.mapCurID = mapCurID;
     }
 
 }

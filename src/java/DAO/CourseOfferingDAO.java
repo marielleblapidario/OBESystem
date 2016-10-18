@@ -55,15 +55,16 @@ public class CourseOfferingDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT CG.offeringID, CG.curriculumID, CG.courseID, CG.term, CG.section, "
-                    + "CE.title as 'courseTitle', CG.room, R.Room as 'roomTitle',  "
-                    + "CG.days, CG.time, CONCAT(U.firstName, \" \" , U.LastName) as 'name'\n"
-                    + "FROM courseoffering CG \n"
-                    + "JOIN course CE\n"
-                    + "ON CG.courseID = CE.courseID\n"
-                    + "JOIN refroom R \n"
-                    + "ON CG.room = R.roomID\n"
-                    + "JOIN user U \n"
+            String query = "SELECT CG.offeringID, CG.curriculumID,CG.courseID, "
+                    + "C.codeCourse, C.title as 'courseTitle', CG.term, CG.section, "
+                    + "CG.days, CG.time, CG.room, RR.room as 'roomTitle', CG.faculty, "
+                    + "CONCAT(U.firstName, \" \" , U.LastName) as 'name'\n"
+                    + "FROM courseoffering CG\n"
+                    + "JOIN refroom RR\n"
+                    + "ON CG.room = RR.roomID\n"
+                    + "JOIN course C \n"
+                    + "ON CG.courseID = C.courseID\n"
+                    + "JOIN USER U\n"
                     + "ON CG.faculty = U.userID;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
@@ -73,12 +74,15 @@ public class CourseOfferingDAO {
                 temp.setOfferingID(rs.getInt("offeringID"));
                 temp.setCurriculumID(rs.getInt("curriculumID"));
                 temp.setCourseID(rs.getInt("courseID"));
+                temp.setCodeCourse(rs.getString("codeCourse"));
+                temp.setCourseTitle(rs.getString("courseTitle"));
                 temp.setTerm(rs.getInt("term"));
                 temp.setSection(rs.getString("section"));
-                temp.setCourseTitle(rs.getString("courseTitle"));
-                temp.setRoom(rs.getInt("room"));
-                temp.setRoomTitle("roomTitle");
                 temp.setDays(rs.getString("days"));
+                temp.setTime(rs.getString("time"));
+                temp.setRoom(rs.getInt("room"));
+                temp.setRoomTitle(rs.getString("roomTitle"));
+                temp.setFaculty(rs.getInt("faculty"));
                 temp.setFacultyName(rs.getString("name"));
                 newOffering.add(temp);
             }
@@ -90,7 +94,7 @@ public class CourseOfferingDAO {
         }
         return null;
     }
-    
+
     public boolean mapOffering(CourseOffering newOffering) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -111,7 +115,7 @@ public class CourseOfferingDAO {
         }
         return false;
     }
-    
+
     public Integer getLastOfferingID() throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();

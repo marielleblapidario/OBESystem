@@ -10,8 +10,12 @@ package model;
  * @author mariellelapidario
  */
 public class MapCurriculumToCourse {
+    private int mapCurID;
     private int curriculumID;
     private int courseID;
+    private int term;
+    private int yearLevel;
+    private int preRequisite;
     
     private String codeCourse;
     private String courseTitle;
@@ -85,6 +89,62 @@ public class MapCurriculumToCourse {
      */
     public void setCodeCourse(String codeCourse) {
         this.codeCourse = codeCourse;
+    }
+
+    /**
+     * @return the term
+     */
+    public int getTerm() {
+        return term;
+    }
+
+    /**
+     * @param term the term to set
+     */
+    public void setTerm(int term) {
+        this.term = term;
+    }
+
+    /**
+     * @return the yearLevel
+     */
+    public int getYearLevel() {
+        return yearLevel;
+    }
+
+    /**
+     * @param yearLevel the yearLevel to set
+     */
+    public void setYearLevel(int yearLevel) {
+        this.yearLevel = yearLevel;
+    }
+
+    /**
+     * @return the preRequisite
+     */
+    public int getPreRequisite() {
+        return preRequisite;
+    }
+
+    /**
+     * @param preRequisite the preRequisite to set
+     */
+    public void setPreRequisite(int preRequisite) {
+        this.preRequisite = preRequisite;
+    }
+
+    /**
+     * @return the mapCurID
+     */
+    public int getMapCurID() {
+        return mapCurID;
+    }
+
+    /**
+     * @param mapCurID the mapCurID to set
+     */
+    public void setMapCurID(int mapCurID) {
+        this.mapCurID = mapCurID;
     }
 
 }

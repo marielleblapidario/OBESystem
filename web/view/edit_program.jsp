@@ -68,13 +68,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">Units</label>
-
-                                    <div class="col-xs-10">
-                                        <input id="units" type="number" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
                                         <textarea id="description" class="form-control" rows="3"></textarea>

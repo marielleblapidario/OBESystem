@@ -5,10 +5,6 @@
  */
 package model;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 /**
  *
  * @author mariellelapidario
@@ -18,15 +14,16 @@ public class Assessment {
     private int curriculumID;
     private int courseID;
     private int term;
-    private String section;
     private String codeAT;
     private String title;
     private String description;
     private double weight;
-    
-    private int offeringID;
     private int coID;
-
+    private int syllabusID;
+    private int mapCurID;
+    private int startYear;
+    private int endYear;
+    
     /**
      * @return the curriculumID
      */
@@ -67,20 +64,6 @@ public class Assessment {
      */
     public void setTerm(int term) {
         this.term = term;
-    }
-
-    /**
-     * @return the section
-     */
-    public String getSection() {
-        return section;
-    }
-
-    /**
-     * @param section the section to set
-     */
-    public void setSection(String section) {
-        this.section = section;
     }
 
     /**
@@ -154,20 +137,6 @@ public class Assessment {
     }
 
     /**
-     * @return the offeringID
-     */
-    public int getOfferingID() {
-        return offeringID;
-    }
-
-    /**
-     * @param offeringID the offeringID to set
-     */
-    public void setOfferingID(int offeringID) {
-        this.offeringID = offeringID;
-    }
-
-    /**
      * @return the coID
      */
     public int getCoID() {
@@ -179,6 +148,62 @@ public class Assessment {
      */
     public void setCoID(int coID) {
         this.coID = coID;
+    }
+
+    /**
+     * @return the syllabusID
+     */
+    public int getSyllabusID() {
+        return syllabusID;
+    }
+
+    /**
+     * @param syllabusID the syllabusID to set
+     */
+    public void setSyllabusID(int syllabusID) {
+        this.syllabusID = syllabusID;
+    }
+
+    /**
+     * @return the mapCurID
+     */
+    public int getMapCurID() {
+        return mapCurID;
+    }
+
+    /**
+     * @param mapCurID the mapCurID to set
+     */
+    public void setMapCurID(int mapCurID) {
+        this.mapCurID = mapCurID;
+    }
+
+    /**
+     * @return the startYear
+     */
+    public int getStartYear() {
+        return startYear;
+    }
+
+    /**
+     * @param startYear the startYear to set
+     */
+    public void setStartYear(int startYear) {
+        this.startYear = startYear;
+    }
+
+    /**
+     * @return the endYear
+     */
+    public int getEndYear() {
+        return endYear;
+    }
+
+    /**
+     * @param endYear the endYear to set
+     */
+    public void setEndYear(int endYear) {
+        this.endYear = endYear;
     }
     
 }

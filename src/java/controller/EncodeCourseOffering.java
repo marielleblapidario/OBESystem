@@ -86,80 +86,10 @@ public class EncodeCourseOffering extends BaseServlet {
         System.out.println("codAt size: " + codeAT.length);
         System.out.println("coID size: " + coID.length);
 
-        if (offeringDAO.encodeOffering(offering)) {
-            try {
-                System.out.println("offering creation successful!");
-                offeringID = offeringDAO.getLastOfferingID();
-                System.out.println("offeringID: " + offeringID);
-
-                CourseOffering CO = new CourseOffering();
-                CO.setSyllabusID(syllabusID);
-                CO.setOfferingID(offeringID);
-
-                if (offeringDAO.mapOffering(CO)) {
-                    System.out.println("mapping to offering successful!");
-                    for (int y = 0; y < codeAT.length; y++) {
-                        at.setCurriculumID(curriculumID);
-                        at.setCourseID(courseID);
-                        at.setTerm(term);
-                        at.setSection(section);
-                        at.setCodeAT(codeAT[y]);
-                        at.setTitle(title[y]);
-                        at.setDescription(description[y]);
-                        at.setWeight(Double.parseDouble(weight[y]));
-
-                        if (atDAO.encodeCO(at)) {
-                        } else {
-                            x = false;
-                        }
-                    }
-                    if (x == true) {
-                        System.out.println("create assessments successful!");
-                        try {
-                            arrAt = atDAO.getAllAssessment(curriculumID, courseID, term, section);
-                        } catch (ParseException ex) {
-                            Logger.getLogger(EncodeCourseOffering.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        System.out.println("arrAt size: " + arrAt.size());
-                        for (int y = 0; y < arrAt.size(); y++) {
-                            Assessment OTO = new Assessment();
-                            OTO.setOfferingID(offeringID);
-                            OTO.setAssessmentID(arrAt.get(y).getAssessmentID());
-
-                            if (atDAO.mapAToOffering(OTO)) {
-                            } else {
-                                x = false;
-                            }
-                        }
-                        if (x == true) {
-                            System.out.println("mapping to offerimg successful!");
-                            for (int y = 0; y < arrAt.size(); y++) {
-                                Assessment ATC = new Assessment();
-                                ATC.setCoID(Integer.parseInt(coID[y]));
-                                ATC.setAssessmentID(arrAt.get(y).getAssessmentID());
-
-                                if (atDAO.mapAToCO(ATC)) {
-                                } else {
-                                    x = false;
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    x = false;
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(EncodeCourseOffering.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else {
-            x = false;
-        }
-
         if (x == true) {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("/view/view_syllabus_list.jsp");
+            RequestDispatcher rd = context.getRequestDispatcher("/view/view_course_offerings_list.jsp");
             request.setAttribute("sucesss", "success");
             rd.forward(request, response);
         } else {

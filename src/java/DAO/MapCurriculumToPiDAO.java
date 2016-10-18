@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.MapCurriculumCoursesToPI;
-import model.MapCurriculumToCourse;
 
 /**
  *
@@ -27,13 +26,14 @@ public class MapCurriculumToPiDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapcurriculumcoursestopi (curriculumID, courseID, codePI)\n"
-                    + "VALUES (?,?,?);";
+            String query = "INSERT INTO mapcurriculumcoursestopi (mapCurID, codePI, curriculumID, courseID)\n"
+                    + "VALUES (?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setInt(1, newMapping.getCurriculumID());
-            pstmt.setInt(2, newMapping.getCourseID());
-            pstmt.setString(3, newMapping.getCodePI());
+            pstmt.setInt(1, newMapping.getMapCurID());
+            pstmt.setString(2, newMapping.getCodePI());
+            pstmt.setInt(3, newMapping.getCurriculumID());
+            pstmt.setInt(4, newMapping.getCourseID());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -50,7 +50,7 @@ public class MapCurriculumToPiDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT curriculumID, courseID, codePI\n"
+            String query = "SELECT mapCurID, codePI, curriculumID, courseID\n"
                     + "FROM mapcurriculumcoursestopi\n"
                     + "WHERE curriculumID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -59,6 +59,7 @@ public class MapCurriculumToPiDAO {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 MapCurriculumCoursesToPI temp = new MapCurriculumCoursesToPI();
+                temp.setMapCurID(rs.getInt("mapCurID"));
                 temp.setCurriculumID(rs.getInt("curriculumID"));
                 temp.setCourseID(rs.getInt("courseID"));
                 temp.setCodePI(rs.getString("codePI"));
@@ -72,7 +73,7 @@ public class MapCurriculumToPiDAO {
         }
         return null;
     }
-    
+
     public ArrayList<MapCurriculumCoursesToPI> getPIforCO(int curriculumID, int courseID) throws ParseException {
         ArrayList<MapCurriculumCoursesToPI> newMapping = new ArrayList<>();
         try {

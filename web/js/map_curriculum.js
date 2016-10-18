@@ -16,11 +16,12 @@ $(document).ready(function () {
         for (var i = 0; elements[i]; i++) {
             if (elements[i].checked) {
                 var value = elements[i].value.split("_");
-                var courseID = value[0];
-                var PI = value[1];
-                var mapCombo = {courseID: courseID, codePI: PI, curriculumID: codeCurriculum};
+                var mapCurID = value[0];
+                var courseID = value[1];
+                var PI = value[2];
+                var mapCombo = {mapCurID: mapCurID, courseID: courseID, codePI: PI, curriculumID: codeCurriculum};
                 mapping.push(mapCombo);
-                console.log(courseID + " is checked on " + PI + " curriculumID: " + codeCurriculum);
+                console.log(courseID + " is checked on " + PI + " curriculumID: " + codeCurriculum + "mapCurID: " + mapCurID);
             }
         }
         var jsonData = JSON.stringify(mapping);
@@ -122,6 +123,7 @@ function getSpecificCurriculum(codeCurriculum) {
     });
 }
 function appendTableRow(data) {
+    var mapCurID = data.mapCurID;
     var courseID = data.courseID;
     var codeCourse = data.codeCourse;
     var units = data.units;
@@ -133,7 +135,7 @@ function appendTableRow(data) {
     table.append(s);
     var row = $("#" + codeCourse);
     for (var i = 0; i < arrPI.length; i++) {
-        var codePI = courseID + "_" + arrPI[i];
+        var codePI = mapCurID + "_" + courseID + "_" + arrPI[i];
         var checked = "";
         for (var x = 0; x < arrCodePI.length; x++) {
             if (courseID == arrCourseID[x]) {

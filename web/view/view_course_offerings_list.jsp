@@ -91,5 +91,6 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!-- self made -->
+        <script src="/OBESystem/js/view_course_offerings_list.js"></script>
     </body>
 </html>

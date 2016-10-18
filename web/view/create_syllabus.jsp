@@ -37,88 +37,148 @@
             <div class="content-wrapper">
                 <!-- Main content -->
                 <section class="content">
+                    <form action="EncodeAssessment" method="post" name="EncodeAssessment">
                     <div class="box box-info">
                         <div class="box-header with-border">
                             <h3 class="box-title">Create Syllabus</h3>
                         </div>
                         <!-- /.box-header -->
-                        <!-- form start -->
-                        <form action="EncodeSyllabus" method="post" name="EncodeSyllabus">
-                            <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Curriculum</label>
-                                    <div class="col-sm-10">
-                                        <select name="curriculumID" id="select-curriculum" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                        </select>
-                                    </div>
+                        <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Curriculum</label>
+                                <input type="hidden" name="mapCurID" class="readonlyWhite" id="hidden-mapCurID" />
+                                <div class="col-sm-10">
+                                    <select name="curriculumID" id="select-curriculum" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    </select>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Course</label>
-                                    <div class="col-sm-10">
-                                        <select name="courseID" id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                        </select>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Course</label>
+                                <div class="col-sm-10">
+                                    <select name="courseID" id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">Term</label>
-
-                                    <div class="col-sm-10">
-                                        <select name="term" id="select-term" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Academic Start Year</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input name="startYear" type="text" class="form-control pull-right" id="startYear">
                                     </div>
                                 </div>
                             </div>
-                            <!-- Add CO -->
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-                                    <h4 class="box-title">Add Course Outcome</h4>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Academic End Year</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input name="endYear" type="text" class="form-control pull-right" id="endYear" readOnly>
+                                    </div>
                                 </div>
-                                <div class="box-body table-responsive">
-                                    <table id="data" class="table table-hover">
-                                        <tr>
-                                            <th>Code</th>
-                                            <th>
-                                                <div class="col-sm-10">
-                                                    Course Outcome
-                                                </div>
-                                            </th>
-                                            <th>
-                                                <div class="col-sm-10">
-                                                    Performance Indicator
-                                                </div>
-                                            </th>
-                                            <th>
-                                                <div class="col-sm-10">
-                                                    Status
-                                                </div>
-                                            </th>
-                                            <th>
-                                                <div class="col-sm-10">
-                                                    Remarks
-                                                </div>
-                                            </th>
-                                            <th>Tools</th>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                </div>
-                                <!-- /.box-body -->
-                                <div class="box-footer">  
-                                    <button id="addRowButton" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
-                                    <button type="button" class="btn btn-default pull-right">Cancel</button>
-                                    <button type="submit" class="btn bg-green pull-right">Send for Approval</button>
-                                    <button type="submit" class="btn bg-light-blue pull-right">Save</button>
-                                </div>
-                                <!-- /.box-footer -->
                             </div>
-                            <!-- /add CO -->
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Term</label>
 
-                        </form>
+                                <div class="col-sm-10">
+                                    <select name="term" id="select-term" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add CO -->
+                        <div class="box box-info" id="div-addCO">
+                            <div class="box-header with-border">
+                                <h4 class="box-title">Add Course Outcome</h4>
+                            </div>
+                            <div class="box-body table-responsive">
+                                <table id="data" class="table table-hover">
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>
+                                            <div class="col-sm-10">
+                                                Course Outcome
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="col-sm-10">
+                                                Performance Indicator
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="col-sm-10">
+                                                Remarks
+                                            </div>
+                                        </th>
+                                        <th>Tools</th>
+                                    </tr>
+                                </table>
+                                <br>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">  
+                                <button id="addRowButton" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
+                                <button type="button" class="btn btn-default pull-right">Cancel</button>
+                                <button id= "save-btn" type="button" class="btn bg-light-blue pull-right">Save</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </div>
+                        <!-- /add CO -->
+                        <!-- Add Assessment -->
+                        <div class="box box-info" id="div-addAssessment">
+                            <div class="box-header with-border">
+                                <h4 class="box-title">Add Assessment</h4>
+                            </div>
+                            <div class="box-body table-responsive">
+                                <table id="data-assessment" class="table table-hover">
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>
+                                            <div class="col-sm-10">
+                                                Assessment
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="col-sm-10">
+                                                Course Outcome
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="col-sm-10">
+                                                Description
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="col-sm-10">
+                                                Weight
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="col-sm-10">
+                                                Left Weight
+                                            </div>
+                                        </th>
+                                        <th>Tools</th>
+                                    </tr>
+                                </table>
+                                <br>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">  
+                                <button id="add-assessment" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
+                                <button type="button" class="btn btn-default pull-right">Cancel</button>
+                                <button id="save-assessment" type="submit" class="btn bg-light-blue pull-right">Save</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </div>
                     </div>
+                    <!-- /add Assessment -->
+                </form>
                 </section>
             </div>
         </div>
@@ -165,6 +225,12 @@
                 $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
                 //Money Euro
                 $("[data-mask]").inputmask();
+
+                //self made
+                $('#startYear').datepicker({
+                    format: "yyyy",
+                    autoclose: true,
+                    minViewMode: "years"});
 
                 //Date range picker
                 $('#reservation').daterangepicker();

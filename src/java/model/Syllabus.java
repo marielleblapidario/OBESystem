@@ -5,20 +5,31 @@
  */
 package model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author mariellelapidario
  */
 public class Syllabus {
     private int syllabusID;
+    private int mapCurID;
     private int curriculumID;
     private int courseID;
     private int term;
+    private int startYear;
+    private int endYear;
+    private int contributor;
+    private java.sql.Date dateMade;
+    private java.sql.Date dateUpdated;
     
     private String curriculumTitle;
     private String courseTitle;
     private String programTitle;
     private String codeCourse;
+    private String contributorName;
 
     /**
      * @return the curriculumID
@@ -131,5 +142,124 @@ public class Syllabus {
     public void setSyllabusID(int syllabusID) {
         this.syllabusID = syllabusID;
     }
+
+    /**
+     * @return the startYear
+     */
+    public int getStartYear() {
+        return startYear;
+    }
+
+    /**
+     * @param startYear the startYear to set
+     */
+    public void setStartYear(int startYear) {
+        this.startYear = startYear;
+    }
+
+    /**
+     * @return the endYear
+     */
+    public int getEndYear() {
+        return endYear;
+    }
+
+    /**
+     * @param endYear the endYear to set
+     */
+    public void setEndYear(int endYear) {
+        this.endYear = endYear;
+    }
+
+    /**
+     * @return the mapCurID
+     */
+    public int getMapCurID() {
+        return mapCurID;
+    }
+
+    /**
+     * @param mapCurID the mapCurID to set
+     */
+    public void setMapCurID(int mapCurID) {
+        this.mapCurID = mapCurID;
+    }
+
+    /**
+     * @return the contributorName
+     */
+    public String getContributorName() {
+        return contributorName;
+    }
+
+    /**
+     * @param contributorName the contributorName to set
+     */
+    public void setContributorName(String contributorName) {
+        this.contributorName = contributorName;
+    }
+
+    /**
+     * @return the contributor
+     */
+    public int getContributor() {
+        return contributor;
+    }
+
+    /**
+     * @param contributor the contributor to set
+     */
+    public void setContributor(int contributor) {
+        this.contributor = contributor;
+    }
+    
+    /**
+     * @return the dateMade
+     */
+    public java.sql.Date getDateMade() {
+        return dateMade;
+    }
+
+    /**
+     * @param dateMade the dateMade to set
+     * @throws java.text.ParseException
+     */
+    public void setDateMade() throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date currentDate = new java.util.Date();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date currentDate1 = formatter.parse(df.format(currentDate));
+        java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
+        this.dateMade = sqlDate;
+    }
+
+    public void setDateMade(java.sql.Date dateMade) {
+        this.dateMade = dateMade;
+    }
+
+    /**
+     * @return the dateUpdated
+     */
+    public java.sql.Date getDateUpdated() {
+        return dateUpdated;
+    }
+
+    /**
+     * @param dateUpdated the dateUpdated to set
+     * @throws java.text.ParseException
+     */
+    public void setDateUpdated() throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date currentDate = new java.util.Date();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date currentDate1 = formatter.parse(df.format(currentDate));
+        java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
+        this.dateUpdated = sqlDate;
+    }
+
+    public void setDateUpdated(java.sql.Date dateUpdated) {
+        this.dateUpdated = dateUpdated;
+    }
+
     
 }

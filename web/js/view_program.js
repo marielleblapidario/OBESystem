@@ -21,7 +21,6 @@ function getSpecificProgram(program) {
             $('#title').val(data.title);
             $('#codeProgram').val(data.codeProgram);
             $('#college').val(data.collegeName);
-            $('#units').val(data.units);
             $('#description').val(data.description);
         },
         error: function (response) {

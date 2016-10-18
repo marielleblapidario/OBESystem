@@ -26,12 +26,16 @@ public class MapCurriculumToCourseDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapcurriculumtocourse (ciurriculumID, courseID)\n"
-                    + "VALUES (?,?);";
+            String query = "INSERT INTO mapcurriculumtocourse (curriculumID, courseID, "
+                    + "term, yearLevel, prerequisite)\n"
+                    + "VALUES (?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newMapping.getCurriculumID());
             pstmt.setInt(2, newMapping.getCourseID());
+            pstmt.setInt(3, newMapping.getTerm());
+            pstmt.setInt(4, newMapping.getYearLevel());
+            pstmt.setInt(5, newMapping.getPreRequisite());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -48,13 +52,16 @@ public class MapCurriculumToCourseDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE mapcurriculumtocourse\n"
-                    + "SET courseID = ?\n"
-                    + "WHERE ciurriculumID = ? and courseID = ?;";
+                    + "SET courseID = ?, term = ?, yearLevel = ?, preRequisiste = ?\n"
+                    + "WHERE curriculumID = ? and courseID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newMapping.getCourseID());
-            pstmt.setInt(2, newMapping.getCurriculumID());
-            pstmt.setInt(3, newMapping.getCourseID());
+            pstmt.setInt(2, newMapping.getTerm());
+            pstmt.setInt(3, newMapping.getYearLevel());
+            pstmt.setInt(4, newMapping.getPreRequisite());
+            pstmt.setInt(5, newMapping.getCurriculumID());
+            pstmt.setInt(6, newMapping.getCourseID());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -71,22 +78,28 @@ public class MapCurriculumToCourseDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT MCTC.ciurriculumID, C.codeCourse, MCTC.courseID, C.title, C.units\n"
+            String query = "SELECT MCTC.mapCurID, MCTC.curriculumID, C.codeCourse, MCTC.courseID, "
+                    + "C.title, C.units, MCTC.term, MCTC.yearLevel, MCTC.prerequisite\n"
                     + "FROM mapcurriculumtocourse MCTC\n"
                     + "JOIN course C \n"
                     + "ON MCTC.courseID = C. courseID\n"
-                    + "WHERE ciurriculumID = ?;";
+                    + "WHERE curriculumID = ? "
+                    + "ORDER BY yearLevel ASC, term ASC;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, codeCurriculum);
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 MapCurriculumToCourse temp = new MapCurriculumToCourse();
-                temp.setCurriculumID(rs.getInt("ciurriculumID"));
+                temp.setMapCurID(rs.getInt("mapCurID"));
+                temp.setCurriculumID(rs.getInt("curriculumID"));
                 temp.setCourseID(rs.getInt("courseID"));
                 temp.setCodeCourse(rs.getString("codeCourse"));
                 temp.setCourseTitle(rs.getString("title"));
                 temp.setUnits(rs.getInt("units"));
+                temp.setTerm(rs.getInt("term"));
+                temp.setYearLevel(rs.getInt("yearLevel"));
+                temp.setPreRequisite(rs.getInt("prerequisite"));
                 newMapping.add(temp);
             }
             pstmt.close();
@@ -97,4 +110,30 @@ public class MapCurriculumToCourseDAO {
         }
         return null;
     }
+    
+    public int getCurID(int curriculumID, int courseID) throws ParseException {
+       int mapCurID = -1;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT mapCurID\n"
+                    + "FROM mapcurriculumtocourse\n"
+                    + "WHERE curriculumID = ? AND courseID = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, curriculumID);
+            pstmt.setInt(2, courseID);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                mapCurID = rs.getInt("mapCurID");
+            }
+            pstmt.close();
+            conn.close();
+            return mapCurID;
+        } catch (SQLException ex) {
+            Logger.getLogger(MapCurriculumToCourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mapCurID;
+    }
+    
 }

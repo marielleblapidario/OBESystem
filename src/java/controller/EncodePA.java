@@ -173,7 +173,7 @@ public class EncodePA extends BaseServlet {
         if (x == true) {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("/view/search_PA.jsp");
+            RequestDispatcher rd = context.getRequestDispatcher("/view/create_PA.jsp");
             request.setAttribute("sucesss", "success");
             rd.forward(request, response);
         } else {

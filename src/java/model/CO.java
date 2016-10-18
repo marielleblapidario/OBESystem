@@ -15,21 +15,19 @@ import java.text.SimpleDateFormat;
  */
 public class CO {
     private int coID;
+    private int syllabusID;
     private int curriculumID;
     private int courseID;
     private int term;
+    private int startYear;
+    private int endYear;
     private String codeCO;
     private String description;
-    private String status;
     private String remarks;
-    private java.sql.Date dateMade;
-    private java.sql.Date dateUpdated;
-    private int contributor;
 
-    private String contributorName;
     private String checkerName;
     private String codePI;
-    private int syllabusID;
+    private int mapCurID;
 
     /**
      * @return the codeCO
@@ -60,20 +58,6 @@ public class CO {
     }
 
     /**
-     * @return the status
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    /**
      * @return the remarks
      */
     public String getRemarks() {
@@ -85,82 +69,6 @@ public class CO {
      */
     public void setRemarks(String remarks) {
         this.remarks = remarks;
-    }
-
-    /**
-     * @return the dateMade
-     */
-    public java.sql.Date getDateMade() {
-        return dateMade;
-    }
-
-    /**
-     * @param dateMade the dateMade to set
-     * @throws java.text.ParseException
-     */
-    public void setDateMade() throws ParseException {
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date currentDate = new java.util.Date();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date currentDate1 = formatter.parse(df.format(currentDate));
-        java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
-        this.dateMade = sqlDate;
-    }
-
-    public void setDateMade(java.sql.Date dateMade) {
-        this.dateMade = dateMade;
-    }
-
-    /**
-     * @return the dateUpdated
-     */
-    public java.sql.Date getDateUpdated() {
-        return dateUpdated;
-    }
-
-    /**
-     * @param dateUpdated the dateUpdated to set
-     * @throws java.text.ParseException
-     */
-    public void setDateUpdated() throws ParseException {
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date currentDate = new java.util.Date();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date currentDate1 = formatter.parse(df.format(currentDate));
-        java.sql.Date sqlDate = new java.sql.Date(currentDate1.getTime());
-        this.dateUpdated = sqlDate;
-    }
-
-    public void setDateUpdated(java.sql.Date dateUpdated) {
-        this.dateUpdated = dateUpdated;
-    }
-
-    /**
-     * @return the contributor
-     */
-    public int getContributor() {
-        return contributor;
-    }
-
-    /**
-     * @param contributor the contributor to set
-     */
-    public void setContributor(int contributor) {
-        this.contributor = contributor;
-    }
-
-    /**
-     * @return the contributorName
-     */
-    public String getContributorName() {
-        return contributorName;
-    }
-
-    /**
-     * @param contributorName the contributorName to set
-     */
-    public void setContributorName(String contributorName) {
-        this.contributorName = contributorName;
     }
 
     /**
@@ -259,5 +167,47 @@ public class CO {
      */
     public void setSyllabusID(int syllabusID) {
         this.syllabusID = syllabusID;
+    }
+
+    /**
+     * @return the mapCurID
+     */
+    public int getMapCurID() {
+        return mapCurID;
+    }
+
+    /**
+     * @param mapCurID the mapCurID to set
+     */
+    public void setMapCurID(int mapCurID) {
+        this.mapCurID = mapCurID;
+    }
+
+    /**
+     * @return the startYear
+     */
+    public int getStartYear() {
+        return startYear;
+    }
+
+    /**
+     * @param startYear the startYear to set
+     */
+    public void setStartYear(int startYear) {
+        this.startYear = startYear;
+    }
+
+    /**
+     * @return the endYear
+     */
+    public int getEndYear() {
+        return endYear;
+    }
+
+    /**
+     * @param endYear the endYear to set
+     */
+    public void setEndYear(int endYear) {
+        this.endYear = endYear;
     }
 }

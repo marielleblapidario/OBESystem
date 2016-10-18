@@ -1,8 +1,8 @@
 var codeCurriculum = sessionStorage.getItem("codeCurriculum");
-var table = $("#example1").DataTable();
+var table = $("#data");
+var rowCount = 0;
 
 $(document).ready(function () {
-    $("#table").hide();
     getSpecificCurriculum(codeCurriculum);
     getSpecificMapCurriculumToCourse(codeCurriculum);
 });
@@ -16,8 +16,8 @@ function getSpecificCurriculum(codeCurriculum) {
             console.log(data);
             $("#title").val(data.title);
             $("#programName").val(data.programName);
-            var range = data.startYear+" - "+ data.endYear;
-            $("#range").val(range);
+            $("#startYear").val(data.startYear);
+            $("#endYear").val(data.endYear);
             $("#description").val(data.description);
         },
         error: function (response) {
@@ -34,7 +34,6 @@ function getSpecificMapCurriculumToCourse(codeCurriculum) {
         success: function (data) {
             console.log(data);
             data.forEach(addRow);
-            $("#table").show();
         },
         error: function (response) {
             console.log(response);
@@ -43,11 +42,36 @@ function getSpecificMapCurriculumToCourse(codeCurriculum) {
 }
 
 function addRow(data) {
+    var courseID = data.courseID;
     var codeCourse = data.codeCourse;
     var courseTitle = data.courseTitle;
     var units = data.units;
+    var term = data.term;
+    var yearLevel = data.yearLevel;
+    var preRequisite = data.preRequisite;
 
-    table.row.add([codeCourse, courseTitle, units]);
-    table.draw();
-
+    var tr = '';
+    var appendTr = '<tr id =tr' + rowCount + '>'
+            + '<td>' + codeCourse
+            + '<input type="hidden" name="codeCourse" class="readonlyWhite" value="' + codeCourse + '" />'
+            + '<input type="hidden" name="courseID" class="readonlyWhite" value="' + courseID + '" />'
+            + '</td>'
+            + '<td>' + courseTitle
+            + '<input type="hidden" name="title" class="readonlyWhite"  value="' + courseTitle + '" />'
+            + '</td>'
+            + '<td>' + units
+            + '<input type="hidden" name="title" class="readonlyWhite"  value="' + units + '" />'
+            + '</td>'
+            + '<td>' + yearLevel
+            + '<input type="hidden" name="title" class="readonlyWhite"  value="' + yearLevel + '" />'
+            + '</td>'
+            + '<td>' + term
+            + '<input type="hidden" name="title" class="readonlyWhite"  value="' + term + '" />'
+            + '</td>'
+            + '<td>' + preRequisite
+            + '<input type="hidden" name="title" class="readonlyWhite"  value="' + preRequisite + '" />'
+            + '</td>';
+    tr += appendTr;
+    table.append(tr);
+    rowCount++;
 }

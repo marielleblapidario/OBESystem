@@ -5,8 +5,7 @@
  */
 package controller;
 
-import DAO.CoDAO;
-import DAO.PaDAO;
+import DAO.CourseOfferingDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class GetAllCO extends BaseServlet {
+public class GetAllOfferings extends BaseServlet {
 
     /**
      *
@@ -37,23 +36,11 @@ public class GetAllCO extends BaseServlet {
         Gson g = new Gson();
         String s = null;
         try {
-            System.out.println("curriculumID: " + request.getParameter("curriculumID"));
-            System.out.println("courseID: " + request.getParameter("courseID"));
-            System.out.println("term: " + request.getParameter("term"));
-            System.out.println("startYear: " + request.getParameter("startYear"));
-            System.out.println("endYear: " + request.getParameter("endYear"));
-
-            int curriculumID = Integer.parseInt(request.getParameter("curriculumID"));
-            int courseID = Integer.parseInt(request.getParameter("courseID"));
-            int term = Integer.parseInt(request.getParameter("term"));
-            int startYear = Integer.parseInt(request.getParameter("startYear"));
-            int endYear = Integer.parseInt(request.getParameter("endYear"));
-            System.out.println("curriculumID: " + curriculumID);
-            s = g.toJson(new CoDAO().getAllCO(curriculumID, courseID, term, startYear ,endYear));
+            s = g.toJson(new CourseOfferingDAO().getAllOfferings());
         } catch (ParseException ex) {
-            Logger.getLogger(GetAllCO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetAllOfferings.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         PrintWriter out = response.getWriter();
         out.print(s);
     }

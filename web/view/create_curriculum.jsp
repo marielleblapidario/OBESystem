@@ -54,7 +54,7 @@
                                         <input name="title" type="text" class="form-control" id="inputEmail3" placeholder="BS in CSE 2010-2016" required>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Program</label>
                                     <div class="col-sm-10">
@@ -62,20 +62,28 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Academic Year Range</label>
+                                    <label class="col-sm-2 control-label">Academic Start Year</label>
                                     <div class="col-sm-10">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input name="range" type="text" class="form-control pull-right" id="reservation">
+                                            <input name="startYear" type="text" class="form-control pull-right" id="startYear">
                                         </div>
                                     </div>
-                                    <!-- /.input group -->
                                 </div>
-
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Academic End Year</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input name="endYear" type="text" class="form-control pull-right" id="endYear" readOnly>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
@@ -90,15 +98,10 @@
                                     <h4 class="box-title">Add Course</h4>
                                 </div>
                                 <div class="box-body no-border">
-                                    <h5 class="box-info">Required Units:
-                                        <span id = "required-units"></span>
-                                        <input name="hidden-required-units" id="hidden-required-units" class="hidden">
+                                    <h5 class="box-info">Total Units:
+                                        <span id = "total-units"></span>
+                                        <input name="hidden-total-units" id="hidden-total-units" class="hidden">
                                     </h5>
-                                    <h5 class="box-info">Left Units:
-                                        <span id = "left-units"></span>
-                                        <input name="hidden-left-units" id="hidden-left-units" class="hidden">
-                                    </h5>
-
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Search</label>
                                         <div class="col-sm-10">
@@ -110,17 +113,16 @@
                                     <button id="button-add" type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add Course</button>
 
                                     <div id="table">
-                                        <table id="example1" class="table table-bordered table-striped">
-                                            <thead>
+                                        <table id="data" class="table table-hover">
                                                 <tr>
                                                     <th>Code</th>
                                                     <th>Title</th>
                                                     <th>Units</th>
+                                                    <th>Year Level</th>
+                                                    <th>Term</th>
+                                                    <th>Prerequisite</th>
                                                     <th>Delete</th>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -184,6 +186,12 @@
                 $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
                 //Money Euro
                 $("[data-mask]").inputmask();
+
+                //self made
+                $('#startYear').datepicker({
+                    format: "yyyy",
+                    autoclose: true,
+                    minViewMode: "years"});
 
                 //Date range picker
                 $('#reservation').daterangepicker();

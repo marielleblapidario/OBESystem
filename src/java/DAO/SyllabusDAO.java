@@ -26,13 +26,20 @@ public class SyllabusDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO syllabus (curriculumID, courseID, term)\n"
-                    + "VALUES (?,?,?);";
+            String query = "INSERT INTO syllabus (mapCurID, curriculumID, courseID, "
+                    + "term, startYear, endYear, contributor, dateMade, dateUpdated)\n"
+                    + "VALUES (?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setInt(1, newSyllabus.getCurriculumID());
-            pstmt.setInt(2, newSyllabus.getCourseID());
-            pstmt.setInt(3, newSyllabus.getTerm());
+            pstmt.setInt(1, newSyllabus.getMapCurID());
+            pstmt.setInt(2, newSyllabus.getCurriculumID());
+            pstmt.setInt(3, newSyllabus.getCourseID());
+            pstmt.setInt(4, newSyllabus.getTerm());
+            pstmt.setInt(5, newSyllabus.getStartYear());
+            pstmt.setInt(6, newSyllabus.getEndYear());
+            pstmt.setInt(7, newSyllabus.getContributor());
+            pstmt.setDate(8, newSyllabus.getDateMade());
+            pstmt.setDate(9, newSyllabus.getDateUpdated());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -51,7 +58,8 @@ public class SyllabusDAO {
             Connection conn = myFactory.getConnection();
             String query = "SELECT S.syllabusID, S.curriculumID, S.courseID, S.term, "
                     + "CS.codeCourse, CS.title as 'courseTitle', "
-                    + "P.title as 'programTitle', C.title as 'curriculumTitle'\n"
+                    + "P.title as 'programTitle', C.title as 'curriculumTitle',\n"
+                    + "S.mapCurID, S.startYear, S.endYear "
                     + "FROM syllabus S \n"
                     + "JOIN curriculum C \n"
                     + "ON S.curriculumID = C.curriculumID \n"
@@ -72,6 +80,9 @@ public class SyllabusDAO {
                 temp.setCourseTitle(rs.getString("courseTitle"));
                 temp.setProgramTitle(rs.getString("programTitle"));
                 temp.setCurriculumTitle(rs.getString("curriculumTitle"));
+                temp.setMapCurID(rs.getInt("mapCurID"));
+                temp.setStartYear(rs.getInt("startYear"));
+                temp.setEndYear(rs.getInt("endYear"));
                 newSyllabus.add(temp);
             }
             pstmt.close();
@@ -89,6 +100,7 @@ public class SyllabusDAO {
             Connection conn = myFactory.getConnection();
             String query = "SELECT S.curriculumID, S.courseID, S.term, "
                     + "CS.title as 'courseTitle', C.title as 'curriculumTitle'\n"
+                    + "S.mapCurID, S.startYear, S.endYear "
                     + "FROM syllabus S \n"
                     + "JOIN curriculum C \n"
                     + "ON S.curriculumID = C.curriculumID\n"
@@ -107,6 +119,9 @@ public class SyllabusDAO {
                 syllabus.setTerm(rs.getInt("term"));
                 syllabus.setCourseTitle(rs.getString("courseTitle"));
                 syllabus.setCurriculumTitle(rs.getString("curriculumTitle"));
+                syllabus.setMapCurID(rs.getInt("mapCurID"));
+                syllabus.setStartYear(rs.getInt("startYear"));
+                syllabus.setEndYear(rs.getInt("endYear"));
             }
             pstmt.close();
             conn.close();

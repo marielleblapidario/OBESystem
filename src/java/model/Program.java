@@ -18,7 +18,6 @@ public class Program {
     private String codeProgram;
     private String title;
     private int college;
-    private int units;
     private String description;
     private Date dateMade;
     private Date dateUpdated;
@@ -68,20 +67,6 @@ public class Program {
      */
     public void setCollege(int college) {
         this.college = college;
-    }
-
-    /**
-     * @return the units
-     */
-    public int getUnits() {
-        return units;
-    }
-
-    /**
-     * @param units the units to set
-     */
-    public void setUnits(int units) {
-        this.units = units;
     }
 
     /**

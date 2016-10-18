@@ -22,23 +22,27 @@ import model.Assessment;
  */
 public class AssessmentDAO {
 
-    public boolean encodeCO(Assessment newAssessment) {
+    public boolean encodeAssessment(Assessment newAssessment) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO assessment (curriculumID, courseID, term, "
-                    + "section, codeAT, title, description, weight)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?);";
+            String query = "INSERT INTO assessment (coID, syllabusID, mapCurID, curriculumID, courseID, term, "
+                    + "startYear, endYear, codeAT, title, description, weight)\n"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setInt(1, newAssessment.getCurriculumID());
-            pstmt.setInt(2, newAssessment.getCourseID());
-            pstmt.setInt(3, newAssessment.getTerm());
-            pstmt.setString(4, newAssessment.getSection());
-            pstmt.setString(5, newAssessment.getCodeAT());
-            pstmt.setString(6, newAssessment.getTitle());
-            pstmt.setString(7, newAssessment.getDescription());
-            pstmt.setDouble(8, newAssessment.getWeight());
+            pstmt.setInt(1, newAssessment.getCoID());
+            pstmt.setInt(2, newAssessment.getSyllabusID());
+            pstmt.setInt(3, newAssessment.getMapCurID());
+            pstmt.setInt(4, newAssessment.getCurriculumID());
+            pstmt.setInt(5, newAssessment.getCourseID());
+            pstmt.setInt(6, newAssessment.getTerm());
+            pstmt.setInt(7, newAssessment.getStartYear());
+            pstmt.setInt(8, newAssessment.getEndYear());
+            pstmt.setString(9, newAssessment.getCodeAT());
+            pstmt.setString(10, newAssessment.getTitle());
+            pstmt.setString(11, newAssessment.getDescription());
+            pstmt.setDouble(12, newAssessment.getWeight());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -84,7 +88,7 @@ public class AssessmentDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT assessmentID, curriculumID, courseID, term, "
-                    + "section, codeAT, title, description, weight\n"
+                    + "codeAT, title, description, weight\n"
                     + "FROM assessment\n"
                     + "WHERE curriculumID = ? AND courseID = ? AND term = ? AND section = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -92,7 +96,7 @@ public class AssessmentDAO {
             pstmt.setInt(2, courseID);
             pstmt.setInt(3, term);
             pstmt.setString(4, section);
-            
+
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Assessment temp = new Assessment();
@@ -100,7 +104,6 @@ public class AssessmentDAO {
                 temp.setCurriculumID(rs.getInt("curriculumID"));
                 temp.setCourseID(rs.getInt("courseID"));
                 temp.setTerm(rs.getInt("term"));
-                temp.setSection(rs.getString("section"));
                 temp.setCodeAT(rs.getString("codeAT"));
                 temp.setTitle(rs.getString("title"));
                 temp.setDescription(rs.getString("description"));
@@ -115,48 +118,27 @@ public class AssessmentDAO {
         }
         return null;
     }
-    
-    public boolean mapAToOffering(Assessment newOffering) {
-        try {
-            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
-            Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapassessmenttooffering (offeringID, assessmentID)\n"
-                    + "VALUES (?,?);";
-            PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setInt(1, newOffering.getOfferingID());
-            pstmt.setInt(2, newOffering.getAssessmentID());
-            
-            pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(AssessmentDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-    
-    public boolean mapAToCO(Assessment newOffering) {
-        try {
-            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
-            Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapassesmenttoco (coID, assessmentID)\n"
-                    + "VALUES (?,?);";
-            PreparedStatement pstmt = conn.prepareStatement(query);
-
-            pstmt.setInt(1, newOffering.getCoID());
-            pstmt.setInt(2, newOffering.getAssessmentID());
-            
-            pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(AssessmentDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
+//    public boolean mapAToOffering(Assessment newOffering) {
+//        try {
+//            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+//            Connection conn = myFactory.getConnection();
+//            String query = "INSERT INTO mapassessmenttooffering (offeringID, assessmentID)\n"
+//                    + "VALUES (?,?);";
+//            PreparedStatement pstmt = conn.prepareStatement(query);
+//
+//            pstmt.setInt(1, newOffering.getOfferingID());
+//            pstmt.setInt(2, newOffering.getAssessmentID());
+//
+//            pstmt.executeUpdate();
+//            pstmt.close();
+//            conn.close();
+//            return true;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(AssessmentDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return false;
+//    }
 
 //    public boolean deleteAssessment(String codeAssessment) {
 //        try {

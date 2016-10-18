@@ -39,78 +39,74 @@ public class EncodeCurriculum extends BaseServlet {
      */
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            CurriculumDAO curriculumDAO = new CurriculumDAO();
-            Curriculum curriculum = new Curriculum();
-            Boolean checkCreation = true;
-            String contributor = request.getParameter("contributor");
-            String title = request.getParameter("title");
-            String codeProgram = request.getParameter("select-program");
-            String description = request.getParameter("description");
-            //datepicker
-            String range = request.getParameter("range");
-            String[] splitted = range.split("-");
-            for (int x = 0; x < splitted.length; x++) {
-                splitted[x] = splitted[x].replaceAll("\\s+", "");
+        response.setContentType("text/html;charset=UTF-8");
+        CurriculumDAO curriculumDAO = new CurriculumDAO();
+        Curriculum curriculum = new Curriculum();
+        Boolean checkCreation = true;
+        String contributor = request.getParameter("contributor");
+        System.out.println("contributor: " + contributor);
+        String title = request.getParameter("title");
+        String codeProgram = request.getParameter("select-program");
+        String description = request.getParameter("description");
+        String startYear = request.getParameter("startYear");
+        String endYear = request.getParameter("endYear");
+        curriculum.setTitle(title);
+        curriculum.setProgram(codeProgram);
+        curriculum.setStartYear(Integer.parseInt(startYear));
+        System.out.println("start year: " + startYear);
+        curriculum.setEndYear(Integer.parseInt(endYear));
+        System.out.println("end year: " + endYear);
+        curriculum.setDescription(description);
+        curriculum.setContributor(Integer.parseInt(contributor));
+
+        String[] codeCourse = request.getParameterValues("codeCourse");
+        String[] courseID = request.getParameterValues("courseID");
+        String[] term = request.getParameterValues("term");
+        String[] yearLevel = request.getParameterValues("yearLevel");
+        String[] preRequisite = request.getParameterValues("prerequisite");
+
+        System.out.println("codeCourse array size: " + courseID.length);
+        System.out.println("preRequisite array size: " + preRequisite.length);
+        if (curriculumDAO.encodeCurriculum(curriculum)) {
+            System.out.println("created curriculum");
+            MapCurriculumToCourseDAO mapping = new MapCurriculumToCourseDAO();
+            //gets the last codeCurriculum in curriculum table
+            int createdCurriculum = 0;
+            try {
+                createdCurriculum = curriculumDAO.getLastCodeCurriculum();
+            } catch (SQLException ex) {
+                Logger.getLogger(EncodeCurriculum.class.getName()).log(Level.SEVERE, null, ex);
             }
-                                   
-            curriculum.setTitle(title);
-            curriculum.setProgram(codeProgram);
-            curriculum.setStartYear(splitted[0]);
-            System.out.println("start year: " + splitted[0]);
-            curriculum.setEndYear(splitted[1]);
-            System.out.println("end year: " + splitted[1]);
-            curriculum.setDescription(description);
-            curriculum.setContributor(Integer.parseInt(contributor));
-            
-            //how to get the courses
-            String[] codeCourse = request.getParameterValues("codeCourse");
-            String[] courseID = request.getParameterValues("courseID");
 
-            System.out.println("codeCourse array size: " + courseID.length);
+            for (int x = 0; x < courseID.length; x++) {
+                MapCurriculumToCourse temp = new MapCurriculumToCourse();
+                System.out.println("courseID: " + courseID[x]);
+                temp.setCurriculumID(createdCurriculum);
+                temp.setCourseID(Integer.parseInt(courseID[x]));
+                temp.setTerm(Integer.parseInt(term[x]));
+                temp.setYearLevel(Integer.parseInt(yearLevel[x]));
+                temp.setPreRequisite(Integer.parseInt(preRequisite[x]));
 
-            if (curriculumDAO.encodeCurriculum(curriculum)) {
-                System.out.println("created curriculum");
-                MapCurriculumToCourseDAO mapping = new MapCurriculumToCourseDAO();
-                //gets the last codeCurriculum in curriculum table
-                int createdCurriculum = 1000;
-                try {
-                    createdCurriculum = curriculumDAO.getLastCodeCurriculum();
-                } catch (SQLException ex) {
-                    Logger.getLogger(EncodeCurriculum.class.getName()).log(Level.SEVERE, null, ex);
+                if (mapping.encodeMapCurriculumToCourse(temp) == false) {
+                    checkCreation = false;
                 }
-                
-                for (int x = 0; x < courseID.length; x++) {
-                    MapCurriculumToCourse temp = new MapCurriculumToCourse();
-                    System.out.println("courseID: " + courseID[x]);
-                    temp.setCurriculumID(createdCurriculum);
-                    temp.setCourseID(Integer.parseInt(courseID[x]));
-
-                    if (mapping.encodeMapCurriculumToCourse(temp) == false) {
-                        checkCreation = false;
-                    }
-                }
-                if (checkCreation) {
-                    ServletContext context = getServletContext();
-                    RequestDispatcher rd = context.getRequestDispatcher("/view/create_curriculum.jsp");
-                    request.setAttribute("success", "success");
-                    rd.forward(request, response);
-                } else {
-                    ServletContext context = getServletContext();
-                    RequestDispatcher rd = context.getRequestDispatcher("/view/Error.jsp");
-                    request.setAttribute("Error", "Error");
-                    rd.forward(request, response);
-                }
+            }
+            if (checkCreation) {
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/view/view_curriculums_list.jsp");
+                request.setAttribute("success", "success");
+                rd.forward(request, response);
             } else {
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/view/Error.jsp");
                 request.setAttribute("Error", "Error");
                 rd.forward(request, response);
             }
-
-        } catch (ParseException ex) {
-            Logger.getLogger(EncodeProgram.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            ServletContext context = getServletContext();
+            RequestDispatcher rd = context.getRequestDispatcher("/view/Error.jsp");
+            request.setAttribute("Error", "Error");
+            rd.forward(request, response);
         }
 
     }

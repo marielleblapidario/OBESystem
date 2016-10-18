@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Program</label>
                                     <div class="col-sm-10">
-                                        <select id="select-program" name="select-program" class="form-control select2 select2-hidden-accessible"  multiple="" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        <select id="select-program" name="select-program" class="form-control select2 select2-hidden-accessible"  multiple="" style="width: 100%;" tabindex="-1" aria-hidden="true" required>
                                         </select>
                                     </div>
                                 </div>

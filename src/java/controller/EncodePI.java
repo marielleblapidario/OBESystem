@@ -147,7 +147,7 @@ public class EncodePI extends BaseServlet {
         if (x == true) {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("/view/search_PI.jsp");
+            RequestDispatcher rd = context.getRequestDispatcher("/view/create_PI.jsp");
             request.setAttribute("sucesss", "success");
             rd.forward(request, response);
         } else {

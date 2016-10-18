@@ -25,6 +25,7 @@ public class CourseOffering {
     private String roomTitle;
     private String facultyName;
     private int syllabusID;
+    private String codeCourse;
 
     /**
      * @return the curriculumID
@@ -220,5 +221,19 @@ public class CourseOffering {
      */
     public void setSyllabusID(int syllabusID) {
         this.syllabusID = syllabusID;
+    }
+
+    /**
+     * @return the codeCourse
+     */
+    public String getCodeCourse() {
+        return codeCourse;
+    }
+
+    /**
+     * @param codeCourse the codeCourse to set
+     */
+    public void setCodeCourse(String codeCourse) {
+        this.codeCourse = codeCourse;
     }
 }

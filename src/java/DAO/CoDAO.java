@@ -26,22 +26,22 @@ public class CoDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO CO (curriculumID, courseID, term, codeCO, "
-                    + "description, status, remarks, dateMade, dateUpdated, contributor)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?);";
+            String query = "INSERT INTO CO (mapCurID, codePI, syllabusID, curriculumID, "
+                    + "courseID, term, codeCO, description, remarks, startYear, endYear)\n"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setInt(1, newCO.getCurriculumID());
-            pstmt.setInt(2, newCO.getCourseID());
-            pstmt.setInt(3, newCO.getTerm());
-            pstmt.setString(4, newCO.getCodeCO());
-            pstmt.setString(5, newCO.getDescription());
-            pstmt.setString(6, newCO.getStatus());
-            pstmt.setString(7, newCO.getRemarks());
-            pstmt.setDate(8, newCO.getDateMade());
-            pstmt.setDate(9, newCO.getDateUpdated());
-            pstmt.setInt(10, newCO.getContributor());
-
+            pstmt.setInt(1, newCO.getMapCurID());
+            pstmt.setString(2, newCO.getCodePI());
+            pstmt.setInt(3, newCO.getSyllabusID());
+            pstmt.setInt(4, newCO.getCurriculumID());
+            pstmt.setInt(5, newCO.getCourseID());
+            pstmt.setInt(6, newCO.getTerm());
+            pstmt.setString(7, newCO.getCodeCO());
+            pstmt.setString(8, newCO.getDescription());
+            pstmt.setString(9, newCO.getRemarks());
+            pstmt.setInt(10, newCO.getStartYear());
+            pstmt.setInt(11, newCO.getEndYear());
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -57,19 +57,16 @@ public class CoDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE CO\n"
-                    + "SET description = ?, status = ?, remarks = ?, dateUpdated = ?, contributor = ?\n"
+                    + "SET description = ?, contributor = ?\n"
                     + "WHERE curriculumID = ? AND courseID = ? AND term = ? AND CodeCO = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, newCO.getDescription());
-            pstmt.setString(2, newCO.getStatus());
-            pstmt.setString(3, newCO.getRemarks());
-            pstmt.setDate(4, newCO.getDateUpdated());
-            pstmt.setInt(5, newCO.getContributor());
-            pstmt.setInt(6, newCO.getCurriculumID());
-            pstmt.setInt(7, newCO.getCourseID());
-            pstmt.setInt(8, newCO.getTerm());
-            pstmt.setString(9, newCO.getCodeCO());
+            pstmt.setString(2, newCO.getRemarks());
+            pstmt.setInt(3, newCO.getCurriculumID());
+            pstmt.setInt(4, newCO.getCourseID());
+            pstmt.setInt(5, newCO.getTerm());
+            pstmt.setString(6, newCO.getCodeCO());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -81,19 +78,22 @@ public class CoDAO {
         return false;
     }
 
-    public ArrayList<CO> getAllCO(int curriculumID, int courseID, int term) throws ParseException {
+    public ArrayList<CO> getAllCO(int curriculumID, int courseID, int term, int startYear, int endYear) throws ParseException {
         ArrayList<CO> newCO = new ArrayList<>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT coID, curriculumID, courseID, term, codeCO, "
-                    + "description, status, remarks, contributor\n"
+                    + "description, remarks\n"
                     + "FROM CO\n"
-                    + "WHERE curriculumID = ? AND courseID = ? AND term = ?;";;
+                    + "WHERE curriculumID = ? AND courseID = ? AND term = ? "
+                    + "AND startYear = ? AND endYear = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, curriculumID);
             pstmt.setInt(2, courseID);
             pstmt.setInt(3, term);
+            pstmt.setInt(4, startYear);
+            pstmt.setInt(5, endYear);
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -104,9 +104,7 @@ public class CoDAO {
                 temp.setTerm(rs.getInt("term"));
                 temp.setCodeCO(rs.getString("codeCO"));
                 temp.setDescription(rs.getString("description"));
-                temp.setStatus(rs.getString("status"));
                 temp.setRemarks(rs.getString("remarks"));
-                temp.setContributor(rs.getInt("contributor"));
                 newCO.add(temp);
             }
             pstmt.close();
@@ -165,35 +163,13 @@ public class CoDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapcotopi (curriculumID, courseID, codePI, coID)\n"
-                    + "VALUES (?,?,?,?);";
+            String query = "INSERT INTO mapcotopi (coID, mapCurID, codePI)\n"
+                    + "VALUES (?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setInt(1, newCO.getCurriculumID());
-            pstmt.setInt(2, newCO.getCourseID());
+            pstmt.setInt(1, newCO.getCoID());
+            pstmt.setInt(2, newCO.getMapCurID());
             pstmt.setString(3, newCO.getCodePI());
-            pstmt.setInt(4, newCO.getCoID());
-
-            pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(CoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-    
-    public boolean mapCO(CO newCO) {
-        try {
-            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
-            Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapsyllabustoco (syllabusID, coID)\n"
-                    + "VALUES (?,?);";
-            PreparedStatement pstmt = conn.prepareStatement(query);
-
-            pstmt.setInt(1, newCO.getSyllabusID());
-            pstmt.setInt(2, newCO.getCoID());
 
             pstmt.executeUpdate();
             pstmt.close();

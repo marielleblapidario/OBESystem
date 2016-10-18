@@ -40,6 +40,7 @@ public class EncodeMapCurriculumToPI extends BaseServlet {
         MapCurriculumToPiDAO dao = new MapCurriculumToPiDAO();
         MapCurriculumCoursesToPI mapping = new MapCurriculumCoursesToPI();
         ArrayList<MapCurriculumCoursesToPI> existingMapping = new ArrayList<>();
+        ArrayList<Integer> arrMapCurID = new ArrayList<>();
         ArrayList<Integer> arrCourseID = new ArrayList<>();
         ArrayList<String> arrCodePI = new ArrayList<>();
         int arrCurriculumID = 0;
@@ -56,9 +57,11 @@ public class EncodeMapCurriculumToPI extends BaseServlet {
 
             for (int a = 0; a < jsonArray.size(); a++) {
                 JSONObject jsonObject = (JSONObject) jsonArray.get(a);
+                 String mapCurID = (String) jsonObject.get("mapCurID");
                 String courseID = (String) jsonObject.get("courseID");
                 String codePI = (String) jsonObject.get("codePI");
                 String curriculumID = (String) jsonObject.get("curriculumID");
+                arrMapCurID.add(Integer.parseInt(mapCurID));
                 arrCourseID.add(Integer.parseInt(courseID));
                 arrCodePI.add(codePI);
                 arrCurriculumID = Integer.parseInt(curriculumID);
@@ -82,6 +85,7 @@ public class EncodeMapCurriculumToPI extends BaseServlet {
                     mapping.setCurriculumID(arrCurriculumID);
                     mapping.setCourseID(arrCourseID.get(y));
                     mapping.setCodePI(arrCodePI.get(y));
+                    mapping.setMapCurID(arrMapCurID.get(y));
                     if (dao.encodeMapCurriculumToCourse(mapping)) {
                     } else {
                         x = false;

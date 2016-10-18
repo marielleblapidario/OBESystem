@@ -68,14 +68,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">Units</label>
-
-                                    <div class="col-xs-10">
-                                        <input name="units" type="number" class="form-control" id="inputEmail3" placeholder="0" required>
-                                    </div>
-                                </div>
-                                    <div class="form-group"><br>
+                                <div class="form-group"><br>
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
                                         <textarea name="description" class="form-control" rows="3" placeholder="Enter ..." required></textarea>

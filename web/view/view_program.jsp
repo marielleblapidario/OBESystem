@@ -14,10 +14,6 @@
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
-        <!-- daterange picker -->
-        <link rel="stylesheet" href="/OBESystem/resources/plugins/daterangepicker/daterangepicker.css">
-        <!-- bootstrap datepicker -->
-        <link rel="stylesheet" href="/OBESystem/resources/plugins/datepicker/datepicker3.css">
         <!-- iCheck for checkboxes and radio inputs -->
         <link rel="stylesheet" href="/OBESystem/resources/plugins/iCheck/all.css">
         <!-- Bootstrap Color Picker -->
@@ -68,12 +64,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Units</label>
-                                    <div class="col-sm-10">
-                                         <input name="units" type="text" class="form-control" id="units" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
                                         <textarea id="description" class="form-control" rows="3" disabled></textarea>
@@ -102,11 +92,6 @@
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.js"></script>
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-        <!-- date-range-picker -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-        <script src="/OBESystem/plugins/daterangepicker/daterangepicker.js"></script>
-        <!-- bootstrap datepicker -->
-        <script src="/OBESystem/resources/plugins/datepicker/bootstrap-datepicker.js"></script>
         <!-- bootstrap color picker -->
         <script src="/OBESystem/resources/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
         <!-- bootstrap time picker -->
@@ -135,34 +120,6 @@
                 $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
                 //Money Euro
                 $("[data-mask]").inputmask();
-
-                //Date range picker
-                $('#reservation').daterangepicker();
-                //Date range picker with time picker
-                $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
-                //Date range as a button
-                $('#daterange-btn').daterangepicker(
-                        {
-                            ranges: {
-                                'Today': [moment(), moment()],
-                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                            },
-                            startDate: moment().subtract(29, 'days'),
-                            endDate: moment()
-                        },
-                        function (start, end) {
-                            $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                        }
-                );
-
-                //Date picker
-                $('#datepicker').datepicker({
-                    autoclose: true
-                });
 
                 //iCheck for checkbox and radio inputs
                 $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({

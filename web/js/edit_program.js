@@ -16,7 +16,6 @@ function getSpecificProgram(program) {
             $('#title').val(data.title);
             $('#codeProgram').val(data.codeProgram);
             //$('#select-college>option:eq( ' + data.college + ')').prop('selected', true);
-            $('#units').val(data.units);
             $('#description').val(data.description);
         },
         error: function (response) {

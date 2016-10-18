@@ -34,8 +34,8 @@ public class CurriculumDAO {
 
             pstmt.setString(1, newCurriculum.getTitle());
             pstmt.setString(2, newCurriculum.getProgram());
-            pstmt.setDate(3, newCurriculum.getStartYear());
-            pstmt.setDate(4, newCurriculum.getEndYear());
+            pstmt.setInt(3, newCurriculum.getStartYear());
+            pstmt.setInt(4, newCurriculum.getEndYear());
             pstmt.setString(5, newCurriculum.getDescription());
             pstmt.setInt(6, newCurriculum.getContributor());
 
@@ -116,8 +116,8 @@ public class CurriculumDAO {
                 temp.setTitle(rs.getString("crTitle"));
                 temp.setProgramName(rs.getString("pTitle"));
                 temp.setCollegeName(rs.getString("college"));
-                temp.setViewStartYear(rs.getString("startYear"));
-                temp.setViewEndYear(rs.getString("endYear"));
+                temp.setStartYear(rs.getInt("startYear"));
+                temp.setEndYear(rs.getInt("endYear"));
                 temp.setContributorName(rs.getString("name"));
                 newCurriculum.add(temp);
             }
@@ -150,8 +150,8 @@ public class CurriculumDAO {
                 newCurriculum.setProgram(rs.getString("program"));
                 newCurriculum.setTitle(rs.getString("crTitle"));
                 newCurriculum.setProgramName(rs.getString("pTitle"));
-                newCurriculum.setViewStartYear(rs.getString("startYear"));
-                newCurriculum.setViewEndYear(rs.getString("endYear"));
+                newCurriculum.setStartYear(rs.getInt("startYear"));
+                newCurriculum.setEndYear(rs.getInt("endYear"));
                 newCurriculum.setDescription(rs.getString("description"));
             }
             pstmt.close();

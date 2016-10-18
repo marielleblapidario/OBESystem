@@ -149,8 +149,7 @@
                                     <ul class="treeview-menu" style="display: none;">
                                         <li><a href="/OBESystem/ViewCourseList"><i class="fa fa-circle-o"></i>Course List</a></li>
                                         <li><a href="/OBESystem/RedirectToViewSyllabusList"><i class="fa fa-circle-o"></i>Syllabus List</a></li>
-                                        <li><a href="/OBESystem/RedirectToSearchCO"><i class="fa fa-circle-o"></i>Course Outcome</a></li>
-                                        <li><a href="/OBESystem/RedirectToSearchAssessment"><i class="fa fa-circle-o"></i>Assessment</a></li>
+                                        <li><a href="/OBESystem/RedirectToOfferingsList"><i class="fa fa-circle-o"></i>Course Offerings List</a></li>
                                     </ul>
                                 </li>
                             </ul>

@@ -319,6 +319,30 @@
         <servlet-name>EncodeCourseOffering</servlet-name>
         <servlet-class>controller.EncodeCourseOffering</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetAllOfferings</servlet-name>
+        <servlet-class>controller.GetAllOfferings</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllTrimester</servlet-name>
+        <servlet-class>controller.GetAllTrimester</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllYearLevel</servlet-name>
+        <servlet-class>controller.GetAllYearLevel</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodeCO</servlet-name>
+        <servlet-class>controller.EncodeCO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetMapCurID</servlet-name>
+        <servlet-class>controller.GetMapCurID</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodeAssessment</servlet-name>
+        <servlet-class>controller.EncodeAssessment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -634,6 +658,30 @@
     <servlet-mapping>
         <servlet-name>EncodeCourseOffering</servlet-name>
         <url-pattern>/EncodeCourseOffering</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllOfferings</servlet-name>
+        <url-pattern>/GetAllOfferings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllTrimester</servlet-name>
+        <url-pattern>/GetAllTrimester</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllYearLevel</servlet-name>
+        <url-pattern>/GetAllYearLevel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeCO</servlet-name>
+        <url-pattern>/EncodeCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetMapCurID</servlet-name>
+        <url-pattern>/GetMapCurID</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeAssessment</servlet-name>
+        <url-pattern>/EncodeAssessment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

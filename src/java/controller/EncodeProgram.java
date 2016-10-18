@@ -47,15 +47,12 @@ public class EncodeProgram extends BaseServlet {
             System.out.println("codeProgram: " + codeProgram);
             String college = request.getParameter("college");
             System.out.println("selected college: " + college);
-            String units = request.getParameter("units");
-            System.out.println("units: " + units);
             String description = request.getParameter("description");
             System.out.println("description: " + description);
 
             program.setCodeProgram(codeProgram);
             program.setTitle(title);
             program.setCollege(Integer.parseInt(college));
-            program.setUnits(Integer.parseInt(units));
             program.setDescription(description);
             program.setDateMade();
             program.setDateUpdated();
