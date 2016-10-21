@@ -30,6 +30,17 @@ public class Syllabus {
     private String programTitle;
     private String codeCourse;
     private String contributorName;
+    
+    private int assessmentID;
+    private int coID;
+    private String codeCO;
+    private String codePI;
+    private String coDescription;
+    private String coRemarks;
+    private String codeAT;
+    private String assessmentTitle;
+    private String assessmentDescription;
+    private double assessmentWeight;
 
     /**
      * @return the curriculumID
@@ -259,6 +270,146 @@ public class Syllabus {
 
     public void setDateUpdated(java.sql.Date dateUpdated) {
         this.dateUpdated = dateUpdated;
+    }
+
+    /**
+     * @return the assessmentID
+     */
+    public int getAssessmentID() {
+        return assessmentID;
+    }
+
+    /**
+     * @param assessmentID the assessmentID to set
+     */
+    public void setAssessmentID(int assessmentID) {
+        this.assessmentID = assessmentID;
+    }
+
+    /**
+     * @return the coID
+     */
+    public int getCoID() {
+        return coID;
+    }
+
+    /**
+     * @param coID the coID to set
+     */
+    public void setCoID(int coID) {
+        this.coID = coID;
+    }
+
+    /**
+     * @return the codeCO
+     */
+    public String getCodeCO() {
+        return codeCO;
+    }
+
+    /**
+     * @param codeCO the codeCO to set
+     */
+    public void setCodeCO(String codeCO) {
+        this.codeCO = codeCO;
+    }
+
+    /**
+     * @return the coDescription
+     */
+    public String getCoDescription() {
+        return coDescription;
+    }
+
+    /**
+     * @param coDescription the coDescription to set
+     */
+    public void setCoDescription(String coDescription) {
+        this.coDescription = coDescription;
+    }
+
+    /**
+     * @return the coRemarks
+     */
+    public String getCoRemarks() {
+        return coRemarks;
+    }
+
+    /**
+     * @param coRemarks the coRemarks to set
+     */
+    public void setCoRemarks(String coRemarks) {
+        this.coRemarks = coRemarks;
+    }
+
+    /**
+     * @return the codeAT
+     */
+    public String getCodeAT() {
+        return codeAT;
+    }
+
+    /**
+     * @param codeAT the codeAT to set
+     */
+    public void setCodeAT(String codeAT) {
+        this.codeAT = codeAT;
+    }
+
+    /**
+     * @return the assessmentTitle
+     */
+    public String getAssessmentTitle() {
+        return assessmentTitle;
+    }
+
+    /**
+     * @param assessmentTitle the assessmentTitle to set
+     */
+    public void setAssessmentTitle(String assessmentTitle) {
+        this.assessmentTitle = assessmentTitle;
+    }
+
+    /**
+     * @return the assessmentDescription
+     */
+    public String getAssessmentDescription() {
+        return assessmentDescription;
+    }
+
+    /**
+     * @param assessmentDescription the assessmentDescription to set
+     */
+    public void setAssessmentDescription(String assessmentDescription) {
+        this.assessmentDescription = assessmentDescription;
+    }
+
+    /**
+     * @return the assessmentWeight
+     */
+    public double getAssessmentWeight() {
+        return assessmentWeight;
+    }
+
+    /**
+     * @param assessmentWeight the assessmentWeight to set
+     */
+    public void setAssessmentWeight(double assessmentWeight) {
+        this.assessmentWeight = assessmentWeight;
+    }
+
+    /**
+     * @return the codePI
+     */
+    public String getCodePI() {
+        return codePI;
+    }
+
+    /**
+     * @param codePI the codePI to set
+     */
+    public void setCodePI(String codePI) {
+        this.codePI = codePI;
     }
 
     

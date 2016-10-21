@@ -40,20 +40,57 @@
                     <section class="content">
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <input  name="syllabusID" class="hidden" id="hidden-syllabusID-title">
                                 <h3 class="box-title">Create Course Offering</h3>
-                                <h5>Curriculum: <span id = "curriculum-title"></span></h5>
-                                <input  name="curriculumID"  class="hidden" id="hidden-curriculum-title">
-                                <h5>Course: <span id = "course-title" ></span></h5>
-                                <input name="courseID"  class="hidden" id="hidden-course-title">
-                                <h5>Term: <span id = "term-title" ></span></h5>
-                                <input name="term"  class="hidden" id="hidden-term-title">
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
 
                             <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                             <div class="box-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Curriculum Followed</label>
+                                    <input type="hidden" name="mapCurID" class="readonlyWhite" id="hidden-mapCurID" />
+                                    <div  class="col-sm-10">
+                                        <input name="curriculum-title" type="text" class="form-control" id="curriculum-title" readOnly>
+                                        <input name="curriculumID" type="hidden" class="form-control" id="hidden-curriculum-title">
+                                        <input name="syllabusID" type="hidden" class="form-control" id="hidden-syllabusID">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Course</label>
+                                    <div  class="col-sm-10">
+                                        <input name="course-title" type="text" class="form-control" id="course-title" readOnly>
+                                        <input name="courseID" type="hidden" class="form-control" id="hidden-course-title">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Academic Start Year</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input name="startYear" type="text" class="form-control pull-right" id="startYear" readOnly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Academic End Year</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input name="endYear" type="text" class="form-control pull-right" id="endYear" readOnly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Term</label>
+                                    <div  class="col-sm-10">
+                                        <input name="term" type="text" class="form-control" id="term" readOnly>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Section</label>
                                     <div class="col-sm-10">
@@ -87,50 +124,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Add CO -->
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-                                    <h4 class="box-title">Add Assessment</h4>
-                                </div>
-                                <div class="box-body table-responsive">
-                                    <table id="data" class="table table-hover">
-                                        <tr>
-                                            <th>Code</th>
-                                            <th>
-                                                <div class="col-sm-10">
-                                                    Assessment
-                                                </div>
-                                            </th>
-                                            <th>
-                                                <div class="col-sm-10">
-                                                    Course Outcome
-                                                </div>
-                                            </th>
-                                            <th>
-                                                <div class="col-sm-10">
-                                                    Description
-                                                </div>
-                                            </th>
-                                            <th>
-                                                <div class="col-sm-10">
-                                                    Weight
-                                                </div>
-                                            </th>
-                                            <th>Tools</th>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                </div>
-                                <!-- /.box-body -->
-                                <div class="box-footer">  
-                                    <button id="addRowButton" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
-                                    <button type="button" class="btn btn-default pull-right">Cancel</button>
-                                    <button type="submit" class="btn bg-green pull-right">Send for Approval</button>
-                                    <button type="submit" class="btn bg-light-blue pull-right">Save</button>
-                                </div>
-                                <!-- /.box-footer -->
+                            <div class="box-footer">
+                                <a href="/OBESystem/RedirectToChooseSyllabus"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
+                                <button type="submit" class="btn bg-light-blue pull-right">Save</button>
                             </div>
-                            <!-- /add CO -->
                         </div>
                     </section>
                 </form>

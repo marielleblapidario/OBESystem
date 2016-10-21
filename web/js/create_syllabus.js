@@ -24,7 +24,6 @@ var startYear;
 var endYear;
 var finalTerm;
 
-
 $(document).ready(function () {
     divCO.hide();
     divAssessment.hide();
@@ -302,7 +301,7 @@ function AddAssessment() {
         tr.appendChild(weightCell);
 
         var leftWeightCell = document.createElement("td");
-        leftWeightCell.innerHTML = '<div class="col-sm-10"><input type="number" name="leftWeight" class="form-control no-border" id="leftWeight_' + rowCountA + '" max = "0" readOnly></div>';
+        leftWeightCell.innerHTML = '<div class="col-sm-10"><input type="number" name="leftWeight" class="form-control no-border" id="leftWeight_' + rowCountA + '" min = "0" max = "0" readOnly></div>';
         tr.appendChild(leftWeightCell);
 
         var toolsCell = document.createElement("td");

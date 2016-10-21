@@ -29,38 +29,110 @@
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
+        <link rel="stylesheet" href="resources/dist/css/skins/_all-skins.min.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <!-- ./wrapper -->
         <div class="wrapper">
             <div class="content-wrapper">
                 <!-- Main content -->
-                <section class="content">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Search Course</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form class="form-horizontal">
+                <form action="EncodeCourseOffering" method="post" name="EncodeCourseOffering">
+                    <section class="content">
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">View Course Offering</h3>
+                                <br>
+                                <button type="button" class="btn bg-maroon-active pull-right"><i class="fa  fa-download"></i>  grades format</button>
+                                <button type="button" class="btn bg-maroon-active pull-right"><i class="fa  fa-download"></i>  student list format</button>
+                                <button type="button" class="btn bg-teal pull-right"><i class="fa fa-upload"></i>  grades</button>
+                                <button type="button" class="btn bg-teal pull-right"><i class="fa fa-upload"></i>  student list</button>
+                            </div>
+                            <!-- /.box-header -->
+                            <!-- form start -->
+
+                            <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                             <div class="box-body">
                                 <div class="form-group">
+                                    <label class="col-sm-2 control-label">Curriculum Followed</label>
+                                    <input type="hidden" name="mapCurID" class="readonlyWhite" id="hidden-mapCurID" />
+                                    <div  class="col-sm-10">
+                                        <input name="curriculum-title" type="text" class="form-control" id="curriculum-title" readOnly>
+                                        <input name="curriculumID" type="hidden" class="form-control" id="hidden-curriculum-title">
+                                        <input name="syllabusID" type="hidden" class="form-control" id="hidden-syllabusID">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-2 control-label">Course</label>
+                                    <div  class="col-sm-10">
+                                        <input name="course-title" type="text" class="form-control" id="course-title" readOnly>
+                                        <input name="courseID" type="hidden" class="form-control" id="hidden-course-title">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Academic Start Year</label>
                                     <div class="col-sm-10">
-                                        <select id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                        </select>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input name="startYear" type="text" class="form-control pull-right" id="startYear" readOnly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Academic End Year</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input name="endYear" type="text" class="form-control pull-right" id="endYear" readOnly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Term</label>
+                                    <div  class="col-sm-10">
+                                        <input name="term" type="text" class="form-control" id="term" readOnly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Section</label>
+                                    <div class="col-sm-10">
+                                        <input name="section" type="text" class="form-control" id="section" readOnly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Days</label>
+                                    <div class="col-sm-10">
+                                        <input name="days" type="text" class="form-control" id="days" readOnly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Time</label>
+                                    <div class="col-sm-10">
+                                        <input name="time" type="text" class="form-control" id="time" readOnly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Room</label>
+                                    <div class="col-sm-10">
+                                        <input name="room" type="text" class="form-control" id="room" readOnly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Faculty</label>
+                                    <div class="col-sm-10">
+                                        <input name="faculty" type="text" class="form-control" id="faculty" readOnly>
                                     </div>
                                 </div>
                             </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">  
-                                <a id ="confirm-btn" href ="/OBESystem/RedirectToCreateAssessment"><button type="button" class="btn btn-success pull-right">Confirm</button></a>
+                            <div class="box-footer">
+                                <a href="/OBESystem/RedirectToOfferingsList"><button type="button" class="btn btn-default pull-right">Back</button></a>
                             </div>
-                            <!-- /.box-footer -->
-                        </form>
-                    </div>
-                </section>
+                        </div>
+                    </section>
+                </form>
             </div>
         </div>
         <!-- jQuery 2.2.3 -->
@@ -92,8 +164,9 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
+        <!--self made-->
+        <script src="/OBESystem/js/view_course_offering.js"></script>
         <!-- Page script -->
-        <script src="/OBESystem/js/search_course.js"></script>
         <script>
             $(function () {
                 //Initialize Select2 Elements

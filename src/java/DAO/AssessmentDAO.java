@@ -139,7 +139,6 @@ public class AssessmentDAO {
 //        }
 //        return false;
 //    }
-
 //    public boolean deleteAssessment(String codeAssessment) {
 //        try {
 //            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -158,6 +157,30 @@ public class AssessmentDAO {
 //        }
 //        return false;
 //    }
+    public ArrayList<String> getAssessmentforFormat(int syllabusID) throws ParseException {
+        ArrayList<String> arrAssessment = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT codeAT\n"
+                    + "FROM assessment\n"
+                    + "WHERE syllabusID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, syllabusID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String assessment = rs.getString("codeAT");
+                arrAssessment.add(assessment);
+            }
+            pstmt.close();
+            conn.close();
+            return arrAssessment;
+        } catch (SQLException ex) {
+            Logger.getLogger(SyllabusDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public String getLastCodeAssessment(String codeCourse) throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();

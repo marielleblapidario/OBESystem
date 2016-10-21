@@ -88,7 +88,6 @@
                             <div class="box-footer">  
                                 <button id="addRowButton" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
                                 <button type="button" class="btn btn-default pull-right">Cancel</button>
-                                <button type="submit" class="btn bg-green pull-right">Send for Approval</button>
                                 <button type="submit" class="btn bg-light-blue pull-right">Save</button>
                             </div>
                             <!-- /.box-footer -->

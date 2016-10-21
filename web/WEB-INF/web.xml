@@ -80,22 +80,6 @@
         <servlet-class>controller.RedirectToCreatePI</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RedirectToMapPAtoIGA</servlet-name>
-        <servlet-class>controller.RedirectToMapPAtoIGA</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RedirectToMapPOtoPA</servlet-name>
-        <servlet-class>controller.RedirectToMapPOtoPA</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RedirectToSearchMapPAtoIGA</servlet-name>
-        <servlet-class>controller.RedirectToSearchMapPAtoIGA</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RedirectToSearchMapPOtoPA</servlet-name>
-        <servlet-class>controller.RedirectToSearchMapPOtoPA</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RedirectToSearchPA</servlet-name>
         <servlet-class>controller.RedirectToSearchPA</servlet-class>
     </servlet>
@@ -158,18 +142,6 @@
     <servlet>
         <servlet-name>RedirectToSearchCO</servlet-name>
         <servlet-class>controller.RedirectToSearchCO</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RedirectToSearchAssessment</servlet-name>
-        <servlet-class>controller.RedirectToSearchAssessment</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RedirectToCreateCO</servlet-name>
-        <servlet-class>controller.RedirectToCreateCO</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RedirectToCreateAssessment</servlet-name>
-        <servlet-class>controller.RedirectToCreateAssessment</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GetAllCO</servlet-name>
@@ -343,6 +315,42 @@
         <servlet-name>EncodeAssessment</servlet-name>
         <servlet-class>controller.EncodeAssessment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetAllCOofSyllabus</servlet-name>
+        <servlet-class>controller.GetAllCOofSyllabus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllAssessmentOfSyllabus</servlet-name>
+        <servlet-class>controller.GetAllAssessmentOfSyllabus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToViewSyllabus</servlet-name>
+        <servlet-class>controller.RedirectToViewSyllabus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToChooseSyllabus</servlet-name>
+        <servlet-class>controller.RedirectToChooseSyllabus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetSpecificOffering</servlet-name>
+        <servlet-class>controller.GetSpecificOffering</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToViewCourseOffering</servlet-name>
+        <servlet-class>controller.RedirectToViewCourseOffering</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetStudentColumnNames</servlet-name>
+        <servlet-class>controller.GetStudentColumnNames</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAssessmentForFormat</servlet-name>
+        <servlet-class>controller.GetAssessmentForFormat</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetEnrolledStudents</servlet-name>
+        <servlet-class>controller.GetEnrolledStudents</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -420,22 +428,6 @@
         <url-pattern>/RedirectToCreatePI</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RedirectToMapPAtoIGA</servlet-name>
-        <url-pattern>/RedirectToMapPAtoIGA</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RedirectToMapPOtoPA</servlet-name>
-        <url-pattern>/RedirectToMapPOtoPA</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RedirectToSearchMapPAtoIGA</servlet-name>
-        <url-pattern>/RedirectToSearchMapPAtoIGA</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RedirectToSearchMapPOtoPA</servlet-name>
-        <url-pattern>/RedirectToSearchMapPOtoPA</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>RedirectToSearchPA</servlet-name>
         <url-pattern>/RedirectToSearchPA</url-pattern>
     </servlet-mapping>
@@ -498,18 +490,6 @@
     <servlet-mapping>
         <servlet-name>RedirectToSearchCO</servlet-name>
         <url-pattern>/RedirectToSearchCO</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RedirectToSearchAssessment</servlet-name>
-        <url-pattern>/RedirectToSearchAssessment</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RedirectToCreateCO</servlet-name>
-        <url-pattern>/RedirectToCreateCO</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RedirectToCreateAssessment</servlet-name>
-        <url-pattern>/RedirectToCreateAssessment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetAllCO</servlet-name>
@@ -682,6 +662,42 @@
     <servlet-mapping>
         <servlet-name>EncodeAssessment</servlet-name>
         <url-pattern>/EncodeAssessment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllCOofSyllabus</servlet-name>
+        <url-pattern>/GetAllCOofSyllabus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllAssessmentOfSyllabus</servlet-name>
+        <url-pattern>/GetAllAssessmentOfSyllabus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToViewSyllabus</servlet-name>
+        <url-pattern>/RedirectToViewSyllabus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToChooseSyllabus</servlet-name>
+        <url-pattern>/RedirectToChooseSyllabus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetSpecificOffering</servlet-name>
+        <url-pattern>/GetSpecificOffering</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToViewCourseOffering</servlet-name>
+        <url-pattern>/RedirectToViewCourseOffering</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetStudentColumnNames</servlet-name>
+        <url-pattern>/GetStudentColumnNames</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAssessmentForFormat</servlet-name>
+        <url-pattern>/GetAssessmentForFormat</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetEnrolledStudents</servlet-name>
+        <url-pattern>/GetEnrolledStudents</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

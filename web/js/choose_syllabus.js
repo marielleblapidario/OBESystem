@@ -9,9 +9,6 @@ var examaple2 = $('#example2').DataTable({
 });
 var rowCount = 0;
 var arrSyllabusID = [];
-var arrCurriculumID = [];
-var arrCourseID = [];
-var arrTerm = [];
 
 $(document).ready(function () {
     $.ajax({
@@ -36,14 +33,12 @@ function addRow(data) {
     var syllabusID = data.syllabusID;
     var AY = data.startYear + " - " + data.endYear;
 
-    var tools = "<button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button>\n\
-<a href=\"/OBESystem/RedirectToViewSyllabus\"><button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>\n\
-<button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>"
+    var tools = "<a href=\"/OBESystem/RedirectToCreateOffering\"><button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn bg-blue btn-xs\">select</button></a>";
     arrSyllabusID.push(syllabusID);
 
     console.log("rowCount: " + rowCount);
     console.log("syllabusID pushed: " + syllabusID);
-    example1.row.add([codeCourse, courseTitle, AY, term, curriculumTitle, tools]);
+    example1.row.add([codeCourse, courseTitle, term, AY, curriculumTitle, tools]);
     example1.draw();
     rowCount++;
 }

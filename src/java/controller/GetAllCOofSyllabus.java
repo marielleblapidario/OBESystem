@@ -5,10 +5,13 @@
  */
 package controller;
 
+import DAO.SyllabusDAO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class RedirectToSearchAssessment extends BaseServlet {
+public class GetAllCOofSyllabus extends BaseServlet {
 
     /**
      *
@@ -30,9 +33,17 @@ public class RedirectToSearchAssessment extends BaseServlet {
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/view/search_assessment.jsp");
-        request.setAttribute("sucesss", "success");
-        rd.forward(request, response);
+        Gson g = new Gson();
+        String s = null;
+        try {
+            int syllabusID = Integer.parseInt(request.getParameter("syllabusID"));
+            System.out.println("selected syllabusID: " + syllabusID);
+            s = g.toJson(new SyllabusDAO().getSpecificSyllabusCO(syllabusID));
+        } catch (ParseException ex) {
+            Logger.getLogger(GetSpecificSyllabus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        PrintWriter out = response.getWriter();
+        out.print(s);
     }
 }

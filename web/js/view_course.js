@@ -1,26 +1,27 @@
-var codeCourse = sessionStorage.getItem("codeCourse");
+var courseID = sessionStorage.getItem("courseID");
 
 $(document).ready(function () {
-    console.log("codeCourse: " + codeCourse);
-    getSpecificCourse(codeCourse);
+    console.log("courseID: " + courseID);
+    getSpecificCourse(courseID);
+    getMapCourseToProgram(courseID);
 
     $('#edit').click(function () {
-        sessionStorage.setItem("codeCourse", codeCourse);
-        var ss = sessionStorage.getItem("codeCourse");
-        console.log("codeCourse: " + ss);
+        sessionStorage.setItem("codeCourse", courseID);
+        var ss = sessionStorage.getItem("courseID");
+        console.log("courseID: " + ss);
     });
 });
 
 
-function getSpecificCourse(course) {
+function getSpecificCourse(courseID) {
     $.ajax({
         type: "GET",
-        url: "/OBESystem/GetSpecificCourse?SelectedCourse=" + course,
+        url: "/OBESystem/GetSpecificCourse?SelectedCourse=" + courseID,
         dataType: 'json',
         success: function (data) {
             console.log(data);
             $('#title').val(data.title);
-            $('#codeProgram').val(data.codeProgram);
+            $('#codeCourse').val(data.codeCourse);
             $('#college').val(data.collegeName);
             $('#units').val(data.units);
             $('#description').val(data.description);
@@ -31,13 +32,23 @@ function getSpecificCourse(course) {
     });
 }
 
-function getMapCourseToProgram(){
+function getMapCourseToProgram(courseID){
     $.ajax({
         type: "GET",
-        url: "/OBESystem/GetSpecificCourse?SelectedCourse=" + course,
+        url: "/OBESystem/GetSpecificMapCourseToProgram?SelectedCourse=" + courseID,
         dataType: 'json',
         success: function (data) {
             console.log(data);
+            var s = "";
+            for(var x = 0; x < data.length; x++){
+                if(x == (data.length - 1)){
+                    console.log("entered if");
+                     s = s + data[x].codeProgram;
+                }else {
+                     s = s + data[x].codeProgram + ", ";
+                }
+            }
+            $('#program').val(s);
         },
         error: function (response) {
             console.log(response);

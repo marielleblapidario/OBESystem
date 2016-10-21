@@ -93,7 +93,6 @@
                         </div>
                         <div class="">
                             <button type="button" class="btn btn-default pull-right">Cancel</button>
-                            <button type="submit" class="btn bg-green pull-right">Send for Approval</button>
                             <button type="submit" class="btn bg-light-blue pull-right">Save</button>
                         </div>
                     </section>

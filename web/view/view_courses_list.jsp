@@ -71,7 +71,7 @@
             </div>
         </div>
         <!-- jQuery 2.2.3 -->
-        <script src="/OBESystem/resourcesplugins/jQuery/jquery-2.2.3.min.js"></script>
+        <script src="/OBESystem/resources/plugins/jQuery/jquery-2.2.3.min.js"></script>
         <!-- Bootstrap 3.3.6 -->
         <script src="/OBESystem/resources/bootstrap/js/bootstrap.min.js"></script>
         <!-- DataTables -->

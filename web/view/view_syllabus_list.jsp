@@ -52,9 +52,9 @@
                                             <tr>
                                                 <th>Code</th>
                                                 <th>Course</th>
-                                                <th>Degree</th>
+                                                <th>Academic Year</th>
                                                 <th>Term</th>
-                                                <th>Curriculum</th>
+                                                <th>Curriculum Followed</th>
                                                 <th>Tools</th>
                                             </tr>
                                         </thead>

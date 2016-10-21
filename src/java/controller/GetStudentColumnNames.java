@@ -5,10 +5,14 @@
  */
 package controller;
 
+import DAO.StudentDAO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class RedirectToMapPAtoIGA extends BaseServlet {
+public class GetStudentColumnNames extends BaseServlet {
 
     /**
      *
@@ -30,9 +34,11 @@ public class RedirectToMapPAtoIGA extends BaseServlet {
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/view/map_PA_IGA.jsp");
-        request.setAttribute("sucesss", "success");
-        rd.forward(request, response);
+        Gson g = new Gson();
+        String s = null;
+        s = g.toJson(new StudentDAO().getColumnNames());
+        PrintWriter out = response.getWriter();
+        System.out.println(s);
+        out.print(s);
     }
 }

@@ -5,7 +5,7 @@
  */
 package controller;
 
-import DAO.CourseDAO;
+import DAO.AssessmentDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class GetSpecificCourse extends BaseServlet {
+public class GetAssessmentForFormat extends BaseServlet {
 
     /**
      *
@@ -32,19 +32,18 @@ public class GetSpecificCourse extends BaseServlet {
      */
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        Gson g = new Gson();
-        String s = null;
         try {
-            String selectedCourse = request.getParameter("SelectedCourse");
-            System.out.println("selected course: " + selectedCourse);
-            s = g.toJson(new CourseDAO().getSpecificCourse(selectedCourse));
-            System.out.println(s);
+            response.setContentType("text/html;charset=UTF-8");
+            Gson g = new Gson();
+            String s = null;
+            int syllabusID = Integer.parseInt(request.getParameter("syllabusID"));
+            System.out.println("selected syllabusID: " + syllabusID);
+            s = g.toJson(new AssessmentDAO().getAssessmentforFormat(syllabusID));
+            
+            PrintWriter out = response.getWriter();
+            out.print(s);
         } catch (ParseException ex) {
-            Logger.getLogger(GetSpecificCourse.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetAssessmentForFormat.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        PrintWriter out = response.getWriter();
-        out.print(s);
     }
 }

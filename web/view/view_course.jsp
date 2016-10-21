@@ -39,7 +39,7 @@
                 <section class="content">
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Create Course</h3>
+                            <h3 class="box-title">View Course</h3>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
@@ -49,41 +49,41 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">Course Title</label>
 
                                     <div class="col-sm-10">
-                                        <input name="title" type="text" class="form-control" id="title" disabled>
+                                        <input name="title" type="text" class="form-control" id="title" readOnly>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Code</label>
 
                                     <div class="col-sm-10">
-                                         <input name="codeCourse" type="text" class="form-control" id="codeCourse" disabled>
+                                         <input name="codeCourse" type="text" class="form-control" id="codeCourse" readOnly>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Program</label>
                                     <div class="col-sm-10">
-                                         <input name="program" type="text" class="form-control" id="program" disabled>
+                                         <input name="program" type="text" class="form-control" id="program" readOnly>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Units</label>
 
                                     <div class="col-xs-10">
-                                         <input name="units" type="text" class="form-control" id="units" disabled>
+                                         <input name="units" type="text" class="form-control" id="units" readOnly>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea id="description" class="form-control" rows="3" disabled></textarea>
+                                        <textarea id="description" class="form-control" rows="3" readOnly></textarea>
                                     </div>
                                 </div>
 
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">  
-                                <button type="submit" class="btn btn-default pull-right">Back</button>
-                                <button type="submit" class="btn btn-success pull-right">Edit</button>
+                                <a href="/OBESystem/ViewCourseList"><button type="button" class="btn btn-default pull-right">Back</button></a>
+                                <button type="button" class="btn btn-success pull-right">Edit</button>
                             </div>
                             <!-- /.box-footer -->
                         </form>
@@ -121,6 +121,7 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!-- Page script -->
+         <script src="/OBESystem/js/view_course.js"></script>
         <script>
             $(function () {
                 //Initialize Select2 Elements

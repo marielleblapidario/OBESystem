@@ -39,10 +39,8 @@
                             <!-- /.box -->
                             <div class="box">
                                 <div class="box-header">
-                                    <h3 class="box-title">View Course Offerings List</h3>
+                                    <h3 class="box-title">Choose Syllabus to Follow</h3>
                                     <br>
-                                    <a href="/OBESystem/RedirectToChooseSyllabus"><button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New Course Offering</button></a>
-
                                 </div>
 
                                 <!-- /.box-header -->
@@ -52,14 +50,10 @@
                                             <tr>
                                                 <th>Code</th>
                                                 <th>Course</th>
-                                                <th>Academic Year</th>
                                                 <th>Term</th>
-                                                <th>Section</th>
-                                                <th>Days</th>
-                                                <th>Time</th>
-                                                <th>Room</th>
-                                                <th>Faculty</th>
-                                                <th>Tools</th>
+                                                <th>Academic Year</th>
+                                                <th>Curriculum Followed</th>
+                                                <th>Choose</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -92,6 +86,6 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!-- self made -->
-        <script src="/OBESystem/js/view_course_offerings_list.js"></script>
+        <script src="/OBESystem/js/choose_syllabus.js"></script>
     </body>
 </html>

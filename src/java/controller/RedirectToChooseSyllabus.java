@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class RedirectToCreateAssessment extends BaseServlet {
+public class RedirectToChooseSyllabus extends BaseServlet {
 
     /**
      *
@@ -31,7 +31,7 @@ public class RedirectToCreateAssessment extends BaseServlet {
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/view/create_assessment.jsp");
+        RequestDispatcher rd = context.getRequestDispatcher("/view/choose_syllabus.jsp");
         request.setAttribute("sucesss", "success");
         rd.forward(request, response);
     }

@@ -36,15 +36,11 @@ public class GetSpecificSyllabus  extends BaseServlet {
         Gson g = new Gson();
         String s = null;
         try {
-            int curriculumID = Integer.parseInt(request.getParameter("curriculumID"));
-            System.out.println("selected curriculumID: " + curriculumID);
-            int courseID = Integer.parseInt(request.getParameter("courseID"));
-            System.out.println("selected courseID: " + courseID);
-            int term = Integer.parseInt(request.getParameter("term"));
-            System.out.println("selected term: " + term);
-            s = g.toJson(new SyllabusDAO().getSpecificSyllabus(curriculumID,courseID,term));
+            int syllabusID = Integer.parseInt(request.getParameter("syllabusID"));
+            System.out.println("selected syllabusID: " + syllabusID);
+            s = g.toJson(new SyllabusDAO().getSpecificSyllabus(syllabusID));
         } catch (ParseException ex) {
-            Logger.getLogger(GetSpecificCurriculum.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetSpecificSyllabus.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         PrintWriter out = response.getWriter();

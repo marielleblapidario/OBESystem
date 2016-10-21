@@ -11,9 +11,12 @@ package model;
  */
 public class CourseOffering {
     private int offeringID;
+    private int syllabusID;
     private int curriculumID;
     private int courseID;
     private int term;
+    private int startYear;
+    private int endYear;
     private String section;
     private String days;
     private String time;
@@ -24,7 +27,6 @@ public class CourseOffering {
     private String courseTitle;
     private String roomTitle;
     private String facultyName;
-    private int syllabusID;
     private String codeCourse;
 
     /**
@@ -235,5 +237,33 @@ public class CourseOffering {
      */
     public void setCodeCourse(String codeCourse) {
         this.codeCourse = codeCourse;
+    }
+
+    /**
+     * @return the startYear
+     */
+    public int getStartYear() {
+        return startYear;
+    }
+
+    /**
+     * @param startYear the startYear to set
+     */
+    public void setStartYear(int startYear) {
+        this.startYear = startYear;
+    }
+
+    /**
+     * @return the endYear
+     */
+    public int getEndYear() {
+        return endYear;
+    }
+
+    /**
+     * @param endYear the endYear to set
+     */
+    public void setEndYear(int endYear) {
+        this.endYear = endYear;
     }
 }

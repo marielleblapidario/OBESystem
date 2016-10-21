@@ -41,51 +41,59 @@ public class EncodeCourseOffering extends BaseServlet {
         response.setContentType("text/html;charset=UTF-8");
         CourseOffering offering = new CourseOffering();
         CourseOfferingDAO offeringDAO = new CourseOfferingDAO();
-        Assessment at = new Assessment();
-        AssessmentDAO atDAO = new AssessmentDAO();
-        ArrayList<Assessment> arrAt = new ArrayList<>();
         boolean x = true;
-        int offeringID = 0;
-        String syllabusIDs = request.getParameter("syllabusID");
+        
         String curriculumIDs = request.getParameter("curriculumID");
         String courseIDs = request.getParameter("courseID");
         String terms = request.getParameter("term");
         String rooms = request.getParameter("room");
         String facultys = request.getParameter("faculty");
-
+        String startYears = request.getParameter("startYear");
+        String endYears = request.getParameter("endYear");
+        String syllabusIDs = request.getParameter("syllabusID");
+        
+        String section = request.getParameter("section");
+        String days = request.getParameter("days");
+        String time = request.getParameter("time");
+        
         System.out.println("syllabusID: " + syllabusIDs);
         System.out.println("curriculumID: " + curriculumIDs);
         System.out.println("courseID: " + courseIDs);
         System.out.println("term: " + terms);
-
+        System.out.println("startYear: " + startYears);
+        System.out.println("endYear: " + endYears);
+        System.out.println("room: " + rooms);
+        System.out.println("faculty: " + facultys);
+        System.out.println("section: " + section);
+        System.out.println("days: " + days);
+        System.out.println("time: " + time);
+        
         int syllabusID = Integer.parseInt(syllabusIDs);
         int curriculumID = Integer.parseInt(curriculumIDs);
         int courseID = Integer.parseInt(courseIDs);
         int term = Integer.parseInt(terms);
         int room = Integer.parseInt(rooms);
         int faculty = Integer.parseInt(facultys);
-        String section = request.getParameter("section");
-        String days = request.getParameter("days");
-        String time = request.getParameter("time");
-        String[] codeAT = request.getParameterValues("codeAT");
-        String[] title = request.getParameterValues("title");
-        String[] coID = request.getParameterValues("codeCO");
-        String[] description = request.getParameterValues("description");
-        String[] weight = request.getParameterValues("weight");
-
+        int startYear = Integer.parseInt(startYears);
+        int endYear = Integer.parseInt(endYears);
+        
+        offering.setSyllabusID(syllabusID);
         offering.setCurriculumID(curriculumID);
         offering.setCourseID(courseID);
         offering.setTerm(term);
+        offering.setStartYear(startYear);
+        offering.setEndYear(endYear);
         offering.setSection(section);
         offering.setDays(days);
         offering.setTime(time);
         offering.setRoom(room);
         offering.setFaculty(faculty);
-
-        System.out.println("syllabusID: " + syllabusID);
-        System.out.println("codAt size: " + codeAT.length);
-        System.out.println("coID size: " + coID.length);
-
+        
+        if (offeringDAO.encodeOffering(offering)) {
+        } else {
+            x = false;
+        }
+        
         if (x == true) {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext context = getServletContext();
@@ -99,6 +107,6 @@ public class EncodeCourseOffering extends BaseServlet {
             request.setAttribute("Error", "Error");
             rd.forward(request, response);
         }
-
+        
     }
 }

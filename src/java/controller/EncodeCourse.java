@@ -10,6 +10,7 @@ import DAO.MapCourseToProgramDAO;
 import DAO.ProgramDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,7 +66,7 @@ public class EncodeCourse extends BaseServlet {
                 MapCourseToProgramDAO mapping = new MapCourseToProgramDAO();
                 for (int x = 0; x < program.length; x++) {
                     MapCourseToProgram temp = new MapCourseToProgram();
-                    int courseID = courseDAO.getSpecificCourse(codeCourse).getCourseID();
+                    int courseID = courseDAO.getLastCourseID();
                     System.out.println("courseID: " + courseID);
                     System.out.println("codeProgram:" + program[x]);
                     temp.setCourseID(courseID);
@@ -95,6 +96,8 @@ public class EncodeCourse extends BaseServlet {
 
         } catch (ParseException ex) {
             Logger.getLogger(EncodeProgram.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EncodeCourse.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

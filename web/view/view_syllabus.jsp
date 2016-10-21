@@ -37,7 +37,6 @@
             <div class="content-wrapper">
                 <!-- Main content -->
                 <section class="content">
-                    <form action="EncodeAssessment" method="post" id="EncodeAssessment" name="EncodeAssessment">
                     <div class="box box-info">
                         <div class="box-header with-border">
                             <h3 class="box-title">Create Syllabus</h3>
@@ -48,16 +47,14 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Curriculum Followed</label>
                                 <input type="hidden" name="mapCurID" class="readonlyWhite" id="hidden-mapCurID" />
-                                <div class="col-sm-10">
-                                    <select name="curriculumID" id="select-curriculum" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                    </select>
+                                <div  class="col-sm-10">
+                                    <input name="curriculum-title" type="text" class="form-control" id="curriculum-title" readOnly>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Course</label>
-                                <div class="col-sm-10">
-                                    <select name="courseID" id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                    </select>
+                                <div  class="col-sm-10">
+                                    <input name="course-title" type="text" class="form-control" id="course-title" readOnly>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -67,7 +64,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input name="startYear" type="text" class="form-control pull-right" id="startYear">
+                                        <input name="startYear" type="text" class="form-control pull-right" id="startYear" readOnly>
                                     </div>
                                 </div>
                             </div>
@@ -84,101 +81,54 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-2 control-label">Term</label>
-
-                                <div class="col-sm-10">
-                                    <select name="term" id="select-term" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                    </select>
+                                <div  class="col-sm-10">
+                                    <input name="term" type="text" class="form-control" id="term" readOnly>
                                 </div>
                             </div>
                         </div>
                         <!-- Add CO -->
                         <div class="box box-info" id="div-addCO">
                             <div class="box-header with-border">
-                                <h4 class="box-title">Add Course Outcome</h4>
+                                <h4 class="box-title">Course Outcomes</h4>
                             </div>
                             <div class="box-body table-responsive">
                                 <table id="data" class="table table-hover">
                                     <tr>
                                         <th>Code</th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Course Outcome
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Performance Indicator
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Remarks
-                                            </div>
-                                        </th>
-                                        <th>Tools</th>
+                                        <th>Course Outcome</th>
+                                        <th>Performance Indicator</th>
+                                        <th>Remarks</th>
                                     </tr>
                                 </table>
                                 <br>
                             </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">  
-                                <button id="addRowButton" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
-                                <button type="button" class="btn btn-default pull-right">Cancel</button>
-                                <button id= "save-btn" type="button" class="btn bg-light-blue pull-right">Save</button>
-                            </div>
-                            <!-- /.box-footer -->
                         </div>
                         <!-- /add CO -->
                         <!-- Add Assessment -->
                         <div class="box box-info" id="div-addAssessment">
                             <div class="box-header with-border">
-                                <h4 class="box-title">Add Assessment</h4>
+                                <h4 class="box-title">Assessments</h4>
                             </div>
                             <div class="box-body table-responsive">
                                 <table id="data-assessment" class="table table-hover">
                                     <tr>
                                         <th>Code</th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Assessment
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Course Outcome
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Description
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Weight
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Left Weight
-                                            </div>
-                                        </th>
-                                        <th>Tools</th>
+                                        <th>Assessment</th>
+                                        <th>Course Outcome</th>
+                                        <th>Description</th>
+                                        <th>Weight</th>
                                     </tr>
                                 </table>
                                 <br>
                             </div>
                             <!-- /.box-body -->
-                            <div class="box-footer">  
-                                <button id="add-assessment" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
-                                <button type="button" class="btn btn-default pull-right">Cancel</button>
-                                <button id="save-assessment" type="submit" class="btn bg-light-blue pull-right">Save</button>
+                            <div class="box-footer">
+                                <a href="/OBESystem/RedirectToViewSyllabusList"><button type="button" class="btn btn-default pull-right">Back</button></a>
                             </div>
                             <!-- /.box-footer -->
                         </div>
                     </div>
                     <!-- /add Assessment -->
-                </form>
                 </section>
             </div>
         </div>
@@ -212,80 +162,6 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!--self made-->
-        <script src="/OBESystem/js/create_syllabus.js"></script>
-        <!-- Page script -->
-        <script>
-            $(function () {
-                //Initialize Select2 Elements
-                $(".select2").select2();
-
-                //Datemask dd/mm/yyyy
-                $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-                //Datemask2 mm/dd/yyyy
-                $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
-                //Money Euro
-                $("[data-mask]").inputmask();
-
-                //self made
-                $('#startYear').datepicker({
-                    format: "yyyy",
-                    autoclose: true,
-                    minViewMode: "years"});
-
-                //Date range picker
-                $('#reservation').daterangepicker();
-                //Date range picker with time picker
-                $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
-                //Date range as a button
-                $('#daterange-btn').daterangepicker(
-                        {
-                            ranges: {
-                                'Today': [moment(), moment()],
-                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                            },
-                            startDate: moment().subtract(29, 'days'),
-                            endDate: moment()
-                        },
-                        function (start, end) {
-                            $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                        }
-                );
-
-                //Date picker
-                $('#datepicker').datepicker({
-                    autoclose: true
-                });
-
-                //iCheck for checkbox and radio inputs
-                $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-                    checkboxClass: 'icheckbox_minimal-blue',
-                    radioClass: 'iradio_minimal-blue'
-                });
-                //Red color scheme for iCheck
-                $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-                    checkboxClass: 'icheckbox_minimal-red',
-                    radioClass: 'iradio_minimal-red'
-                });
-                //Flat red color scheme for iCheck
-                $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-                    checkboxClass: 'icheckbox_flat-green',
-                    radioClass: 'iradio_flat-green'
-                });
-
-                //Colorpicker
-                $(".my-colorpicker1").colorpicker();
-                //color picker with addon
-                $(".my-colorpicker2").colorpicker();
-
-                //Timepicker
-                $(".timepicker").timepicker({
-                    showInputs: false
-                });
-            });
-        </script>
+        <script src="/OBESystem/js/view_syllabus.js"></script>
     </body>
 </html>

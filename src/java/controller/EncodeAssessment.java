@@ -46,7 +46,7 @@ public class EncodeAssessment extends BaseServlet {
         String startYear = request.getParameter("startYear");
         String endYear = request.getParameter("endYear");
         String[] coID = request.getParameterValues("codeCOA");
-        String[] codeAT = request.getParameterValues("codAT");
+        String[] codeAT = request.getParameterValues("codeAT");
         String[] title = request.getParameterValues("titleA");
         String[] description = request.getParameterValues("descriptionA");
         String[] weight = request.getParameterValues("weight");
@@ -54,8 +54,20 @@ public class EncodeAssessment extends BaseServlet {
         SyllabusDAO syllabusDAO = new SyllabusDAO();
         boolean x = true;
         int syllabusID = -1;
+        
+        System.out.println("mapCurID: " + mapCurID);
+        System.out.println("curriculumID: " + curriculumID);
+        System.out.println("term: " + courseID);
+        System.out.println("startYear: " + startYear);
+        System.out.println("endYear: " + endYear);
+        System.out.println("coID size: " + coID.length);
+        System.out.println("codeAT size: " + codeAT.length);
+        System.out.println("title size: " + title.length);
+        System.out.println("description size: " + description.length);
+        System.out.println("weight size: " + weight.length);
         try {
             syllabusID = syllabusDAO.getLastSyllabusID();
+            System.out.println("syllabusID: " + syllabusID);
         } catch (SQLException ex) {
             Logger.getLogger(EncodeCO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,7 +90,6 @@ public class EncodeAssessment extends BaseServlet {
                 x = false;
             }
         }
-        
         if (x == true) {
             response.setContentType("text/html;charset=UTF-8");
             ServletContext context = getServletContext();

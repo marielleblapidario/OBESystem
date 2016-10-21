@@ -56,33 +56,29 @@ public class SyllabusDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT S.syllabusID, S.curriculumID, S.courseID, S.term, "
-                    + "CS.codeCourse, CS.title as 'courseTitle', "
-                    + "P.title as 'programTitle', C.title as 'curriculumTitle',\n"
-                    + "S.mapCurID, S.startYear, S.endYear "
+            String query = "SELECT S.syllabusID, S.mapCurID, S.curriculumID, "
+                    + "S.courseID, S.term, S.startYear, S.endYear, C.title as 'curriculumTitle', "
+                    + "CE.title as 'courseTitle', CE.codeCourse\n"
                     + "FROM syllabus S \n"
-                    + "JOIN curriculum C \n"
-                    + "ON S.curriculumID = C.curriculumID \n"
-                    + "JOIN program P \n"
-                    + "ON C.program = P.codeProgram\n"
-                    + "JOIN course CS\n"
-                    + "ON S.courseID = CS.courseID;";
+                    + "JOIN curriculum  C \n"
+                    + "ON S.curriculumID = S.curriculumID\n"
+                    + "JOIN course CE \n"
+                    + "ON S.courseID = CE.courseID";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Syllabus temp = new Syllabus();
                 temp.setSyllabusID(rs.getInt("syllabusID"));
+                temp.setMapCurID(rs.getInt("mapCurID"));
                 temp.setCurriculumID(rs.getInt("curriculumID"));
                 temp.setCourseID(rs.getInt("courseID"));
                 temp.setTerm(rs.getInt("term"));
-                temp.setCodeCourse(rs.getString("codeCourse"));
-                temp.setCourseTitle(rs.getString("courseTitle"));
-                temp.setProgramTitle(rs.getString("programTitle"));
-                temp.setCurriculumTitle(rs.getString("curriculumTitle"));
-                temp.setMapCurID(rs.getInt("mapCurID"));
                 temp.setStartYear(rs.getInt("startYear"));
                 temp.setEndYear(rs.getInt("endYear"));
+                temp.setCourseTitle(rs.getString("courseTitle"));
+                temp.setCurriculumTitle(rs.getString("curriculumTitle"));
+                temp.setCodeCourse(rs.getString("codeCourse"));
                 newSyllabus.add(temp);
             }
             pstmt.close();
@@ -93,35 +89,34 @@ public class SyllabusDAO {
         }
         return null;
     }
-    public Syllabus getSpecificSyllabus(int curriculumID, int courseID, int term) throws ParseException {
+
+    public Syllabus getSpecificSyllabus(int syllabusID) throws ParseException {
         Syllabus syllabus = new Syllabus();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT S.curriculumID, S.courseID, S.term, "
-                    + "CS.title as 'courseTitle', C.title as 'curriculumTitle'\n"
-                    + "S.mapCurID, S.startYear, S.endYear "
+            String query = "SELECT S.syllabusID, S.mapCurID, S.curriculumID, "
+                    + "S.courseID, S.term, S.startYear, S.endYear, "
+                    + "C.title as 'curriculumTitle', CE.title as 'courseTitle'\n"
                     + "FROM syllabus S \n"
-                    + "JOIN curriculum C \n"
-                    + "ON S.curriculumID = C.curriculumID\n"
-                    + "JOIN course CS\n"
-                    + "ON S.courseID = CS.courseID\n"
-                    + "WHERE  S.curriculumID = ? AND  S.courseID = ? AND  S.term = ?;";
+                    + "JOIN curriculum  C \n"
+                    + "ON S.curriculumID = S.curriculumID\n"
+                    + "JOIN course CE \n"
+                    + "ON S.courseID = CE.courseID\n"
+                    + "WHERE S.syllabusID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, curriculumID);
-            pstmt.setInt(2, courseID);
-            pstmt.setInt(3, term);
-
+            pstmt.setInt(1, syllabusID);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
+                syllabus.setSyllabusID(rs.getInt("syllabusID"));
+                syllabus.setMapCurID(rs.getInt("mapCurID"));
                 syllabus.setCurriculumID(rs.getInt("curriculumID"));
                 syllabus.setCourseID(rs.getInt("courseID"));
                 syllabus.setTerm(rs.getInt("term"));
-                syllabus.setCourseTitle(rs.getString("courseTitle"));
-                syllabus.setCurriculumTitle(rs.getString("curriculumTitle"));
-                syllabus.setMapCurID(rs.getInt("mapCurID"));
                 syllabus.setStartYear(rs.getInt("startYear"));
                 syllabus.setEndYear(rs.getInt("endYear"));
+                syllabus.setCourseTitle(rs.getString("courseTitle"));
+                syllabus.setCurriculumTitle(rs.getString("curriculumTitle"));
             }
             pstmt.close();
             conn.close();
@@ -131,7 +126,88 @@ public class SyllabusDAO {
         }
         return null;
     }
-    
+
+    public ArrayList<Syllabus> getSpecificSyllabusCO(int syllabusID) throws ParseException {
+        ArrayList<Syllabus> arrSyllabus = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT coID, syllabusID, mapCurID, curriculumID, "
+                    + "courseID, term, startYear, endYear, codePI, codeCO, description, remarks\n"
+                    + "FROM CO\n"
+                    + "WHERE syllabusID = ?\n"
+                    + "ORDER BY coID;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, syllabusID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Syllabus syllabus = new Syllabus();
+                syllabus.setCoID(rs.getInt("coID"));
+                syllabus.setSyllabusID(rs.getInt("syllabusID"));
+                syllabus.setMapCurID(rs.getInt("mapCurID"));
+                syllabus.setCurriculumID(rs.getInt("curriculumID"));
+                syllabus.setCourseID(rs.getInt("courseID"));
+                syllabus.setTerm(rs.getInt("term"));
+                syllabus.setStartYear(rs.getInt("startYear"));
+                syllabus.setEndYear(rs.getInt("endYear"));
+                syllabus.setCodePI(rs.getString("codePI"));
+                syllabus.setCodeCO(rs.getString("codeCO"));
+                syllabus.setCoDescription(rs.getString("description"));
+                syllabus.setCoRemarks(rs.getString("remarks"));
+                arrSyllabus.add(syllabus);
+            }
+            pstmt.close();
+            conn.close();
+            return arrSyllabus;
+        } catch (SQLException ex) {
+            Logger.getLogger(SyllabusDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ArrayList<Syllabus> getSpecificSyllabusAssessment(int syllabusID) throws ParseException {
+         ArrayList<Syllabus> arrSyllabus = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT A.assessmentID, A.coID, A.syllabusID, A.mapCurID, "
+                    + "A.curriculumID, A.courseID, A.term, A.startYear, A.endYear, "
+                    + "C.codeCO, A.codeAT, A.title, A.description, A.weight\n"
+                    + "FROM assessment A\n"
+                    + "JOIN CO C \n"
+                    + "ON A.coID = C.coID\n"
+                    + "WHERE A.syllabusID = ? "
+                    + "ORDER BY A.assessmentID;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, syllabusID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Syllabus syllabus = new Syllabus();
+                syllabus.setAssessmentID(rs.getInt("assessmentID"));
+                syllabus.setCoID(rs.getInt("coID"));
+                syllabus.setSyllabusID(rs.getInt("syllabusID"));
+                syllabus.setMapCurID(rs.getInt("mapCurID"));
+                syllabus.setCurriculumID(rs.getInt("curriculumID"));
+                syllabus.setCourseID(rs.getInt("courseID"));
+                syllabus.setTerm(rs.getInt("term"));
+                syllabus.setStartYear(rs.getInt("startYear"));
+                syllabus.setEndYear(rs.getInt("endYear"));
+                syllabus.setCodeCO(rs.getString("codeCO"));
+                syllabus.setCodeAT(rs.getString("codeAT"));
+                syllabus.setAssessmentTitle(rs.getString("title"));
+                syllabus.setAssessmentDescription(rs.getString("description"));
+                syllabus.setAssessmentWeight(rs.getDouble("weight"));
+                arrSyllabus.add(syllabus);
+            }
+            pstmt.close();
+            conn.close();
+            return arrSyllabus;
+        } catch (SQLException ex) {
+            Logger.getLogger(SyllabusDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public Integer getLastSyllabusID() throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();

@@ -138,11 +138,11 @@ public class CourseDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT courseID, codeCourse, title, units\n"
+            String query = "SELECT courseID, codeCourse, title, units, description\n"
                     + "FROM course\n"
-                    + "WHERE codeCourse = ?;";
+                    + "WHERE courseID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, codeCourse);
+            pstmt.setInt(1, Integer.parseInt(codeCourse));
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -151,6 +151,7 @@ public class CourseDAO {
                 course.setCodeCourse(rs.getString("codeCourse"));
                 course.setTitle(rs.getString("title"));
                 course.setUnits(rs.getInt("units"));
+                course.setDescription(rs.getString("description"));
             }
             pstmt.close();
             conn.close();
@@ -241,4 +242,20 @@ public class CourseDAO {
         }
         return false;
     }
+    
+    public Integer getLastCourseID() throws SQLException {
+        DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+        Connection conn = myFactory.getConnection();
+        int i = 1000;
+        String query = "SELECT MAX(courseID) from course;";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            i = rs.getInt("MAX(courseID)");
+        }
+        ps.close();
+        rs.close();
+        return i;
+    }
 }
+
