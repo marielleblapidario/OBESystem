@@ -49,7 +49,6 @@
                         </div>
                         <div class="box-footer">
                             <button type="button" class="btn btn-default pull-right">Cancel</button>
-                            <button type="button" class="btn btn-success pull-right">Send for Approval</button>
                             <a href="/OBESystem/ViewCurriculumList"><button id="save-btn" type="button" class="btn btn-primary pull-right">Save</button></a>
                         </div>
                         <!-- /.box-footer -->

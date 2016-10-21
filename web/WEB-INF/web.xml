@@ -351,6 +351,10 @@
         <servlet-name>GetEnrolledStudents</servlet-name>
         <servlet-class>controller.GetEnrolledStudents</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditProgram</servlet-name>
+        <servlet-class>controller.EditProgram</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -698,6 +702,10 @@
     <servlet-mapping>
         <servlet-name>GetEnrolledStudents</servlet-name>
         <url-pattern>/GetEnrolledStudents</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProgram</servlet-name>
+        <url-pattern>/EditProgram</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

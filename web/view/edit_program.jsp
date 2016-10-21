@@ -43,41 +43,42 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form class="form-horizontal">
+                        <form action="EditProgram" method="post" name="EditProgram">
+                            <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Program Title</label>
 
                                     <div class="col-sm-10">
-                                        <input id="title" type="text" class="form-control">
+                                        <input id="title" name="title" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Code</label>
 
                                     <div class="col-sm-10">
-                                        <input id="codeProgram" type="text" class="form-control">
+                                        <input id="codeProgram" name="codeProgram" type="text" class="form-control" readOnly>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">College</label>
                                     <div class="col-sm-10">
-                                        <select id="select-college" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        <select id="select-college" name="college" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea id="description" class="form-control" rows="3"></textarea>
+                                        <textarea id="description" name="description" class="form-control" rows="3"></textarea>
                                     </div>
                                 </div>
 
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">  
-                                <button type="submit" class="btn btn-default pull-right">Cancel</button>
+                                <a href="/OBESystem/RedirectToProgramList"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
                                 <button type="submit" class="btn btn-success pull-right">Update</button>
                             </div>
                             <!-- /.box-footer -->
@@ -116,7 +117,6 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!--selfMade-->
-        <script src="/OBESystem/js/search_program2.js"></script>
         <script src="/OBESystem/js/edit_program.js"></script>
 
         <!-- Page script -->
