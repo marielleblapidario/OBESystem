@@ -48,7 +48,7 @@
                         <div id="table-div" class="box-body table-bordered" style="overflow-y: auto">    
                         </div>
                         <div class="box-footer">
-                            <button type="button" class="btn btn-default pull-right">Cancel</button>
+                            <a href="/OBESystem/ViewCurriculumList"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
                             <a href="/OBESystem/ViewCurriculumList"><button id="save-btn" type="button" class="btn btn-primary pull-right">Save</button></a>
                         </div>
                         <!-- /.box-footer -->

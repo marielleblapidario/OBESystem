@@ -18,6 +18,7 @@ $(document).ready(function () {
     programDropDown.change(function () {
         clearTable();
         courseList = [];
+        preRequisite = [];
         var program = programDropDown.val();
         console.log("program selected: " + program);
         getAllCourse(program);
@@ -31,7 +32,6 @@ $("#button-add").click(function () {
     for (var i = 0; i < courseList.length; i++) {
         console.log("for loop: " + courseList[i].courseID + " compare to " + selectedCourse);
         if (courseList[i].courseID == selectedCourse) {
-            console.log("entered boolean of compare");
             courseList.splice(i, 1);
             break;
         }
@@ -86,7 +86,9 @@ $("#button-add").click(function () {
                 }
                 var CTS = '</select></td>';
                 tr += CTS;
-
+                
+                console.log("preRequisite size: " + preRequisite.length);
+                
                 var OPS = '<td><select name="prerequisite" class="form-control">';
                 tr += OPS;
                 var a = "<option selected value=\"-1\"> -- select an option -- </option>";

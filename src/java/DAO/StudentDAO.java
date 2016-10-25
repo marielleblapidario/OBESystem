@@ -48,6 +48,46 @@ public class StudentDAO {
         return null;
     }
 
+    public boolean encodeEnrolledStudent(Student newStudent) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO enrolledStudent (studentID, offeringID)\n"
+                    + "VALUES (?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setInt(1, newStudent.getStudentID());
+            pstmt.setInt(2, newStudent.getOfferingID());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean deleteEnrolledStudents(int offeringID) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "DELETE FROM enrolledStudent\n"
+                    + "WHERE offeringID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, offeringID);
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     public ArrayList<Student> getEnrolledStudents(int offeringID) throws ParseException {
         ArrayList<Student> arrStudent = new ArrayList<>();
 
@@ -58,7 +98,8 @@ public class StudentDAO {
                     + "FROM enrolledstudent ES \n"
                     + "JOIN student S \n"
                     + "ON ES.studentID = S.studentID\n"
-                    + "WHERE ES.offeringID = ?;";
+                    + "WHERE ES.offeringID = ?\n"
+                    + "ORDER BY S.lastName ASC, S.firstName ASC, S.middleName ASC;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, offeringID);
             ResultSet rs = pstmt.executeQuery();

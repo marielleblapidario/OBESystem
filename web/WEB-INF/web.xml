@@ -355,6 +355,18 @@
         <servlet-name>EditProgram</servlet-name>
         <servlet-class>controller.EditProgram</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EncodeEnrolledStudents</servlet-name>
+        <servlet-class>controller.EncodeEnrolledStudents</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EncodeStudentGrades</servlet-name>
+        <servlet-class>controller.EncodeStudentGrades</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetGradesOfSection</servlet-name>
+        <servlet-class>controller.GetGradesOfSection</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -706,6 +718,18 @@
     <servlet-mapping>
         <servlet-name>EditProgram</servlet-name>
         <url-pattern>/EditProgram</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeEnrolledStudents</servlet-name>
+        <url-pattern>/EncodeEnrolledStudents</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EncodeStudentGrades</servlet-name>
+        <url-pattern>/EncodeStudentGrades</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetGradesOfSection</servlet-name>
+        <url-pattern>/GetGradesOfSection</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

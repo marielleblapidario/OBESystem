@@ -55,7 +55,7 @@ function addRow(data) {
 function save(count) {
     sessionStorage.setItem("offeringID", arrOfferingID[count]);
     var offeringID = sessionStorage.getItem("offeringID");
-    sessionStorage.setItem("syllabusID", arrOfferingID[count]);
+    sessionStorage.setItem("syllabusID", arrSyllabusID[count]);
     var syllabusID = sessionStorage.getItem("syllabusID");
     console.log("syllabusID: " + syllabusID);
     console.log("offeringID: " + offeringID);

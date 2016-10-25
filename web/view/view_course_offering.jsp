@@ -42,14 +42,25 @@
                             <div class="box-header with-border">
                                 <h3 class="box-title">View Course Offering</h3>
                                 <br>
-                                <button type="button" class="btn bg-maroon-active pull-right"><i class="fa  fa-download"></i>  grades format</button>
-                                <button type="button" class="btn bg-maroon-active pull-right"><i class="fa  fa-download"></i>  student list format</button>
-                                <button type="button" class="btn bg-teal pull-right"><i class="fa fa-upload"></i>  grades</button>
-                                <button type="button" class="btn bg-teal pull-right"><i class="fa fa-upload"></i>  student list</button>
+                                <div class="btn-group-vertical pull-left">
+                                    <button id="grades-format" type="button" class="btn btn-default"><i class="fa  fa-download"></i>  grades format</button>
+                                    <button id="students-format" type="button" class="btn btn-default"><i class="fa  fa-download"></i>  student list format</button>
+                                </div>
+                                <div class="btn-group-vertical pull-right">
+                                    <div class ="form-group">
+                                        <label class="ontrol-label">Grades Upload</label>
+                                        <input id ="grades-upload" type="file">
+                                         <button id="grades-save" type="button" class="btn btn-default">save</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Student List Upload</label>
+                                        <input id="students-upload" type="file">
+                                         <button id="students-save" type="button" class="btn btn-default">save</button>
+                                    </div>
+                                </div>
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
-
                             <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                             <div class="box-body">
                                 <div class="form-group">
@@ -126,6 +137,11 @@
                                         <input name="faculty" type="text" class="form-control" id="faculty" readOnly>
                                     </div>
                                 </div>
+                            </div>
+                            <!--display students-->
+                            <div id = "div-students" class="box box-info">
+                                <table id="data" class="table table-hover">
+                                </table>
                             </div>
                             <div class="box-footer">
                                 <a href="/OBESystem/RedirectToOfferingsList"><button type="button" class="btn btn-default pull-right">Back</button></a>

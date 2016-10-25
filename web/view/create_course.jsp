@@ -70,7 +70,7 @@
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Units</label>
 
-                                    <div class="col-xs-1">
+                                    <div class="col-sm-10">
                                         <select name="units" class="form-control">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
