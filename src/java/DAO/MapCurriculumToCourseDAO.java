@@ -78,12 +78,14 @@ public class MapCurriculumToCourseDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT MCTC.mapCurID, MCTC.curriculumID, C.codeCourse, MCTC.courseID, "
-                    + "C.title, C.units, MCTC.term, MCTC.yearLevel, MCTC.prerequisite\n"
+            String query = "SELECT MCTC.mapCurID, MCTC.curriculumID, C.codeCourse, MCTC.courseID,\n"
+                    + "C.title, C.units, MCTC.term, MCTC.yearLevel, MCTC.prerequisite, PC.codeCourse as 'pTitle'\n"
                     + "FROM mapcurriculumtocourse MCTC\n"
-                    + "JOIN course C \n"
+                    + "JOIN course C\n"
                     + "ON MCTC.courseID = C. courseID\n"
-                    + "WHERE curriculumID = ? "
+                    + "LEFT JOIN course PC \n"
+                    + "ON MCTC.prerequisite = PC.courseID\n"
+                    + "WHERE curriculumID = ?\n"
                     + "ORDER BY yearLevel ASC, term ASC;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, codeCurriculum);
@@ -100,6 +102,7 @@ public class MapCurriculumToCourseDAO {
                 temp.setTerm(rs.getInt("term"));
                 temp.setYearLevel(rs.getInt("yearLevel"));
                 temp.setPreRequisite(rs.getInt("prerequisite"));
+                temp.setPrerequisiteTitle(rs.getString("pTitle"));
                 newMapping.add(temp);
             }
             pstmt.close();
@@ -110,9 +113,9 @@ public class MapCurriculumToCourseDAO {
         }
         return null;
     }
-    
+
     public int getCurID(int curriculumID, int courseID) throws ParseException {
-       int mapCurID = -1;
+        int mapCurID = -1;
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
@@ -135,5 +138,5 @@ public class MapCurriculumToCourseDAO {
         }
         return mapCurID;
     }
-    
+
 }

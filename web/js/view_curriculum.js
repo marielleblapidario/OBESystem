@@ -1,6 +1,8 @@
 var codeCurriculum = sessionStorage.getItem("codeCurriculum");
 var table = $("#data");
+var spanUnits = $("#total-units");
 var rowCount = 0;
+var totalUnits = 0;
 
 $(document).ready(function () {
     getSpecificCurriculum(codeCurriculum);
@@ -49,7 +51,13 @@ function addRow(data) {
     var term = data.term;
     var yearLevel = data.yearLevel;
     var preRequisite = data.preRequisite;
-
+    var pTitle = data.prerequisiteTitle;
+    
+    if(!pTitle){
+        pTitle = "-";
+    }
+    
+    totalUnits = totalUnits + parseInt(units);
     var tr = '';
     var appendTr = '<tr id =tr' + rowCount + '>'
             + '<td>' + codeCourse
@@ -68,10 +76,11 @@ function addRow(data) {
             + '<td>' + term
             + '<input type="hidden" name="title" class="readonlyWhite"  value="' + term + '" />'
             + '</td>'
-            + '<td>' + preRequisite
+            + '<td>' + pTitle
             + '<input type="hidden" name="title" class="readonlyWhite"  value="' + preRequisite + '" />'
             + '</td>';
     tr += appendTr;
     table.append(tr);
     rowCount++;
+    spanUnits.text(totalUnits);
 }

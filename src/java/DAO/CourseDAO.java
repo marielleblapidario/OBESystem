@@ -50,6 +50,34 @@ public class CourseDAO {
         return false;
     }
 
+    public boolean updateCourse(Course newCourse) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "UPDATE course \n"
+                    + "SET codeCourse = ?, title = ?, units = ?, description = ?, "
+                    + "dateUpdated = ?, contributor = ?\n"
+                    + "WHERE courseID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setString(1, newCourse.getCodeCourse());
+            pstmt.setString(2, newCourse.getTitle());
+            pstmt.setInt(3, newCourse.getUnits());
+            pstmt.setString(4, newCourse.getDescription());
+            pstmt.setDate(5, newCourse.getDateUpdated());
+            pstmt.setInt(6, newCourse.getContributor());
+            pstmt.setInt(7, newCourse.getCourseID());
+
+            int rows = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     public boolean encodeMapCourseToProgram(MapCourseToProgram newMap) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -242,7 +270,7 @@ public class CourseDAO {
         }
         return false;
     }
-    
+
     public Integer getLastCourseID() throws SQLException {
         DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
         Connection conn = myFactory.getConnection();
@@ -258,4 +286,3 @@ public class CourseDAO {
         return i;
     }
 }
-

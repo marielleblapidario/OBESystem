@@ -67,7 +67,28 @@ public class MapCourseToProgramDAO {
         }
         return false;
     }
+    
+    public boolean deleteMapping(MapCourseToProgram newMapping) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "DELETE FROM mapCourseToProgram\n"
+                    + "WHERE courseID = ? AND codeProgram = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
 
+            pstmt.setInt(1, newMapping.getCourseID());
+            pstmt.setString(2, newMapping.getCodeProgram());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(MapCourseToProgramDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     public ArrayList<MapCourseToProgram> getSpecificMapCourseToProgram(int courseID) throws ParseException {
         ArrayList<MapCourseToProgram> newMapping = new ArrayList<>();
         try {

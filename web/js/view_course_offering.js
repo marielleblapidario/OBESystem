@@ -432,15 +432,10 @@ function tableRow() {
                     + '<td>' + arrEnrolledStudents[x].firstName + '</td>'
                     + '<td>' + arrEnrolledStudents[x].middleName + '</td>';
             table.append(s);
-
-            console.log("tableRow check arrGrades size: " + arrGradesDisplay.length);
-            console.log("tableRow check arrAssessment size: " + arrAssessment.length);
             var row = $('#studentTr' + x);
             for (var a = 0; a < arrAssessment.length; a++) {
                 if (arrGradesDisplay.length > 0) {
                     for (var b = 0; b < arrGradesDisplay.length; b++) {
-                        console.log("compare " + arrEnrolledStudents[x].studentID + " vs " + arrGradesDisplay[b].studentID
-                                + "  AND " + arrAssessment[a] + " vs " + arrGradesDisplay[b].codeAT);
                         if (arrEnrolledStudents[x].studentID == arrGradesDisplay[b].studentID &&
                                 arrAssessment[a] == arrGradesDisplay[b].codeAT) {
                             var c = '<td>' + arrGradesDisplay[b].grade + '</td>';

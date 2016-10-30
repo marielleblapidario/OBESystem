@@ -6,8 +6,10 @@ var yearLevel = [];
 var table = $("#data");
 var dropDownCourse = $("#select-course");
 var programDropDown = $("#select-program");
+var spanUnits = $("#total-units");
 var yearPicker = $('#startYear');
 var rowCount = 0;
+var totalUnits = 0;
 var arrRowCount = [];
 
 $(document).ready(function () {
@@ -15,10 +17,14 @@ $(document).ready(function () {
     getAllTerm();
     getAllYearLevel();
     changeYear();
+    spanUnits.text(totalUnits);
     programDropDown.change(function () {
         clearTable();
         courseList = [];
         preRequisite = [];
+        list = [];
+        totalUnits = 0;
+        spanUnits.text(totalUnits);
         var program = programDropDown.val();
         console.log("program selected: " + program);
         getAllCourse(program);
@@ -46,7 +52,7 @@ $("#button-add").click(function () {
                 console.log(data);
                 console.log("rowCount: " + rowCount);
 
-                var rowCourse = {count: rowCount, courseID: data.courseID, title: data.title};
+                var rowCourse = {count: rowCount, courseID: data.courseID, title: data.title, units: data.units};
                 arrRowCount.push(rowCourse);
 
                 var tr = '';
@@ -86,9 +92,9 @@ $("#button-add").click(function () {
                 }
                 var CTS = '</select></td>';
                 tr += CTS;
-                
+
                 console.log("preRequisite size: " + preRequisite.length);
-                
+
                 var OPS = '<td><select name="prerequisite" class="form-control">';
                 tr += OPS;
                 var a = "<option selected value=\"-1\"> -- select an option -- </option>";
@@ -108,6 +114,9 @@ $("#button-add").click(function () {
 
                 table.append(tr);
                 rowCount++;
+
+                totalUnits = totalUnits + parseInt(data.units);
+                spanUnits.text(totalUnits);
             },
             error: function (response) {
                 console.log(response);
@@ -191,11 +200,11 @@ function showCourses() {
 function clearTable() {
     console.log("arrRowCount size: " + arrRowCount.length);
     for (var x = 0; x < arrRowCount.length; x++) {
-        console.log("arrRowCount count: " + arrRowCount[x].count);
         var tr = 'tr' + arrRowCount[x].count;
         document.getElementById(tr).remove();
-        arrRowCount.splice(x, 1);
     }
+    arrRowCount = [];
+    
     $("#table").hide();
     console.log("arrRowCount length: " + arrRowCount.length);
     rowCount = 0;
@@ -223,11 +232,13 @@ function deleteRow(num) {
                 add = x;
             }
         }
+        totalUnits = totalUnits - parseInt(arrRowCount[pos].units);
+        spanUnits.text(totalUnits);
         courseList.push(preRequisite[add]);
         arrRowCount.splice(pos, 1);
         console.log("arrRowCount newSize: ", arrRowCount.length);
         showCourses();
-        if(arrRowCount.length == 0){
+        if (arrRowCount.length == 0) {
             $("#table").hide();
         }
         return true;

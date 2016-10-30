@@ -100,7 +100,6 @@
                                 <div class="box-body no-border">
                                     <h5 class="box-info">Total Units:
                                         <span id = "total-units"></span>
-                                        <input name="hidden-total-units" id="hidden-total-units" class="hidden">
                                     </h5>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Search</label>

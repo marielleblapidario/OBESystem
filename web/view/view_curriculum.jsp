@@ -100,7 +100,6 @@
                                 <div class="box-body no-border">
                                     <h5 class="box-info">Total Units:
                                         <span id = "total-units"></span>
-                                        <input name="hidden-total-units" id="hidden-total-units" class="hidden">
                                     </h5>
                                     <div id="table">
                                         <table id="data" class="table table-hover">

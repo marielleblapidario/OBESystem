@@ -367,6 +367,14 @@
         <servlet-name>GetGradesOfSection</servlet-name>
         <servlet-class>controller.GetGradesOfSection</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RedirectToEditCourse</servlet-name>
+        <servlet-class>controller.RedirectToEditCourse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCourse</servlet-name>
+        <servlet-class>controller.EditCourse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -730,6 +738,14 @@
     <servlet-mapping>
         <servlet-name>GetGradesOfSection</servlet-name>
         <url-pattern>/GetGradesOfSection</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToEditCourse</servlet-name>
+        <url-pattern>/RedirectToEditCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCourse</servlet-name>
+        <url-pattern>/EditCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -6,12 +6,11 @@ $(document).ready(function () {
     getMapCourseToProgram(courseID);
 
     $('#edit').click(function () {
-        sessionStorage.setItem("codeCourse", courseID);
+        sessionStorage.setItem("courseID", courseID);
         var ss = sessionStorage.getItem("courseID");
         console.log("courseID: " + ss);
     });
 });
-
 
 function getSpecificCourse(courseID) {
     $.ajax({

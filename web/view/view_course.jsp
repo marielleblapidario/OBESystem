@@ -83,8 +83,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">  
                                 <a href="/OBESystem/ViewCourseList"><button type="button" class="btn btn-default pull-right">Back</button></a>
-                                <button type="button" class="btn btn-success pull-right">Edit</button>
-                            </div>
+                                <a href="/OBESystem/RedirectToEditCourse"><button type="button" class="btn btn-success pull-right">Edit</button></a>
                             <!-- /.box-footer -->
                         </form>
                     </div>

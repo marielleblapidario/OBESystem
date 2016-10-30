@@ -29,15 +29,15 @@ function addRow(data) {
     var courseID = data.courseID;
     var title = data.title;
     var contributorName = data.contributorName;
-    
+
     console.log("courseID: " + courseID);
 
-    var tools = "<button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button>\n\
+    var tools ="<a href=\"/OBESystem/RedirectToEditCourse\"><button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>\n\
 <a href=\"/OBESystem/RedirectToViewCourse\"><button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>\n\
-<button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>"
+<button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>";
     example1.row.add([codeCourse, title, contributorName, tools]);
     example1.draw();
-    
+
 }
 
 function save(courseID) {

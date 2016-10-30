@@ -82,7 +82,7 @@ function getSpecificCurriculum(codeCurriculum) {
         dataType: 'json',
         success: function (data) {
             console.log(data);
-            $('title').text(data.title);
+            $('#title').text(data.title);
             var codeProgram = data.program;
 
             $.ajax({

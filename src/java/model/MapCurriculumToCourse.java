@@ -19,6 +19,7 @@ public class MapCurriculumToCourse {
     
     private String codeCourse;
     private String courseTitle;
+    private String prerequisiteTitle;
     private int units;
 
     /**
@@ -145,6 +146,20 @@ public class MapCurriculumToCourse {
      */
     public void setMapCurID(int mapCurID) {
         this.mapCurID = mapCurID;
+    }
+
+    /**
+     * @return the prerequisiteTitle
+     */
+    public String getPrerequisiteTitle() {
+        return prerequisiteTitle;
+    }
+
+    /**
+     * @param prerequisiteTitle the prerequisiteTitle to set
+     */
+    public void setPrerequisiteTitle(String prerequisiteTitle) {
+        this.prerequisiteTitle = prerequisiteTitle;
     }
 
 }
