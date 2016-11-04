@@ -9,15 +9,11 @@ package model;
  *
  * @author mariellelapidario
  */
-public class Grade {
+public class GradeCO {
     private int studentID;
     private int offeringID;
-    private int assessmentID;
-    private double grade;
-    private String codeAT;
-    
     private int coID;
-    private double weight;
+    private double gradeCO;
 
     /**
      * @return the studentID
@@ -48,48 +44,6 @@ public class Grade {
     }
 
     /**
-     * @return the assessmentID
-     */
-    public int getAssessmentID() {
-        return assessmentID;
-    }
-
-    /**
-     * @param assessmentID the assessmentID to set
-     */
-    public void setAssessmentID(int assessmentID) {
-        this.assessmentID = assessmentID;
-    }
-
-    /**
-     * @return the grade
-     */
-    public double getGrade() {
-        return grade;
-    }
-
-    /**
-     * @param grade the grade to set
-     */
-    public void setGrade(double grade) {
-        this.grade = grade;
-    }
-
-    /**
-     * @return the codeAT
-     */
-    public String getCodeAT() {
-        return codeAT;
-    }
-
-    /**
-     * @param codeAT the codeAT to set
-     */
-    public void setCodeAT(String codeAT) {
-        this.codeAT = codeAT;
-    }
-
-    /**
      * @return the coID
      */
     public int getCoID() {
@@ -104,16 +58,16 @@ public class Grade {
     }
 
     /**
-     * @return the weight
+     * @return the gradeCO
      */
-    public double getWeight() {
-        return weight;
+    public double getGradeCO() {
+        return gradeCO;
     }
 
     /**
-     * @param weight the weight to set
+     * @param gradeCO the gradeCO to set
      */
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setGradeCO(double gradeCO) {
+        this.gradeCO = gradeCO;
     }
 }

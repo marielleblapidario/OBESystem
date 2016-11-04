@@ -5,7 +5,9 @@
  */
 package controller;
 
+import DAO.GradeCoDAO;
 import DAO.GradeDAO;
+import DAO.StudentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Grade;
+import model.GradeCO;
+import model.Student;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -66,13 +70,13 @@ public class EncodeStudentGrades extends BaseServlet {
                     arrOfferingID.add(Integer.parseInt(offeringID));
                     arrCodeAT.add(codeAT);
                     arrGrade.add(Double.parseDouble(grade));
-                    
+
                     syllabusID = Integer.parseInt(syllabusIDs);
                 }
             }
             boolean delete = gradeDAO.deleteGrades(arrOfferingID.get(0));
             System.out.println("deleted: " + delete);
-            
+
             for (int y = 0; y < arrStudentID.size(); y++) {
                 Grade temp = new Grade();
                 temp.setStudentID(arrStudentID.get(y));
@@ -84,6 +88,57 @@ public class EncodeStudentGrades extends BaseServlet {
                 } else {
                     x = false;
                 }
+            }
+            //calculates and encode the CO grade based on the assessment grade
+            GradeCoDAO gradeCoDAO = new GradeCoDAO();
+            if (gradeCoDAO.deleteGrades(arrOfferingID.get(0))) {
+                ArrayList<Grade> arrTemp = new ArrayList<>();
+                ArrayList<Integer> arrCO = new ArrayList<>();
+                //get students in Offering
+                StudentDAO studentDAO = new StudentDAO();
+                ArrayList<Student> arrStudent = new ArrayList<>();
+
+                arrStudent = studentDAO.getEnrolledStudents(arrOfferingID.get(0));
+                arrTemp = gradeDAO.getAllGradesForGradeCO(arrOfferingID.get(0));
+                arrCO = gradeDAO.getCOs(arrOfferingID.get(0));
+
+                System.out.println("arrSutdent: " + arrStudent.size() + " arrCO: " + arrCO.size() + " arrTemp: " + arrTemp.size());
+                //loops through all the students in offering
+                for (int a = 0; a < arrStudent.size(); a++) {
+                    //loops through all the COs in assessment
+                    for (int b = 0; b < arrCO.size(); b++) {
+                        double gradeCO = 0;
+                        //loops through all the grades
+                        for (int c = 0; c < arrTemp.size(); c++) {
+//                            System.out.println("compare student: " + arrStudent.get(a).getStudentID()
+//                                    + " vs " + arrTemp.get(c).getStudentID()
+//                                    + " compareCO : " + arrCO.get(b) + " vs " + arrTemp.get(c).getCoID());
+                            if (arrStudent.get(a).getStudentID() == arrTemp.get(c).getStudentID()
+                                    && arrCO.get(b) == arrTemp.get(c).getCoID()) {
+                                System.out.println("entered if");
+                                double weightedGrade = arrTemp.get(c).getGrade() * (arrTemp.get(c).getWeight() * 0.01);
+                                gradeCO += weightedGrade;
+                                System.out.println(arrTemp.get(c).getAssessmentID() + " : " + weightedGrade);
+                            }
+                        }
+                        System.out.println("co grade: " + gradeCO);
+                        gradeCO = gradeCO - (gradeCO % .5);
+                        if(gradeCO < 1){
+                            gradeCO = 0;
+                        }
+                        GradeCO temp = new GradeCO();
+                        temp.setStudentID(arrStudent.get(a).getStudentID());
+                        temp.setOfferingID(arrOfferingID.get(0));
+                        temp.setCoID(arrCO.get(b));
+                        temp.setGradeCO(gradeCO);
+                        if (gradeCoDAO.encodeGrade(temp)) {
+                        } else {
+                            x = false;
+                        }
+                    }
+                }
+            } else {
+                x = false;
             }
             PrintWriter out = response.getWriter();
             out.print(x);

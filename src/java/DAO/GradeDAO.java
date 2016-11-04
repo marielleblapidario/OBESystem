@@ -78,6 +78,69 @@ public class GradeDAO {
         return null;
     }
 
+    public ArrayList<Grade> getAllGradesForGradeCO(int offeringID) throws ParseException {
+        ArrayList<Grade> arrGrade = new ArrayList<>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT G.studentID, G.offeringID, G.assessmentID, G.grade, A.coID, A.weight \n"
+                    + "FROM grade G\n"
+                    + "JOIN assessment A \n"
+                    + "ON G.assessmentID = A.assessmentID\n"
+                    + "WHERE G.offeringID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, offeringID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Grade grade = new Grade();
+                grade.setStudentID(rs.getInt("studentID"));
+                grade.setOfferingID(rs.getInt("offeringID"));
+                grade.setAssessmentID(rs.getInt("assessmentID"));
+                grade.setGrade(rs.getDouble("grade"));
+                grade.setCoID(rs.getInt("coID"));
+                grade.setWeight(rs.getDouble("weight"));
+                arrGrade.add(grade);
+            }
+            pstmt.close();
+            conn.close();
+            return arrGrade;
+        } catch (SQLException ex) {
+            Logger.getLogger(GradeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ArrayList<Integer> getCOs(int offeringID) throws ParseException {
+        ArrayList<Integer> arrCO = new ArrayList<>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT A.coID\n"
+                    + "FROM grade G \n"
+                    + "JOIN assessment A \n"
+                    + "ON G.assessmentID = A.assessmentID\n"
+                    + "WHERE G.offeringID = ?\n"
+                    + "GROUP BY A.coID;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, offeringID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int co = rs.getInt("coID");
+                arrCO.add(co);
+            }
+            pstmt.close();
+            conn.close();
+            return arrCO;
+        } catch (SQLException ex) {
+            Logger.getLogger(GradeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public int getAssessmentID(int syllabusID, String codeAT) throws ParseException {
         int assessmentID = -1;
 
