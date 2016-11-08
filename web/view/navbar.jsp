@@ -17,6 +17,9 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
+        <!--pace-->
+        <link rel="stylesheet" href="/OBESystem/resources/plugins/pace/pace.css">
+        <script src="/OBESystem/resources/plugins/pace/pace.js"></script>
     </head>
     <div class="hold-transition skin-blue sidebar-mini">
 
@@ -84,23 +87,25 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <img src="/OBESystem/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <span class="hidden-xs">${login.fullName}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <img src="/OBESystem/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                     <p>
-                                        Alexander Pierce
-                                        <small>Academic Chairman</small>
+                                        ${login.fullName}
+                                        <small>${login.position}</small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <a href="#" class="btn btn-default btn-flat btn-block">Profile</a>
-                                    <a href="#" class="btn btn-default btn-flat btn-block">Sign out</a>
+                                    <form action="Logout" method="post" name="Logout">
+                                        <button type = "submit" id="logout" class="btn btn-default btn-flat btn-block">Sign out</button>
+                                    </form>
                                 </li>
                             </ul>
                         </li>

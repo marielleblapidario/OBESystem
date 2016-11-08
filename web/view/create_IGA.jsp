@@ -21,9 +21,6 @@
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-        <!--pace-->
-        <link rel="stylesheet" href="/OBESystem/resources/plugins/pace/pace.css">
-        <script src="/OBESystem/resources/plugins/pace/pace.js"></script>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">

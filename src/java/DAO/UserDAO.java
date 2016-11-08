@@ -66,15 +66,16 @@ public class UserDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("select * from user where email= ? and password= ?");
+            PreparedStatement pstmt = conn.prepareStatement("select userID, "
+                    + "CONCAT(firstName, \" \" , lastName) as 'fullName', "
+                    + "email, position, gender, password from user where email= ? and password= ?");
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
 
                 User.setUserID(rs.getInt("userID"));
-                User.setLastName(rs.getString("lastName"));
-                User.setFirstName(rs.getString("firstName"));
+                User.setFullName(rs.getString("fullName"));
                 User.setEmail(rs.getString("email"));
                 User.setPosition(rs.getString("position"));
                 User.setGender(rs.getString("gender"));
