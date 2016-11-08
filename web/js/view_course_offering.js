@@ -41,7 +41,7 @@ $(document).ready(function () {
     $('#students-upload').click(function () {
         this.value = null;
     });
-    document.getElementById('students-upload').addEventListener('change', uploadStudents, false);
+    document.getElementById('students-upload').addEventListener('change', xmlToJson, false);
 
     document.getElementById('grades-upload').addEventListener('change', uploadAssessments, false);
     saveStudents();
@@ -345,24 +345,27 @@ function xmlToJson(evt)
 
             var students_arr = jason["TABLE"]["TR"]
             var students_len = students_arr.length;
-            var students = {};
-
+            var students = [];
+            
             for (var i = 1; i < students_len; i++)
             {
-                students[i - 1] = [];
+                var obj = {};
                 for (var j = 0; j < head_len; j++)
                 {
-                    students[i - 1][header_names[j]] = students_arr[i]["TD"][j]["#text"];
+                    obj[header_names[j]] = students_arr[i]["TD"][j]["#text"];
                 }
+                students.push(obj);
             }
 
             console.log(students);
 
             //START POST FUNCTION HERE:
             for (var i = 0; i < students.length; i++){
-                var studentData = {studentID: students.ID_No, offeringID: offeringID};
+                var studentData = {studentID: students[i].ID_No, offeringID: offeringID};
                 arrStudentData.push(studentData);
+                console.log("studentID", students[i].ID_No);
             }
+            console.log(arrStudentData);
             //END POST FUNCTION HERE
         };
         reader.onerror = function ()
