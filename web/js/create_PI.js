@@ -36,7 +36,7 @@ $(document).ready(function () {
                 '<span id = "codePI">' + newCodeIGA + '</span>' +
                 '<input class="hidden" name="codePI" value="' + newCodeIGA + '">' +
                 '<div class="input-group input-group-sm">' +
-                '<input name="description" type="text" class="form-control" placeholder="Add Performance Indicator" required>' +
+                '<input name="description" id="description' + rowCount + '" type="text" class="form-control" placeholder="Add Performance Indicator" required>' +
                 '<span class="input-group-btn">' +
                 '<button type="button" class="btn bg-green btn-flat"><i class="fa fa-edit"></i></button>' +
                 '<button onClick="deleteRow(' + rowCount + ')" type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button>' +
@@ -99,9 +99,9 @@ function addRow(data) {
             '<span id = "codePI">' + codePI + '</span>' +
             '<input class="hidden" name="codePI" value="' + codePI + '">' +
             '<div class="input-group input-group-sm">' +
-            '<input name="description" type="text" class="form-control" value="' + description + '" readOnly>' +
+            '<input name="description" id="description' + rowCount + '" type="text" class="form-control" value="' + description + '" readOnly>' +
             '<span class="input-group-btn">' +
-            '<button type="button" class="btn bg-green btn-flat"><i class="fa fa-edit"></i></button>' +
+            '<button type="button" class="btn bg-green btn-flat" onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"></i></button>' +
             '<button onClick="deleteRow(' + rowCount + ')" type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button>' +
             '</span>' +
             '</div>' +
@@ -122,5 +122,15 @@ function deleteRow(num) {
     } else {
         console.log("cancelled");
         return false;
+    }
+}
+
+function makeRowEditable(count) {
+    var description = 'description' + count;
+
+    if (document.getElementById(description).readOnly) {
+        document.getElementById(description).readOnly = false;
+    } else {
+        document.getElementById(description).readOnly = true;
     }
 }

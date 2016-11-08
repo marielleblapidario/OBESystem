@@ -58,12 +58,9 @@ public class EncodePI extends BaseServlet {
         String contributor = request.getParameter("contributor");
         String[] codePI = request.getParameterValues("codePI");
         String[] description = request.getParameterValues("description");
-        String status = "pending";
         String remarks = request.getParameter("remarks");
-        String checker = request.getParameter("select-approver");
         
         System.out.println("contributor: " + contributor);
-        System.out.println("checker: " + checker);
 
         for (int y = 0; y < description.length; y++) {
             System.out.println("codePA: " + codePI[y]);
@@ -96,11 +93,9 @@ public class EncodePI extends BaseServlet {
                         pa.setCodePI(codePI[y]);
                         pa.setProgram(codeProgram);
                         pa.setDescription(description[y]);
-                        pa.setStatus(status);
                         pa.setRemarks(remarks);
                         pa.setDateUpdated();
                         pa.setContributor(Integer.parseInt(contributor));
-                        pa.setChecker(Integer.parseInt(checker));
                         if (piDAO.updatePI(pa)) {
                         } else {
                             x = false;
@@ -116,12 +111,10 @@ public class EncodePI extends BaseServlet {
                     pa.setCodePI(codePI[y]);
                     pa.setProgram(codeProgram);
                     pa.setDescription(description[y]);
-                    pa.setStatus(status);
                     pa.setRemarks(remarks);
                     pa.setDateMade();
                     pa.setDateUpdated();
                     pa.setContributor(Integer.parseInt(contributor));
-                    pa.setChecker(Integer.parseInt(checker));
                     if (piDAO.encodePI(pa)) {
                         System.out.println("PA created");
                         PI mapping = new PI();

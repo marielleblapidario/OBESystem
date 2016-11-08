@@ -43,7 +43,6 @@ function getAllIGA() {
 }
 
 function getLastPA(program) {
-
     $.ajax({
         type: "GET",
         url: "/OBESystem/GetLastPA?SelectedProgram=" + program,
@@ -89,11 +88,6 @@ function getLastPA(program) {
                     select.appendChild(option);
                 }
 
-                var statusCell = document.createElement("td");
-                statusCell.innerHTML = '<span class="label label-success">pending</span>'
-                        + '<input type="hidden" name="status" class="readonlyWhite" id="status' + rowCount + '" value="pending" />';
-                tr.appendChild(statusCell);
-
                 var remarksCell = document.createElement("td");
                 remarksCell.innerHTML = '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '"></div>'
                 tr.appendChild(remarksCell);
@@ -118,7 +112,6 @@ function addRow(data) {
     var description = data.description;
     var codeIGA = data.codeIGA;
     var igaTitle = data.igaTitle;
-    var status = data.status;
     var remarks = data.remarks;
 
     console.log("rowCount: " + rowCount);
@@ -138,11 +131,6 @@ function addRow(data) {
     mapIGACell.innerHTML = '<div class="col-sm-10"><input type="text" class="form-control no-border" value="' + igaTitle + '" required readOnly></div>'
      + '<input type="hidden" name="mapIGA" class="readonlyWhite" id="mapIGA' + rowCount + '" value="' + codeIGA + '" />';
     tr.appendChild(mapIGACell);
-
-    var statusCell = document.createElement("td");
-    statusCell.innerHTML = '<span class="label label-success">' + status + '</span>'
-            + '<input type="hidden" name="status" class="readonlyWhite" id="status' + rowCount + '" value="' + status + '" />';
-    tr.appendChild(statusCell);
 
     var remarksCell = document.createElement("td");
     remarksCell.innerHTML = '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '" value="' + remarks + '" readOnly></div>'

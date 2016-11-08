@@ -52,21 +52,17 @@ public class EncodePA extends BaseServlet {
         }
 
         String contributor = request.getParameter("contributor");
-        String checker = request.getParameter("select-approver");
         String[] codePA = request.getParameterValues("codePA");
         String[] description = request.getParameterValues("description");
         String[] codeIGA = request.getParameterValues("mapIGA");
-        String[] status = request.getParameterValues("status");
         String[] remarks = request.getParameterValues("remarks");
 
         System.out.println("contributor: " + contributor);
-        System.out.println("checker: " + checker);
         System.out.println("array size: " + codePA.length);
 
         for (int y = 0; y < codePA.length; y++) {
             System.out.println("codePA: " + codePA[y]);
             System.out.println("description: " + description[y]);
-            System.out.println("status" + status[y]);
             System.out.println("remarks: " + remarks[y]);
 
             PA pa = new PA();
@@ -95,11 +91,9 @@ public class EncodePA extends BaseServlet {
                         pa.setCodePA(codePA[y]);
                         pa.setProgram(codeProgram);
                         pa.setDescription(description[y]);
-                        pa.setStatus(status[y]);
                         pa.setRemarks(remarks[y]);
                         pa.setDateUpdated();
                         pa.setContributor(Integer.parseInt(contributor));
-                        pa.setChecker(Integer.parseInt(checker));
                         if (paDAO.updatePA(pa)) {
                         } else {
                             x = false;
@@ -115,12 +109,10 @@ public class EncodePA extends BaseServlet {
                     pa.setCodePA(codePA[y]);
                     pa.setProgram(codeProgram);
                     pa.setDescription(description[y]);
-                    pa.setStatus(status[y]);
                     pa.setRemarks(remarks[y]);
                     pa.setDateMade();
                     pa.setDateUpdated();
                     pa.setContributor(Integer.parseInt(contributor));
-                    pa.setChecker(Integer.parseInt(checker));
                     if (paDAO.encodePA(pa)) {
                         System.out.println("PA created");
                         MapPatoIgaDAO dao = new MapPatoIgaDAO();

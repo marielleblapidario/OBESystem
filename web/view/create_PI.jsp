@@ -48,12 +48,6 @@
                                 <h5>College: <span id = "college-title" ></span></h5>
                                 <input class="hidden" id="hidden-college-title" name="college-title">
                                 <br>
-
-                                <label>Approver</label>
-                                <div>
-                                    <select name="select-approver" id="select-approver" class="form-control select2 select2-hidden-accessible" style="width: 30%;" tabindex="-1" aria-hidden="true" required>
-                                    </select>
-                                </div>
                             </div>
                         </div>
                         <div class="box box-info">
@@ -130,7 +124,6 @@
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!-- stored attributes from search-->
         <script src="/OBESystem/js/store_program_search.js"></script>
-        <script src="/OBESystem/js/view_approver_list.js"></script>
         <script src="/OBESystem/js/search_PO.js"></script>
         <script src="/OBESystem/js/create_PI.js"></script>
         <!-- Page script -->

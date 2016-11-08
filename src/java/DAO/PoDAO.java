@@ -27,20 +27,17 @@ public class PoDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "INSERT INTO PO (codePO, program, description, "
-                    + "status, remarks, dateMade, dateUpdated, contributor, checker)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?,?);";
+                    + "remarks, dateMade, dateUpdated, contributor)\n"
+                    + "VALUES (?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, newPO.getCodePO());
             pstmt.setString(2, newPO.getProgram());
             pstmt.setString(3, newPO.getDescription());
-            pstmt.setString(4, newPO.getStatus());
-            pstmt.setString(5, newPO.getRemarks());
-            pstmt.setDate(6, newPO.getDateMade());
-            pstmt.setDate(7, newPO.getDateUpdated());
-            pstmt.setInt(8, newPO.getContributor());
-            pstmt.setInt(9, newPO.getChecker());
-
+            pstmt.setString(4, newPO.getRemarks());
+            pstmt.setDate(5, newPO.getDateMade());
+            pstmt.setDate(6, newPO.getDateUpdated());
+            pstmt.setInt(7, newPO.getContributor());
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -56,16 +53,15 @@ public class PoDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE PO\n"
-                    + "SET description = ?, status = ?, remarks = ?, dateUpdated = ?, contributor = ?\n"
+                    + "SET description = ?, remarks = ?, dateUpdated = ?, contributor = ?\n"
                     + "WHERE codePO = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, newPO.getDescription());
-            pstmt.setString(2, newPO.getStatus());
-            pstmt.setString(3, newPO.getRemarks());
-            pstmt.setDate(4, newPO.getDateUpdated());
-            pstmt.setInt(5, newPO.getContributor());
-            pstmt.setString(6, newPO.getCodePO());
+            pstmt.setString(2, newPO.getRemarks());
+            pstmt.setDate(3, newPO.getDateUpdated());
+            pstmt.setInt(4, newPO.getContributor());
+            pstmt.setString(5, newPO.getCodePO());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -83,7 +79,7 @@ public class PoDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT P.codePO, P.description, "
-                    + "MPTP.codePA, A.description as 'titlePA', P.status, P.remarks\n"
+                    + "MPTP.codePA, A.description as 'titlePA', P.remarks\n"
                     + "FROM PO P\n"
                     + "JOIN mappotopa MPTP\n"
                     + "ON P.codePO = MPTP.codePO\n"
@@ -100,7 +96,6 @@ public class PoDAO {
                 temp.setDescription(rs.getString("description"));
                 temp.setCodePA(rs.getString("codePA"));
                 temp.setTitlePA(rs.getString("titlePA"));
-                temp.setStatus(rs.getString("status"));
                 temp.setRemarks(rs.getString("remarks"));
                 newPO.add(temp);
             }

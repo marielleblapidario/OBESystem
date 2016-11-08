@@ -27,19 +27,17 @@ public class PiDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "INSERT INTO PI (codePI, program, description, "
-                    + "status, remarks, dateMade, dateUpdated, contributor, checker)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?,?);";
+                    + "remarks, dateMade, dateUpdated, contributor)\n"
+                    + "VALUES (?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, newPI.getCodePI());
             pstmt.setString(2, newPI.getProgram());
             pstmt.setString(3, newPI.getDescription());
-            pstmt.setString(4, newPI.getStatus());
-            pstmt.setString(5, newPI.getRemarks());
-            pstmt.setDate(6, newPI.getDateMade());
-            pstmt.setDate(7, newPI.getDateUpdated());
-            pstmt.setInt(8, newPI.getContributor());
-            pstmt.setInt(9, newPI.getChecker());
+            pstmt.setString(4, newPI.getRemarks());
+            pstmt.setDate(5, newPI.getDateMade());
+            pstmt.setDate(6, newPI.getDateUpdated());
+            pstmt.setInt(7, newPI.getContributor());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -56,16 +54,15 @@ public class PiDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE PI\n"
-                    + "SET description = ?, status = ?, remarks = ?, dateUpdated = ?, contributor = ?\n"
+                    + "SET description = ?, remarks = ?, dateUpdated = ?, contributor = ?\n"
                     + "WHERE codePI = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, newPI.getDescription());
-            pstmt.setString(2, newPI.getStatus());
-            pstmt.setString(3, newPI.getRemarks());
-            pstmt.setDate(4, newPI.getDateUpdated());
-            pstmt.setInt(5, newPI.getContributor());
-            pstmt.setString(6, newPI.getCodePI());
+            pstmt.setString(2, newPI.getRemarks());
+            pstmt.setDate(3, newPI.getDateUpdated());
+            pstmt.setInt(4, newPI.getContributor());
+            pstmt.setString(5, newPI.getCodePI());
 
             pstmt.executeUpdate();
             pstmt.close();

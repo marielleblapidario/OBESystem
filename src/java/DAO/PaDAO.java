@@ -27,19 +27,17 @@ public class PaDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "INSERT INTO PA (codePA, program, description, "
-                    + "status, remarks, dateMade, dateUpdated, contributor, checker)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?,?);";
+                    + "remarks, dateMade, dateUpdated, contributor)\n"
+                    + "VALUES (?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, newPA.getCodePA());
             pstmt.setString(2, newPA.getProgram());
             pstmt.setString(3, newPA.getDescription());
-            pstmt.setString(4, newPA.getStatus());
-            pstmt.setString(5, newPA.getRemarks());
-            pstmt.setDate(6, newPA.getDateMade());
-            pstmt.setDate(7, newPA.getDateUpdated());
-            pstmt.setInt(8, newPA.getContributor());
-            pstmt.setInt(9, newPA.getChecker());
+            pstmt.setString(4, newPA.getRemarks());
+            pstmt.setDate(5, newPA.getDateMade());
+            pstmt.setDate(6, newPA.getDateUpdated());
+            pstmt.setInt(7, newPA.getContributor());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -56,16 +54,15 @@ public class PaDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE PA\n"
-                    + "SET description = ?, status = ?, remarks = ?, dateUpdated = ?, contributor = ?\n"
+                    + "SET description = ?, remarks = ?, dateUpdated = ?, contributor = ?\n"
                     + "WHERE codePA = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, newPA.getDescription());
-            pstmt.setString(2, newPA.getStatus());
-            pstmt.setString(3, newPA.getRemarks());
-            pstmt.setDate(4, newPA.getDateUpdated());
-            pstmt.setInt(5, newPA.getContributor());
-            pstmt.setString(6, newPA.getCodePA());
+            pstmt.setString(2, newPA.getRemarks());
+            pstmt.setDate(3, newPA.getDateUpdated());
+            pstmt.setInt(4, newPA.getContributor());
+            pstmt.setString(5, newPA.getCodePA());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -83,7 +80,7 @@ public class PaDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT P.codePA, P.description, "
-                    + "MPTI.codeIGA, I.title, P.status, P.remarks\n"
+                    + "MPTI.codeIGA, I.title, P.remarks\n"
                     + "FROM PA P\n"
                     + "JOIN mappatoiga MPTI\n"
                     + "ON P.codePA = MPTI.codePA\n"
@@ -101,7 +98,6 @@ public class PaDAO {
                 temp.setDescription(rs.getString("description"));
                 temp.setCodeIGA(rs.getString("codeIGA"));
                 temp.setIgaTitle(rs.getString("title"));
-                temp.setStatus(rs.getString("status"));
                 temp.setRemarks(rs.getString("remarks"));
                 newPA.add(temp);
             }

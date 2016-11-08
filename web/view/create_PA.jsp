@@ -49,13 +49,6 @@
                                 <h5>College: <span id = "college-title" ></span></h5>
                                 <input class="hidden" id="hidden-college-title" name="college-title">
                                 <br>
-
-                                <label class="col-sm-2 control-label">Approver</label>
-                                <div class="col-sm-10">
-                                    <select name="select-approver" id = "select-approver" class="form-control select2 select2-hidden-accessible" style="width: 30%;" tabindex="-1" aria-hidden="true" required>
-                                    </select>
-                                </div>
-                                <br>
                             </div>
                             <div class="box-body table-responsive">
                                 <table id="data" class="table table-hover">
@@ -69,11 +62,6 @@
                                         <th>
                                             <div class="col-sm-10">
                                                 IGA Mapping
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Status
                                             </div>
                                         </th>
                                         <th>
@@ -132,7 +120,6 @@
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!--self made-->
         <script src="/OBESystem/js/store_program_search.js"></script>
-        <script src="/OBESystem/js/view_approver_list.js"></script>
         <script src="/OBESystem/js/create_PA.js"></script>
 
         <!-- Page script -->

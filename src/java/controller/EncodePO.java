@@ -52,21 +52,17 @@ public class EncodePO extends BaseServlet {
         }
 
         String contributor = request.getParameter("contributor");
-        String checker = request.getParameter("select-approver");
         String[] codePO = request.getParameterValues("codePO");
         String[] description = request.getParameterValues("description");
         String[] codePA = request.getParameterValues("mapPA");
-        String[] status = request.getParameterValues("status");
         String[] remarks = request.getParameterValues("remarks");
 
         System.out.println("contributor: " + contributor);
-        System.out.println("checker: " + checker);
         System.out.println("array size: " + codePO.length);
 
         for (int y = 0; y < codePO.length; y++) {
             System.out.println("codePO: " + codePO[y]);
             System.out.println("description: " + description[y]);
-            System.out.println("status" + status[y]);
             System.out.println("remarks: " + remarks[y]);
 
             PO po = new PO();
@@ -95,11 +91,9 @@ public class EncodePO extends BaseServlet {
                         po.setCodePO(codePO[y]);
                         po.setProgram(codeProgram);
                         po.setDescription(description[y]);
-                        po.setStatus(status[y]);
                         po.setRemarks(remarks[y]);
                         po.setDateUpdated();
                         po.setContributor(Integer.parseInt(contributor));
-                        po.setChecker(Integer.parseInt(checker));
                         if (poDAO.updatePA(po)) {
                         } else {
                             x = false;
@@ -115,12 +109,10 @@ public class EncodePO extends BaseServlet {
                     po.setCodePO(codePO[y]);
                     po.setProgram(codeProgram);
                     po.setDescription(description[y]);
-                    po.setStatus(status[y]);
                     po.setRemarks(remarks[y]);
                     po.setDateMade();
                     po.setDateUpdated();
                     po.setContributor(Integer.parseInt(contributor));
-                    po.setChecker(Integer.parseInt(checker));
                     if (poDAO.encodePO(po)) {
                         System.out.println("PO created");
                         MapPoToPaDAO dao = new MapPoToPaDAO();

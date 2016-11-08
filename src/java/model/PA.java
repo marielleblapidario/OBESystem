@@ -18,17 +18,14 @@ public class PA {
     private String codePA;
     private String program;
     private String description;
-    private String status;
     private String remarks;
     private Date dateMade;
     private Date dateUpdated;
     private int contributor;
-    private int checker;
     
     private String programTitle;
     private String college;
     private String contributorName;
-    private String checkerName;
     private String codeIGA;
     private String igaTitle;
     
@@ -72,20 +69,6 @@ public class PA {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    /**
-     * @return the status
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     /**
@@ -163,20 +146,6 @@ public class PA {
     }
 
     /**
-     * @return the checker
-     */
-    public int getChecker() {
-        return checker;
-    }
-
-    /**
-     * @param checker the checker to set
-     */
-    public void setChecker(int checker) {
-        this.checker = checker;
-    }
-
-    /**
      * @return the programTitle
      */
     public String getProgramTitle() {
@@ -216,20 +185,6 @@ public class PA {
      */
     public void setContributorName(String contributorName) {
         this.contributorName = contributorName;
-    }
-
-    /**
-     * @return the checkerName
-     */
-    public String getCheckerName() {
-        return checkerName;
-    }
-
-    /**
-     * @param checkerName the checkerName to set
-     */
-    public void setCheckerName(String checkerName) {
-        this.checkerName = checkerName;
     }
 
     /**

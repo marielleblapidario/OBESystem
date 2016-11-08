@@ -92,11 +92,6 @@ function getLastPO(program) {
                     select.appendChild(option);
                 }
 
-                var statusCell = document.createElement("td");
-                statusCell.innerHTML = '<span class="label label-success">pending</span>'
-                        + '<input type="hidden" name="status" class="readonlyWhite" id="status' + rowCount + '" value="pending" />';
-                tr.appendChild(statusCell);
-
                 var remarksCell = document.createElement("td");
                 remarksCell.innerHTML = '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '"></div>'
                 tr.appendChild(remarksCell);
@@ -121,7 +116,6 @@ function addRow(data) {
     var description = data.description;
     var codePA = data.codePA;
     var titlePA = data.titlePA;
-    var status = data.status;
     var remarks = data.remarks;
 
     console.log("rowCount: " + rowCount);
@@ -141,11 +135,6 @@ function addRow(data) {
     mapPACell.innerHTML = '<div class="col-sm-10"><input type="text" class="form-control no-border" value="' + titlePA + '" required readOnly></div>'
      + '<input type="hidden" name="mapPA" class="readonlyWhite" id="mapPA' + rowCount + '" value="' + codePA + '" />';
     tr.appendChild(mapPACell);
-
-    var statusCell = document.createElement("td");
-    statusCell.innerHTML = '<span class="label label-success">' + status + '</span>'
-            + '<input type="hidden" name="status" class="readonlyWhite" id="status' + rowCount + '" value="' + status + '" />';
-    tr.appendChild(statusCell);
 
     var remarksCell = document.createElement("td");
     remarksCell.innerHTML = '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '" value="' + remarks + '" readOnly></div>'
