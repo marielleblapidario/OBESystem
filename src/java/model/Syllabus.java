@@ -38,7 +38,8 @@ public class Syllabus {
     private String coDescription;
     private String coRemarks;
     private String codeAT;
-    private String assessmentTitle;
+    private int type;
+    private String typeTitle;
     private String assessmentDescription;
     private double assessmentWeight;
 
@@ -357,20 +358,6 @@ public class Syllabus {
     }
 
     /**
-     * @return the assessmentTitle
-     */
-    public String getAssessmentTitle() {
-        return assessmentTitle;
-    }
-
-    /**
-     * @param assessmentTitle the assessmentTitle to set
-     */
-    public void setAssessmentTitle(String assessmentTitle) {
-        this.assessmentTitle = assessmentTitle;
-    }
-
-    /**
      * @return the assessmentDescription
      */
     public String getAssessmentDescription() {
@@ -410,6 +397,34 @@ public class Syllabus {
      */
     public void setCodePI(String codePI) {
         this.codePI = codePI;
+    }
+
+    /**
+     * @return the type
+     */
+    public int getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    /**
+     * @return the typeTitle
+     */
+    public String getTypeTitle() {
+        return typeTitle;
+    }
+
+    /**
+     * @param typeTitle the typeTitle to set
+     */
+    public void setTypeTitle(String typeTitle) {
+        this.typeTitle = typeTitle;
     }
 
     

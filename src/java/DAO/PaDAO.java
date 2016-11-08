@@ -89,7 +89,8 @@ public class PaDAO {
                     + "ON P.codePA = MPTI.codePA\n"
                     + "JOIN IGA I\n"
                     + "ON MPTI.codeIGA = I.codeIGA\n"
-                    + "WHERE P.program = ? AND P.isDeleted IS NULL;";
+                    + "WHERE P.program = ? AND P.isDeleted IS NULL "
+                    + "ORDER BY P.codePA;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, codeProgram);
 

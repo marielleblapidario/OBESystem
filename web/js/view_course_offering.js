@@ -257,6 +257,122 @@ function browserSupportFileUpload()
     return isCompatible;
 }
 
+function setJsonObj(xml) {
+    var js_obj = {};
+
+    if (xml.nodeType == 1) {
+        if (xml.attributes.length > 0) {
+            js_obj["@attributes"] = {};
+            for (var j = 0; j < xml.attributes.length; j++) {
+                var attribute = xml.attributes.item(j);
+                js_obj["@attributes"][attribute.nodeName] = attribute.value;
+            }
+        }
+    } else if (xml.nodeType == 3) {
+        js_obj = xml.nodeValue;
+    }
+    if (xml.hasChildNodes()) {
+        for (var i = 0; i < xml.childNodes.length; i++) {
+            var item = xml.childNodes.item(i);
+            var nodeName = item.nodeName;
+            var string = "i : " + i + ", item : " + setJsonObj(item) + ", nodeName : " + nodeName + ", xml.nodeType : " + xml.nodeType;
+            // console.log(string);
+            if (typeof (js_obj[nodeName]) == "undefined") {
+                js_obj[nodeName] = setJsonObj(item);
+            } else {
+                if (typeof (js_obj[nodeName].push) == "undefined") {
+                    var old = js_obj[nodeName];
+                    js_obj[nodeName] = [];
+                    js_obj[nodeName].push(old);
+                }
+                js_obj[nodeName].push(setJsonObj(item));
+            }
+        }
+    }
+    return js_obj;
+}
+
+function jsontoStr(js_obj) {
+    var rejsn = JSON.stringify(js_obj, undefined, 2).replace(/(\\t|\\r|\\n)/g, '').replace(/"",[\n\t\r\s]+""[,]*/g, '').replace(/(\n[\t\s\r]*\n)/g, '').replace(/[\s\t]{2,}""[,]{0,1}/g, '').replace(/"[\s\t]{1,}"[,]{0,1}/g, '').replace(/\[[\t\s]*\]/g, '""');
+    return (rejsn.indexOf('"parsererror": {') == -1) ? rejsn : 'Invalid XML format';
+}
+
+function xmlToJson(evt)
+{
+    arrStudentData = [];
+    if (!browserSupportFileUpload())
+    {
+        alert('The File APIs are not fully supported in this browser!');
+    } else
+    {
+        var data = null;
+        var file = evt.target.files[0];
+        var reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = function (event)
+        {
+            var xml = event.target.result;
+            xml = xml.replace(/>'/g, ">");
+            xml = xml.replace(/<\/TD>\n<TR>/g, "</TD></TR>\n<TR>");
+            xml = xml.replace(/<\/TD>\n<\/TABLE>/g, "</TD></TR>\n</TABLE>");
+            xml = xml.replace(/",/g, "\" ");
+            xml = xml.replace(/&nbsp;/g, "Status");
+            console.log(xml);
+            if (window.DOMParser) {
+                var getxml = new DOMParser();
+                var xmlDoc = getxml.parseFromString(xml, "text/xml");
+            } else {
+                // for Internet Explorer
+                var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+                xmlDoc.async = "false";
+            }
+
+            // gets the JSON string
+            var json_str = jsontoStr(setJsonObj(xmlDoc));
+            var jason = JSON.parse(json_str);
+
+            // sets and returns the JSON object, if "rstr" undefined (not passed), else, returns JSON string\
+            var headers = jason["TABLE"]["TR"][0]["TH"];
+            var header_names = [];
+            var head_len = headers.length;
+            for (var i = 0; i < head_len; i++)
+            {
+                var str_header = headers[i]["#text"];
+                str_header = str_header.replace(/ /g, "_");
+                str_header = str_header.replace(/\./g, '');
+                header_names.push(str_header);
+            }
+
+            var students_arr = jason["TABLE"]["TR"]
+            var students_len = students_arr.length;
+            var students = {};
+
+            for (var i = 1; i < students_len; i++)
+            {
+                students[i - 1] = [];
+                for (var j = 0; j < head_len; j++)
+                {
+                    students[i - 1][header_names[j]] = students_arr[i]["TD"][j]["#text"];
+                }
+            }
+
+            console.log(students);
+
+            //START POST FUNCTION HERE:
+            for (var i = 0; i < students.length; i++){
+                var studentData = {studentID: students.ID_No, offeringID: offeringID};
+                arrStudentData.push(studentData);
+            }
+            //END POST FUNCTION HERE
+        };
+        reader.onerror = function ()
+        {
+            alert('Unable to read ' + file.fileName);
+        };
+    }
+}
+
+
 // Method that reads and posts the students csv file
 function uploadStudents(evt)
 {

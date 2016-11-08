@@ -12,6 +12,7 @@ var courseList = [];
 var arrPI = [];
 var arrCreateCO = [];
 var arrCO = [];
+var arrType = [];
 var rowCount = 0;
 var count = 0;
 var rowCountA = 0;
@@ -30,6 +31,7 @@ $(document).ready(function () {
     getAllCurriculum();
     changeYear();
     getAllTerm();
+    getAllType();
     curriculumDropDown.change(function () {
         clearCO();
         courseList = [];
@@ -164,6 +166,24 @@ function getAllCurriculum() {
     });
 }
 
+function getAllType() {
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/GetAllType",
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            for (var x = 0; x < data.length; x++) {
+                arrType.push(data[x]);
+            }
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+
 function getAllCourse(SelectedCurriculum) {
     $.ajax({
         type: "GET",
@@ -271,44 +291,34 @@ function AddAssessment() {
         console.log("rowCount: " + rowCountA);
         arrRowCountA.push(rowCountA);
 
-        var tr = document.createElement("tr");
-        tr.id = 'tr' + rowCountA;
-        var codeATCell = document.createElement("td");
-        codeATCell.innerHTML = newCodeAT
-                + '<input type="hidden" name="codeAT" class="readonlyWhite" id="codeAT' + rowCountA + '" value="' + newCodeAT + '" />';
-        tr.appendChild(codeATCell);
-
-        var titleCell = document.createElement("td");
-        titleCell.innerHTML = '<div class="col-sm-10"><input type="text" name="titleA" class="form-control no-border" id="titleA' + rowCountA + '" required></div>';
-        tr.appendChild(titleCell);
-
-        var select = document.createElement("select");
-        select.name = "codeCOA";
-        select.id = "codeCOA_" + rowCountA;
-        tr.appendChild(select);
-        for (var x = 0; x < arrCO.length; x++) {
-            var option = document.createElement("option");
-            option.label = arrCO[x].codeCO;
-            option.value = arrCO[x].coID;
-            select.appendChild(option);
+        var tr = '<tr id =tr' + rowCountA + '>';
+        tr += '<td>' + newCodeAT
+                + '<input type="hidden" name="codeAT" class="readonlyWhite" id="codeAT' + rowCountA + '" value="' + newCodeAT + '" />'
+                + '</td>';
+        
+        tr+= '<td><select name="type" class="form-control">';
+        for (var x = 0; x < arrType.length; x++) {
+            tr += "<option value=" + arrType[x].typeID + ">" + arrType[x].type + "</option>";
         }
-        var descriptionCell = document.createElement("td");
-        descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="descriptionA" class="form-control no-border" id="descriptionA' + rowCountA + '" required></div>';
-        tr.appendChild(descriptionCell);
+        tr += '</select></td>';
+        
+        console.log("arrCO length", arrCO.length);
+        tr += '<td><select name="codeCOA" id="codeCOA_' + rowCountA + '" class="form-control">';
+        for (var x = 0; x < arrCO.length; x++) {
+            tr += "<option value=" + arrCO[x].coID + ">" + arrCO[x].codeCO + "</option>";
+        }
+        tr += '</select></td>';
 
-        var weightCell = document.createElement("td");
-        weightCell.innerHTML = '<div class="col-sm-10"><input type="number" name="weight" class="form-control no-border" id="weight_' + rowCountA + '" onblur= handleChange(this); required></div>';
-        tr.appendChild(weightCell);
+        tr +='<td><div class="col-sm-10"><input type="text" name="descriptionA" class="form-control no-border" id="descriptionA' + rowCountA + '" required></div></td>';
 
-        var leftWeightCell = document.createElement("td");
-        leftWeightCell.innerHTML = '<div class="col-sm-10"><input type="number" name="leftWeight" class="form-control no-border" id="leftWeight_' + rowCountA + '" min = "0" max = "0" readOnly></div>';
-        tr.appendChild(leftWeightCell);
-
-        var toolsCell = document.createElement("td");
-        toolsCell.innerHTML = '<button type="button" id="editA' + rowCountA + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCountA + ')"><i class="fa fa-edit"> </i></button>' +
-                '<button type="button" id="deleteA' + rowCountA + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCountA + ')"></i></button>';
-        tr.appendChild(toolsCell);
-
+        tr += '<td><div class="col-sm-10"><input type="number" name="weight" class="form-control no-border" id="weight_' + rowCountA + '" onblur= handleChange(this); required></div></td>';
+        
+        tr+= '<td><div class="col-sm-10"><input type="number" name="leftWeight" class="form-control no-border" id="leftWeight_' + rowCountA + '" min = "0" max = "0" readOnly></div></td>';
+        
+        tr += '<td><button type="button" id="editA' + rowCountA + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCountA + ')"><i class="fa fa-edit"> </i></button>' +
+                '<button type="button" id="deleteA' + rowCountA + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCountA + ')"></i></button></td>';
+        
+        console.log(tr);
         tableA.append(tr);
         //var name = "#weight_" + rowCountA;
         $("#weight_" + rowCountA).blur(function () {
@@ -449,6 +459,25 @@ function getAllTerm() {
         }
     });
 }
+
+function getAllType() {
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/GetAllType",
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            for (var x = 0; x < data.length; x++) {
+                arrType.push(data[x]);
+            }
+            showCourses();
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
 
 function showTerm(data) {
     var s = "<option value = " + data.term + ">" + data.term + "</option>";

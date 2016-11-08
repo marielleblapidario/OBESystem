@@ -15,6 +15,7 @@ public class Assessment {
     private int courseID;
     private int term;
     private String codeAT;
+    private int type;
     private String title;
     private String description;
     private double weight;
@@ -23,6 +24,7 @@ public class Assessment {
     private int mapCurID;
     private int startYear;
     private int endYear;
+    
     
     /**
      * @return the curriculumID
@@ -204,6 +206,20 @@ public class Assessment {
      */
     public void setEndYear(int endYear) {
         this.endYear = endYear;
+    }
+
+    /**
+     * @return the type
+     */
+    public int getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(int type) {
+        this.type = type;
     }
     
 }

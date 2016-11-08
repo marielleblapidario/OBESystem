@@ -5,13 +5,10 @@
  */
 package controller;
 
-import DAO.TypeDAO;
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class GetAllType extends BaseServlet {
+public class RedirectToSearchMapping extends BaseServlet {
 
     /**
      *
@@ -32,14 +29,10 @@ public class GetAllType extends BaseServlet {
      */
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");        
-        try(PrintWriter out = response.getWriter()){
-           Gson g = new Gson();
-           String s = g.toJson(new TypeDAO().getAllType());
-           out.printf(s);
-        } catch (ParseException ex) {
-            Logger.getLogger(GetAllType.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        response.setContentType("text/html;charset=UTF-8");
+        ServletContext context = getServletContext();
+        RequestDispatcher rd = context.getRequestDispatcher("/view/search_mapping.jsp");
+        request.setAttribute("sucesss", "success");
+        rd.forward(request, response);
     }
 }

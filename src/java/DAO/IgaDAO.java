@@ -32,7 +32,7 @@ public class IgaDAO {
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, newIGA.getCodeIGA());
-             pstmt.setString(2, newIGA.getTitle());
+            pstmt.setString(2, newIGA.getTitle());
             pstmt.setString(3, newIGA.getDescription());
             pstmt.setString(4, newIGA.getRemarks());
             pstmt.setDate(5, newIGA.getDateMade());
@@ -79,13 +79,14 @@ public class IgaDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT codeIGA, title, description, remarks, dateMade, "
-                    + "dateUpdated, I.contributor, "
+            String query = "SELECT codeIGA, title, description, remarks, dateMade,\n"
+                    + "dateUpdated, I.contributor,\n"
                     + "CONCAT(U.firstName, \" \" , U.LastName) as 'contributorName'\n"
                     + "FROM IGA I\n"
                     + "JOIN USER U\n"
                     + "ON I.contributor = U.userID\n"
-                    + "WHERE I.isDeleted IS NULL;";
+                    + "WHERE I.isDeleted IS NULL\n"
+                    + "ORDER BY codeIGA;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -116,8 +117,8 @@ public class IgaDAO {
             String query = "UPDATE IGA\n"
                     + "SET isDELETED = TRUE\n"
                     + "WHERE codeIGA = ?;";
-            PreparedStatement pstmt = conn.prepareStatement(query);            
-            pstmt.setString(1, codeIGA);            
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, codeIGA);
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();

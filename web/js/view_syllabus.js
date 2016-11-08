@@ -86,7 +86,7 @@ function getCO(data) {
 
 function getAssessment(data) {
     var codeAT = data.codeAT;
-    var assessmentTitle = data.assessmentTitle;
+    var typeTitle = data.typeTitle;
     var codeCO = data.codeCO;
     var assessmentDescription = data.assessmentDescription;
     var assessmentWeight = data.assessmentWeight;
@@ -94,7 +94,7 @@ function getAssessment(data) {
     console.log("rowCount: ", rowCountA);
     var s = '<tr id =tr' + rowCountA + '>'
             + '<td>' + codeAT + '</td>'
-            + '<td>' + assessmentTitle + '</td>'
+            + '<td>' + typeTitle + '</td>'
             + '<td>' + codeCO + '</td>'
             + '<td>' + assessmentDescription + '</td>'
             + '<td>' + assessmentWeight + '</td>'

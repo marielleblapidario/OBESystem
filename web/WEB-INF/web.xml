@@ -375,6 +375,18 @@
         <servlet-name>EditCourse</servlet-name>
         <servlet-class>controller.EditCourse</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetAllPI</servlet-name>
+        <servlet-class>controller.GetAllPI</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToSearchMapping</servlet-name>
+        <servlet-class>controller.RedirectToSearchMapping</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToViewMapSummary</servlet-name>
+        <servlet-class>controller.RedirectToViewMapSummary</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -746,6 +758,18 @@
     <servlet-mapping>
         <servlet-name>EditCourse</servlet-name>
         <url-pattern>/EditCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllPI</servlet-name>
+        <url-pattern>/GetAllPI</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToSearchMapping</servlet-name>
+        <url-pattern>/RedirectToSearchMapping</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToViewMapSummary</servlet-name>
+        <url-pattern>/RedirectToViewMapSummary</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

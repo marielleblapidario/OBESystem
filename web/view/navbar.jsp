@@ -18,7 +18,7 @@
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
     </head>
-    <body class="hold-transition skin-blue sidebar-mini">
+    <div class="hold-transition skin-blue sidebar-mini">
 
         <header class="main-header">
 
@@ -137,6 +137,7 @@
                                         <li><a href="/OBESystem/RedirectToSearchPA"><i class="fa fa-circle-o"></i>Program Attribute</a></li>
                                         <li><a href="/OBESystem/RedirectToSearchPO"><i class="fa fa-circle-o"></i>Program Outcome</a></li>
                                         <li><a href="/OBESystem/RedirectToSearchPI"><i class="fa fa-circle-o"></i>Performance Indicator</a></li>
+                                        <li><a href="/OBESystem/RedirectToSearchMapping"><i class="fa fa-circle-o"></i>Mapping Summary</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="/OBESystem/ViewCurriculumList"><i class="fa fa-circle-o"></i>Curriculum</a></li>
@@ -201,15 +202,5 @@
                 <!-- /.sidebar -->
             </aside>
         </nav>
-        <!-- jQuery 2.2.3 -->
-        <script src="/OBESystem/resources/plugins/jQuery/jquery-2.2.3.min.js"></script>
-        <!-- Bootstrap 3.3.6 -->
-        <script src="/OBESystem/resources/bootstrap/js/bootstrap.min.js"></script>
-        <!-- FastClick -->
-        <script src="/OBESystem/resources/plugins/fastclick/fastclick.js"></script>
-        <!-- AdminLTE App -->
-        <script src="/OBESystem/resources/dist/js/app.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="/OBESystem/resources/dist/js/demo.js"></script>
-    </body>
+    </div>
 </html>

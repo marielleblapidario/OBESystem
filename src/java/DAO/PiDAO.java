@@ -107,7 +107,8 @@ public class PiDAO {
                     + "FROM mappitopo MPTP\n"
                     + "JOIN PI P\n"
                     + "ON MPTP.codePI = P.codePI\n"
-                    + "WHERE MPTP.codePO = ? AND P.isDeleted IS NULL;";
+                    + "WHERE MPTP.codePO = ? AND P.isDeleted IS NULL "
+                    + "ORDER BY MPTP.codePI;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, codePO);
 
@@ -176,5 +177,37 @@ public class PiDAO {
         ps.close();
         rs.close();
         return i;
+    }
+
+    public ArrayList<PI> getAllPI(String program) throws ParseException {
+        ArrayList<PI> newPA = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT MPTP.codePI, MPTP.codePO, P.description, P.remarks\n"
+                    + "FROM mappitopo MPTP\n"
+                    + "JOIN PI P\n"
+                    + "ON MPTP.codePI = P.codePI\n"
+                    + "WHERE P.program = ? AND P.isDeleted IS NULL\n"
+                    + "ORDER BY MPTP.codePI;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, program);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                PI temp = new PI();
+                temp.setCodePI(rs.getString("codePI"));
+                temp.setCodePO(rs.getString("codePO"));
+                temp.setDescription(rs.getString("description"));
+                temp.setRemarks(rs.getString("remarks"));
+                newPA.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return newPA;
+        } catch (SQLException ex) {
+            Logger.getLogger(PiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

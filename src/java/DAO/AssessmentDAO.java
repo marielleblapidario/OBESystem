@@ -27,7 +27,7 @@ public class AssessmentDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "INSERT INTO assessment (coID, syllabusID, mapCurID, curriculumID, courseID, term, "
-                    + "startYear, endYear, codeAT, title, description, weight)\n"
+                    + "startYear, endYear, codeAT, type, description, weight)\n"
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
@@ -40,7 +40,7 @@ public class AssessmentDAO {
             pstmt.setInt(7, newAssessment.getStartYear());
             pstmt.setInt(8, newAssessment.getEndYear());
             pstmt.setString(9, newAssessment.getCodeAT());
-            pstmt.setString(10, newAssessment.getTitle());
+            pstmt.setInt(10, newAssessment.getType());
             pstmt.setString(11, newAssessment.getDescription());
             pstmt.setDouble(12, newAssessment.getWeight());
 

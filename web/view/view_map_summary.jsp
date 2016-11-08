@@ -38,39 +38,54 @@
                                 <h5>Course: <span id="course-title"></span></h5>
                                 <input class="hidden" id="hidden-codeCourse" name="codeCourse">
                                 <br>
-
-                                <label class="col-sm-2 control-label">Approver</label>
-                                <div class="col-sm-10">
-                                    <select name="select-approver" id="select-approver" class="form-control select2 select2-hidden-accessible" style="width: 30%;" tabindex="-1" aria-hidden="true">
-                                    </select>
-                                </div>
                                 <br>
                             </div>
-                            <div class="box-body table-responsive">
-                                <table id="data" class="table table-hover">
+                            <div class="box-body">
+                                <table id="data" class="table table-bordered">
+                                    <div>
+                                        
+                                    </div>
                                     <tr>
-                                        <th>Code</th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Course Outcome
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Weight
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Status
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Remarks
-                                            </div>
-                                        </th>
-                                        <th>Tools</th>
+                                        <th>IGA</th>
+                                        <th>PA</th>
+                                        <th>PO</th>
+                                        <th>PI</th>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="10">IGA 1</td>
+                                        <td rowspan="6">PA 1</td>
+                                        <td rowspan="6">PO 1</td>
+                                        <td>PI 1.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PI 1.2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PI 1.3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PI 1.4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PI 1.5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PI 1.6</td>
+                                    </tr>
+                                    <tr>
+                                        <td  rowspan="4">PA 2</td>
+                                        <td  rowspan="3">PO 2</td>
+                                        <td>PI 2.1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PI 2.2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PI 2.3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PO 3</td>
+                                        <td>PI 3.1</td>
                                     </tr>
                                 </table>
                             </div>
@@ -103,9 +118,6 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!--selfmade-->
-        <script src="/OBESystem/js/store_course_search.js"></script>
-        <script src="/OBESystem/js/view_approver_list.js"></script>
-        <script src="/OBESystem/js/create_CO.js"></script>
-
+        <script src="/OBESystem/js/view_map_summary.js"></script>
     </body>
 </html>

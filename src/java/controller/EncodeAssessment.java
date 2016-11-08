@@ -47,7 +47,7 @@ public class EncodeAssessment extends BaseServlet {
         String endYear = request.getParameter("endYear");
         String[] coID = request.getParameterValues("codeCOA");
         String[] codeAT = request.getParameterValues("codeAT");
-        String[] title = request.getParameterValues("titleA");
+        String[] type = request.getParameterValues("type");
         String[] description = request.getParameterValues("descriptionA");
         String[] weight = request.getParameterValues("weight");
         Syllabus syllabus = new Syllabus();
@@ -62,7 +62,7 @@ public class EncodeAssessment extends BaseServlet {
         System.out.println("endYear: " + endYear);
         System.out.println("coID size: " + coID.length);
         System.out.println("codeAT size: " + codeAT.length);
-        System.out.println("title size: " + title.length);
+        System.out.println("type size: " + type.length);
         System.out.println("description size: " + description.length);
         System.out.println("weight size: " + weight.length);
         try {
@@ -81,7 +81,7 @@ public class EncodeAssessment extends BaseServlet {
             as.setStartYear(Integer.parseInt(startYear));
             as.setEndYear(Integer.parseInt(endYear));
             as.setCodeAT(codeAT[y]);
-            as.setTitle(title[y]);
+            as.setType(Integer.parseInt(type[y]));
             as.setCoID(Integer.parseInt(coID[y]));
             as.setDescription(description[y]);
             as.setWeight(Double.parseDouble(weight[y]));

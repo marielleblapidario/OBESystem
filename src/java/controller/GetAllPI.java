@@ -5,7 +5,7 @@
  */
 package controller;
 
-import DAO.TypeDAO;
+import DAO.PiDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mariellelapidario
  */
-public class GetAllType extends BaseServlet {
+public class GetAllPI extends BaseServlet {
 
     /**
      *
@@ -32,14 +32,18 @@ public class GetAllType extends BaseServlet {
      */
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");        
-        try(PrintWriter out = response.getWriter()){
-           Gson g = new Gson();
-           String s = g.toJson(new TypeDAO().getAllType());
-           out.printf(s);
+        response.setContentType("text/html;charset=UTF-8");
+        Gson g = new Gson();
+        String s = null;
+        try {
+            String SelectedProgram = request.getParameter("SelectedProgram");
+            System.out.println("selected program: " + SelectedProgram);
+            s = g.toJson(new PiDAO().getAllPI(SelectedProgram));
         } catch (ParseException ex) {
-            Logger.getLogger(GetAllType.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetAllPI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        PrintWriter out = response.getWriter();
+        out.print(s);
     }
 }

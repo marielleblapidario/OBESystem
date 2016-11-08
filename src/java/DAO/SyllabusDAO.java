@@ -56,13 +56,13 @@ public class SyllabusDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT S.syllabusID, S.mapCurID, S.curriculumID, "
-                    + "S.courseID, S.term, S.startYear, S.endYear, C.title as 'curriculumTitle', "
+            String query = "SELECT S.syllabusID, S.mapCurID, S.curriculumID,\n"
+                    + "S.courseID, S.term, S.startYear, S.endYear, C.title as 'curriculumTitle',\n"
                     + "CE.title as 'courseTitle', CE.codeCourse\n"
-                    + "FROM syllabus S \n"
-                    + "JOIN curriculum  C \n"
-                    + "ON S.curriculumID = S.curriculumID\n"
-                    + "JOIN course CE \n"
+                    + "FROM syllabus S\n"
+                    + "JOIN curriculum  C\n"
+                    + "ON S.curriculumID = C.curriculumID\n"
+                    + "JOIN course CE\n"
                     + "ON S.courseID = CE.courseID";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
@@ -166,17 +166,19 @@ public class SyllabusDAO {
     }
 
     public ArrayList<Syllabus> getSpecificSyllabusAssessment(int syllabusID) throws ParseException {
-         ArrayList<Syllabus> arrSyllabus = new ArrayList<>();
+        ArrayList<Syllabus> arrSyllabus = new ArrayList<>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT A.assessmentID, A.coID, A.syllabusID, A.mapCurID, "
-                    + "A.curriculumID, A.courseID, A.term, A.startYear, A.endYear, "
-                    + "C.codeCO, A.codeAT, A.title, A.description, A.weight\n"
+            String query = "SELECT A.assessmentID, A.coID, A.syllabusID, A.mapCurID,\n"
+                    + "A.curriculumID, A.courseID, A.term, A.startYear, A.endYear,\n"
+                    + "C.codeCO, A.codeAT, A.type, RT.type as 'typeTitle', A.description, A.weight\n"
                     + "FROM assessment A\n"
                     + "JOIN CO C \n"
                     + "ON A.coID = C.coID\n"
-                    + "WHERE A.syllabusID = ? "
+                    + "JOIN refType RT \n"
+                    + "ON A.type = RT.typeID\n"
+                    + "WHERE A.syllabusID = ? \n"
                     + "ORDER BY A.assessmentID;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, syllabusID);
@@ -194,7 +196,8 @@ public class SyllabusDAO {
                 syllabus.setEndYear(rs.getInt("endYear"));
                 syllabus.setCodeCO(rs.getString("codeCO"));
                 syllabus.setCodeAT(rs.getString("codeAT"));
-                syllabus.setAssessmentTitle(rs.getString("title"));
+                syllabus.setType(rs.getInt("type"));
+                syllabus.setTypeTitle(rs.getString("typeTitle"));
                 syllabus.setAssessmentDescription(rs.getString("description"));
                 syllabus.setAssessmentWeight(rs.getDouble("weight"));
                 arrSyllabus.add(syllabus);
