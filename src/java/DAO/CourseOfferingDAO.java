@@ -110,7 +110,7 @@ public class CourseOfferingDAO {
                     + "CUR.title as 'curriculumTitle', CG.courseID, CG.term, "
                     + "CG.startYear,CG.endYear, CG.section, CE.title as 'courseTitle', "
                     + "CG.room, R.Room as 'roomTitle',  CG.days, CG.time, CG.faculty, "
-                    + "CONCAT(U.firstName, \" \" , U.LastName) as 'name'\n"
+                    + "CONCAT(U.firstName, \" \" , U.LastName) as 'name', CE.codeCourse\n"
                     + "FROM courseoffering CG \n"
                     + "JOIN course CE\n"
                     + "ON CG.courseID = CE.courseID\n"
@@ -142,6 +142,7 @@ public class CourseOfferingDAO {
                 newOffering.setRoomTitle(rs.getString("roomTitle"));
                 newOffering.setFaculty(rs.getInt("faculty"));
                 newOffering.setFacultyName(rs.getString("name"));
+                newOffering.setCodeCourse(rs.getString("codeCourse"));
             }
             pstmt.close();
             conn.close();

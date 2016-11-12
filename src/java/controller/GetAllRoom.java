@@ -38,7 +38,7 @@ public class GetAllRoom extends BaseServlet {
         try {
             s = g.toJson(new RoomDAO().getAllRoom());
         } catch (ParseException ex) {
-            Logger.getLogger(GetAllApprover.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetAllRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         PrintWriter out = response.getWriter();

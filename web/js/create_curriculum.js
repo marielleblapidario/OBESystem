@@ -138,7 +138,7 @@ function getAllCourse(program) {
         success: function (data) {
             console.log(data);
             for (var x = 0; x < data.length; x++) {
-                var course = {courseID: data[x].courseID, title: data[x].title};
+                var course = {courseID: data[x].courseID, title: data[x].codeCourse};
                 courseList.push(course);
                 preRequisite.push(course);
 

@@ -19,6 +19,7 @@ public class User {
     private String password;
     
     private String fullName;
+    private int posID;
 
     /**
      * @return the userID
@@ -130,6 +131,20 @@ public class User {
      */
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    /**
+     * @return the posID
+     */
+    public int getPosID() {
+        return posID;
+    }
+
+    /**
+     * @param posID the posID to set
+     */
+    public void setPosID(int posID) {
+        this.posID = posID;
     }
     
 }

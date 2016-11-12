@@ -102,7 +102,6 @@
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <a href="#" class="btn btn-default btn-flat btn-block">Profile</a>
                                     <form action="Logout" method="post" name="Logout">
                                         <button type = "submit" id="logout" class="btn btn-default btn-flat btn-block">Sign out</button>
                                     </form>
@@ -122,85 +121,43 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <li class="header">MAIN NAVIGATION</li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-sitemap"></i> <span>Mapping</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="/OBESystem/ViewIGA"><i class="fa fa-circle-o"></i>Institutional Graduate Attribute</a></li>
-                                <li class="">
-                                    <a href="#"><i class="fa fa-circle-o"></i>Programs
-                                        <span class="pull-right-container">
-                                            <i class="fa fa-angle-left pull-right"></i>
-                                        </span>
-                                    </a>
-                                    <ul class="treeview-menu" style="display: none;">
-                                        <li><a href="/OBESystem/RedirectToProgramList"><i class="fa fa-circle-o"></i>Program List</a></li>
-                                        <li><a href="/OBESystem/RedirectToSearchPA"><i class="fa fa-circle-o"></i>Program Attribute</a></li>
-                                        <li><a href="/OBESystem/RedirectToSearchPO"><i class="fa fa-circle-o"></i>Program Outcome</a></li>
-                                        <li><a href="/OBESystem/RedirectToSearchPI"><i class="fa fa-circle-o"></i>Performance Indicator</a></li>
-                                        <li><a href="/OBESystem/RedirectToSearchMapping"><i class="fa fa-circle-o"></i>Mapping Summary</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="/OBESystem/ViewCurriculumList"><i class="fa fa-circle-o"></i>Curriculum</a></li>
-                                <li class="">
-                                    <a href="#"><i class="fa fa-circle-o"></i>Course
-                                        <span class="pull-right-container">
-                                            <i class="fa fa-angle-left pull-right"></i>
-                                        </span>
-                                    </a>
-                                    <ul class="treeview-menu" style="display: none;">
-                                        <li><a href="/OBESystem/ViewCourseList"><i class="fa fa-circle-o"></i>Course List</a></li>
-                                        <li><a href="/OBESystem/RedirectToViewSyllabusList"><i class="fa fa-circle-o"></i>Syllabus List</a></li>
-                                        <li><a href="/OBESystem/RedirectToOfferingsList"><i class="fa fa-circle-o"></i>Course Offerings List</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+          
+                        <li>
+                            <a href="/OBESystem/ViewIGA"><i class="fa  fa-institution"></i> <span>Institutional Graduate Attribute</span></a>
                         </li>
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                                <i class="fa fa-graduation-cap"></i> <span>Programs</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="create_IGO.jsp"><i class="fa fa-circle-o"></i>Dashboard 1</a></li>
-                                <li><a href="create_curriculum.jsp"><i class="fa fa-circle-o"></i>Dashboard 2</a></li>
-                                <li><a href="create_GO.jsp"><i class="fa fa-circle-o"></i>Dashboard 3</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-file-text"></i> <span>Reports</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="create_IGO.jsp"><i class="fa fa-circle-o"></i>Reports 1</a></li>
-                                <li><a href="create_curriculum.jsp"><i class="fa fa-circle-o"></i>Reports 2</a></li>
-                                <li><a href="create_GO.jsp"><i class="fa fa-circle-o"></i>Reports 3</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-bar-chart"></i> <span>Assessment</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="create_IGO.jsp"><i class="fa fa-circle-o"></i>Assessment 1</a></li>
-                                <li><a href="create_curriculum.jsp"><i class="fa fa-circle-o"></i>Assessment 2</a></li>
-                                <li><a href="create_GO.jsp"><i class="fa fa-circle-o"></i>Assessment 3</a></li>
+                                <li><a href="/OBESystem/RedirectToProgramList"><i class="fa fa-circle-o"></i>Program List</a></li>
+                                <li><a href="/OBESystem/RedirectToSearchPA"><i class="fa fa-circle-o"></i>Program Attribute</a></li>
+                                <li><a href="/OBESystem/RedirectToSearchPO"><i class="fa fa-circle-o"></i>Program Outcome</a></li>
+                                <li><a href="/OBESystem/RedirectToSearchPI"><i class="fa fa-circle-o"></i>Performance Indicator</a></li>
+                                <li><a href="/OBESystem/RedirectToSearchMapping"><i class="fa fa-circle-o"></i>Mapping Summary</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="create_GO.jsp"><i class="fa fa-users"></i> <span>Users</span></a>
+                            <a href="/OBESystem/ViewCurriculumList"><i class="fa fa-file-text"></i> <span>Curriculum</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-flask"></i> <span>Course</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/OBESystem/ViewCourseList"><i class="fa fa-circle-o"></i>Course List</a></li>
+                                <li><a href="/OBESystem/RedirectToViewSyllabusList"><i class="fa fa-circle-o"></i>Syllabus List</a></li>
+                                <li><a href="/OBESystem/RedirectToOfferingsList"><i class="fa fa-circle-o"></i>Course Offerings List</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/OBESystem/ViewIGA"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a>
                         </li>
                     </ul>
                 </section>

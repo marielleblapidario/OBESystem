@@ -21,6 +21,32 @@ import model.User;
  * @author mariellelapidario
  */
 public class UserDAO {
+    
+    public boolean createAccount(User newUser) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO user "
+                    + "(firstName, lastName, email, posID, gender, password)\n"
+                    + "VALUES (?,?,?,?,?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setString(1, newUser.getFirstName());
+            pstmt.setString(2, newUser.getLastName());
+            pstmt.setString(3, newUser.getEmail());
+            pstmt.setInt(4, newUser.getPosID());
+            pstmt.setString(5, newUser.getGender());
+            pstmt.setString(6, newUser.getPassword());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     /**
      * Authenticate
@@ -68,7 +94,11 @@ public class UserDAO {
             Connection conn = myFactory.getConnection();
             PreparedStatement pstmt = conn.prepareStatement("select userID, "
                     + "CONCAT(firstName, \" \" , lastName) as 'fullName', "
-                    + "email, position, gender, password from user where email= ? and password= ?");
+                    + "email, position, gender, password "
+                    + "FROM user U "
+                    + "JOIN refposition RP "
+                    + "ON U.posID = RP.posID "
+                    + "WHERE email= ? and password= ?");
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
@@ -99,7 +129,11 @@ public class UserDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user WHERE userID = ?");
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * "
+                    + "FROM user U "
+                    + "JOIN refposition RP "
+                    + "ON U.posID = RP.posID "
+                    + "WHERE userID = ?");
             pstmt.setString(1, userID);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -132,7 +166,9 @@ public class UserDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT * "
-                    + "FROM USER";
+                    + "FROM USER U"
+                    + "JOIN refposition RP "
+                    + "ON U.posID = RP.posID";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             ResultSet rs = pstmt.executeQuery();
@@ -156,7 +192,7 @@ public class UserDAO {
         return null;
     }
 
-    public ArrayList<User> getAllUserByPosition(String position) throws ParseException {
+    public ArrayList<User> getAllUserByPosition(int position) throws ParseException {
 
         ArrayList<User> listUser = new ArrayList<User>();
 
@@ -164,10 +200,10 @@ public class UserDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT * "
-                    + "FROM USER"
-                    + "WHERE position = ?";
+                    + "FROM USER "
+                    + "WHERE posID = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, position);
+            pstmt.setInt(1, position);
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -189,35 +225,7 @@ public class UserDAO {
         }
         return null;
     }
-
-    public ArrayList<User> getAllApprovers() throws ParseException {
-
-        ArrayList<User> listUser = new ArrayList<User>();
-
-        try {
-            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
-            Connection conn = myFactory.getConnection();
-            String query = "SELECT userID, CONCAT(firstName, \" \" , LastName) as 'name'\n"
-                    + "FROM user\n"
-                    + "where position = 'admin';";
-            PreparedStatement pstmt = conn.prepareStatement(query);
-
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                User temp = new User();
-                temp.setUserID(rs.getInt("userID"));
-                temp.setFullName(rs.getString("name"));
-                listUser.add(temp);
-            }
-            pstmt.close();
-            conn.close();
-            return listUser;
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
+    
     public ArrayList<User> getAllFaculty() throws ParseException {
 
         ArrayList<User> listUser = new ArrayList<User>();
@@ -227,7 +235,7 @@ public class UserDAO {
             Connection conn = myFactory.getConnection();
             String query = "SELECT userID, CONCAT(firstName, \" \" , LastName) as 'name'\n"
                     + "FROM user\n"
-                    + "where position = 'faculty';";
+                    + "where posID = 2;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             ResultSet rs = pstmt.executeQuery();
@@ -246,4 +254,32 @@ public class UserDAO {
         }
         return null;
     }
+    public ArrayList<User> getAllPosition() throws ParseException {
+
+        ArrayList<User> listUser = new ArrayList<User>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT posID, position "
+                    + "FROM refposition U;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                User temp = new User();
+                temp.setPosID(rs.getInt("posID"));
+                temp.setPosition(rs.getString("position"));
+                listUser.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return listUser;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }

@@ -21,6 +21,9 @@ var arrGrades = [];
 var arrGradesDisplay = [];
 var arrStudentData = [];
 var strSection;
+var strTerm;
+var strCourse;
+var strYear;
 
 $(document).ready(function () {
     divTable.hide();
@@ -69,6 +72,10 @@ function getSyllabus(offeringID) {
             time.val(data.time);
             room.val(data.roomTitle);
             faculty.val(data.facultyName);
+            
+            strYear = data.startYear;
+            strTerm = data.term;
+            strCourse = data.codeCourse;
         },
         error: function (response) {
             console.log(response);
@@ -227,7 +234,7 @@ function convertToCSV() {
     }
 
     //Generate a file name
-    var fileName = "grades_" + strSection;
+    var fileName = "grades_" + strCourse + "_" + strYear + "_" + strTerm + "_" + strSection;
 
     //Initialize file format you want csv or xls
     var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
@@ -346,7 +353,7 @@ function xmlToJson(evt)
             var students_arr = jason["TABLE"]["TR"]
             var students_len = students_arr.length;
             var students = [];
-            
+
             for (var i = 1; i < students_len; i++)
             {
                 var obj = {};
@@ -360,7 +367,7 @@ function xmlToJson(evt)
             console.log(students);
 
             //START POST FUNCTION HERE:
-            for (var i = 0; i < students.length; i++){
+            for (var i = 0; i < students.length; i++) {
                 var studentData = {studentID: students[i].ID_No, offeringID: offeringID};
                 arrStudentData.push(studentData);
                 console.log("studentID", students[i].ID_No);

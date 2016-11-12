@@ -36,6 +36,6 @@ function getAllCourse() {
 
 function addCourse(data) {
     console.log("Entered addCourse: " + data.codeCourse);
-    var s = "<option value = " + data.courseID + ">" + data.title + "</option>";
+    var s = "<option value = " + data.courseID + ">" + data.codeCourse + "</option>";
     programDropDown.append(s);
 }

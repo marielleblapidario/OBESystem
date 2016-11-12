@@ -93,6 +93,7 @@ public class EditCourse extends BaseServlet {
                             checkCreation = false;
                         }
                     }
+                    checkIfExist = false;
                 }
                 //check if deleted
                 System.out.println("check for deleted");

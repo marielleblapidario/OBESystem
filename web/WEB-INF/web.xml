@@ -92,10 +92,6 @@
         <servlet-class>controller.RedirectToSearchPO</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetAllApprover</servlet-name>
-        <servlet-class>controller.GetAllApprover</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EncodeProgram</servlet-name>
         <servlet-class>controller.EncodeProgram</servlet-class>
     </servlet>
@@ -391,6 +387,22 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>controller.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RedirectToRegistration</servlet-name>
+        <servlet-class>controller.RedirectToRegistration</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RedirectToLogin</servlet-name>
+        <servlet-class>controller.RedirectToLogin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllPosition</servlet-name>
+        <servlet-class>controller.GetAllPosition</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>controller.Register</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -478,10 +490,6 @@
     <servlet-mapping>
         <servlet-name>RedirectToSearchPO</servlet-name>
         <url-pattern>/RedirectToSearchPO</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetAllApprover</servlet-name>
-        <url-pattern>/GetAllApprover</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EncodeProgram</servlet-name>
@@ -778,6 +786,22 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToRegistration</servlet-name>
+        <url-pattern>/RedirectToRegistration</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToLogin</servlet-name>
+        <url-pattern>/RedirectToLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllPosition</servlet-name>
+        <url-pattern>/GetAllPosition</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/Register</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

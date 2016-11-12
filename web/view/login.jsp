@@ -52,7 +52,7 @@
                         <!-- /.col -->
                     </div>
                 </form>
-                <a href="register.html" class="text-center">Register a new membership</a>
+                <a href="/OBESystem/RedirectToRegistration" class="text-center">Register a new membership</a>
 
             </div>
             <!-- /.login-box-body -->

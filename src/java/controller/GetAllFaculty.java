@@ -38,7 +38,7 @@ public class GetAllFaculty extends BaseServlet {
         try {
             s = g.toJson(new UserDAO().getAllFaculty());
         } catch (ParseException ex) {
-            Logger.getLogger(GetAllApprover.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetAllFaculty.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         PrintWriter out = response.getWriter();
