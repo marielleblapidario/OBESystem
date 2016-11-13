@@ -94,7 +94,7 @@ public class UserDAO {
             Connection conn = myFactory.getConnection();
             PreparedStatement pstmt = conn.prepareStatement("select userID, "
                     + "CONCAT(firstName, \" \" , lastName) as 'fullName', "
-                    + "email, position, gender, password "
+                    + "email, U.posID, position, gender, password "
                     + "FROM user U "
                     + "JOIN refposition RP "
                     + "ON U.posID = RP.posID "
@@ -107,6 +107,7 @@ public class UserDAO {
                 User.setUserID(rs.getInt("userID"));
                 User.setFullName(rs.getString("fullName"));
                 User.setEmail(rs.getString("email"));
+                User.setPosID(rs.getInt("posID"));
                 User.setPosition(rs.getString("position"));
                 User.setGender(rs.getString("gender"));
                 User.setPassword(rs.getString("password"));

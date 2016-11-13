@@ -2,6 +2,7 @@ var codeCurriculum = sessionStorage.getItem("codeCurriculum");
 var tableDIV = $("#table-div");
 var sizePI = 0;
 var table;
+var tbody;
 var courseCodes = [];
 var mapping = [];
 var arrPI = [];
@@ -9,7 +10,11 @@ var arrCodePI = [];
 var arrCourseID = [];
 
 $(document).ready(function () {
-    getMapping(codeCurriculum);
+    function1().done(function () {
+        function2().done(function () {
+        });
+    });
+    //getMapping(codeCurriculum);
     $('#save-btn').click(function () {
         console.log("clicked");
         var elements = document.getElementsByClassName('checkbox');
@@ -67,7 +72,10 @@ function getCourses(codeCurriculum) {
         dataType: 'json',
         success: function (data) {
             console.log(data);
+            var s = '<tbody id = "body">';
+            table.append(s);
             data.forEach(appendTableRow);
+            table.append('</tbody>');
         },
         error: function (response) {
             console.log(response);
@@ -91,23 +99,23 @@ function getSpecificCurriculum(codeCurriculum) {
                 dataType: 'json',
                 success: function (data) {
                     console.log(data);
-                    var s = "<table class='table table-bordered' id='table' style='overflow-y:auto; width=100%; text-align:center;'>";
+                    var s = "<table class='overflow-y' id='table' style='overflow-y:auto; width=100%; text-align:center;'>";
                     tableDIV.append(s);
                     table = $("#table");
-                    var ss = "<tr id='table-header'>";
+                    var ss = "<thead><tr id='table-header'>";
                     table.append(ss);
                     var header = $("#table-header");
-                    header.append("<td> Code </td>");
-                    header.append("<td> Units  </td>");
+                    header.append("<th> Code </th>");
+                    header.append("<th> Units  </th>");
 
                     sizePI = data.length;
 
                     for (var i = 0; i < data.length; i++) {
-                        var a = "<td>" + data[i].codePI + " </td>";
+                        var a = "<th>" + data[i].codePI + " </th>";
                         header.append(a);
                         arrPI.push(data[i].codePI);
                     }
-                    header.append("</tr>");
+                    header.append("</tr></thead>");
                     getCourses(codeCurriculum);
 
                 },
@@ -129,8 +137,8 @@ function appendTableRow(data) {
     var units = data.units;
     courseCodes.push(codeCourse);
     var s = "<tr id=" + codeCourse + "> " +
-            +"<td>" + codeCourse + "</td>"
-            + "<td>" + codeCourse + "</td>"
+            +"<th>" + codeCourse + "</th>"
+            + "<th>" + codeCourse + "</th>"
             + "<td>" + units + "</td>";
     table.append(s);
     var row = $("#" + codeCourse);
@@ -153,4 +161,176 @@ function appendTableRow(data) {
         row.append(appendPI);
     }
     row.append("</tr>");
+}
+function function1() {
+    var dfrd1 = $.Deferred();
+    setTimeout(function () {
+        // doing async stuff
+        getMapping(codeCurriculum);
+        console.log('task 1 in function1 is done!');
+        dfrd1.resolve();
+    }, 1000);
+
+    return dfrd1.promise();
+}
+
+function function2() {
+    var dfrd1 = $.Deferred();
+    setTimeout(function () {
+        // doing async stuff
+        stickT();
+        console.log('task 1 in function2 is done!');
+        dfrd1.resolve();
+    }, 2000);
+    return dfrd1.promise();
+}
+function stickT() {
+    $('table').each(function () {
+        if ($(this).find('thead').length > 0 && $(this).find('th').length > 0) {
+            // Clone <thead>
+            var $w = $(window),
+                    $t = $(this),
+                    $thead = $t.find('thead').clone(),
+                    $col = $t.find('thead, tbody').clone();
+
+            // Add class, remove margins, reset width and wrap table
+            $t
+                    .addClass('sticky-enabled')
+                    .css({
+                        margin: 0,
+                        width: '100%'
+                    }).wrap('<div class="sticky-wrap" />');
+
+            if ($t.hasClass('overflow-y'))
+                $t.removeClass('overflow-y').parent().addClass('overflow-y');
+
+            // Create new sticky table head (basic)
+            $t.after('<table class="sticky-thead" />');
+
+            // If <tbody> contains <th>, then we create sticky column and intersect (advanced)
+            if ($t.find('tbody th').length > 0) {
+                $t.after('<table class="sticky-col" /><table class="sticky-intersect" />');
+            }
+
+            // Create shorthand for things
+            var $stickyHead = $(this).siblings('.sticky-thead'),
+                    $stickyCol = $(this).siblings('.sticky-col'),
+                    $stickyInsct = $(this).siblings('.sticky-intersect'),
+                    $stickyWrap = $(this).parent('.sticky-wrap');
+
+            $stickyHead.append($thead);
+
+            $stickyCol
+                    .append($col)
+                    .find('thead th:gt(0)').remove()
+                    .end()
+                    .find('tbody td').remove();
+
+            $stickyInsct.html('<thead><tr><th>' + $t.find('thead th:first-child').html() + '</th></tr></thead>');
+
+            // Set widths
+            var setWidths = function () {
+                $t
+                        .find('thead th').each(function (i) {
+                    $stickyHead.find('th').eq(i).width($(this).width());
+                })
+                        .end()
+                        .find('tr').each(function (i) {
+                    $stickyCol.find('tr').eq(i).height($(this).height());
+                });
+
+                // Set width of sticky table head
+                $stickyHead.width($t.width());
+
+                // Set width of sticky table col
+                $stickyCol.find('th').add($stickyInsct.find('th')).width($t.find('thead th').width())
+            },
+                    repositionStickyHead = function () {
+                        // Return value of calculated allowance
+                        var allowance = calcAllowance();
+
+                        // Check if wrapper parent is overflowing along the y-axis
+                        if ($t.height() > $stickyWrap.height()) {
+                            // If it is overflowing (advanced layout)
+                            // Position sticky header based on wrapper scrollTop()
+                            if ($stickyWrap.scrollTop() > 0) {
+                                // When top of wrapping parent is out of view
+                                $stickyHead.add($stickyInsct).css({
+                                    opacity: 1,
+                                    top: $stickyWrap.scrollTop()
+                                });
+                            } else {
+                                // When top of wrapping parent is in view
+                                $stickyHead.add($stickyInsct).css({
+                                    opacity: 0,
+                                    top: 0
+                                });
+                            }
+                        } else {
+                            // If it is not overflowing (basic layout)
+                            // Position sticky header based on viewport scrollTop
+                            if ($w.scrollTop() > $t.offset().top && $w.scrollTop() < $t.offset().top + $t.outerHeight() - allowance) {
+                                // When top of viewport is in the table itself
+                                $stickyHead.add($stickyInsct).css({
+                                    opacity: 1,
+                                    top: $w.scrollTop() - $t.offset().top
+                                });
+                            } else {
+                                // When top of viewport is above or below table
+                                $stickyHead.add($stickyInsct).css({
+                                    opacity: 0,
+                                    top: 0
+                                });
+                            }
+                        }
+                    },
+                    repositionStickyCol = function () {
+                        if ($stickyWrap.scrollLeft() > 0) {
+                            // When left of wrapping parent is out of view
+                            $stickyCol.add($stickyInsct).css({
+                                opacity: 1,
+                                left: $stickyWrap.scrollLeft()
+                            });
+                        } else {
+                            // When left of wrapping parent is in view
+                            $stickyCol
+                                    .css({opacity: 0})
+                                    .add($stickyInsct).css({left: 0});
+                        }
+                    },
+                    calcAllowance = function () {
+                        var a = 0;
+                        // Calculate allowance
+                        $t.find('tbody tr:lt(3)').each(function () {
+                            a += $(this).height();
+                        });
+
+                        // Set fail safe limit (last three row might be too tall)
+                        // Set arbitrary limit at 0.25 of viewport height, or you can use an arbitrary pixel value
+                        if (a > $w.height() * 0.25) {
+                            a = $w.height() * 0.25;
+                        }
+
+                        // Add the height of sticky header
+                        a += $stickyHead.height();
+                        return a;
+                    };
+
+            setWidths();
+
+            $t.parent('.sticky-wrap').scroll($.throttle(250, function () {
+                repositionStickyHead();
+                repositionStickyCol();
+            }));
+
+            $w
+                    .load(setWidths)
+                    .resize($.debounce(250, function () {
+                        setWidths();
+                        repositionStickyHead();
+                        repositionStickyCol();
+                    }))
+                    .scroll($.throttle(250, repositionStickyHead));
+        }
+    });
 }

@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="/OBESystem/resources/plugins/pace/pace.css">
         <script src="/OBESystem/resources/plugins/pace/pace.js"></script>
     </head>
-    <div class="hold-transition skin-blue sidebar-mini">
+    <div class="hold-transition skin-green sidebar-mini">
 
         <header class="main-header">
 

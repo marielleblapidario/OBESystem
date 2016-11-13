@@ -153,6 +153,56 @@ public class CourseOfferingDAO {
         return null;
     }
 
+    public ArrayList<CourseOffering> getOfferingsOfFaculty(int userID) throws ParseException {
+        ArrayList<CourseOffering> newOffering = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT CG.offeringID, CG.syllabusID, CG.curriculumID,CG.courseID,\n"
+                    + "C.codeCourse, C.title as 'courseTitle', CG.term, CG.section,\n"
+                    + "CG.days, CG.time, CG.room, RR.room as 'roomTitle', CG.faculty,\n"
+                    + "CONCAT(U.firstName, \" \" , U.LastName) as 'name', CG.startYear, CG.endYear\n"
+                    + "FROM courseoffering CG\n"
+                    + "JOIN refroom RR\n"
+                    + "ON CG.room = RR.roomID\n"
+                    + "JOIN course C\n"
+                    + "ON CG.courseID = C.courseID\n"
+                    + "JOIN USER U\n"
+                    + "ON CG.faculty = U.userID\n"
+                    + "WHERE CG.faculty = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+             pstmt.setInt(1, userID);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                CourseOffering temp = new CourseOffering();
+                temp.setOfferingID(rs.getInt("offeringID"));
+                temp.setSyllabusID(rs.getInt("syllabusID"));
+                temp.setCurriculumID(rs.getInt("curriculumID"));
+                temp.setCourseID(rs.getInt("courseID"));
+                temp.setCodeCourse(rs.getString("codeCourse"));
+                temp.setCourseTitle(rs.getString("courseTitle"));
+                temp.setTerm(rs.getInt("term"));
+                temp.setStartYear(rs.getInt("startYear"));
+                temp.setEndYear(rs.getInt("endYear"));
+                temp.setSection(rs.getString("section"));
+                temp.setDays(rs.getString("days"));
+                temp.setTime(rs.getString("time"));
+                temp.setRoom(rs.getInt("room"));
+                temp.setRoomTitle(rs.getString("roomTitle"));
+                temp.setFaculty(rs.getInt("faculty"));
+                temp.setFacultyName(rs.getString("name"));
+                newOffering.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return newOffering;
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseOfferingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public boolean mapOffering(CourseOffering newOffering) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();

@@ -38,7 +38,7 @@
                 <!-- Main content -->
                 <form action="EncodeCourseOffering" method="post" name="EncodeCourseOffering">
                     <section class="content">
-                        <div class="box box-info">
+                        <div class="box box-success">
                             <div class="box-header with-border">
                                 <h3 class="box-title">View Course Offering</h3>
                                 <br>

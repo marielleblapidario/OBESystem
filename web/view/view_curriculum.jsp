@@ -40,7 +40,7 @@
                 <!-- Main content -->
                 <form action="EncodeCurriculum" method="post" name="EncodeCurriculum">
                     <section class="content">
-                        <div class="box box-info">
+                        <div class="box box-success">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Create Curriculum</h3>
                             </div>

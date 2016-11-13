@@ -30,7 +30,7 @@
                 <!-- Main content -->
                 <form action="EncodeIGA" method="post" name="EncodeIGA">
                     <section class="content">
-                        <div class="box box-info">
+                        <div class="box box-success">
                             <!-- /.box-header -->
                             <div class="box-header">
                                 <h3 class="box-title">Institutional Graduate Attribute</h3><br>

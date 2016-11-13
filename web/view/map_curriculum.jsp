@@ -30,6 +30,7 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
+        <link rel="stylesheet" href="/OBESystem/table/fixed_rc.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -38,7 +39,7 @@
 
                 <!-- Main content -->
                 <section class="content">
-                    <div class="box box-info">
+                    <div class="box box-success">
                         <!-- /.box-header -->
                         <div class="box-header">
                             <h3 class="box-title">Curriculum Mapping</h3><br>
@@ -90,6 +91,7 @@
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!-- Page script -->
         <script src="/OBESystem/js/map_curriculum.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
         <script>
             $(function () {
                 //Initialize Select2 Elements

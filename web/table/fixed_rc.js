@@ -1,4 +1,4 @@
-$(function () {
+$(window).load(function () {
     $('table').each(function () {
         if ($(this).find('thead').length > 0 && $(this).find('th').length > 0) {
             // Clone <thead>

@@ -6,7 +6,11 @@ var arrIGA = [];
 
 $(document).ready(function () {
     getAllIGA();
-    getAllPA(programCode);
+    function1().done(function () {
+        function2().done(function () {
+        });
+    });
+    //getAllPA(programCode);
     getLastPA(programCode);
 });
 
@@ -75,7 +79,7 @@ function getLastPA(program) {
                 tr.appendChild(codeIGACell);
 
                 var descriptionCell = document.createElement("td");
-                descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" required></div>'
+                descriptionCell.innerHTML = '<div class="col-sm-10"><textarea onkeyup="textAreaAdjust(this)" style="border: none; outline: none;  resize: none; overflow:hidden" name="description" class="form-control no-border" id="description' + rowCount + '" required></textarea></div>'
                 tr.appendChild(descriptionCell);
 
                 var select = document.createElement("select");
@@ -89,7 +93,7 @@ function getLastPA(program) {
                 }
 
                 var remarksCell = document.createElement("td");
-                remarksCell.innerHTML = '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '"></div>'
+                remarksCell.innerHTML = '<div class="col-sm-10"><textarea onkeyup="textAreaAdjust(this)" style="border: none; outline: none;  resize: none; overflow:hidden" name="remarks" class="form-control no-border" id="remarks' + rowCount + '"></textarea></div>'
                 tr.appendChild(remarksCell);
 
                 var toolsCell = document.createElement("td");
@@ -124,16 +128,16 @@ function addRow(data) {
     tr.appendChild(codeIGACell);
 
     var descriptionCell = document.createElement("td");
-    descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" value="' + description + '" required readOnly></div>'
+    descriptionCell.innerHTML = '<div class="col-sm-10"><textarea onkeyup="textAreaAdjust(this)" style="border: none; outline: none;  resize: none; overflow:hidden" name="description" class="form-control no-border" id="description' + rowCount + '" required readOnly>' + description + '</textarea></div>';
     tr.appendChild(descriptionCell);
 
     var mapIGACell = document.createElement("td");
-    mapIGACell.innerHTML = '<div class="col-sm-10"><input type="text" class="form-control no-border" value="' + igaTitle + '" required readOnly></div>'
-     + '<input type="hidden" name="mapIGA" class="readonlyWhite" id="mapIGA' + rowCount + '" value="' + codeIGA + '" />';
+    mapIGACell.innerHTML = '<div class="col-sm-10"><textAreaAdjust(this)" style="border: none; outline: none;  resize: none; overflow:hidden" id="mapIGA' + rowCount + '" class="form-control no-border" required readOnly>' + igaTitle + '</textarea></div>'
+     + '<input type="hidden" name="mapIGA" class="readonlyWhite" value="' + codeIGA + '" />';
     tr.appendChild(mapIGACell);
 
     var remarksCell = document.createElement("td");
-    remarksCell.innerHTML = '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '" value="' + remarks + '" readOnly></div>'
+    remarksCell.innerHTML = '<div class="col-sm-10"><textarea onkeyup="textAreaAdjust(this)" style="border: none; outline: none;  resize: none; overflow:hidden" name="remarks" class="form-control no-border" id="remarks' + rowCount + '" readOnly>' + remarks + '</textarea></div>';
     tr.appendChild(remarksCell);
 
     var toolsCell = document.createElement("td");
@@ -170,4 +174,50 @@ function deleteRow(num) {
         console.log("cancelled");
         return false;
     }
+}
+
+function textAreaAdjust(o) {
+  o.style.height = "1px";
+  o.style.height = (25+o.scrollHeight)+"px";
+}
+
+function onTableLoad() {
+    console.log("final rowcount ", rowCount);
+    for (var x = 0; x < rowCount; x++) {
+        var description = "description" + x;
+        var remarks = "remarks" + x;
+        var mapIGA = "mapIGA" + x;
+        
+        console.log("desc: ", description);
+        console.log("remark: ", remarks);
+        document.getElementById(description).style.height = "1px";
+        document.getElementById(description).style.height = (25 + document.getElementById(description).scrollHeight) + "px";
+        document.getElementById(remarks).style.height = "1px";
+        document.getElementById(remarks).style.height = (25 + document.getElementById(remarks).scrollHeight) + "px";
+        document.getElementById(mapIGA).style.height = "1px";
+        document.getElementById(mapIGA).style.height = (25 + document.getElementById(mapIGA).scrollHeight) + "px";
+    }
+}
+
+function function1() {
+    var dfrd1 = $.Deferred();
+    setTimeout(function () {
+        // doing async stuff
+       getAllPA(programCode);
+        console.log('task 1 in function1 is done!');
+        dfrd1.resolve();
+    }, 1000);
+
+    return dfrd1.promise();
+}
+
+function function2() {
+    var dfrd1 = $.Deferred();
+    setTimeout(function () {
+        // doing async stuff
+        onTableLoad();
+        console.log('task 1 in function2 is done!');
+        dfrd1.resolve();
+    }, 2000);
+    return dfrd1.promise();
 }

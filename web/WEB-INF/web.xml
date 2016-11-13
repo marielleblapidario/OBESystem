@@ -403,6 +403,14 @@
         <servlet-name>Register</servlet-name>
         <servlet-class>controller.Register</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetUser</servlet-name>
+        <servlet-class>controller.GetUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetOfferingsOfFaculty</servlet-name>
+        <servlet-class>controller.GetOfferingsOfFaculty</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -802,6 +810,14 @@
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetUser</servlet-name>
+        <url-pattern>/GetUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetOfferingsOfFaculty</servlet-name>
+        <url-pattern>/GetOfferingsOfFaculty</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

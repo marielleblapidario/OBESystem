@@ -40,7 +40,7 @@
                 <form action="EncodePA" method="post" name="encodePA">
                     <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                     <section class="content">
-                        <div class="box box-info">
+                        <div class="box box-success">
                             <!-- /.box-header -->
                             <div class="box-header">
                                 <h3 class="box-title">Program Attribute</h3><br>

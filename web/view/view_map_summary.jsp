@@ -40,57 +40,21 @@
                             <div class="box-body">
                                 <table id="data" class="table table-bordered">
                                     <div>
-                                        
+
                                     </div>
-                                    <tr>
-                                        <th>IGA</th>
-                                        <th>PA</th>
-                                        <th>PO</th>
-                                        <th>PI</th>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="10">IGA 1</td>
-                                        <td rowspan="6">PA 1</td>
-                                        <td rowspan="6">PO 1</td>
-                                        <td>PI 1.1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PI 1.2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PI 1.3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PI 1.4</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PI 1.5</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PI 1.6</td>
-                                    </tr>
-                                    <tr>
-                                        <td  rowspan="4">PA 2</td>
-                                        <td  rowspan="3">PO 2</td>
-                                        <td>PI 2.1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PI 2.2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PI 2.3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PO 3</td>
-                                        <td>PI 3.1</td>
-                                    </tr>
+                                    <thead>
+                                        <tr>
+                                            <th>IGA</th>
+                                            <th>PA</th>
+                                            <th>PO</th>
+                                            <th>PI</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
                                 </table>
                             </div>
-                            <div class="box-footer">  
-                                <button type="button" id="addRowButton" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
-                                <button type="button" class="btn btn-default pull-right">Cancel</button>
-                                <button type="submit" class="btn bg-green pull-right">Send for Approval</button>
-                                <button type="submit" class="btn bg-light-blue pull-right">Save</button>
+                            <div class="box-footer">
+                                <a href="/OBESystem/RedirectToSearchMapping"><button type="button" class="btn btn-default pull-right">Back</button></a>
                             </div>
                             <!-- /.box-footer -->
                         </div>

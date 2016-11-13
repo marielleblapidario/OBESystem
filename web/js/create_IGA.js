@@ -3,7 +3,11 @@ var rowCount = 0;
 var count = 0;
 
 $(document).ready(function () {
-    getAllIGA();
+    function1().done(function () {
+        function2().done(function () {
+        });
+    });
+    //getAllIGA();
     getLastIGA();
 });
 
@@ -55,15 +59,15 @@ function getLastIGA() {
                 tr.appendChild(codeIGACell);
 
                 var titleCell = document.createElement("td");
-                titleCell.innerHTML = '<div class="col-sm-10"><input type="text" name="title" class="form-control no-border" id="title' + rowCount + '" required></div>'
+                titleCell.innerHTML = '<div class="col-sm-10"><textarea onkeyup="textAreaAdjust(this)" style="border: none; outline: none; resize: none; overflow:hidden" name="title" class="form-control no-border" id="title' + rowCount + '" required></textarea></div>';
                 tr.appendChild(titleCell);
 
                 var descriptionCell = document.createElement("td");
-                descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" required></div>'
+                descriptionCell.innerHTML = '<div class="col-sm-10"><textarea onkeyup="textAreaAdjust(this)" style="border: none; outline: none; resize: none; overflow:hidden" name="description" class="form-control no-border" id="description' + rowCount + '" required></textarea></div>';
                 tr.appendChild(descriptionCell);
 
                 var remarksCell = document.createElement("td");
-                remarksCell.innerHTML = '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '"></div>'
+                remarksCell.innerHTML = '<div class="col-sm-10"><textarea onkeyup="textAreaAdjust(this)" style="border: none; outline: none; resize: none; overflow:hidden" name="remarks" class="form-control no-border" id="remarks' + rowCount + '"></textarea></div>';
                 tr.appendChild(remarksCell);
 
                 var toolsCell = document.createElement("td");
@@ -97,15 +101,15 @@ function addRow(data) {
     tr.appendChild(codeIGACell);
 
     var titleCell = document.createElement("td");
-    titleCell.innerHTML = '<div class="col-sm-10"><input type="text" name="title" class="form-control no-border" id="title' + rowCount + '" value="' + title + '" required readOnly></div>'
+    titleCell.innerHTML = '<div class="col-sm-10"><textarea onkeyup="textAreaAdjust(this)" style="border: none; outline: none;  resize: none; overflow:hidden" name="title" class="form-control no-border" id="title' + rowCount + '" required readOnly>' + title + '</textarea></div>'
     tr.appendChild(titleCell);
 
     var descriptionCell = document.createElement("td");
-    descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" value="' + description + '" required readOnly></div>'
+    descriptionCell.innerHTML = '<div class="col-sm-10"><textarea onkeyup="textAreaAdjust(this)" style="border: none; outline: none;  resize: none; overflow:hidden" name="description" class="form-control no-border" id="description' + rowCount + '" required readOnly>' + description + '</textarea></div>'
     tr.appendChild(descriptionCell);
 
     var remarksCell = document.createElement("td");
-    remarksCell.innerHTML = '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '" value="' + remarks + '" readOnly></div>'
+    remarksCell.innerHTML = '<div class="col-sm-10"><textarea onkeyup="textAreaAdjust(this)" style="border: none; outline: none; resize: none; overflow:hidden" name="remarks" class="form-control no-border" id="remarks' + rowCount + '" readOnly>' + remarks + '</textarea></div>'
     tr.appendChild(remarksCell);
 
     var toolsCell = document.createElement("td");
@@ -118,7 +122,7 @@ function addRow(data) {
 }
 
 function makeRowEditable(count) {
-    var title = 'title'+count;
+    var title = 'title' + count;
     var description = 'description' + count;
     var remarks = 'remarks' + count;
 
@@ -146,4 +150,47 @@ function deleteRow(num) {
         console.log("cancelled");
         return false;
     }
+}
+
+function textAreaAdjust(o) {
+    o.style.height = "1px";
+    o.style.height = (25 + o.scrollHeight) + "px";
+}
+
+function onTableLoad() {
+    console.log("final rowcount ", rowCount);
+    for (var x = 0; x < rowCount; x++) {
+        var description = "description" + x;
+        var remarks = "remarks" + x;
+        
+        console.log("desc: ", description);
+        console.log("remark: ", remarks);
+        document.getElementById(description).style.height = "1px";
+        document.getElementById(description).style.height = (25 + document.getElementById(description).scrollHeight) + "px";
+        document.getElementById(remarks).style.height = "1px";
+        document.getElementById(remarks).style.height = (25 + document.getElementById(remarks).scrollHeight) + "px";
+    }
+}
+
+function function1() {
+    var dfrd1 = $.Deferred();
+    setTimeout(function () {
+        // doing async stuff
+        getAllIGA();
+        console.log('task 1 in function1 is done!');
+        dfrd1.resolve();
+    }, 1000);
+
+    return dfrd1.promise();
+}
+
+function function2() {
+    var dfrd1 = $.Deferred();
+    setTimeout(function () {
+        // doing async stuff
+        onTableLoad();
+        console.log('task 1 in function2 is done!');
+        dfrd1.resolve();
+    }, 2000);
+    return dfrd1.promise();
 }

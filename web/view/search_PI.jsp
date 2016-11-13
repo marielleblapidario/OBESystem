@@ -37,7 +37,7 @@
             <div class="content-wrapper">
                 <!-- Main content -->
                 <section class="content">
-                    <div class="box box-info">
+                    <div class="box box-success">
                         <div class="box-header with-border">
                             <h3 class="box-title">Search Program for Performance Indicators</h3>
                         </div>

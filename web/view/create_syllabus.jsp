@@ -38,7 +38,7 @@
                 <!-- Main content -->
                 <section class="content">
                     <form action="EncodeAssessment" method="post" id="EncodeAssessment" name="EncodeAssessment">
-                    <div class="box box-info">
+                    <div class="box box-success">
                         <div class="box-header with-border">
                             <h3 class="box-title">Create Syllabus</h3>
                         </div>
@@ -92,7 +92,7 @@
                             </div>
                         </div>
                         <!-- Add CO -->
-                        <div class="box box-info" id="div-addCO">
+                        <div class="box box-success" id="div-addCO">
                             <div class="box-header with-border">
                                 <h4 class="box-title">Add Course Outcome</h4>
                             </div>
@@ -130,7 +130,7 @@
                         </div>
                         <!-- /add CO -->
                         <!-- Add Assessment -->
-                        <div class="box box-info" id="div-addAssessment">
+                        <div class="box box-success" id="div-addAssessment">
                             <div class="box-header with-border">
                                 <h4 class="box-title">Add Assessment</h4>
                             </div>

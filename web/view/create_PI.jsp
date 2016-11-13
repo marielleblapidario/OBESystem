@@ -40,7 +40,7 @@
                     <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                     <!-- Main content -->
                     <section class="content">
-                        <div class="box box-info">
+                        <div class="box box-success">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Create Performance Indicators</h3><br>
                                 <h5>Program: <span id = "program-title"></span></h5>
@@ -50,7 +50,7 @@
                                 <br>
                             </div>
                         </div>
-                        <div class="box box-info">
+                        <div class="box box-success">
                             <div class="box-header with-border">
                                 <label>Choose Program Outcome</label>
                                 <select id="select-PO" name="select-PO" class="form-control select2 select2-hidden-accessible" style="width: 30%;" tabindex="-1" aria-hidden="true">

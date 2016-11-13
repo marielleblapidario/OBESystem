@@ -6,24 +6,43 @@ var examaple2 = $('#example2').DataTable({
     "ordering": true,
     "info": true,
     "autoWidth": false
-}); 
+});
 var rowCount = 0;
 var arrOfferingID = [];
 var arrSyllabusID = [];
+var userID = sessionStorage.getItem("userID");
+var posID = sessionStorage.getItem("posID");
 
 $(document).ready(function () {
-    $.ajax({
-        type: "GET",
-        url: "/OBESystem/GetAllOfferings",
-        dataType: 'json',
-        success: function (data) {
-            console.log(data);
-            data.forEach(addRow);
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
+    console.log("userID: ", userID);
+    console.log("posID: ", posID);
+    if (posID == 2) {
+        $.ajax({
+            type: "GET",
+            url: "/OBESystem/GetOfferingsOfFaculty?userID=" + userID,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                data.forEach(addRow);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    } else {
+        $.ajax({
+            type: "GET",
+            url: "/OBESystem/GetAllOfferings",
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                data.forEach(addRow);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    }
 });
 
 function addRow(data) {
@@ -38,7 +57,7 @@ function addRow(data) {
     var facultyName = data.facultyName;
     var AY = data.startYear + " - " + data.endYear;
     var syllabusID = data.syllabusID;
-    
+
     console.log("rowCount: " + rowCount);
     var tools = "<button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button>\n\
 <a href=\"/OBESystem/RedirectToViewCourseOffering\"><button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>\n\
@@ -46,7 +65,7 @@ function addRow(data) {
     arrOfferingID.push(offeringID);
     arrSyllabusID.push(syllabusID);
     console.log("pushed: ", offeringID);
-    
+
     example1.row.add([codeCourse, courseTitle, AY, term, section, days, time, roomTitle, facultyName, tools]);
     example1.draw();
     rowCount++;
