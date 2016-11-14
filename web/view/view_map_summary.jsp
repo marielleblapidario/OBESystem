@@ -10,9 +10,9 @@
         <!-- Bootstrap 3.3.6 -->
         <link rel="stylesheet" href="/OBESystem/resources/bootstrap/css/bootstrap.min.css">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/OBESystem/resources/downloads/font-awesome-4.7.0/css/font-awesome.min.css">
         <!-- Ionicons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="/OBESystem/resources/downloads/ionicons-2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -28,13 +28,14 @@
                 <form action="EncodeCO" method="post" name="EncodeCO">
                     <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                     <section class="content">
-                        <div class="box box-info">
+                        <div class="box box-success">
                             <!-- /.box-header -->
                             <div class="box-header">
-                                <h3 class="box-title">Course Outcome</h3><br>
-                                <h5>Course: <span id="course-title"></span></h5>
-                                <input class="hidden" id="hidden-codeCourse" name="codeCourse">
-                                <br>
+                                <h3 class="box-title">Map Summary</h3><br>
+                                <h5>Program: <span id = "program-title"></span></h5>
+                                <input class="hidden" id="hidden-program-title" name="program-title">
+                                <h5>College: <span id = "college-title" ></span></h5>
+                                <input class="hidden" id="hidden-college-title" name="college-title">
                                 <br>
                             </div>
                             <div class="box-body">
@@ -79,6 +80,7 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!--selfmade-->
+        <script src="/OBESystem/js/store_program_search.js"></script>
         <script src="/OBESystem/js/view_map_summary.js"></script>
     </body>
 </html>

@@ -10,9 +10,9 @@
         <!-- Bootstrap 3.3.6 -->
         <link rel="stylesheet" href="/OBESystem/resources/bootstrap/css/bootstrap.min.css">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/OBESystem/resources/downloads/font-awesome-4.7.0/css/font-awesome.min.css">
         <!-- Ionicons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="/OBESystem/resources/downloads/ionicons-2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
         <!-- daterange picker -->
         <link rel="stylesheet" href="/OBESystem/resources/plugins/daterangepicker/daterangepicker.css">
@@ -91,7 +91,11 @@
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!-- Page script -->
         <script src="/OBESystem/js/map_curriculum.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/OBESystem/resources/downloads/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="/OBESystem/resources/downloads/ionicons-2.0.1/css/ionicons.min.css">
+        <script src="/OBESystem/resources/downloads/jquery-throttle-debounce-master//jquery.ba-throttle-debounce.min.js"></script>
         <script>
             $(function () {
                 //Initialize Select2 Elements

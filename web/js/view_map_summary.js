@@ -86,192 +86,196 @@ function getAllPI(program) {
     });
 }
 
-function create_table(IGA, PA, PO, PI, table_name) {
+function create_table(IGA, PA, PO, PI, table_name)
+{
 
-    var iga_len = IGA.length; //IGA is the array of IGAs
-    var pa_len = PA.length; //PA is the array of PAs
-    var po_len = PO.length; //PO is the array of POS
-    var pi_len = PI.length; //PI is the array of PIs
-    var ret_arr = [];
-    var current_iga = 0;
-    var current_pa = 0;
-    var current_pi = 0;
-    var current_po = 0;
-    var counter = 0;
-    var iga_rows = 0;
-    var pa_rows = 0;
-    var pi_rows = 0;
-    var po_rows = 0;
-    var is_after = false;
+var iga_len     = IGA.length; //IGA is the array of IGAs
+var pa_len      = PA.length; //PA is the array of PAs
+var po_len      = PO.length; //PO is the array of POS
+var pi_len      = PI.length; //PI is the array of PIs
+var ret_arr     = [];
+var current_iga = 0;
+var current_pa  = 0;
+var current_pi  = 0;
+var current_po  = 0;
+var counter     = 0;
+var iga_rows    = 0;
+var pa_rows     = 0;
+var pi_rows     = 0;
+var po_rows     = 0;
+var is_after       = false;
 
-    for (var i = 0; i < iga_len; i++)
+for(var i = 0; i < iga_len; i++)
+{
+    current_iga     = counter;
+    counter++;
+
+    iga_rows    = 0;
+    pa_rows     = 0;
+    pi_rows     = 0;
+    po_rows     = 0;
+	iga_rows++;
+
+    ret_arr.push({
+        "value"     : IGA[i]["codeIGA"],
+        "rowspan"   : 0,
+        "column"    : "IGA"
+    });
+
+	pa_rows = 0;
+    for(var j = 0; j < pa_len; j++)
     {
-        current_iga = counter;
-        counter++;
-
-        iga_rows = 0;
-        pa_rows = 0;
-        pi_rows = 0;
-        po_rows = 0;
-        iga_rows++;
-
-        ret_arr.push({
-            "value": IGA[i]["codeIGA"],
-            "rowspan": 0,
-            "column": "IGA"
-        });
-
-        pa_rows = 0;
-        for (var j = 0; j < pa_len; j++)
+        if(PA[j]["codeIGA"] == IGA[i]["codeIGA"])
         {
-            if (PA[j]["codeIGA"] == IGA[i]["codeIGA"])
+            pa_rows++;
+            current_pa = counter;
+            counter++;
+            ret_arr.push({
+                "value"     : PA[j]["codePA"],
+                "rowspan"   : 0,
+                "column"    : "PA"
+            });
+            po_rows = 0;
+            for(var k = 0; k < po_len; k++)
             {
-                pa_rows++;
-                current_pa = counter;
-                counter++;
-                ret_arr.push({
-                    "value": PA[j]["codePA"],
-                    "rowspan": 0,
-                    "column": "PA"
-                });
-                po_rows = 0;
-                for (var k = 0; k < po_len; k++)
+                if(PO[k]["codePA"] == PA[j]["codePA"])
                 {
-                    if (PO[k]["codePA"] == PA[j]["codePA"])
+                    current_po = counter;
+                    counter++;
+                    po_rows++;
+                    ret_arr.push({
+                            "value"     : PO[k]["codePO"],
+                            "rowspan"   : 0,
+                            "column"    : "PO"
+                    });
+                    pi_rows = 0;
+                    for(var l = 0; l < pi_len; l++)
                     {
-                        current_po = counter;
-                        counter++;
-                        po_rows++;
-                        ret_arr.push({
-                            "value": PO[k]["codePO"],
-                            "rowspan": 0,
-                            "column": "PO"
-                        });
-                        pi_rows = 0;
-                        for (var l = 0; l < pi_len; l++)
+                        if(PI[l]["codePO"] == PO[k]["codePO"])
                         {
-                            if (PI[l]["codePO"] == PO[k]["codePO"])
-                            {
-                                counter++;
-                                pi_rows++;
-                                ret_arr.push({
-                                    "value": PI[l]["codePI"],
-                                    "rowspan": 1,
-                                    "column": "PI"
-                                });
-                            }
-                        }
-                        if (pi_rows > 0)
-                        {
-                            ret_arr[current_po]["rowspan"] = pi_rows;
-                            ret_arr[current_pa]["rowspan"] += pi_rows;
-                            ret_arr[current_iga]["rowspan"] += pi_rows;
-                        } else
-                        {
-                            ret_arr[current_po]["rowspan"] = po_rows;
-                            ret_arr[current_pa]["rowspan"] += po_rows;
-                            ret_arr[current_iga]["rowspan"] += po_rows;
+                            counter++;
+                            pi_rows++;
+                            ret_arr.push({
+                                    "value"     : PI[l]["codePI"],
+                                    "rowspan"   : 1,
+                                    "column"    : "PI"
+                            });
                         }
                     }
-                }
-                if (po_rows == 0)
-                {
-                    ret_arr[current_pa]["rowspan"] = pa_rows;
-                    ret_arr[current_iga]["rowspan"] += pa_rows;
+					if(pi_rows > 0)
+					{
+						ret_arr[current_po]["rowspan"]      = pi_rows;
+	                    ret_arr[current_pa]["rowspan"]      += pi_rows;
+	                    ret_arr[current_iga]["rowspan"]     += pi_rows;
+					}
+					else
+					{
+						ret_arr[current_po]["rowspan"]      = 1;
+	                    ret_arr[current_pa]["rowspan"]      += 1;
+	                    ret_arr[current_iga]["rowspan"]     += 1;
+					}
                 }
             }
-        }
-        if (pa_rows == 0)
-        {
-            ret_arr[current_iga]["rowspan"] = iga_rows;
+			if(po_rows == 0)
+			{
+				ret_arr[current_pa]["rowspan"]      = 1;
+				ret_arr[current_iga]["rowspan"]     += 1;
+			}
         }
     }
-    var order = {
-        "IGA": {
-            "before": "PI",
-            "after": "PA"
+	if(pa_rows == 0)
+	{
+		ret_arr[current_iga]["rowspan"]     = 1;
+	}
+}
+var order = {
+        "IGA" : {
+            "before"    : "PI",
+            "after"     : "PA"
         },
-        "PA": {
-            "before": "IGA",
-            "after": "PO"
+        "PA" : {
+            "before"    : "IGA",
+            "after"     : "PO"
         },
-        "PO": {
-            "before": "PA",
-            "after": "PI"
+        "PO" : {
+            "before"    : "PA",
+            "after"     : "PI"
         },
-        "PI": {
-            "before": "PO",
-            "after": "IGA"
+        "PI" : {
+            "before"    : "PO",
+            "after"     : "IGA"
         }
-    };
-    var table_string = "";
-    var ret_len = ret_arr.length;
-    var is_tr = true;
-    var td_count = 0;
-    var close_tr = false;
-    for (var i = 0; i < ret_len; i++)
+};
+var table_string 	= "";
+var ret_len 		= ret_arr.length;
+var is_tr 			= true;
+var td_count        = 0;
+var close_tr        = false;
+for(var i = 0; i < ret_len; i++)
+{
+    if(close_tr)
     {
-        if (close_tr)
-        {
-            table_string += "</tr><tr>";
-            close_tr = false;
-        }
-        if (ret_arr[i]["column"] == "IGA" && is_tr == false)
-        {
-            table_string += "</tr>";
-            is_tr = true;
-            // break;
-        }
-        if (ret_arr[i]["column"] == "IGA" && is_tr == true)
-        {
-            table_string += "<tr>";
-            is_tr = false;
-        }
-        if (td_count == 4)
+        table_string += "</tr><tr>";
+        close_tr = false;
+    }
+	if(ret_arr[i]["column"] == "IGA" && is_tr == false)
+    {
+        table_string += "</tr>";
+        is_tr 		= true;
+        // break;
+    }
+    if(ret_arr[i]["column"] == "IGA" && is_tr == true)
+    {
+        table_string    += "<tr>";
+        is_tr           = false;
+    }
+    if(td_count == 4)
+    {
+        table_string += "</tr><tr>";
+        td_count    = 0;
+    }
+    else
+    {
+        if(i != 0 && order[ret_arr[i]["column"]]["before"] != ret_arr[i - 1]["column"] && is_after == false)
         {
             table_string += "</tr><tr>";
             td_count = 0;
-        } else
-        {
-            if (i != 0 && order[ret_arr[i]["column"]]["before"] != ret_arr[i - 1]["column"] && is_after == false)
-            {
-                table_string += "</tr><tr>";
-                td_count = 0;
-            }
-        }
-
-        // if(ret_arr[i]["column"] == "PI" && td_count == 0)
-        // {
-        //     table_string += "</tr><tr>";
-        //     close_tr = true;
-        // }
-        if (ret_arr[i]["column"] != "PI")
-        {
-            table_string += "<td rowspan='" + ret_arr[i]["rowspan"] + "'>" + ret_arr[i]["value"] + "</td>";
-        } else
-        {
-            table_string += "<td>" + ret_arr[i]["value"] + "</td>";
-        }
-        if (is_after == true)
-        {
-            is_after = false;
-        }
-        if (td_count != 4)
-        {
-            if (i != ret_len - 1 && order[ret_arr[i]["column"]]["after"] != ret_arr[i + 1]["column"] && ret_arr[i]["column"] != "PI" && ret_arr[i + 1]["column"] != "IGA")
-            {
-                table_string += "</tr><tr>";
-                td_count = 0;
-                is_after = true;
-            }
-        }
-        td_count++;
-        if (i == ret_len - 1)
-        {
-            table_string += "</tr><tr>";
         }
     }
-    table_name = "#" + table_name;
-    $(table_name).find('tbody').append(table_string);
+
+    // if(ret_arr[i]["column"] == "PI" && td_count == 0)
+    // {
+    //     table_string += "</tr><tr>";
+    //     close_tr = true;
+    // }
+    if(ret_arr[i]["column"] != "PI")
+    {
+        table_string += "<td rowspan='"+ ret_arr[i]["rowspan"] +"'>" + ret_arr[i]["value"] + "</td>";
+    }
+    else
+    {
+        table_string += "<td>" + ret_arr[i]["value"] + "</td>";
+    }
+    if(is_after == true)
+    {
+        is_after = false;
+    }
+    if(td_count != 4)
+    {
+        if(i != ret_len - 1 && order[ret_arr[i]["column"]]["after"] != ret_arr[i + 1]["column"] && ret_arr[i]["column"] != "PI" && ret_arr[i + 1]["column"] != "IGA")
+        {
+            table_string += "</tr><tr>";
+            td_count = 0;
+            is_after    = true;
+        }
+    }
+    td_count++;
+    if(i == ret_len - 1)
+    {
+        table_string += "</tr><tr>";
+    }
+}
+table_name = "#" + table_name;
+$(table_name).find('tbody').append(table_string);
 
 }

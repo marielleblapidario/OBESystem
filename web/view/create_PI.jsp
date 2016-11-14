@@ -10,9 +10,9 @@
         <!-- Bootstrap 3.3.6 -->
         <link rel="stylesheet" href="/OBESystem/resources/bootstrap/css/bootstrap.min.css">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/OBESystem/resources/downloads/font-awesome-4.7.0/css/font-awesome.min.css">
         <!-- Ionicons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="/OBESystem/resources/downloads/ionicons-2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
         <!-- daterange picker -->
         <link rel="stylesheet" href="/OBESystem/resources/plugins/daterangepicker/daterangepicker.css">
@@ -76,17 +76,11 @@
                                     </div>
                                 </div>
                                 <br>
-                                <h5 class="box-title pull-right">
-                                    <span id = "PO-description">12</span>
-                                    out of
-                                    <span id = "PO-description">45</span>
-                                    left to Map
-                                </h5>
                             </div>
                             <!-- /.box-footer -->
                         </div>
                         <div class="">
-                            <button type="button" class="btn btn-default pull-right">Cancel</button>
+                            <a href="/OBESystem/RedirectToSearchPI"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
                             <button type="submit" class="btn bg-light-blue pull-right">Save</button>
                         </div>
                     </section>

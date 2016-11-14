@@ -411,6 +411,10 @@
         <servlet-name>GetOfferingsOfFaculty</servlet-name>
         <servlet-class>controller.GetOfferingsOfFaculty</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RedirectToPowerBI</servlet-name>
+        <servlet-class>controller.RedirectToPowerBI</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -818,6 +822,10 @@
     <servlet-mapping>
         <servlet-name>GetOfferingsOfFaculty</servlet-name>
         <url-pattern>/GetOfferingsOfFaculty</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RedirectToPowerBI</servlet-name>
+        <url-pattern>/RedirectToPowerBI</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
