@@ -5,6 +5,7 @@
  */
 package controller;
 
+import DAO.AssessmentDAO;
 import DAO.GradeCoDAO;
 import DAO.GradeDAO;
 import DAO.StudentDAO;
@@ -17,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Assessment;
 import model.Grade;
 import model.GradeCO;
 import model.Student;
@@ -44,10 +46,8 @@ public class EncodeStudentGrades extends BaseServlet {
             GradeDAO gradeDAO = new GradeDAO();
             boolean x = true;
 
-            ArrayList<Integer> arrStudentID = new ArrayList<>();
             ArrayList<Integer> arrOfferingID = new ArrayList<>();
-            ArrayList<String> arrCodeAT = new ArrayList<>();
-            ArrayList<Double> arrGrade = new ArrayList<>();
+            ArrayList<Grade> arrTempGrade = new ArrayList<>();
             int syllabusID = -1;
 
             Object obj;
@@ -63,32 +63,52 @@ public class EncodeStudentGrades extends BaseServlet {
                 String studentID = (String) jsonObject.get("studentID");
                 String offeringID = (String) jsonObject.get("offeringID");
                 String syllabusIDs = (String) jsonObject.get("syllabusID");
-                String codeAT = (String) jsonObject.get("codeAT");
+                String type = (String) jsonObject.get("type");
                 String grade = (String) jsonObject.get("grade");
                 if (!studentID.isEmpty()) {
-                    arrStudentID.add(Integer.parseInt(studentID));
-                    arrOfferingID.add(Integer.parseInt(offeringID));
-                    arrCodeAT.add(codeAT);
-                    arrGrade.add(Double.parseDouble(grade));
+                    Grade temp = new Grade();
+                    temp.setStudentID(Integer.parseInt(studentID));
+                    temp.setOfferingID(Integer.parseInt(offeringID));
+                    temp.setSyllabusID(syllabusID);
+                    temp.setTypeName(type);
+                    temp.setGrade(Double.parseDouble(grade));
 
+                    arrTempGrade.add(temp);
+                    arrOfferingID.add(Integer.parseInt(offeringID));
                     syllabusID = Integer.parseInt(syllabusIDs);
                 }
             }
             boolean delete = gradeDAO.deleteGrades(arrOfferingID.get(0));
             System.out.println("deleted: " + delete);
+            System.out.println("syllabusID: " + syllabusID);
+            AssessmentDAO assessDAO = new AssessmentDAO();
+            ArrayList<Assessment> arrAssess = new ArrayList<>();
+            //get all the types used under the syllabus
+            arrAssess = assessDAO.getTypesUnderSyllabus(syllabusID);
 
-            for (int y = 0; y < arrStudentID.size(); y++) {
+            System.out.println("arrAssess size: " + arrAssess.size());
+            System.out.println("arrTempeGrade size: " + arrTempGrade.size());
+
+            for (int y = 0; y < arrTempGrade.size(); y++) {
                 Grade temp = new Grade();
-                temp.setStudentID(arrStudentID.get(y));
-                temp.setOfferingID(arrOfferingID.get(y));
-                temp.setGrade(arrGrade.get(y));
-                int id = gradeDAO.getAssessmentID(syllabusID, arrCodeAT.get(y));
-                temp.setAssessmentID(id);
-                if (gradeDAO.encodeGrade(temp)) {
-                } else {
-                    x = false;
+                temp.setStudentID(arrTempGrade.get(y).getStudentID());
+                temp.setOfferingID(arrTempGrade.get(y).getOfferingID());
+                //sets the grades of each assessment
+                for (int a = 0; a < arrAssess.size(); a++) {
+                    System.out.println("typeName: " + arrAssess.get(a).getTypeName()
+                            + " vs " + arrTempGrade.get(y).getTypeName());
+                    if (arrTempGrade.get(y).getTypeName().equalsIgnoreCase(arrAssess.get(a).getTypeName())) {
+                        System.out.println("entered if");
+                        temp.setAssessmentID(arrAssess.get(a).getAssessmentID());
+                        temp.setGrade(arrTempGrade.get(y).getGrade());
+                        if (gradeDAO.encodeGrade(temp)) {
+                        } else {
+                            x = false;
+                        }
+                    }
                 }
             }
+
             //calculates and encode the CO grade based on the assessment grade
             GradeCoDAO gradeCoDAO = new GradeCoDAO();
             if (gradeCoDAO.deleteGrades(arrOfferingID.get(0))) {
@@ -123,7 +143,7 @@ public class EncodeStudentGrades extends BaseServlet {
                         }
                         System.out.println("co grade: " + gradeCO);
                         gradeCO = gradeCO - (gradeCO % .5);
-                        if(gradeCO < 1){
+                        if (gradeCO < 1) {
                             gradeCO = 0;
                         }
                         GradeCO temp = new GradeCO();

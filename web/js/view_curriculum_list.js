@@ -8,8 +8,16 @@ var examaple2 = $('#example2').DataTable({
     "autoWidth": false
 });
 var rowCount = 0;
+var posID = sessionStorage.getItem("posID");
+var userID = sessionStorage.getItem("userID");
+console.log("posID: ", posID);
+console.log("userID: ", userID);
 
 $(document).ready(function () {
+    if (posID == 6 || posID == 1) {
+    } else {
+        $('#button-new').hide();
+    }
     $.ajax({
         type: "GET",
         url: "/OBESystem/GetAllCurriculum",
@@ -33,13 +41,18 @@ function addRow(data) {
     var startYear = data.startYear;
     var endYear = data.endYear;
     var contributor = data.contributorName;
+    var tools;
     
     console.log("rowCount: " + rowCount);
-
-    var tools = "<a href=\"/OBESystem/RedirectToEditCurriculum\"><button onclick=\"save('" + codeCurriculum + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>" +
+    if (posID == 6 || posID == 1) {
+        tools = "<a href=\"/OBESystem/RedirectToEditCurriculum\"><button onclick=\"save('" + codeCurriculum + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>" +
             "<a href=\"/OBESystem/RedirectToViewCurriculum\"><button  onclick=\"save('" + codeCurriculum + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>" +
             "<a href=\"/OBESystem/RedirectToMapCurriculum\"><button onclick=\"save('" + codeCurriculum + "')\" type=\"button\" class=\"btn bg-orange btn-xs\"><i class=\"fa  fa-map-o\"></i></button></a>" +
             "<button type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>";
+    
+    } else {
+        tools = "<a href=\"/OBESystem/RedirectToViewCurriculum\"><button  onclick=\"save('" + codeCurriculum + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
+    }
     
     example1.row.add([codeCurriculum, title, programName, collegeName, startYear, endYear, contributor, tools]);
     example1.draw();

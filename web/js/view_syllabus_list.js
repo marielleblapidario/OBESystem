@@ -12,8 +12,16 @@ var arrSyllabusID = [];
 var arrCurriculumID = [];
 var arrCourseID = [];
 var arrTerm = [];
+var posID = sessionStorage.getItem("posID");
+var userID = sessionStorage.getItem("userID");
+console.log("posID: ", posID);
+console.log("userID: ", userID);
 
 $(document).ready(function () {
+    if (posID == 7 || posID == 1) {
+    } else {
+        $('#button-new').hide();
+    }
     $.ajax({
         type: "GET",
         url: "/OBESystem/GetAllSyllabus",
@@ -35,10 +43,16 @@ function addRow(data) {
     var curriculumTitle = data.curriculumTitle;
     var syllabusID = data.syllabusID;
     var AY = data.startYear + " - " + data.endYear;
+    var tools;
 
-    var tools = "<button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button>\n\
+    if (posID == 7 || posID == 1) {
+        tools = "<button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button>\n\
 <a href=\"/OBESystem/RedirectToViewSyllabus\"><button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>\n\
-<button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>"
+<button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>";
+    } else {
+        tools = "<a href=\"/OBESystem/RedirectToViewSyllabus\"><button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
+    }
+
     arrSyllabusID.push(syllabusID);
 
     console.log("rowCount: " + rowCount);

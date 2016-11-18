@@ -347,10 +347,10 @@ function AddAssessment() {
             temp = temp - addWeight;
             console.log("temp: ", temp);
             if (temp < 0) {
-                alert("invalid input!");
                 var denied = $("#weight_" + thisRowCountA).val();
                 console.log("denied:", denied);
                 temp = temp + parseInt(denied);
+                alert("invalid input! You can only input a value no more than: " + temp);
                 $("#weight_" + thisRowCountA).val(0);
             }
             for (var b = 0; b < arrRowCountA.length; b++) {
@@ -387,10 +387,10 @@ function AddAssessment() {
             temp = temp - addWeight;
             console.log("temp: ", temp);
             if (temp < 0) {
-                alert("invalid input!");
-                var denied = $("#weight_" + thisRowCountA).val();
+                 var denied = $("#weight_" + thisRowCountA).val();
                 console.log("denied:", denied);
                 temp = temp + parseInt(denied);
+                alert("invalid input! You can only input a value no more than: " + temp);
                 $("#weight_" + thisRowCountA).val(0);
             }
             for (var b = 0; b < arrRowCountA.length; b++) {

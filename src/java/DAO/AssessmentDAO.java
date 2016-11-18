@@ -119,6 +119,36 @@ public class AssessmentDAO {
         return null;
     }
 
+    public ArrayList<Assessment> getTypesUnderSyllabus(int syllabusID) throws ParseException {
+        ArrayList<Assessment> newAssessment = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT T.assessmentID, RT.typeID, RT.type\n"
+                    + "FROM assessment T\n"
+                    + "JOIN refType RT \n"
+                    + "ON T.type = RT.typeID "
+                    + "WHERE syllabusID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, syllabusID);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Assessment temp = new Assessment();
+                temp.setAssessmentID(rs.getInt("assessmentID"));
+                temp.setType(rs.getInt("typeID"));
+                temp.setTypeName(rs.getString("type"));
+                newAssessment.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return newAssessment;
+        } catch (SQLException ex) {
+            Logger.getLogger(AssessmentDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 //    public boolean mapAToOffering(Assessment newOffering) {
 //        try {
 //            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -170,6 +200,33 @@ public class AssessmentDAO {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 String assessment = rs.getString("codeAT");
+                arrAssessment.add(assessment);
+            }
+            pstmt.close();
+            conn.close();
+            return arrAssessment;
+        } catch (SQLException ex) {
+            Logger.getLogger(SyllabusDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ArrayList<String> getAllTypesInSyllabus(int syllabusID) throws ParseException {
+        ArrayList<String> arrAssessment = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT RT.Type "
+                    + "FROM assessment A "
+                    + "JOIN refType RT "
+                    + "ON A.type = RT.typeID "
+                    + "WHERE syllabusID = ? "
+                    + "GROUP BY A.type;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, syllabusID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String assessment = rs.getString("Type");
                 arrAssessment.add(assessment);
             }
             pstmt.close();

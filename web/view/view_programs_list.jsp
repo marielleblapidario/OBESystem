@@ -41,7 +41,7 @@
                                 <div class="box-header">
                                     <h3 class="box-title">View Programs List</h3>
                                     <br>
-                                    <a href="/OBESystem/ViewCreateProgram"><button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New Program</button></a>
+                                    <a href="/OBESystem/ViewCreateProgram"><button id="button-new-program" type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New Program</button></a>
 
                                 </div>
 

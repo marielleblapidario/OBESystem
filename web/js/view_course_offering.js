@@ -17,9 +17,11 @@ var divTable = $('#div-students');
 var faculty = $('#faculty');
 var arrEnrolledStudents = [];
 var arrAssessment = [];
+var arrTypes = [];
 var arrGrades = [];
 var arrGradesDisplay = [];
 var arrStudentData = [];
+var arrCOGrades = [];
 var strSection;
 var strTerm;
 var strCourse;
@@ -99,6 +101,7 @@ function getEnrolledStudents(offeringID) {
                 arrEnrolledStudents.push(student);
             }
             getAssessments(syllabusID);
+            getTypes(syllabusID);
         },
         error: function (response) {
             console.log(response);
@@ -120,7 +123,29 @@ function getAssessments(syllabusID) {
             for (var x = 0; x < data.length; x++) {
                 arrAssessment.push(data[x]);
             }
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+//get all types under the syllabus
+function getTypes(syllabusID) {
+    arrType = [];
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/GetTypeForFormat?syllabusID=" + syllabusID,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            //pushed the array of Strings (e.g. AS - 01, AS -02, .....
+            console.log(data.length);
+            for (var x = 0; x < data.length; x++) {
+                arrType.push(data[x]);
+            }
             getGrades(offeringID);
+            getCoGrades(offeringID);
         },
         error: function (response) {
             console.log(response);
@@ -148,6 +173,25 @@ function getGrades(offeringID) {
                 tableHeader();
                 divTable.show();
             }
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+function getCoGrades(offeringID) {
+    arrCOGrades = [];
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/GetAllgradesCO?offeringID=" + offeringID,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            for (var x = 0; x < data.length; x++) {
+                arrGradesDisplay.push(data[x]);
+            }
+            console.log("getGrades check arrGradesDisplay size: " + arrCOGrades.length);
         },
         error: function (response) {
             console.log(response);
@@ -200,10 +244,10 @@ function convertToCSV() {
             row += index + ',';
         }
         var x;
-        //Added by Raji, this loop adds headers from arrAssessment
-        for (x in arrAssessment)
+        //Added by Raji, this loop adds headers from arrType
+        for (x in arrType)
         {
-            row += arrAssessment[x] + ',';
+            row += arrType[x] + ',';
         }
 
         row = row.slice(0, -1);
@@ -425,6 +469,7 @@ function uploadStudents(evt)
 // Method that reads and posts the assessments csv file
 function uploadAssessments(evt)
 {
+    arrAssessments =[];
     arrGrades = [];
     if (!browserSupportFileUpload())
     {
@@ -461,10 +506,10 @@ function uploadAssessments(evt)
                 for (var j = 4; j < headers.length; j++)
                 {
                     if (studentData[i - 1].studentID) {
-                        var tempCodeAT = headers[j].replace('\r', '').replace('\n', '');
+                        var tempType = headers[j].replace('\r', '').replace('\n', '');
                         var tempGrade = currentline[j].replace('\r', '').replace('\n', '');
                         var grades = {studentID: studentData[(i - 1)].studentID,
-                            offeringID: offeringID, codeAT: tempCodeAT, grade: tempGrade,
+                            offeringID: offeringID, type: tempType, grade: tempGrade,
                             syllabusID: syllabusID};
                         arrGrades.push(grades);
                     }

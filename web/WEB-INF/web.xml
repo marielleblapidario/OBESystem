@@ -415,6 +415,14 @@
         <servlet-name>RedirectToPowerBI</servlet-name>
         <servlet-class>controller.RedirectToPowerBI</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetTypeForFormat</servlet-name>
+        <servlet-class>controller.GetTypeForFormat</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllgradesCO</servlet-name>
+        <servlet-class>controller.GetAllgradesCO</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -826,6 +834,14 @@
     <servlet-mapping>
         <servlet-name>RedirectToPowerBI</servlet-name>
         <url-pattern>/RedirectToPowerBI</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetTypeForFormat</servlet-name>
+        <url-pattern>/GetTypeForFormat</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllgradesCO</servlet-name>
+        <url-pattern>/GetAllgradesCO</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -3,6 +3,10 @@ var programCode = sessionStorage.getItem("programCode");
 var rowCount = 0;
 var count = 0;
 var arrIGA = [];
+var posID = sessionStorage.getItem("posID");
+var userID = sessionStorage.getItem("userID");
+console.log("posID: ", posID);
+console.log("userID: ", userID);
 
 $(document).ready(function () {
     getAllIGA();
@@ -12,6 +16,10 @@ $(document).ready(function () {
     });
     //getAllPA(programCode);
     getLastPA(programCode);
+    if(posID == 1 || posID == 6){} else {
+        $('#save').hide();
+        $('#addRowButton').hide();
+    }
 });
 
 function getAllPA(program) {
@@ -141,8 +149,12 @@ function addRow(data) {
     tr.appendChild(remarksCell);
 
     var toolsCell = document.createElement("td");
-    toolsCell.innerHTML = '<button type="button" id="edit' + rowCount + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"> </i></button>' +
+    if(posID == 1 || posID == 6){
+        toolsCell.innerHTML = '<button type="button" id="edit' + rowCount + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"> </i></button>' +
             '<button type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button>';
+    } else {
+        toolsCell.innerHTML = '';
+    }
     tr.appendChild(toolsCell);
 
     table.append(tr);

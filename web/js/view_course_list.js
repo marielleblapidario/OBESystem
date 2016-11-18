@@ -7,8 +7,16 @@ var examaple2 = $('#example2').DataTable({
     "info": true,
     "autoWidth": false
 });
+var posID = sessionStorage.getItem("posID");
+var userID = sessionStorage.getItem("userID");
+console.log("posID: ", posID);
+console.log("userID: ", userID);
 
 $(document).ready(function () {
+    if (posID == 7 || posID == 1) {
+    } else {
+        $('#button-new').hide();
+    }
     $.ajax({
         type: "GET",
         url: "/OBESystem/GetAllCourseList",
@@ -29,13 +37,17 @@ function addRow(data) {
     var courseID = data.courseID;
     var title = data.title;
     var contributorName = data.contributorName;
+    var tools;
 
     console.log("courseID: " + courseID);
-
-    var tools ="<a href=\"/OBESystem/RedirectToEditCourse\"><button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>\n\
+    if (posID == 7 || posID == 1) {
+         tools = "<a href=\"/OBESystem/RedirectToEditCourse\"><button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>\n\
 <a href=\"/OBESystem/RedirectToViewCourse\"><button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>\n\
 <button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>";
-    example1.row.add([codeCourse, title, contributorName, tools]);
+    } else {
+         var tools = "<a href=\"/OBESystem/RedirectToViewCourse\"><button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
+    }
+   example1.row.add([codeCourse, title, contributorName, tools]);
     example1.draw();
 
 }

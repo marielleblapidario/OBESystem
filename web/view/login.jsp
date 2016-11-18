@@ -65,7 +65,6 @@
         <script src="/OBESystem/resources/bootstrap/js/bootstrap.min.js"></script>
         <!-- iCheck -->
         <script src="/OBESystem/resources/plugins/iCheck/icheck.min.js"></script>
-        <script src="/OBESystem/js/login.js"></script>
         <script>
             $(function () {
                 $('input').iCheck({

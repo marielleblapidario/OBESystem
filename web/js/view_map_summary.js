@@ -222,7 +222,7 @@ for(var i = 0; i < ret_len; i++)
     {
         table_string += "</tr>";
         is_tr 		= true;
-        // break;
+        td_count    = 0;
     }
     if(ret_arr[i]["column"] == "IGA" && is_tr == true)
     {

@@ -25,6 +25,8 @@ public class Assessment {
     private int startYear;
     private int endYear;
     
+    private String typeName;
+    
     
     /**
      * @return the curriculumID
@@ -220,6 +222,20 @@ public class Assessment {
      */
     public void setType(int type) {
         this.type = type;
+    }
+
+    /**
+     * @return the typeName
+     */
+    public String getTypeName() {
+        return typeName;
+    }
+
+    /**
+     * @param typeName the typeName to set
+     */
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
     
 }

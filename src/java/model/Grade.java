@@ -18,6 +18,8 @@ public class Grade {
     
     private int coID;
     private double weight;
+    private int syllabusID;
+    private String typeName;
 
     /**
      * @return the studentID
@@ -115,5 +117,33 @@ public class Grade {
      */
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    /**
+     * @return the syllabusID
+     */
+    public int getSyllabusID() {
+        return syllabusID;
+    }
+
+    /**
+     * @param syllabusID the syllabusID to set
+     */
+    public void setSyllabusID(int syllabusID) {
+        this.syllabusID = syllabusID;
+    }
+
+    /**
+     * @return the typeName
+     */
+    public String getTypeName() {
+        return typeName;
+    }
+
+    /**
+     * @param typeName the typeName to set
+     */
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }

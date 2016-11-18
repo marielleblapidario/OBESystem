@@ -39,9 +39,9 @@
                             <!-- /.box -->
                             <div class="box box-success">
                                 <div class="box-header">
-                                    <h3 class="box-title">View Course Offerings List</h3>
+                                    <h3 class="box-title">View Courses for Enrollment List</h3>
                                     <br>
-                                    <a href="/OBESystem/RedirectToChooseSyllabus"><button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New Course Offering</button></a>
+                                    <a href="/OBESystem/RedirectToChooseSyllabus"><button id="button-new" type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New Course for Enrollment</button></a>
 
                                 </div>
 

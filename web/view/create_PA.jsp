@@ -77,7 +77,7 @@
                             <div class="box-footer">  
                                 <button id="addRowButton" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
                                 <a href="/OBESystem/RedirectToSearchPA"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
-                                <button type="submit" class="btn bg-light-blue pull-right">Save</button>
+                                <button id="save" type="submit" class="btn bg-light-blue pull-right">Save</button>
                             </div>
                             <!-- /.box-footer -->
                         </div>
@@ -101,7 +101,7 @@
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.extensions.js"></script>
         <!-- date-range-picker -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-        <script src="/OBESystem/plugins/daterangepicker/daterangepicker.js"></script>
+        <script src="/OBESystem/resources/plugins/daterangepicker/daterangepicker.js"></script>
         <!-- bootstrap datepicker -->
         <script src="/OBESystem/resources/plugins/datepicker/bootstrap-datepicker.js"></script>
         <!-- bootstrap color picker -->

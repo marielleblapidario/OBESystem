@@ -81,7 +81,7 @@
                         </div>
                         <div class="">
                             <a href="/OBESystem/RedirectToSearchPI"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
-                            <button type="submit" class="btn bg-light-blue pull-right">Save</button>
+                            <button id="save" type="submit" class="btn bg-light-blue pull-right">Save</button>
                         </div>
                     </section>
                 </form>

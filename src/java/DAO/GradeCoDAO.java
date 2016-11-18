@@ -61,4 +61,42 @@ public class GradeCoDAO {
         }
         return false;
     }
+    
+    public ArrayList<GradeCO> getAllCOGradesOfSection(int offeringID) throws ParseException {
+        ArrayList<GradeCO> arrGrade = new ArrayList<>();
+
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT GC.studentID, S.lastName, S.firstName, S.middleName, "
+                    + "C.codeCO, GC.gradeCO\n"
+                    + "FROM gradeco GC\n"
+                    + "JOIN co C \n"
+                    + "ON GC.coID = C.coID \n"
+                    + "JOIN student S \n"
+                    + "ON GC.studentID = S.studentID\n"
+                    + "WHERE offeringID = ?\n"
+                    + "ORDER BY S.lastName ASC, S.firstName ASC, S.middleName ASC, C.codeCO ASC;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, offeringID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                GradeCO grade = new GradeCO();
+                grade.setStudentID(rs.getInt("studentID"));
+                grade.setLastName(rs.getString("lastName"));
+                grade.setFirstName(rs.getString("firstName"));
+                grade.setMiddleName(rs.getString("middleName"));
+                grade.setCodeCO(rs.getString("codeCO"));
+                grade.setGradeCO(rs.getDouble("gradeCO"));
+                arrGrade.add(grade);
+            }
+            pstmt.close();
+            conn.close();
+            return arrGrade;
+        } catch (SQLException ex) {
+            Logger.getLogger(GradeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

@@ -1,6 +1,14 @@
 var codeProgram = sessionStorage.getItem("codeProgram");
+var posID = sessionStorage.getItem("posID");
+var userID = sessionStorage.getItem("userID");
+console.log("posID: ", posID);
+console.log("userID: ", userID);
 
 $(document).ready(function () {
+    if (posID == 6 || posID == 1) {
+    } else {
+        $('#edit').hide();
+    }
     console.log("codeProgram: " + codeProgram);
     getSpecificProgram(codeProgram);
 

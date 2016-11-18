@@ -41,7 +41,7 @@
                                 <div class="box-header">
                                     <h3 class="box-title">View Syllabus List</h3>
                                     <br>
-                                    <a href="/OBESystem/RedirectToCreateSyllabus"><button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New Syllabus</button></a>
+                                    <a href="/OBESystem/RedirectToCreateSyllabus"><button type="button" id="button-new" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New Syllabus</button></a>
 
                                 </div>
 

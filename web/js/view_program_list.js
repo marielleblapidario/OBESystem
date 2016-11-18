@@ -8,8 +8,16 @@ var examaple2 = $('#example2').DataTable({
     "autoWidth": false
 });
 var rowCount = 0;
+var posID = sessionStorage.getItem("posID");
+var userID = sessionStorage.getItem("userID");
+console.log("posID: ", posID);
+console.log("userID: ", userID);
 
 $(document).ready(function () {
+    if (posID == 6 || posID == 1) {
+    } else {
+        $('#button-new-program').hide();
+    }
     $.ajax({
         type: "GET",
         url: "/OBESystem/ViewProgramList",
@@ -31,12 +39,18 @@ function addRow(data) {
     var collegeName = data.collegeName;
     console.log("college name: " + collegeName);
     var contributorName = data.contributorName;
+    var tools;
 
     console.log("rowCount: " + rowCount);
 
-    var tools = "<a href=\"/OBESystem/RedirectToEditProgram\"><button onclick=\"save('" + codeProgram + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>\n\
+    if (posID == 6 || posID == 1) {
+        tools = "<a href=\"/OBESystem/RedirectToEditProgram\"><button onclick=\"save('" + codeProgram + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>\n\
  <a href=\"/OBESystem/RedirectToViewProgram\"><button  onclick=\"save('" + codeProgram + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>\n\
 <button type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>";
+    } else {
+        tools = "<a href=\"/OBESystem/RedirectToViewProgram\"><button  onclick=\"save('" + codeProgram + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
+    }
+
     example1.row.add([codeProgram, title, collegeName, contributorName, tools]);
     example1.draw();
     rowCount++;

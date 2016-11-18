@@ -14,6 +14,11 @@ public class GradeCO {
     private int offeringID;
     private int coID;
     private double gradeCO;
+    
+    private String codeCO;
+    private String lastName;
+    private String firstName;
+    private String middleName;
 
     /**
      * @return the studentID
@@ -69,5 +74,61 @@ public class GradeCO {
      */
     public void setGradeCO(double gradeCO) {
         this.gradeCO = gradeCO;
+    }
+
+    /**
+     * @return the codeCO
+     */
+    public String getCodeCO() {
+        return codeCO;
+    }
+
+    /**
+     * @param codeCO the codeCO to set
+     */
+    public void setCodeCO(String codeCO) {
+        this.codeCO = codeCO;
+    }
+
+    /**
+     * @return the lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * @param lastName the lastName to set
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * @return the firstName
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * @param firstName the firstName to set
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * @return the middleName
+     */
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    /**
+     * @param middleName the middleName to set
+     */
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 }

@@ -40,22 +40,22 @@
                     <section class="content">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">View Course Offering</h3>
+                                <h3 class="box-title">View Specific Course Section</h3>
                                 <br>
                                 <div class="btn-group-vertical pull-left">
-                                    <button id="grades-format" type="button" class="btn btn-default"><i class="fa  fa-download"></i>  grades format</button>
-                                    <button id="students-format" type="button" class="btn btn-default"><i class="fa  fa-download"></i>  student list format</button>
+                                    <button id="grades-format" type="button" class="btn btn-default"><i class="fa  fa-download"></i>  Encode Grades Template</button>
+                                    <button id="download-co" type="button" class="btn btn-default"><i class="fa  fa-download"></i>  View CO Grades</button>
                                 </div>
                                 <div class="btn-group-vertical pull-right">
-                                    <div class ="form-group">
-                                        <label class="ontrol-label">Grades Upload</label>
-                                        <input id ="grades-upload" type="file">
-                                         <button id="grades-save" type="button" class="btn btn-default">save</button>
-                                    </div>
                                     <div class="form-group">
                                         <label class="control-label">Student List Upload</label>
                                         <input id="students-upload" type="file">
                                          <button id="students-save" type="button" class="btn btn-default">save</button>
+                                    </div>
+                                    <div class ="form-group">
+                                        <label class="ontrol-label">Grades Upload</label>
+                                        <input id ="grades-upload" type="file">
+                                         <button id="grades-save" type="button" class="btn btn-default">save</button>
                                     </div>
                                 </div>
                             </div>

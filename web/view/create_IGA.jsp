@@ -37,6 +37,8 @@
                             </div>
                             <!--hidden values -->
                             <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
+                            <input type="hidden" id="posID" value="${login.posID}" />
+                            <input type="hidden" id="userID" value="${login.userID}" />
                             <!--encoding IGA table-->
                             <div class="box-body table-responsive">
                                 <table id="data" class="table table-hover">

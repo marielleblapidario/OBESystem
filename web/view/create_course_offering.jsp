@@ -40,7 +40,7 @@
                     <section class="content">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Create Course Offering</h3>
+                                <h3 class="box-title">Create Course for Enrollment</h3>
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->

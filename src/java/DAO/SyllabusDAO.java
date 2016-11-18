@@ -100,7 +100,7 @@ public class SyllabusDAO {
                     + "C.title as 'curriculumTitle', CE.title as 'courseTitle'\n"
                     + "FROM syllabus S \n"
                     + "JOIN curriculum  C \n"
-                    + "ON S.curriculumID = S.curriculumID\n"
+                    + "ON S.curriculumID = C.curriculumID\n"
                     + "JOIN course CE \n"
                     + "ON S.courseID = CE.courseID\n"
                     + "WHERE S.syllabusID = ?;";

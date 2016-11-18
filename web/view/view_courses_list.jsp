@@ -41,7 +41,7 @@
                                 <div class="box-header">
                                     <h3 class="box-title">View Courses List</h3>
                                     <br>
-                                    <a href="/OBESystem/ViewCreateCourse"><button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New Course</button></a>
+                                    <a href="/OBESystem/ViewCreateCourse"><button type="button" id="button-new" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> New Course</button></a>
 
                                 </div>
 

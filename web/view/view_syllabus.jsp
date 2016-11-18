@@ -114,9 +114,9 @@
                                     <tr>
                                         <th>Code</th>
                                         <th>Assessment</th>
-                                        <th>Course Outcome</th>
+                                        <th>Course Outcome (CO)</th>
                                         <th>Description</th>
-                                        <th>Weight</th>
+                                        <th>Weight of Assessment to CO</th>
                                     </tr>
                                 </table>
                                 <br>

@@ -135,6 +135,7 @@
                                 <h4 class="box-title">Add Assessment</h4>
                             </div>
                             <div class="box-body table-responsive">
+                                <h6>*enter the weight of each assessment to the corresponding CO assigned to it. The sum of the assessment weights under a CO should not exceed 100, else the system will alert you of the invalid input. (e.g. CO-01 has AS-01 and AS-03 mapped to it. AS-01 has a weight of 40. AS-03 has a weight of 60. The sum of these two equals 100.)</h6>
                                 <table id="data-assessment" class="table table-hover">
                                     <tr>
                                         <th>Code</th>
@@ -145,7 +146,7 @@
                                         </th>
                                         <th>
                                             <div class="col-sm-10">
-                                                Course Outcome
+                                                Course Outcome (CO)
                                             </div>
                                         </th>
                                         <th>
@@ -155,12 +156,12 @@
                                         </th>
                                         <th>
                                             <div class="col-sm-10">
-                                                Weight
+                                                Weight of Assessment to CO
                                             </div>
                                         </th>
                                         <th>
                                             <div class="col-sm-10">
-                                                Left Weight
+                                                Remaining Weight to CO
                                             </div>
                                         </th>
                                         <th>Tools</th>
@@ -169,7 +170,7 @@
                                 <br>
                             </div>
                             <!-- /.box-body -->
-                            <div class="box-footer">  
+                            <div class="box-footer">
                                 <button id="add-assessment" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
                                 <button type="button" class="btn btn-default pull-right">Cancel</button>
                                 <button id="save-assessment" type="submit" class="btn bg-light-blue pull-right">Save</button>

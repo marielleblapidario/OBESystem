@@ -5,8 +5,17 @@ var rowCount = 0;
 var count = 0;
 var dec = 0;
 var lastCodeIGA;
+var posID = sessionStorage.getItem("posID");
+var userID = sessionStorage.getItem("userID");
+console.log("posID: ", posID);
+console.log("userID: ", userID);
 
 $(document).ready(function () {
+    if (posID == 1 || posID == 6) {
+    } else {
+        $('#save').hide();
+        $('#addRowButton').hide();
+    }
     dropDown.change(function () {
         inputs.html("");
         //inputs.remove();
@@ -15,7 +24,14 @@ $(document).ready(function () {
         dec = 0;
         codePO = dropDown.val();
         console.log("newcodePO: " + codePO);
-        getAllPI(codePO);
+        if (posID == 1 || posID == 6) {
+            getAllPI(codePO);
+        } else {
+            function1().done(function () {
+                function2().done(function () {
+                });
+            });
+        }
         getLastPI(codePO);
     });
     $('#addRowButton').click(function () {
@@ -92,21 +108,33 @@ function getAllPI(codePO) {
 function addRow(data) {
     var codePI = data.codePI;
     var description = data.description;
+    var div;
 
     console.log("rowCount: " + rowCount);
 
-    var div = '<div id="inputs' + rowCount + '" >' +
-            '<span id = "codePI">' + codePI + '</span>' +
-            '<input class="hidden" name="codePI" value="' + codePI + '">' +
-            '<div class="input-group input-group-sm">' +
-            '<input name="description" id="description' + rowCount + '" type="text" class="form-control" value="' + description + '" readOnly>' +
-            '<span class="input-group-btn">' +
-            '<button type="button" class="btn bg-green btn-flat" onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"></i></button>' +
-            '<button onClick="deleteRow(' + rowCount + ')" type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button>' +
-            '</span>' +
-            '</div>' +
-            '<br>' +
-            '</div>';
+    if (posID == 1 || posID == 6) {
+        div = '<div id="inputs' + rowCount + '" >' +
+                '<span id = "codePI">' + codePI + '</span>' +
+                '<input class="hidden" name="codePI" value="' + codePI + '">' +
+                '<div class="input-group input-group-sm">' +
+                '<input name="description" id="description' + rowCount + '" type="text" class="form-control" value="' + description + '" readOnly>' +
+                '<span class="input-group-btn">' +
+                '<button type="button" class="btn bg-green btn-flat" onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"></i></button>' +
+                '<button onClick="deleteRow(' + rowCount + ')" type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button>' +
+                '</span>' +
+                '</div>' +
+                '<br>' +
+                '</div>';
+    } else {
+        div = '<div id="inputs' + rowCount + '" >' +
+                '<span id = "codePI">' + codePI + '</span>' +
+                '<input class="hidden" name="codePI" value="' + codePI + '">' +
+                '<br>' +
+                '</div>'+
+                '<div>' +
+                '<textarea class="form-control" width="100%" name="description" id="description' + rowCount + '" style="border: none; outline: none; resize: none; overflow:hidden" readOnly>' + description + '</textArea>' +
+                '</div>';
+    }
     inputs.append(div);
     rowCount++;
 }
@@ -133,4 +161,38 @@ function makeRowEditable(count) {
     } else {
         document.getElementById(description).readOnly = true;
     }
+}
+
+function onTableLoad() {
+    console.log("final rowcount ", rowCount);
+    for (var x = 0; x < rowCount; x++) {
+        var description = "description" + x;
+
+        console.log("desc: ", description);
+        document.getElementById(description).style.height = "1px";
+        document.getElementById(description).style.height = (25 + document.getElementById(description).scrollHeight) + "px";
+    }
+}
+
+function function1() {
+    var dfrd1 = $.Deferred();
+    setTimeout(function () {
+        // doing async stuff
+        getAllPI(codePO);
+        console.log('task 1 in function1 is done!');
+        dfrd1.resolve();
+    }, 1000);
+
+    return dfrd1.promise();
+}
+
+function function2() {
+    var dfrd1 = $.Deferred();
+    setTimeout(function () {
+        // doing async stuff
+        onTableLoad();
+        console.log('task 1 in function2 is done!');
+        dfrd1.resolve();
+    }, 2000);
+    return dfrd1.promise();
 }

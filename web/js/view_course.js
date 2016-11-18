@@ -1,6 +1,10 @@
 var courseID = sessionStorage.getItem("courseID");
 
 $(document).ready(function () {
+    if (posID == 7 || posID == 1) {
+    } else {
+        $('#edit').hide();
+    }
     console.log("courseID: " + courseID);
     getSpecificCourse(courseID);
     getMapCourseToProgram(courseID);
