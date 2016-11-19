@@ -36,6 +36,7 @@ $(document).ready(function () {
 
     $('#grades-format').click(function () {
         convertToCSV();
+        convertToCSVsimple();
     });
     $('#students-format').click(function () {
         convertToCSVsimple();
@@ -200,7 +201,8 @@ function getCoGrades(offeringID) {
 }
 
 function convertToCSVsimple() {
-    var CSV = 'studentID';
+    var CSV = '(1) Input grades in DLSU grading format. (e.g. 4, 3.5, 3, 2.5, 2, 1.5, 1 & 0).\r\n' +
+'(2) If you have multiple assessments under one assessment category, compute the final grade under the assessment category by averaging all the assessments given under the category (e.g. Quiz-1: 2.5, Quiz-2: 3.0, Quiz-3: 4.0; Computation (2.5 + 3 + 4.0)/3 = 3.16, round down/up, final grade 3.0).';
 
 
     if (CSV == '') {
@@ -209,7 +211,7 @@ function convertToCSVsimple() {
     }
 
     //Generate a file name
-    var fileName = "enrolledStudents_" + strSection;
+    var fileName = "instruction";
 
     //Initialize file format you want csv or xls
     var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
@@ -220,7 +222,7 @@ function convertToCSVsimple() {
 
     //set the visibility hidden so it will not effect on your web-layout
     link.style = "visibility:hidden";
-    link.download = fileName + ".csv";
+    link.download = fileName + ".text";
 
     //this part will append the anchor tag and remove it after automatic click
     document.body.appendChild(link);

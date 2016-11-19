@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<jsp:include page ="navbar.jsp" />
+<jsp:include page ="security.jsp" />
 <html>
     <head>
         <meta charset="utf-8">
@@ -69,7 +69,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input name="startYear" type="text" class="form-control pull-right" id="startYear">
+                                            <input name="startYear" type="text" class="form-control pull-right" id="from">
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input name="endYear" type="text" class="form-control pull-right" id="endYear" readOnly>
+                                            <input name="endYear" type="text" class="form-control pull-right" id="to">
                                         </div>
                                     </div>
                                 </div>
@@ -113,15 +113,15 @@
 
                                     <div id="table">
                                         <table id="data" class="table table-hover">
-                                                <tr>
-                                                    <th>Code</th>
-                                                    <th>Title</th>
-                                                    <th>Units</th>
-                                                    <th>Year Level</th>
-                                                    <th>Term</th>
-                                                    <th>Prerequisite</th>
-                                                    <th>Delete</th>
-                                                </tr>
+                                            <tr>
+                                                <th>Code</th>
+                                                <th>Title</th>
+                                                <th>Units</th>
+                                                <th>Year Level</th>
+                                                <th>Term</th>
+                                                <th>Prerequisite</th>
+                                                <th>Delete</th>
+                                            </tr>
                                         </table>
                                     </div>
                                 </div>
@@ -191,6 +191,23 @@
                     format: "yyyy",
                     autoclose: true,
                     minViewMode: "years"});
+
+                $('#from').datepicker({
+                    format: "yyyy",
+                    autoclose: true,
+                    minViewMode: "years"
+                }).on('changeDate', function (selected) {
+                    startDate = $("#from").val();
+                    $('#to').datepicker('setStartDate', startDate);
+                });
+                ;
+
+
+                $('#to').datepicker({
+                    format: "yyyy",
+                    autoclose: true,
+                    minViewMode: "years"
+                });
 
                 //Date range picker
                 $('#reservation').daterangepicker();

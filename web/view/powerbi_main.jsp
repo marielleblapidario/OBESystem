@@ -1,7 +1,7 @@
 <%@page import="model.IGA"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
-<jsp:include page ="navbar.jsp" />
+<jsp:include page ="security.jsp" />
 <html>
     <head>
         <meta charset="utf-8">
@@ -51,8 +51,5 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
-        <!-- Delete Row -->
-        <script src="/OBESystem/resources/bootstrap/js/deleteRow.js"></script>
-        <script src="/OBESystem/js/create_IGA.js"></script>
     </body>
 </html>

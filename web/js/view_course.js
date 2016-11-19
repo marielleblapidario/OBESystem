@@ -1,4 +1,8 @@
 var courseID = sessionStorage.getItem("courseID");
+var posID = sessionStorage.getItem("posID");
+var userID = sessionStorage.getItem("userID");
+console.log("posID: ", posID);
+console.log("userID: ", userID);
 
 $(document).ready(function () {
     if (posID == 7 || posID == 1) {
