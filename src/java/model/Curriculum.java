@@ -22,6 +22,7 @@ public class Curriculum {
     private int endYear;
     private String description;
     private int contributor;
+    private int curriculumID;
 
     private String contributorName;
     private String programName;
@@ -166,5 +167,19 @@ public class Curriculum {
      */
     public void setEndYear(int endYear) {
         this.endYear = endYear;
+    }
+
+    /**
+     * @return the curriculumID
+     */
+    public int getCurriculumID() {
+        return curriculumID;
+    }
+
+    /**
+     * @param curriculumID the curriculumID to set
+     */
+    public void setCurriculumID(int curriculumID) {
+        this.curriculumID = curriculumID;
     }
 }

@@ -48,6 +48,34 @@ public class CurriculumDAO {
         }
         return false;
     }
+    
+    public boolean updateCurriculum(Curriculum newCurriculum) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "UPDATE curriculum "
+                    + "SET title = ?, program = ?, startYear = ?, endYear = ? "
+                    + "description = ?, contributor = ? "
+                    + "WHERE curriculumID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setString(1, newCurriculum.getTitle());
+            pstmt.setString(2, newCurriculum.getProgram());
+            pstmt.setInt(3, newCurriculum.getStartYear());
+            pstmt.setInt(4, newCurriculum.getEndYear());
+            pstmt.setString(5, newCurriculum.getDescription());
+            pstmt.setInt(6, newCurriculum.getContributor());
+            pstmt.setInt(7, newCurriculum.getCurriculumID());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CurriculumDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     public boolean encodeMapCurriculumToCourse(MapCurriculumToCourse newMap) {
         try {

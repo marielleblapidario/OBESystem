@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="/OBESystem/resources/plugins/daterangepicker/daterangepicker.css">
         <!-- bootstrap datepicker -->
         <link rel="stylesheet" href="/OBESystem/resources/plugins/datepicker/datepicker3.css">
+        <!-- DataTables -->
+        <link rel="stylesheet" href="/OBESystem/resources/plugins/datatables/dataTables.bootstrap.css">
         <!-- iCheck for checkboxes and radio inputs -->
         <link rel="stylesheet" href="/OBESystem/resources/plugins/iCheck/all.css">
         <!-- Bootstrap Color Picker -->
@@ -36,108 +38,105 @@
         <div class="wrapper">
             <div class="content-wrapper">
                 <!-- Main content -->
-                <section class="content">
-                    <div class="box box-success">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Create Curriculum</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form class="form-horizontal">
+                <form action="EncodeCurriculum" method="post" name="EncodeCurriculum">
+                    <section class="content">
+                        <div class="box box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Create Curriculum</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
 
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="inputEmail3" placeholder="BS in CSE 2010-2016">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">College</label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected">College of Computer Studies</option>
-                                            <option>College of Liberal Arts</option>
-                                            <option>College of Science</option>
-                                            <option>College of Engineering</option>
-                                            <option>College of Education</option>
-                                            <option>School of Economics</option>
-                                            <option>College of Business</option>
-                                        </select>
+                                        <input name="title" type="text" class="form-control" id="inputEmail3" placeholder="BS in CSE 2010-2016" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Program</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected">BS Information Systems</option>
-                                            <option>BS Information Technology</option>
-                                            <option>BS Something</option>
-                                            <option>BS Something</option>
-                                            <option>BS Something</option>
-                                            <option>BS Something</option>
-                                            <option>BS Something</option>
+                                        <select name="select-program" id="select-program" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Academic Year Range</label>
+                                    <label class="col-sm-2 control-label">Academic Start Year</label>
                                     <div class="col-sm-10">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="reservation">
+                                            <input name="startYear" type="text" class="form-control pull-right" id="from">
                                         </div>
                                     </div>
-                                    <!-- /.input group -->
                                 </div>
-
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Academic End Year</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input name="endYear" type="text" class="form-control pull-right" id="to">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        <textarea name="description" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
                                     </div>
                                 </div>
 
                             </div>
                             <!-- Add Courses -->
-                            <div class="box box-info">
+                            <div class="box box-success">
                                 <div class="box-header with-border">
                                     <h4 class="box-title">Add Course</h4>
                                 </div>
                                 <div class="box-body no-border">
-                                    <h5 class="box-info">Required Units: 200</h5>
-                                    <h5 class="box-info">Left Units: 200</h5>
-                                    
+                                    <h5 class="box-info">Total Units:
+                                        <span id = "total-units"></span>
+                                    </h5>
                                     <div class="form-group">
-                                    <label class="col-sm-2 control-label">Search</label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected">DATBAS</option>
-                                            <option>USAENG</option>
-                                            <option>METRES</option>
-                                            <option>THSIS01</option>
-                                        </select>
+                                        <label class="col-sm-2 control-label">Search</label>
+                                        <div class="col-sm-10">
+                                            <select id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            </select>
+                                        </div>
+
                                     </div>
-                                </div>
-                                    <button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add Course</button>
+                                    <button id="button-add" type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add Course</button>
+
+                                    <div id="table">
+                                        <table id="data" class="table table-hover">
+                                            <tr>
+                                                <th>Code</th>
+                                                <th>Title</th>
+                                                <th>Units</th>
+                                                <th>Year Level</th>
+                                                <th>Term</th>
+                                                <th>Prerequisite</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
 
                             </div>
                             <!-- /Add Courses-->
                             <!-- /.box-body -->
                             <div class="box-footer">  
-                                <button type="submit" class="btn btn-default pull-right">Cancel</button>
-                                <button type="submit" class="btn btn-success pull-right">Update</button>
+                                <a href="/OBESystem/ViewCurriculumList"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
+                                <button type="submit" class="btn btn-success pull-right">Save</button>
                             </div>
                             <!-- /.box-footer -->
-                        </form>
-                    </div>
-                </section>
+                        </div>
+                    </section>
+                </form>
             </div>
         </div>
         <!-- jQuery 2.2.3 -->
@@ -150,6 +149,9 @@
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.js"></script>
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="/OBESystem/resources/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <!-- DataTables -->
+        <script src="/OBESystem/resources/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="/OBESystem/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
         <!-- date-range-picker -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
         <script src="/OBESystem/resources/plugins/daterangepicker/daterangepicker.js"></script>
@@ -169,6 +171,8 @@
         <script src="/OBESystem/resources/dist/js/app.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
+        <script src="/OBESystem/js/edit_curriculum.js"></script>
+        <script src="/OBESystem/js/search_program2.js"></script>
         <!-- Page script -->
         <script>
             $(function () {
@@ -181,6 +185,29 @@
                 $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
                 //Money Euro
                 $("[data-mask]").inputmask();
+
+                //self made
+                $('#startYear').datepicker({
+                    format: "yyyy",
+                    autoclose: true,
+                    minViewMode: "years"});
+
+                $('#from').datepicker({
+                    format: "yyyy",
+                    autoclose: true,
+                    minViewMode: "years"
+                }).on('changeDate', function (selected) {
+                    startDate = $("#from").val();
+                    $('#to').datepicker('setStartDate', startDate);
+                });
+                ;
+
+
+                $('#to').datepicker({
+                    format: "yyyy",
+                    autoclose: true,
+                    minViewMode: "years"
+                });
 
                 //Date range picker
                 $('#reservation').daterangepicker();

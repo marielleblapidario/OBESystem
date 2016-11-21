@@ -180,4 +180,28 @@ public class CoDAO {
         }
         return false;
     }
+    
+    public ArrayList<String> getCOforFormat(int syllabusID) throws ParseException {
+        ArrayList<String> arrCO = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT codeCO\n"
+                    + "FROM co \n"
+                    + "WHERE syllabusID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, syllabusID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String co = rs.getString("codeCO");
+                arrCO.add(co);
+            }
+            pstmt.close();
+            conn.close();
+            return arrCO;
+        } catch (SQLException ex) {
+            Logger.getLogger(CoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

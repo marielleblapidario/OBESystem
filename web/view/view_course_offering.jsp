@@ -44,18 +44,18 @@
                                 <br>
                                 <div class="btn-group-vertical pull-left">
                                     <button id="grades-format" type="button" class="btn btn-default"><i class="fa  fa-download"></i>  Encode Grades Template</button>
-                                    <button id="download-co" type="button" class="btn btn-default"><i class="fa  fa-download"></i>  View CO Grades</button>
+                                    <button id="download-co" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa  fa-eye"></i>  View CO Grades</button>
                                 </div>
                                 <div class="btn-group-vertical pull-right">
                                     <div class="form-group">
                                         <label class="control-label">Student List Upload</label>
                                         <input id="students-upload" type="file">
-                                         <button id="students-save" type="button" class="btn btn-default">save</button>
+                                        <button id="students-save" type="button" class="btn btn-default">save</button>
                                     </div>
                                     <div class ="form-group">
                                         <label class="ontrol-label">Grades Upload</label>
                                         <input id ="grades-upload" type="file">
-                                         <button id="grades-save" type="button" class="btn btn-default">save</button>
+                                        <button id="grades-save" type="button" class="btn btn-default">save</button>
                                     </div>
                                 </div>
                             </div>
@@ -150,6 +150,26 @@
                     </section>
                 </form>
             </div>
+        </div>
+        <div class="modal modal-success" id="myModal" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Course Outcomes Grades</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table id="modal-co" class="table responsive">
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
         </div>
         <!-- jQuery 2.2.3 -->
         <script src="/OBESystem/resources/plugins/jQuery/jquery-2.2.3.min.js"></script>

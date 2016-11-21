@@ -22,10 +22,12 @@ var arrGrades = [];
 var arrGradesDisplay = [];
 var arrStudentData = [];
 var arrCOGrades = [];
+var arrCO = [];
 var strSection;
 var strTerm;
 var strCourse;
 var strYear;
+var modal = $('#modal-co');
 
 $(document).ready(function () {
     divTable.hide();
@@ -75,7 +77,7 @@ function getSyllabus(offeringID) {
             time.val(data.time);
             room.val(data.roomTitle);
             faculty.val(data.facultyName);
-            
+
             strYear = data.startYear;
             strTerm = data.term;
             strCourse = data.codeCourse;
@@ -103,6 +105,7 @@ function getEnrolledStudents(offeringID) {
             }
             getAssessments(syllabusID);
             getTypes(syllabusID);
+            getCO(syllabusID);
         },
         error: function (response) {
             console.log(response);
@@ -123,6 +126,26 @@ function getAssessments(syllabusID) {
             console.log(data.length);
             for (var x = 0; x < data.length; x++) {
                 arrAssessment.push(data[x]);
+            }
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+function getCO(syllabusID) {
+    arrCO = [];
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/GetCOforFormat?syllabusID=" + syllabusID,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            //pushed the array of Strings (e.g. AS - 01, AS -02, .....
+            console.log(data.length);
+            for (var x = 0; x < data.length; x++) {
+                arrCO.push(data[x]);
             }
         },
         error: function (response) {
@@ -172,6 +195,9 @@ function getGrades(offeringID) {
                 console.log("entered first if");
                 table.empty();
                 tableHeader();
+                
+                modal.empty();
+                modalHeader();
                 divTable.show();
             }
         },
@@ -190,9 +216,9 @@ function getCoGrades(offeringID) {
         success: function (data) {
             console.log(data);
             for (var x = 0; x < data.length; x++) {
-                arrGradesDisplay.push(data[x]);
+                arrCOGrades.push(data[x]);
             }
-            console.log("getGrades check arrGradesDisplay size: " + arrCOGrades.length);
+            console.log("getGrades check arrCOGrades size: " + arrCOGrades.length);
         },
         error: function (response) {
             console.log(response);
@@ -202,7 +228,7 @@ function getCoGrades(offeringID) {
 
 function convertToCSVsimple() {
     var CSV = '(1) Input grades in DLSU grading format. (e.g. 4, 3.5, 3, 2.5, 2, 1.5, 1 & 0).\r\n' +
-'(2) If you have multiple assessments under one assessment category, compute the final grade under the assessment category by averaging all the assessments given under the category (e.g. Quiz-1: 2.5, Quiz-2: 3.0, Quiz-3: 4.0; Computation (2.5 + 3 + 4.0)/3 = 3.16, round down/up, final grade 3.0).';
+            '(2) If you have multiple assessments under one assessment category, compute the final grade under the assessment category by averaging all the assessments given under the category (e.g. Quiz-1: 2.5, Quiz-2: 3.0, Quiz-3: 4.0; Computation (2.5 + 3 + 4.0)/3 = 3.16, round down/up, final grade 3.0).';
 
 
     if (CSV == '') {
@@ -471,7 +497,7 @@ function uploadStudents(evt)
 // Method that reads and posts the assessments csv file
 function uploadAssessments(evt)
 {
-    arrAssessments =[];
+    arrAssessments = [];
     arrGrades = [];
     if (!browserSupportFileUpload())
     {
@@ -621,6 +647,59 @@ function tableRow() {
                 }
             }
             table.append("</tr>");
+        }
+    }
+}
+
+function modalHeader() {
+    console.log("entered modalHeader");
+    var tr = "<tr id='modal-header'>";
+    modal.append(tr);
+    var header = $("#modal-header");
+    header.append("<th>Student ID</th>");
+    header.append("<th>Last Name</th>");
+    header.append("<th>First Name</th>");
+    header.append("<th>Middle Name</th>");
+
+    for (var x = 0; x < arrCO.length; x++) {
+        var a = "<th>" + arrCO[x] + " </th>";
+        header.append(a);
+    }
+    header.append("</tr>");
+    modalRow();
+}
+
+function modalRow() {
+    console.log("entered modalRow");
+    for (var x = 0; x < arrEnrolledStudents.length; x++) {
+        if (arrEnrolledStudents.studentID != null || arrEnrolledStudents.studentID != '') {
+            var s = '<tr id= modalTr' + x + '>'
+                    + '<td>' + arrEnrolledStudents[x].studentID + '</td>'
+                    + '<td>' + arrEnrolledStudents[x].lastName + '</td>'
+                    + '<td>' + arrEnrolledStudents[x].firstName + '</td>'
+                    + '<td>' + arrEnrolledStudents[x].middleName + '</td>';
+            modal.append(s);
+            var row = $('#modalTr' + x);
+            for (var a = 0; a < arrCO.length; a++) {
+                if (arrCOGrades.length > 0) {
+                    for (var b = 0; b < arrCOGrades.length; b++) {
+                        console.log('compare id: '+ arrEnrolledStudents[x].studentID
+                                + ' vs ' + arrCOGrades[b].studentID +" and "+
+                                arrCO[a] + " vs " + arrCOGrades[b].codeCO);
+                        if (arrEnrolledStudents[x].studentID == arrCOGrades[b].studentID &&
+                                arrCO[a] == arrCOGrades[b].codeCO) {
+                            console.log('entered if');
+                            var c = '<td>' + arrCOGrades[b].gradeCO + '</td>';
+                            row.append(c);
+                        }
+                    }
+                } else {
+                    var y = '<td></td>';
+                    row.append(y);
+                    console.log('entered else');
+                }
+            }
+            modal.append("</tr>");
         }
     }
 }
