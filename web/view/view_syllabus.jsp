@@ -39,7 +39,7 @@
                 <section class="content">
                     <div class="box box-success">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Create Syllabus</h3>
+                            <h3 class="box-title">View Syllabus</h3>
                         </div>
                         <!-- /.box-header -->
                         <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />

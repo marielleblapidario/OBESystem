@@ -11,7 +11,7 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
         <link rel="stylesheet" href="/OBESystem/resources/bootstrap/css/bootstrap.min.css">
-       <!-- Font Awesome -->
+        <!-- Font Awesome -->
         <link rel="stylesheet" href="/OBESystem/resources/downloads/font-awesome-4.7.0/css/font-awesome.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="/OBESystem/resources/downloads/ionicons-2.0.1/css/ionicons.min.css">
@@ -32,13 +32,13 @@
                             <h3 class="box-title">Executive Dashboard</h3>
                         </div>
                         <div class="box-body">
-                            <iframe width="100%" height="570" src="https://app.powerbi.com/view?r=eyJrIjoiYzM3YzU0YTktYTE0Ny00NjI2LWI2NjItYTc2YjIwZjI4ZWYwIiwidCI6ImYzNGEzNWJkLWE2NWQtNDYwNS1iMGZhLWQyNTcxZjgzMWY1ZSIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
+                            <iframe width="100%" height="570" src="https://app.powerbi.com/view?r=eyJrIjoiOTc3MjIyMzktM2QwOC00OTRmLTljNDYtNmI3YTc3YTg5OTJiIiwidCI6ImYzNGEzNWJkLWE2NWQtNDYwNS1iMGZhLWQyNTcxZjgzMWY1ZSIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
                         </div>
                     </div>
                 </section>
             </div>
         </div>
-        
+
         <!-- jQuery 2.2.3 -->
         <script src="/OBESystem/resources/plugins/jQuery/jquery-2.2.3.min.js"></script>
         <!-- Bootstrap 3.3.6 -->

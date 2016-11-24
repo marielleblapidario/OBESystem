@@ -29,7 +29,7 @@ var strCourse;
 var strYear;
 var modal = $('#modal-co');
 
-$(document).ready(function () {
+$(window).load(function () {
     divTable.hide();
     console.log("offeringID: " + offeringID);
     console.log("syllabusID: " + syllabusID);

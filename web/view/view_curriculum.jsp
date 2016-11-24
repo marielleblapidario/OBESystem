@@ -42,7 +42,7 @@
                     <section class="content">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Create Curriculum</h3>
+                                <h3 class="box-title">View Curriculum</h3>
                             </div>
                             <!-- /.box-header -->
                             <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
@@ -95,7 +95,7 @@
                             <!-- Add Courses -->
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h4 class="box-title">Add Course</h4>
+                                    <h4 class="box-title">Courses under the Curriculum</h4>
                                 </div>
                                 <div class="box-body no-border">
                                     <h5 class="box-info">Total Units:
