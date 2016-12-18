@@ -195,9 +195,6 @@ function getGrades(offeringID) {
                 console.log("entered first if");
                 table.empty();
                 tableHeader();
-                
-                modal.empty();
-                modalHeader();
                 divTable.show();
             }
         },
@@ -219,6 +216,10 @@ function getCoGrades(offeringID) {
                 arrCOGrades.push(data[x]);
             }
             console.log("getGrades check arrCOGrades size: " + arrCOGrades.length);
+            if(arrEnrolledStudents.length > 0){
+                modal.empty();
+                modalHeader();
+            }
         },
         error: function (response) {
             console.log(response);

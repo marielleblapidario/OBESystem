@@ -1,0 +1,22 @@
+.box-footer {
+    display: none;
+}
+.box-header {
+    display: none;
+}
+.box-success{
+    border: none;
+}
+
+#printheader {
+    display: block;
+}
+img {
+    height: 100px;
+    width: 100px;
+    border: 0;
+}
+
+@page {
+    margin: 0.5cm;
+}
