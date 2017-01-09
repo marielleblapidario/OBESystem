@@ -63,11 +63,10 @@ function addRow(data) {
 
     console.log("rowCount: " + rowCount);
     if (posID == 4 || posID == 1) {
-        tools = "<button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button>\n\
-<a href=\"/OBESystem/RedirectToViewCourseOffering\"><button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>\n\
-<button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>";
+        tools = "<button onclick=\"save('" + rowCount + "')\" title=\"edit\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button>\n\
+<a href=\"/OBESystem/RedirectToViewCourseOffering\"><button onclick=\"save('" + rowCount + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
     } else {
-        tools = "<a href=\"/OBESystem/RedirectToViewCourseOffering\"><button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
+        tools = "<a href=\"/OBESystem/RedirectToViewCourseOffering\"><button onclick=\"save('" + rowCount + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
     }
     arrOfferingID.push(offeringID);
     arrSyllabusID.push(syllabusID);

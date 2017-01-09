@@ -54,8 +54,8 @@ $(document).ready(function () {
                 '<div class="input-group input-group-sm">' +
                 '<input name="description" id="description' + rowCount + '" type="text" class="form-control" placeholder="Add Performance Indicator" required>' +
                 '<span class="input-group-btn">' +
-                '<button type="button" class="btn bg-green btn-flat"><i class="fa fa-edit"></i></button>' +
-                '<button onClick="deleteRow(' + rowCount + ')" type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button>' +
+                '<button title="edit" type="button" class="btn bg-green btn-flat"><i class="fa fa-edit"></i></button>' +
+                '<button title="delete" onClick="deleteRow(' + rowCount + ')" type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button>' +
                 '</span>' +
                 '</div>' +
                 '<br>' +
@@ -119,8 +119,8 @@ function addRow(data) {
                 '<div class="input-group input-group-sm">' +
                 '<input name="description" id="description' + rowCount + '" type="text" class="form-control" value="' + description + '" readOnly>' +
                 '<span class="input-group-btn">' +
-                '<button type="button" class="btn bg-green btn-flat" onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"></i></button>' +
-                '<button onClick="deleteRow(' + rowCount + ')" type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button>' +
+                '<button title="edit" type="button" class="btn bg-green btn-flat" onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"></i></button>' +
+                '<button title="delete" onClick="deleteRow(' + rowCount + ')" type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button>' +
                 '</span>' +
                 '</div>' +
                 '<br>' +

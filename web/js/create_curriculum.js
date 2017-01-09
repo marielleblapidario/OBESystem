@@ -106,7 +106,7 @@ $("#button-add").click(function () {
                 var CPS = '</select></td>';
                 tr += CPS;
 
-                var tool = '<td><button type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button></td>';
+                var tool = '<td><button title="delete" type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button></td>';
                 tr += tool;
 
                 var closingTr = '</tr>';

@@ -269,8 +269,8 @@ function addCO() {
         tr.appendChild(remarksCell);
 
         var toolsCell = document.createElement("td");
-        toolsCell.innerHTML = '<button type="button" id="edit' + rowCount + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"> </i></button>' +
-                '<button type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button>';
+        toolsCell.innerHTML = '<button title="edit" type="button" id="edit' + rowCount + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"> </i></button>' +
+                '<button  title="delete" type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button>';
         tr.appendChild(toolsCell);
 
         table.append(tr);
@@ -315,8 +315,8 @@ function AddAssessment() {
         
         tr+= '<td><div class="col-sm-10"><input type="number" name="leftWeight" class="form-control no-border" id="leftWeight_' + rowCountA + '" min = "0" max = "0" readOnly></div></td>';
         
-        tr += '<td><button type="button" id="editA' + rowCountA + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCountA + ')"><i class="fa fa-edit"> </i></button>' +
-                '<button type="button" id="deleteA' + rowCountA + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCountA + ')"></i></button></td>';
+        tr += '<td><button title="edit" type="button" id="editA' + rowCountA + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCountA + ')"><i class="fa fa-edit"> </i></button>' +
+                '<button title="delete" type="button" id="deleteA' + rowCountA + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCountA + ')"></i></button></td>';
         
         console.log(tr);
         tableA.append(tr);

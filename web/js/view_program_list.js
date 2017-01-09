@@ -44,11 +44,10 @@ function addRow(data) {
     console.log("rowCount: " + rowCount);
 
     if (posID == 6 || posID == 1) {
-        tools = "<a href=\"/OBESystem/RedirectToEditProgram\"><button onclick=\"save('" + codeProgram + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>\n\
- <a href=\"/OBESystem/RedirectToViewProgram\"><button  onclick=\"save('" + codeProgram + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>\n\
-<button type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>";
+        tools = "<a href=\"/OBESystem/RedirectToEditProgram\"><button onclick=\"save('" + codeProgram + "')\" title=\"edit\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>\n\
+ <a href=\"/OBESystem/RedirectToViewProgram\"><button onclick=\"save('" + codeProgram + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
     } else {
-        tools = "<a href=\"/OBESystem/RedirectToViewProgram\"><button  onclick=\"save('" + codeProgram + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
+        tools = "<a href=\"/OBESystem/RedirectToViewProgram\"><button  onclick=\"save('" + codeProgram + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
     }
 
     example1.row.add([codeProgram, title, collegeName, contributorName, tools]);

@@ -35,19 +35,20 @@
                         <div id="printheader">
                             <img src="/OBESystem/resources/dist/img/dlsuLogo.png">
                             <img src="/OBESystem/resources/dist/img/ccsLogo.png">
-                             <h3 class="box-title">Executive Dashboard</h3>
+                            <h3 class="box-title">Executive Dashboard</h3>
                         </div>
                         <div id="powerbi" class="box-body">
                             <iframe width="100%" height="570" src="https://app.powerbi.com/view?r=eyJrIjoiOTc3MjIyMzktM2QwOC00OTRmLTljNDYtNmI3YTc3YTg5OTJiIiwidCI6ImYzNGEzNWJkLWE2NWQtNDYwNS1iMGZhLWQyNTcxZjgzMWY1ZSIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Remark</label>
-                            <div class="col-sm-10">
-                                <textarea name="remarks" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Remark</label>
+                                <div class="col-sm-10">
+                                    <textarea name="remarks" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                </div>
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="button" id="button-print" class="btn btn-success pull-right">Print</button>
+                            <button type="button" id="button-print" class="btn btn-success pull-right"><i class="fa fa-print"></i>  Print</button>
                         </div>
                     </div>
                 </section>

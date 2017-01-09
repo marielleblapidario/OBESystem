@@ -41,11 +41,10 @@ function addRow(data) {
 
     console.log("courseID: " + courseID);
     if (posID == 7 || posID == 1) {
-         tools = "<a href=\"/OBESystem/RedirectToEditCourse\"><button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>\n\
-<a href=\"/OBESystem/RedirectToViewCourse\"><button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>\n\
-<button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash\"></i></button>";
+         tools = "<a href=\"/OBESystem/RedirectToEditCourse\"><button onclick=\"save('" + courseID + "')\" title=\"edit\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>\n\
+<a href=\"/OBESystem/RedirectToViewCourse\"><button onclick=\"save('" + courseID + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
     } else {
-         var tools = "<a href=\"/OBESystem/RedirectToViewCourse\"><button onclick=\"save('" + courseID + "')\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
+         var tools = "<a href=\"/OBESystem/RedirectToViewCourse\"><button onclick=\"save('" + courseID + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
     }
    example1.row.add([codeCourse, title, contributorName, tools]);
     example1.draw();
