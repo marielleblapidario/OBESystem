@@ -7,6 +7,7 @@ var courseList = [];
 var arrPreRequisite = [];
 var arrTerm = [];
 var arrYearLevel = [];
+var arrRowCount = [];
 var rowCount = 0;
 var totalUnits = 0;
 var program;
@@ -126,7 +127,10 @@ function getSpecificCurriculum(codeCurriculum) {
         success: function (data) {
             console.log(data);
             $("#title").val(data.title);
-            $("#programName").val(data.programName);
+            program = data.program;
+            console.log("program: ", program);
+            $("#program-title-hidden").val(data.program);
+            $("#program-title").val(data.programName);
             $("#from").val(data.startYear);
             $("#to").val(data.endYear);
             $("#description").val(data.description);
@@ -162,6 +166,7 @@ function getSpecificMapCurriculumToCourse(codeCurriculum) {
                     }
                 }
             }
+            console.log("courseList size: ", courseList.length);
             showCourses();
         },
         error: function (response) {
@@ -179,16 +184,19 @@ function addRow(data) {
     var yearLevel = data.yearLevel;
     var preRequisite = data.preRequisite;
     
+    var rowCourse = {count: rowCount, courseID: courseID, title:courseTitle, units: units};
+            arrRowCount.push(rowCourse);
+            
     totalUnits = totalUnits + parseInt(units);
 
     var appendTr =
             '<tr id =tr' + rowCount + '>' +
             '<td>' + data.codeCourse
-            + '<input type="hidden" name="codeCourse" class="readonlyWhite" value="' + data.codeCourse + '" />'
-            + '<input type="hidden" name="courseID" class="readonlyWhite" value="' + data.courseID + '" />'
+            + '<input type="hidden" name="codeCourse" class="readonlyWhite" value="' + codeCourse + '" />'
+            + '<input type="hidden" name="courseID" class="readonlyWhite" value="' +courseID + '" />'
             + '</td>'
             + '<td>' + data.title
-            + '<input type="hidden" name="title" class="readonlyWhite"  value="' + data.title + '" />'
+            + '<input type="hidden" name="title" class="readonlyWhite"  value="' + courseTitle + '" />'
             + '</td>'
             + '<td>' + units
             + '<input type="hidden" name="title" class="readonlyWhite"  value="' + units + '" />'

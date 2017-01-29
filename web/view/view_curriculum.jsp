@@ -93,7 +93,7 @@
 
                             </div>
                             <!-- Add Courses -->
-                            <div class="box box-info">
+                            <div class="box box-success">
                                 <div class="box-header with-border">
                                     <h4 class="box-title">Courses under the Curriculum</h4>
                                 </div>

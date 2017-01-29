@@ -68,63 +68,67 @@ $(document).ready(function () {
     AddAssessment();
 
     $('#save-btn').click(function () {
-        var saveMapCurID = "" + mapCurID;
-        finalTerm = $("[name='term']").val();
-        console.log("finalTerm: ", finalTerm);
-        startYear = $("[name='startYear']").val();
-        endYear = $("[name='endYear']").val();
-        var contributor = $("[name='contributor']").val();
-        var arrCodeCO = $("[name='codeCO']").map(function () {
-            return $(this).val();
-        }).get();
-        var arrDescription = $("[name='description']").map(function () {
-            return $(this).val();
-        }).get();
-        var arrCodePI = $("[name='codePI']").map(function () {
-            return $(this).val();
-        }).get();
-        var arrRemarks = $("[name='remarks']").map(function () {
-            return $(this).val();
-        }).get();
+        var retVal = confirm("Are you sure you want to save this? Changes on the course outcome will after saving will no longer apply.");
+        if (retVal === true) {
+            var saveMapCurID = "" + mapCurID;
+            finalTerm = $("[name='term']").val();
+            console.log("finalTerm: ", finalTerm);
+            startYear = $("[name='startYear']").val();
+            endYear = $("[name='endYear']").val();
+            var contributor = $("[name='contributor']").val();
+            var arrCodeCO = $("[name='codeCO']").map(function () {
+                return $(this).val();
+            }).get();
+            var arrDescription = $("[name='description']").map(function () {
+                return $(this).val();
+            }).get();
+            var arrCodePI = $("[name='codePI']").map(function () {
+                return $(this).val();
+            }).get();
+            var arrRemarks = $("[name='remarks']").map(function () {
+                return $(this).val();
+            }).get();
 
-        for (var i = 0; arrCodeCO[i]; i++) {
-            var createCO = {mapCurID: saveMapCurID, curriculumID: curriculumID, courseID: courseID,
-                term: finalTerm, startYear: startYear, endYear: endYear, codeCO: arrCodeCO[i],
-                description: arrDescription[i], codePI: arrCodePI[i], remarks: arrRemarks[i]};
-            arrCreateCO.push(createCO);
-        }
-        var jsonData = JSON.stringify(arrCreateCO);
-
-        $.ajax({
-            type: "GET",
-            url: "/OBESystem/EncodeSyllabus?mapCurID=" + mapCurID
-                    + "&curriculumID=" + curriculumID + "&courseID=" + courseID
-                    + "&term=" + finalTerm + "&startYear=" + startYear + "&endYear=" + endYear
-                    + "&contributor=" + contributor,
-            dataType: 'json',
-            success: function (data) {
-                console.log(data);
-                arrCreateCO = [];
-                $.ajax({
-                    type: "POST",
-                    url: "/OBESystem/EncodeCO",
-                    dataType: 'json',
-                    data: {'jsonData': jsonData},
-                    success: function (data) {
-                        console.log(data);
-                        getAllCO();
-                        console.log("arrCO size: " + arrCO.length);
-                        divAssessment.show();
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                });
-            },
-            error: function (response) {
-                console.log(response);
+            for (var i = 0; arrCodeCO[i]; i++) {
+                var createCO = {mapCurID: saveMapCurID, curriculumID: curriculumID, courseID: courseID,
+                    term: finalTerm, startYear: startYear, endYear: endYear, codeCO: arrCodeCO[i],
+                    description: arrDescription[i], codePI: arrCodePI[i], remarks: arrRemarks[i]};
+                arrCreateCO.push(createCO);
             }
-        });
+            var jsonData = JSON.stringify(arrCreateCO);
+
+            $.ajax({
+                type: "GET",
+                url: "/OBESystem/EncodeSyllabus?mapCurID=" + mapCurID
+                        + "&curriculumID=" + curriculumID + "&courseID=" + courseID
+                        + "&term=" + finalTerm + "&startYear=" + startYear + "&endYear=" + endYear
+                        + "&contributor=" + contributor,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    arrCreateCO = [];
+                    $.ajax({
+                        type: "POST",
+                        url: "/OBESystem/EncodeCO",
+                        dataType: 'json',
+                        data: {'jsonData': jsonData},
+                        success: function (data) {
+                            console.log(data);
+                            getAllCO();
+                            console.log("arrCO size: " + arrCO.length);
+                            divAssessment.show();
+                            document.getElementById("save-btn").disabled = true;
+                        },
+                        error: function (response) {
+                            console.log(response);
+                        }
+                    });
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        }
     });
 });
 
@@ -295,13 +299,13 @@ function AddAssessment() {
         tr += '<td>' + newCodeAT
                 + '<input type="hidden" name="codeAT" class="readonlyWhite" id="codeAT' + rowCountA + '" value="' + newCodeAT + '" />'
                 + '</td>';
-        
-        tr+= '<td><select name="type" class="form-control">';
+
+        tr += '<td><select name="type" class="form-control">';
         for (var x = 0; x < arrType.length; x++) {
             tr += "<option value=" + arrType[x].typeID + ">" + arrType[x].type + "</option>";
         }
         tr += '</select></td>';
-        
+
         console.log("arrCO length", arrCO.length);
         tr += '<td><select name="codeCOA" id="codeCOA_' + rowCountA + '" class="form-control">';
         for (var x = 0; x < arrCO.length; x++) {
@@ -309,15 +313,15 @@ function AddAssessment() {
         }
         tr += '</select></td>';
 
-        tr +='<td><div class="col-sm-10"><input type="text" name="descriptionA" class="form-control no-border" id="descriptionA' + rowCountA + '" required></div></td>';
+        tr += '<td><div class="col-sm-10"><input type="text" name="descriptionA" class="form-control no-border" id="descriptionA' + rowCountA + '" required></div></td>';
 
         tr += '<td><div class="col-sm-10"><input type="number" name="weight" class="form-control no-border" id="weight_' + rowCountA + '" onblur= handleChange(this); required></div></td>';
-        
-        tr+= '<td><div class="col-sm-10"><input type="number" name="leftWeight" class="form-control no-border" id="leftWeight_' + rowCountA + '" min = "0" max = "0" readOnly></div></td>';
-        
+
+        tr += '<td><div class="col-sm-10"><input type="number" name="leftWeight" class="form-control no-border" id="leftWeight_' + rowCountA + '" min = "0" max = "0" readOnly></div></td>';
+
         tr += '<td><button title="edit" type="button" id="editA' + rowCountA + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCountA + ')"><i class="fa fa-edit"> </i></button>' +
                 '<button title="delete" type="button" id="deleteA' + rowCountA + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCountA + ')"></i></button></td>';
-        
+
         console.log(tr);
         tableA.append(tr);
         //var name = "#weight_" + rowCountA;
@@ -387,7 +391,7 @@ function AddAssessment() {
             temp = temp - addWeight;
             console.log("temp: ", temp);
             if (temp < 0) {
-                 var denied = $("#weight_" + thisRowCountA).val();
+                var denied = $("#weight_" + thisRowCountA).val();
                 console.log("denied:", denied);
                 temp = temp + parseInt(denied);
                 alert("invalid input! You can only input a value no more than: " + temp);

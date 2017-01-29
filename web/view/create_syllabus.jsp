@@ -9,7 +9,7 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
         <link rel="stylesheet" href="/OBESystem/resources/bootstrap/css/bootstrap.min.css">
-       <!-- Font Awesome -->
+        <!-- Font Awesome -->
         <link rel="stylesheet" href="/OBESystem/resources/downloads/font-awesome-4.7.0/css/font-awesome.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="/OBESystem/resources/downloads/ionicons-2.0.1/css/ionicons.min.css">
@@ -38,148 +38,157 @@
                 <!-- Main content -->
                 <section class="content">
                     <form action="EncodeAssessment" method="post" id="EncodeAssessment" name="EncodeAssessment">
-                    <div class="box box-success">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Create Syllabus</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Curriculum Followed</label>
-                                <input type="hidden" name="mapCurID" class="readonlyWhite" id="hidden-mapCurID" />
-                                <div class="col-sm-10">
-                                    <select name="curriculumID" id="select-curriculum" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                    </select>
-                                </div>
+                        <div class="box box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Create Syllabus</h3>
+                                <a href="#" id="syllabus-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                    <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                </a>  
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Course</label>
-                                <div class="col-sm-10">
-                                    <select name="courseID" id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Academic Start Year</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input name="startYear" type="text" class="form-control pull-right" id="startYear">
+                            <!-- /.box-header -->
+                            <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Curriculum Followed</label>
+                                    <input type="hidden" name="mapCurID" class="readonlyWhite" id="hidden-mapCurID" />
+                                    <div class="col-sm-10">
+                                        <select name="curriculumID" id="select-curriculum" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Academic End Year</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input name="endYear" type="text" class="form-control pull-right" id="endYear" readOnly>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Course</label>
+                                    <div class="col-sm-10">
+                                        <select name="courseID" id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-2 control-label">Term</label>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Academic Start Year</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input name="startYear" type="text" class="form-control pull-right" id="startYear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Academic End Year</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input name="endYear" type="text" class="form-control pull-right" id="endYear" readOnly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Term</label>
 
-                                <div class="col-sm-10">
-                                    <select name="term" id="select-term" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                    </select>
+                                    <div class="col-sm-10">
+                                        <select name="term" id="select-term" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- Add CO -->
+                            <div class="box box-success" id="div-addCO">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">Add Course Outcome</h4>
+                                    <a href="#" id="co-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                    </a>  
+                                </div>
+                                <div class="box-body table-responsive">
+                                    <table id="data" class="table table-hover">
+                                        <tr>
+                                            <th id="co-code">Code</th>
+                                            <th id="co-description">
+                                                <div class="col-sm-10">
+                                                    Course Outcome
+                                                </div>
+                                            </th>
+                                            <th id="co-mapping">
+                                                <div class="col-sm-10">
+                                                    Performance Indicator
+                                                </div>
+                                            </th>
+                                            <th>
+                                                <div class="col-sm-10">
+                                                    Remarks
+                                                </div>
+                                            </th>
+                                            <th>Tools</th>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer">  
+                                    <button id="addRowButton" type="button" class="btn btn-success pull-left"><i class="fa fa-plus"></i> Add Row</button>
+                                    <button id= "save-btn" type="button" class="btn btn-success pull-right">Save</button>
+                                </div>
+                                <!-- /.box-footer -->
+                            </div>
+                            <!-- /add CO -->
+                            <!-- Add Assessment -->
+                            <div class="box box-success" id="div-addAssessment">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">Add Assessment</h4>
+                                    <a href="#" id="assessment-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                    </a>
+                                </div>
+                                <div class="box-body table-responsive">
+                                    <h6>*enter the weight of each assessment to the corresponding CO assigned to it. The sum of the assessment weights under a CO should not exceed 100, else the system will alert you of the invalid input. (e.g. CO-01 has AS-01 and AS-03 mapped to it. AS-01 has a weight of 40. AS-03 has a weight of 60. The sum of these two equals 100.)</h6>
+                                    <table id="data-assessment" class="table table-hover">
+                                        <tr>
+                                            
+                                            <th id="as-code">Code</th>
+                                            <th id="as-type">
+                                                <div class="col-sm-10">
+                                                    Assessment
+                                                </div>
+                                            </th>
+                                            <th id="as-mapping">
+                                                <div class="col-sm-10">
+                                                    Course Outcome (CO)
+                                                </div>
+                                            </th>
+                                            <th id="as-description">
+                                                <div class="col-sm-10">
+                                                    Description
+                                                </div>
+                                            </th>
+                                            <th>
+                                                <div class="col-sm-10">
+                                                    Weight of Assessment to CO
+                                                </div>
+                                            </th>
+                                            <th>
+                                                <div class="col-sm-10">
+                                                    Remaining Weight to CO
+                                                </div>
+                                            </th>
+                                            <th>Tools</th>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button id="add-assessment" type="button" class="btn btn-success pull-left"><i class="fa fa-plus"></i> Add Row</button>
+                                    <button type="button" class="btn btn-default pull-right">Cancel</button>
+                                    <button id="save-assessment" type="submit" class="btn btn-success pull-right">Save</button>
+                                </div>
+                                <!-- /.box-footer -->
+                            </div>
                         </div>
-                        <!-- Add CO -->
-                        <div class="box box-success" id="div-addCO">
-                            <div class="box-header with-border">
-                                <h4 class="box-title">Add Course Outcome</h4>
-                            </div>
-                            <div class="box-body table-responsive">
-                                <table id="data" class="table table-hover">
-                                    <tr>
-                                        <th>Code</th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Course Outcome
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Performance Indicator
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Remarks
-                                            </div>
-                                        </th>
-                                        <th>Tools</th>
-                                    </tr>
-                                </table>
-                                <br>
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">  
-                                <button id="addRowButton" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
-                                <button type="button" class="btn btn-default pull-right">Cancel</button>
-                                <button id= "save-btn" type="button" class="btn bg-light-blue pull-right">Save</button>
-                            </div>
-                            <!-- /.box-footer -->
-                        </div>
-                        <!-- /add CO -->
-                        <!-- Add Assessment -->
-                        <div class="box box-success" id="div-addAssessment">
-                            <div class="box-header with-border">
-                                <h4 class="box-title">Add Assessment</h4>
-                            </div>
-                            <div class="box-body table-responsive">
-                                <h6>*enter the weight of each assessment to the corresponding CO assigned to it. The sum of the assessment weights under a CO should not exceed 100, else the system will alert you of the invalid input. (e.g. CO-01 has AS-01 and AS-03 mapped to it. AS-01 has a weight of 40. AS-03 has a weight of 60. The sum of these two equals 100.)</h6>
-                                <table id="data-assessment" class="table table-hover">
-                                    <tr>
-                                        <th>Code</th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Assessment
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Course Outcome (CO)
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Description
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Weight of Assessment to CO
-                                            </div>
-                                        </th>
-                                        <th>
-                                            <div class="col-sm-10">
-                                                Remaining Weight to CO
-                                            </div>
-                                        </th>
-                                        <th>Tools</th>
-                                    </tr>
-                                </table>
-                                <br>
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <button id="add-assessment" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
-                                <button type="button" class="btn btn-default pull-right">Cancel</button>
-                                <button id="save-assessment" type="submit" class="btn bg-light-blue pull-right">Save</button>
-                            </div>
-                            <!-- /.box-footer -->
-                        </div>
-                    </div>
-                    <!-- /add Assessment -->
-                </form>
+                        <!-- /add Assessment -->
+                    </form>
                 </section>
             </div>
         </div>
@@ -214,6 +223,7 @@
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!--self made-->
         <script src="/OBESystem/js/create_syllabus.js"></script>
+        <script src="/OBESystem/js/instructions.js"></script>
         <!-- Page script -->
         <script>
             $(function () {

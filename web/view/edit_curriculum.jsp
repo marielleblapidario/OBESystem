@@ -42,24 +42,25 @@
                     <section class="content">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Create Curriculum</h3>
+                                <h3 class="box-title">Edit Curriculum</h3>
+                                <a href="#" id="curriculum-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                </a>                                
                             </div>
                             <!-- /.box-header -->
                             <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
-
                                     <div class="col-sm-10">
-                                        <input name="title" type="text" class="form-control" id="inputEmail3" placeholder="BS in CSE 2010-2016" required>
+                                        <input name="title" type="text" class="form-control" id="title" placeholder="BS in CSE 2010-2016" required>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Program</label>
                                     <div class="col-sm-10">
-                                        <select name="select-program" id="select-program" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                        </select>
+                                        <input name="select-program" type="hidden" id="program-title-hidden">
+                                         <input type="text" class="form-control" id="program-title" readOnly>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -87,29 +88,35 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea name="description" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
+                                        <textarea name="description" id="description" class="form-control" rows="3" placeholder="Enter ..." required></textarea>
                                     </div>
                                 </div>
-
                             </div>
                             <!-- Add Courses -->
                             <div class="box box-success">
                                 <div class="box-header with-border">
-                                    <h4 class="box-title">Add Course</h4>
+                                    <h4 class="box-title">Courses in Curriculum</h4>
                                 </div>
                                 <div class="box-body no-border">
-                                    <h5 class="box-info">Total Units:
-                                        <span id = "total-units"></span>
-                                    </h5>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Search</label>
-                                        <div class="col-sm-10">
-                                            <select id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            </select>
-                                        </div>
 
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Search Course</label>
+                                        <div class="col-sm-10">
+                                            <select id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 90%;" tabindex="-1" aria-hidden="true">
+                                            </select>
+                                            <button id="button-add" type="button" class="btn btn-success pull-right" style="width: 10%;"><i class="fa fa-plus"></i> Add</button>
+                                        </div>
                                     </div>
-                                    <button id="button-add" type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add Course</button>
+                                </div>
+                                <div class="box-body no-border">
+
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <h5 class="pull-right">Total Units:
+                                                <span id = "total-units"></span>
+                                            </h5>
+                                        </div>
+                                    </div>
 
                                     <div id="table">
                                         <table id="data" class="table table-hover">
@@ -120,7 +127,7 @@
                                                 <th>Year Level</th>
                                                 <th>Term</th>
                                                 <th>Prerequisite</th>
-                                                <th>Delete</th>
+                                                <th>Tool</th>
                                             </tr>
                                         </table>
                                     </div>
@@ -173,6 +180,7 @@
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <script src="/OBESystem/js/edit_curriculum.js"></script>
         <script src="/OBESystem/js/search_program2.js"></script>
+        <script src="/OBESystem/js/instructions.js"></script>
         <!-- Page script -->
         <script>
             $(function () {
