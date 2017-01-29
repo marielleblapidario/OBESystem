@@ -55,7 +55,6 @@ function addRow(data) {
     var section = data.section;
     var days = data.days;
     var time = data.time;
-    var roomTitle = data.roomTitle;
     var facultyName = data.facultyName;
     var AY = data.startYear + " - " + data.endYear;
     var syllabusID = data.syllabusID;
@@ -72,7 +71,7 @@ function addRow(data) {
     arrSyllabusID.push(syllabusID);
     console.log("pushed: ", offeringID);
 
-    example1.row.add([codeCourse, courseTitle, AY, term, section, days, time, roomTitle, facultyName, tools]);
+    example1.row.add([codeCourse, courseTitle, AY, term, section, days, time, facultyName, tools]);
     example1.draw();
     rowCount++;
 }

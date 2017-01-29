@@ -27,8 +27,8 @@ public class CourseOfferingDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "INSERT INTO courseoffering (syllabusID, curriculumID, "
-                    + "courseID, term, startYear, endYear, section, days, time, room, faculty)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+                    + "courseID, term, startYear, endYear, section, days, time, faculty)\n"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newOffering.getSyllabusID());
@@ -40,8 +40,7 @@ public class CourseOfferingDAO {
             pstmt.setString(7, newOffering.getSection());
             pstmt.setString(8, newOffering.getDays());
             pstmt.setString(9, newOffering.getTime());
-            pstmt.setInt(10, newOffering.getRoom());
-            pstmt.setInt(11, newOffering.getFaculty());
+            pstmt.setInt(10, newOffering.getFaculty());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -60,11 +59,9 @@ public class CourseOfferingDAO {
             Connection conn = myFactory.getConnection();
             String query = "SELECT CG.offeringID, CG.syllabusID, CG.curriculumID,CG.courseID, "
                     + "C.codeCourse, C.title as 'courseTitle', CG.term, CG.section, "
-                    + "CG.days, CG.time, CG.room, RR.room as 'roomTitle', CG.faculty, "
+                    + "CG.days, CG.time, CG.faculty, "
                     + "CONCAT(U.firstName, \" \" , U.LastName) as 'name', CG.startYear, CG.endYear\n"
                     + "FROM courseoffering CG\n"
-                    + "JOIN refroom RR\n"
-                    + "ON CG.room = RR.roomID\n"
                     + "JOIN course C \n"
                     + "ON CG.courseID = C.courseID\n"
                     + "JOIN USER U\n"
@@ -86,8 +83,6 @@ public class CourseOfferingDAO {
                 temp.setSection(rs.getString("section"));
                 temp.setDays(rs.getString("days"));
                 temp.setTime(rs.getString("time"));
-                temp.setRoom(rs.getInt("room"));
-                temp.setRoomTitle(rs.getString("roomTitle"));
                 temp.setFaculty(rs.getInt("faculty"));
                 temp.setFacultyName(rs.getString("name"));
                 newOffering.add(temp);
@@ -109,13 +104,11 @@ public class CourseOfferingDAO {
             String query = "SELECT CG.offeringID, CG.syllabusID, CG.curriculumID, "
                     + "CUR.title as 'curriculumTitle', CG.courseID, CG.term, "
                     + "CG.startYear,CG.endYear, CG.section, CE.title as 'courseTitle', "
-                    + "CG.room, R.Room as 'roomTitle',  CG.days, CG.time, CG.faculty, "
+                    + "CG.days, CG.time, CG.faculty, "
                     + "CONCAT(U.firstName, \" \" , U.LastName) as 'name', CE.codeCourse\n"
                     + "FROM courseoffering CG \n"
                     + "JOIN course CE\n"
                     + "ON CG.courseID = CE.courseID\n"
-                    + "JOIN refroom R \n"
-                    + "ON CG.room = R.roomID\n"
                     + "JOIN user U \n"
                     + "ON CG.faculty = U.userID\n"
                     + "JOIN curriculum CUR \n"
@@ -138,8 +131,6 @@ public class CourseOfferingDAO {
                 newOffering.setSection(rs.getString("section"));
                 newOffering.setDays(rs.getString("days"));
                 newOffering.setTime(rs.getString("time"));
-                newOffering.setRoom(rs.getInt("room"));
-                newOffering.setRoomTitle(rs.getString("roomTitle"));
                 newOffering.setFaculty(rs.getInt("faculty"));
                 newOffering.setFacultyName(rs.getString("name"));
                 newOffering.setCodeCourse(rs.getString("codeCourse"));
@@ -160,11 +151,9 @@ public class CourseOfferingDAO {
             Connection conn = myFactory.getConnection();
             String query = "SELECT CG.offeringID, CG.syllabusID, CG.curriculumID,CG.courseID,\n"
                     + "C.codeCourse, C.title as 'courseTitle', CG.term, CG.section,\n"
-                    + "CG.days, CG.time, CG.room, RR.room as 'roomTitle', CG.faculty,\n"
+                    + "CG.days, CG.time, CG.faculty,\n"
                     + "CONCAT(U.firstName, \" \" , U.LastName) as 'name', CG.startYear, CG.endYear\n"
                     + "FROM courseoffering CG\n"
-                    + "JOIN refroom RR\n"
-                    + "ON CG.room = RR.roomID\n"
                     + "JOIN course C\n"
                     + "ON CG.courseID = C.courseID\n"
                     + "JOIN USER U\n"
@@ -188,8 +177,6 @@ public class CourseOfferingDAO {
                 temp.setSection(rs.getString("section"));
                 temp.setDays(rs.getString("days"));
                 temp.setTime(rs.getString("time"));
-                temp.setRoom(rs.getInt("room"));
-                temp.setRoomTitle(rs.getString("roomTitle"));
                 temp.setFaculty(rs.getInt("faculty"));
                 temp.setFacultyName(rs.getString("name"));
                 newOffering.add(temp);

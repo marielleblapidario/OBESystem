@@ -38,8 +38,8 @@
                             <h3 class="box-title">Executive Dashboard</h3>
                         </div>
                         <div id="powerbi" class="box-body">
-                            <iframe width="100%" height="570" src="https://app.powerbi.com/view?r=eyJrIjoiOTc3MjIyMzktM2QwOC00OTRmLTljNDYtNmI3YTc3YTg5OTJiIiwidCI6ImYzNGEzNWJkLWE2NWQtNDYwNS1iMGZhLWQyNTcxZjgzMWY1ZSIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
-                            
+                            <div id="powerbi-include">
+                            </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Remark</label>
                                 <div class="col-sm-10">

@@ -57,7 +57,6 @@
                                                 <th>Section</th>
                                                 <th>Days</th>
                                                 <th>Time</th>
-                                                <th>Room</th>
                                                 <th>Faculty</th>
                                                 <th>Tools</th>
                                             </tr>

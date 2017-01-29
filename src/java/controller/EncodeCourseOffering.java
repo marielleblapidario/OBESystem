@@ -46,7 +46,6 @@ public class EncodeCourseOffering extends BaseServlet {
         String curriculumIDs = request.getParameter("curriculumID");
         String courseIDs = request.getParameter("courseID");
         String terms = request.getParameter("term");
-        String rooms = request.getParameter("room");
         String facultys = request.getParameter("faculty");
         String startYears = request.getParameter("startYear");
         String endYears = request.getParameter("endYear");
@@ -62,7 +61,6 @@ public class EncodeCourseOffering extends BaseServlet {
         System.out.println("term: " + terms);
         System.out.println("startYear: " + startYears);
         System.out.println("endYear: " + endYears);
-        System.out.println("room: " + rooms);
         System.out.println("faculty: " + facultys);
         System.out.println("section: " + section);
         System.out.println("days: " + days);
@@ -72,7 +70,6 @@ public class EncodeCourseOffering extends BaseServlet {
         int curriculumID = Integer.parseInt(curriculumIDs);
         int courseID = Integer.parseInt(courseIDs);
         int term = Integer.parseInt(terms);
-        int room = Integer.parseInt(rooms);
         int faculty = Integer.parseInt(facultys);
         int startYear = Integer.parseInt(startYears);
         int endYear = Integer.parseInt(endYears);
@@ -86,7 +83,6 @@ public class EncodeCourseOffering extends BaseServlet {
         offering.setSection(section);
         offering.setDays(days);
         offering.setTime(time);
-        offering.setRoom(room);
         offering.setFaculty(faculty);
         
         if (offeringDAO.encodeOffering(offering)) {

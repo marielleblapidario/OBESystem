@@ -8,7 +8,7 @@
         <%@include file ="navbar_faculty.jsp" %>
       </c:when>
     <c:when test="${login.posID eq 4}">
-        <%@include file ="navbar_faculty.jsp" %>
+        <%@include file ="navbar_vice.jsp" %>
       </c:when>
     <c:when test="${login == null}">
        <c:redirect url="login.jsp"/>

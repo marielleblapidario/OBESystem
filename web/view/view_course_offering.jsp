@@ -126,12 +126,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Room</label>
-                                    <div class="col-sm-10">
-                                        <input name="room" type="text" class="form-control" id="room" readOnly>
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label class="col-sm-2 control-label">Faculty</label>
                                     <div class="col-sm-10">
                                         <input name="faculty" type="text" class="form-control" id="faculty" readOnly>

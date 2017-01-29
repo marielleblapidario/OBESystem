@@ -157,6 +157,47 @@ public class CurriculumDAO {
         }
         return null;
     }
+    
+    public ArrayList<Curriculum> getCurriculumUnderProgram(String codeProgram) throws ParseException {
+        ArrayList<Curriculum> newCurriculum = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT C.curriculumID, C.program, C.title as 'crTitle', "
+                    + "P.title as 'pTitle', CO.college, C.startYear, C.endYear, "
+                    + "CONCAT(U.firstName, \" \" , U.LastName) as 'name'\n"
+                    + "FROM curriculum C\n"
+                    + "JOIN program P \n"
+                    + "ON C.program = P.codeProgram\n"
+                    + "JOIN refcollege CO \n"
+                    + "ON P.college = CO.collegeID\n"
+                    + "JOIN user U\n"
+                    + "ON C.contributor = U.userID\n"
+                    + "WHERE C.isDeleted IS NULL AND P.codeProgram = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, codeProgram);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Curriculum temp = new Curriculum();
+                temp.setCodeCurriculum(rs.getString("curriculumID"));
+                temp.setProgram(rs.getString("program"));
+                temp.setTitle(rs.getString("crTitle"));
+                temp.setProgramName(rs.getString("pTitle"));
+                temp.setCollegeName(rs.getString("college"));
+                temp.setStartYear(rs.getInt("startYear"));
+                temp.setEndYear(rs.getInt("endYear"));
+                temp.setContributorName(rs.getString("name"));
+                newCurriculum.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return newCurriculum;
+        } catch (SQLException ex) {
+            Logger.getLogger(CurriculumDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     public Curriculum getSpecificCurriculum(String codeCurriculum) throws ParseException {
         Curriculum newCurriculum = new Curriculum();

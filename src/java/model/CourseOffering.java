@@ -20,12 +20,10 @@ public class CourseOffering {
     private String section;
     private String days;
     private String time;
-    private int room;
     private int faculty;
     
     private String curriculumTitle;
     private String courseTitle;
-    private String roomTitle;
     private String facultyName;
     private String codeCourse;
 
@@ -114,20 +112,6 @@ public class CourseOffering {
     }
 
     /**
-     * @return the room
-     */
-    public int getRoom() {
-        return room;
-    }
-
-    /**
-     * @param room the room to set
-     */
-    public void setRoom(int room) {
-        this.room = room;
-    }
-
-    /**
      * @return the faculty
      */
     public int getFaculty() {
@@ -167,20 +151,6 @@ public class CourseOffering {
      */
     public void setCourseTitle(String courseTitle) {
         this.courseTitle = courseTitle;
-    }
-
-    /**
-     * @return the roomTitle
-     */
-    public String getRoomTitle() {
-        return roomTitle;
-    }
-
-    /**
-     * @param roomTitle the roomTitle to set
-     */
-    public void setRoomTitle(String roomTitle) {
-        this.roomTitle = roomTitle;
     }
 
     /**

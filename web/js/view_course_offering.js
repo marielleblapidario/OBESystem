@@ -11,7 +11,6 @@ var endYear = $('#endYear');
 var section = $('#section');
 var days = $('#days');
 var time = $('#time');
-var room = $('#room');
 var table = $('#data');
 var divTable = $('#div-students');
 var faculty = $('#faculty');
@@ -75,7 +74,6 @@ function getSyllabus(offeringID) {
             strSection = data.section;
             days.val(data.days);
             time.val(data.time);
-            room.val(data.roomTitle);
             faculty.val(data.facultyName);
 
             strYear = data.startYear;

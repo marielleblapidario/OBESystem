@@ -110,13 +110,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Room</label>
-                                    <div class="col-sm-10">
-                                        <select name="room" id="select-room" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label class="col-sm-2 control-label">Faculty</label>
                                     <div class="col-sm-10">
                                         <select name="faculty" id="select-faculty" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
