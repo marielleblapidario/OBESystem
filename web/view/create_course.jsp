@@ -89,7 +89,7 @@
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">  
-                                <button type="button" class="btn btn-default pull-right">Cancel</button>
+                                <a href="/OBESystem/ViewCourseList"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
                                 <button type="submit" class="btn btn-success pull-right">Create</button>
                             </div>
                             <!-- /.box-footer -->

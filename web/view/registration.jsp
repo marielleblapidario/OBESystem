@@ -37,7 +37,7 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="index2.html"><b>OBE</b>System</a>
+                <a><b>OBE</b>System</a>
             </div>
             <div class="register-box-body">
                 <p class="login-box-msg">Register a new membership</p>
@@ -78,12 +78,12 @@
                     <div class="row">
                         <!-- /.col -->
                         <div class="col-xs-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                            <button type="submit" class="btn btn-success btn-block btn-flat">Register</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
-                <a href="/OBESystem/RedirectToLogin" class="text-center">I already have a membership</a>
+                <a href="/OBESystem/RedirectToLogin" class="text-center text-olive">I already have a membership</a>
             </div>
             <!-- /.login-box-body -->
         </div>

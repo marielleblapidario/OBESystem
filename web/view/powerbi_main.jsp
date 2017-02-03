@@ -31,6 +31,9 @@
                     <div class="box box-success">
                         <div class="box-header with-border">
                             <h3 class="box-title">Executive Dashboard</h3>
+                            <a href="#" id="dashboard-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                            </a>
                         </div>
                         <div id="printheader">
                             <img src="/OBESystem/resources/dist/img/dlsuLogo.png">
@@ -68,5 +71,6 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <script src="/OBESystem/js/powerbi_main.js"></script>
+         <script src="/OBESystem/js/instructions.js"></script>
     </body>
 </html>

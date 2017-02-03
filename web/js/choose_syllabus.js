@@ -33,7 +33,7 @@ function addRow(data) {
     var syllabusID = data.syllabusID;
     var AY = data.startYear + " - " + data.endYear;
 
-    var tools = "<a href=\"/OBESystem/RedirectToCreateOffering\"><button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn bg-blue btn-xs\">select</button></a>";
+    var tools = "<a href=\"/OBESystem/RedirectToCreateOffering\"><button onclick=\"save('" + rowCount + "')\" type=\"button\" class=\"btn btn-success btn-sm\">select</button></a>";
     arrSyllabusID.push(syllabusID);
 
     console.log("rowCount: " + rowCount);

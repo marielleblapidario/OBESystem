@@ -119,7 +119,7 @@
                             </div>
                             <div class="box-footer">
                                 <a href="/OBESystem/RedirectToChooseSyllabus"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
-                                <button type="submit" class="btn bg-light-blue pull-right">Save</button>
+                                <button type="submit" class="btn btn-success pull-right">Save</button>
                             </div>
                         </div>
                     </section>

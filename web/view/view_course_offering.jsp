@@ -133,7 +133,7 @@
                                 </div>
                             </div>
                             <!--display students-->
-                            <div id = "div-students" class="box box-info">
+                            <div id = "div-students" class="box box-success">
                                 <table id="data" class="table table-hover">
                                 </table>
                             </div>

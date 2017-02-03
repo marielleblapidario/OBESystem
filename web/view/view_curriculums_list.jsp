@@ -41,7 +41,7 @@
                                 <div class="box-header">
                                     <h3 class="box-title">View Curriculum List</h3>
                                     <br>
-                                    <a href="/OBESystem/ViewCreateCurriculum"><button id="button-new" type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add Curriculum</button></a>
+                                    <a href="/OBESystem/ViewCreateCurriculum"><button id="button-new" type="button" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add Curriculum</button></a>
 
                                 </div>
 

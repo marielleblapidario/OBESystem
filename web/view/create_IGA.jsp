@@ -33,7 +33,11 @@
                         <div class="box box-success">
                             <!-- /.box-header -->
                             <div class="box-header">
-                                <h3 class="box-title">Institutional Graduate Attribute</h3><br>
+                                <h3 class="box-title">Institutional Graduate Attribute</h3>
+                                <a href="#" id="iga-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                </a>
+                                <br>
                             </div>
                             <!--hidden values -->
                             <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
@@ -43,13 +47,13 @@
                             <div class="box-body table-responsive">
                                 <table id="data" class="table table-hover">
                                     <tr>
-                                        <th>Code</th>
-                                        <th>
+                                        <th id="iga-code">Code</th>
+                                        <th id="iga-title">
                                             <div class="col-sm-10">
                                                 Institutional Graduate Attribute
                                             </div>
                                         </th>
-                                        <th>
+                                        <th id="iga-description">
                                             <div class="col-sm-10">
                                                 Description
                                             </div>
@@ -64,8 +68,7 @@
                                 </table>
                             </div>
                             <div class="box-footer">  
-                                <button id ="addRowButton" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
-                                <button type="button" class="btn btn-default pull-right">Cancel</button>
+                                <button id ="addRowButton" type="button" class="btn btn-success pull-left"><i class="fa fa-plus"></i> Add Row</button>
                                 <button id ="save" type="submit" class="btn btn-success pull-right">Save</button>
                             </div>
                             <!-- /.box-footer -->
@@ -93,5 +96,6 @@
         <!-- Delete Row -->
         <script src="/OBESystem/resources/bootstrap/js/deleteRow.js"></script>
         <script src="/OBESystem/js/create_IGA.js"></script>
+        <script src="/OBESystem/js/instructions.js"></script>
     </body>
 </html>

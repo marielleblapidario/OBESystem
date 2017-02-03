@@ -42,7 +42,11 @@
                     <section class="content">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Create Performance Indicators</h3><br>
+                                <h3 class="box-title">Create Performance Indicators</h3>
+                                <a href="#" id="pi-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                    <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                </a>
+                                <br>
                                 <h5>Program: <span id = "program-title"></span></h5>
                                 <input class="hidden" id="hidden-program-title" name="program-title">
                                 <h5>College: <span id = "college-title" ></span></h5>
@@ -57,7 +61,7 @@
                                 </select>
                                 <br><br>
                                 <input class="hidden" id="hidden-codePO" name="codePO">
-                                <h3 class="box-title"><span id = "PO-description"></span></h3>
+                                <p class="h4"><span id = "PO-description"></span></p>
                                 <br>
                             </div>
                             <!-- /.box-header -->
@@ -66,7 +70,7 @@
                             <div class="box-body no-border">
                                 <div id="PI-inputs">
                                 </div>
-                                <button id="addRowButton" type="button" class="btn bg-blue pull-left no-border"><i class="fa fa-plus"></i> Add</button>
+                                <button id="addRowButton" type="button" class="btn btn-success pull-left no-border"><i class="fa fa-plus"></i> Add</button>
 
                                 <br><br><br>
                                 <div class="form-group">
@@ -75,13 +79,13 @@
                                         <textarea name="remarks" class="form-control" rows="3" placeholder="Enter ..."></textarea>
                                     </div>
                                 </div>
-                                <br>
+                                <br><br>
+                                <br><br>
+                                <div>
+                                    <a href="/OBESystem/RedirectToSearchPI"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
+                                    <button id="save" type="submit" class="btn btn-success pull-right">Save</button>
+                                </div>
                             </div>
-                            <!-- /.box-footer -->
-                        </div>
-                        <div class="">
-                            <a href="/OBESystem/RedirectToSearchPI"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
-                            <button id="save" type="submit" class="btn bg-light-blue pull-right">Save</button>
                         </div>
                     </section>
                 </form>
@@ -120,6 +124,7 @@
         <script src="/OBESystem/js/store_program_search.js"></script>
         <script src="/OBESystem/js/search_PO.js"></script>
         <script src="/OBESystem/js/create_PI.js"></script>
+        <script src="/OBESystem/js/instructions.js"></script>
         <!-- Page script -->
         <script>
             $(function () {

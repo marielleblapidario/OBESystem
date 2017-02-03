@@ -43,7 +43,11 @@
                         <div class="box box-success">
                             <!-- /.box-header -->
                             <div class="box-header">
-                                <h3 class="box-title">Program Outcome</h3><br>
+                                <h3 class="box-title">Program Outcome</h3>
+                                <a href="#" id="po-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                </a>
+                                <br>
                                 <h5>Program: <span id = "program-title"></span></h5>
                                 <input class="hidden" id="hidden-program-title" name="program-title">
                                 <h5>College: <span id = "college-title" ></span></h5>
@@ -53,13 +57,13 @@
                             <div class="box-body table-responsive">
                                 <table id="data" class="table table-hover">
                                     <tr>
-                                        <th>Code</th>
-                                        <th>
+                                        <th id="po-code">Code</th>
+                                        <th id="po-title">
                                             <div class="col-sm-10">
                                                 Program Outcome
                                             </div>
                                         </th>
-                                        <th>
+                                        <th id="po-mapping">
                                             <div class="col-sm-10">
                                                 PA Mapping
                                             </div>
@@ -74,9 +78,9 @@
                                 </table>
                             </div>
                             <div class="box-footer">  
-                                <button id="addRowButton" type="button" class="btn btn-primary pull-left"><i class="fa fa-plus"></i> Add Row</button>
+                                <button id="addRowButton" type="button" class="btn btn-success pull-left"><i class="fa fa-plus"></i> Add Row</button>
                                 <a href="/OBESystem/RedirectToSearchPO"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
-                                <button id="save" type="submit" class="btn bg-light-blue pull-right">Save</button>
+                                <button id="save" type="submit" class="btn btn-success pull-right">Save</button>
                             </div>
                             <!-- /.box-footer -->
                         </div>
@@ -119,6 +123,7 @@
         <!--self made-->
         <script src="/OBESystem/js/store_program_search.js"></script>
         <script src="/OBESystem/js/create_PO.js"></script>
+         <script src="/OBESystem/js/instructions.js"></script>
         <script>
             $(function () {
                 //Initialize Select2 Elements
