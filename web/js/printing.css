@@ -22,13 +22,16 @@ img {
 }
 
 @media print {
-    iframe {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 100%;
-        width: 100%;
+    #powerbi-include {
+        -moz-transform: scale(0.70, 0.70); 
+        -webkit-transform: scale(0.70, 0.70); 
+        -o-transform: scale(0.70, 0.70);
+        -ms-transform: scale(0.70, 0.70);
+        transform: scale(0.70, 0.70); 
+        -moz-transform-origin: top left;
+        -webkit-transform-origin: top left;
+        -o-transform-origin: top left;
+        -ms-transform-origin: top left;
+        transform-origin: top left;
     }
 }

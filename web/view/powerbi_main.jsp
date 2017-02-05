@@ -41,7 +41,7 @@
                             <h3 class="box-title">Executive Dashboard</h3>
                         </div>
                         <div id="powerbi" class="box-body">
-                            <div id="powerbi-include" class="embed-responsive embed-responsive-16by9">
+                            <div id="powerbi-include" style="zoom: 3.55">
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Remark</label>
