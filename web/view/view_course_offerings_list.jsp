@@ -58,6 +58,7 @@
                                                 <th>Days</th>
                                                 <th>Time</th>
                                                 <th>Faculty</th>
+                                                <th>Status</th>
                                                 <th>Tools</th>
                                             </tr>
                                         </thead>

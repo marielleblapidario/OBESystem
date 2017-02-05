@@ -5,23 +5,25 @@
  */
 package controller;
 
-import DAO.CoDAO;
+import DAO.StudentDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Student;
 
 /**
  *
  * @author mariellelapidario
  */
-public class GetCOforFormat extends BaseServlet {
+public class GetEnrolledStatus extends BaseServlet {
 
     /**
      *
@@ -36,15 +38,19 @@ public class GetCOforFormat extends BaseServlet {
             response.setContentType("text/html;charset=UTF-8");
             Gson g = new Gson();
             String s = null;
-            int syllabusID = Integer.parseInt(request.getParameter("syllabusID"));
-            System.out.println("selected syllabusID: " + syllabusID);
-            s = g.toJson(new CoDAO().getCOforFormat(syllabusID));
-            
+            boolean uploaded = false;
+            int offeringID = Integer.parseInt(request.getParameter("offeringID"));
+            System.out.println("selected syllabusID: " + offeringID);
+            ArrayList<Student> students= new StudentDAO().getEnrolledStudents(offeringID);
+            if (students.size() > 0){
+                uploaded = true;
+            }
+            s = g.toJson(uploaded);
             PrintWriter out = response.getWriter();
             System.out.println(s);
             out.print(s);
         } catch (ParseException ex) {
-            Logger.getLogger(GetAssessmentForFormat.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetEnrolledStudents.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

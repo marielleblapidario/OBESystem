@@ -123,7 +123,8 @@ function getAssessments(syllabusID) {
             //pushed the array of Strings (e.g. AS - 01, AS -02, .....
             console.log(data.length);
             for (var x = 0; x < data.length; x++) {
-                arrAssessment.push(data[x]);
+                var assessment = {codeAT: data[x].codeAT, typeName: data[x].typeName};
+                arrAssessment.push(assessment);
             }
         },
         error: function (response) {
@@ -139,11 +140,11 @@ function getCO(syllabusID) {
         url: "/OBESystem/GetCOforFormat?syllabusID=" + syllabusID,
         dataType: 'json',
         success: function (data) {
+            console.log("CO upload");
             console.log(data);
-            //pushed the array of Strings (e.g. AS - 01, AS -02, .....
-            console.log(data.length);
             for (var x = 0; x < data.length; x++) {
-                arrCO.push(data[x]);
+                var co = {codeCO: data[x].codeCO, description: data[x].description};
+                arrCO.push(co);
             }
         },
         error: function (response) {
@@ -613,7 +614,7 @@ function tableHeader() {
     header.append("<th>Middle Name</th>");
 
     for (var x = 0; x < arrAssessment.length; x++) {
-        var a = "<th>" + arrAssessment[x] + " </th>";
+        var a = "<th title='"+ arrAssessment[x].typeName +"'>" + arrAssessment[x].codeAT + " </th>";
         header.append(a);
     }
     header.append("</tr>");
@@ -635,7 +636,7 @@ function tableRow() {
                 if (arrGradesDisplay.length > 0) {
                     for (var b = 0; b < arrGradesDisplay.length; b++) {
                         if (arrEnrolledStudents[x].studentID == arrGradesDisplay[b].studentID &&
-                                arrAssessment[a] == arrGradesDisplay[b].codeAT) {
+                                arrAssessment[a].codeAT == arrGradesDisplay[b].codeAT) {
                             var c = '<td>' + arrGradesDisplay[b].grade + '</td>';
                             row.append(c);
                         }
@@ -661,7 +662,7 @@ function modalHeader() {
     header.append("<th>Middle Name</th>");
 
     for (var x = 0; x < arrCO.length; x++) {
-        var a = "<th>" + arrCO[x] + " </th>";
+        var a = "<th title='"+arrCO[x].description+"'>" + arrCO[x].codeCO + " </th>";
         header.append(a);
     }
     header.append("</tr>");
@@ -684,9 +685,9 @@ function modalRow() {
                     for (var b = 0; b < arrCOGrades.length; b++) {
                         console.log('compare id: '+ arrEnrolledStudents[x].studentID
                                 + ' vs ' + arrCOGrades[b].studentID +" and "+
-                                arrCO[a] + " vs " + arrCOGrades[b].codeCO);
+                                arrCO[a].codeCO + " vs " + arrCOGrades[b].codeCO);
                         if (arrEnrolledStudents[x].studentID == arrCOGrades[b].studentID &&
-                                arrCO[a] == arrCOGrades[b].codeCO) {
+                                arrCO[a].codeCO == arrCOGrades[b].codeCO) {
                             console.log('entered if');
                             var c = '<td>' + arrCOGrades[b].gradeCO + '</td>';
                             row.append(c);

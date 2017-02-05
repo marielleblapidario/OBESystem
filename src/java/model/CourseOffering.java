@@ -26,6 +26,7 @@ public class CourseOffering {
     private String courseTitle;
     private String facultyName;
     private String codeCourse;
+    private String status;
 
     /**
      * @return the curriculumID
@@ -235,5 +236,19 @@ public class CourseOffering {
      */
     public void setEndYear(int endYear) {
         this.endYear = endYear;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

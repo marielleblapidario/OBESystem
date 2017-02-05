@@ -181,20 +181,22 @@ public class CoDAO {
         return false;
     }
     
-    public ArrayList<String> getCOforFormat(int syllabusID) throws ParseException {
-        ArrayList<String> arrCO = new ArrayList<>();
+    public ArrayList<CO> getCOforFormat(int syllabusID) throws ParseException {
+        ArrayList<CO> arrCO = new ArrayList<>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT codeCO\n"
+            String query = "SELECT codeCO, description\n"
                     + "FROM co \n"
                     + "WHERE syllabusID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, syllabusID);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                String co = rs.getString("codeCO");
-                arrCO.add(co);
+                CO temp = new CO();
+                temp.setCodeCO(rs.getString("codeCO"));
+                temp.setDescription(rs.getString("description"));
+                arrCO.add(temp);
             }
             pstmt.close();
             conn.close();

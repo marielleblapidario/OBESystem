@@ -59,11 +59,22 @@ function addRow(data) {
     var AY = data.startYear + " - " + data.endYear;
     var syllabusID = data.syllabusID;
     var tools;
+    var status = data.status;
+    var statusDisplay;
+    
+    console.log("status: ", status);
+    
+    if(status.toLowerCase() == "grades uploaded"){
+        statusDisplay = '<span class="label label-success">grades uploaded</span>';
+    } else if (status.toLowerCase() == "students uploaded"){
+        statusDisplay = '<span class="label label-warning">students uploaded</span>';
+    } else {
+        statusDisplay = '<span class="label label-danger">pending uploads</span>';
+    }
 
     console.log("rowCount: " + rowCount);
     if (posID == 4 || posID == 1) {
-        tools = "<button onclick=\"save('" + rowCount + "')\" title=\"edit\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button>\n\
-<a href=\"/OBESystem/RedirectToViewCourseOffering\"><button onclick=\"save('" + rowCount + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
+        tools = "<a href=\"/OBESystem/RedirectToViewCourseOffering\"><button onclick=\"save('" + rowCount + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
     } else {
         tools = "<a href=\"/OBESystem/RedirectToViewCourseOffering\"><button onclick=\"save('" + rowCount + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
     }
@@ -71,7 +82,7 @@ function addRow(data) {
     arrSyllabusID.push(syllabusID);
     console.log("pushed: ", offeringID);
 
-    example1.row.add([codeCourse, courseTitle, AY, term, section, days, time, facultyName, tools]);
+    example1.row.add([codeCourse, courseTitle, AY, term, section, days, time, facultyName, statusDisplay, tools]);
     example1.draw();
     rowCount++;
 }

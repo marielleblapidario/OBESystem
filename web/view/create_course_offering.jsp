@@ -156,7 +156,6 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!--self made-->
-        <script src="/OBESystem/js/search_room.js"></script>
         <script src="/OBESystem/js/search_faculty.js"></script>
         <script src="/OBESystem/js/create_course_offering.js"></script>
         <!-- Page script -->

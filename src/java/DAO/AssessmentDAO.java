@@ -187,20 +187,24 @@ public class AssessmentDAO {
 //        }
 //        return false;
 //    }
-    public ArrayList<String> getAssessmentforFormat(int syllabusID) throws ParseException {
-        ArrayList<String> arrAssessment = new ArrayList<>();
+    public ArrayList<Assessment> getAssessmentforFormat(int syllabusID) throws ParseException {
+        ArrayList<Assessment> arrAssessment = new ArrayList<>();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT codeAT\n"
-                    + "FROM assessment\n"
-                    + "WHERE syllabusID = ?;";
+            String query = "SELECT A.codeAT, RT.type \n"
+                    + "FROM assessment A\n"
+                    + "JOIN refType RT "
+                    + "ON A.type = RT.typeID "
+                    + "WHERE A.syllabusID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, syllabusID);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                String assessment = rs.getString("codeAT");
-                arrAssessment.add(assessment);
+                Assessment temp = new Assessment();
+                temp.setCodeAT(rs.getString("codeAT"));
+                temp.setTypeName(rs.getString("type"));
+                arrAssessment.add(temp);
             }
             pstmt.close();
             conn.close();

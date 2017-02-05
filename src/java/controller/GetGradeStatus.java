@@ -5,23 +5,25 @@
  */
 package controller;
 
-import DAO.RoomDAO;
+import DAO.GradeDAO;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Grade;
 
 /**
  *
  * @author mariellelapidario
  */
-public class GetAllRoom extends BaseServlet {
+public class GetGradeStatus extends BaseServlet {
 
     /**
      *
@@ -32,16 +34,23 @@ public class GetAllRoom extends BaseServlet {
      */
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        Gson g = new Gson();
-        String s = null;
         try {
-            s = g.toJson(new RoomDAO().getAllRoom());
+            response.setContentType("text/html;charset=UTF-8");
+            Gson g = new Gson();
+            String s = null;
+            boolean uploaded = false;
+            int offeringID = Integer.parseInt(request.getParameter("offeringID"));
+            System.out.println("selected offeringID: " + offeringID);
+            ArrayList<Grade> grades = new GradeDAO().getAllGradesOfSection(offeringID);
+            if (grades.size() > 0){
+                uploaded = true;
+            }
+            s = g.toJson(uploaded);
+            PrintWriter out = response.getWriter();
+            System.out.println(s);
+            out.print(s);
         } catch (ParseException ex) {
-            Logger.getLogger(GetAllRoom.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetGradesOfSection.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        PrintWriter out = response.getWriter();
-        out.print(s);
     }
 }
