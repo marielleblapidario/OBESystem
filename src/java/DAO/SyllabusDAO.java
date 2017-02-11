@@ -63,7 +63,8 @@ public class SyllabusDAO {
                     + "JOIN curriculum  C\n"
                     + "ON S.curriculumID = C.curriculumID\n"
                     + "JOIN course CE\n"
-                    + "ON S.courseID = CE.courseID";
+                    + "ON S.courseID = CE.courseID \n"
+                    + "ORDER BY S.syllabusID DESC";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             ResultSet rs = pstmt.executeQuery();

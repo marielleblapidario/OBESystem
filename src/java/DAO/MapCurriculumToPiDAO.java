@@ -79,8 +79,10 @@ public class MapCurriculumToPiDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT curriculumID, courseID, codePI\n"
-                    + "FROM mapcurriculumcoursestopi\n"
+            String query = "SELECT curriculumID, courseID, M.codePI, description\n"
+                    + "FROM mapcurriculumcoursestopi M\n"
+                    + "JOIN pi P\n"
+                    + "ON M.codePI = P.codePI\n"
                     + "WHERE curriculumID = ? AND courseID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, curriculumID);
@@ -92,6 +94,7 @@ public class MapCurriculumToPiDAO {
                 temp.setCurriculumID(rs.getInt("curriculumID"));
                 temp.setCourseID(rs.getInt("courseID"));
                 temp.setCodePI(rs.getString("codePI"));
+                temp.setDescription(rs.getString("description"));
                 newMapping.add(temp);
             }
             pstmt.close();

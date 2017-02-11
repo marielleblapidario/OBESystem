@@ -38,7 +38,7 @@
         <div class="wrapper">
             <div class="content-wrapper">
                 <!-- Main content -->
-                <form action="EncodeCurriculum" method="post" name="EncodeCurriculum">
+                <form action="EditCurriculum" method="post" name="EditCurriculum">
                     <section class="content">
                         <div class="box box-success">
                             <div class="box-header with-border">

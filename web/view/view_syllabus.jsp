@@ -87,7 +87,7 @@
                             </div>
                         </div>
                         <!-- Add CO -->
-                        <div class="box box-info" id="div-addCO">
+                        <div class="box box-success" id="div-addCO">
                             <div class="box-header with-border">
                                 <h4 class="box-title">Course Outcomes</h4>
                             </div>
@@ -105,7 +105,7 @@
                         </div>
                         <!-- /add CO -->
                         <!-- Add Assessment -->
-                        <div class="box box-info" id="div-addAssessment">
+                        <div class="box box-success" id="div-addAssessment">
                             <div class="box-header with-border">
                                 <h4 class="box-title">Assessments</h4>
                             </div>

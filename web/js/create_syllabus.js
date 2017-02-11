@@ -117,6 +117,7 @@ $(document).ready(function () {
                             getAllCO();
                             console.log("arrCO size: " + arrCO.length);
                             divAssessment.show();
+                            document.getElementById("addRowButton").disabled = true;
                             document.getElementById("save-btn").disabled = true;
                         },
                         error: function (response) {
@@ -142,9 +143,17 @@ function getAllPI(curriculumID, courseID) {
         dataType: 'json',
         success: function (data) {
             console.log(data);
+            var desc = "";
+            var tit ="Performance Indicators";
             for (var x = 0; x < data.length; x++) {
                 arrPI.push(data[x]);
+                desc += data[x].codePI;
+                desc +=" : <br />"; 
+                desc += data[x].description;
+                desc += " <br /><br />";                
             }
+            $('#pi-description').attr("title", tit);
+            $('#pi-description').attr("data-content", desc);
         },
         error: function (response) {
             console.log(response);
@@ -255,7 +264,7 @@ function addCO() {
         tr.appendChild(codeCOCell);
 
         var descriptionCell = document.createElement("td");
-        descriptionCell.innerHTML = '<div class="col-sm-10"><input type="text" name="description" class="form-control no-border" id="description' + rowCount + '" required></div>';
+        descriptionCell.innerHTML = '<div class="col-sm-10"><textarea type="text" onkeyup="textAreaAdjust(this)" style="border: none; outline: none; resize: none; overflow:hidden" name="description" class="form-control no-border" id="description' + rowCount + '" required></textarea></div>';
         tr.appendChild(descriptionCell);
 
         var select = document.createElement("select");
@@ -313,7 +322,7 @@ function AddAssessment() {
         }
         tr += '</select></td>';
 
-        tr += '<td><div class="col-sm-10"><input type="text" name="descriptionA" class="form-control no-border" id="descriptionA' + rowCountA + '" required></div></td>';
+        tr += '<td><div class="col-sm-10"><textarea type="text" name="descriptionA" onkeyup="textAreaAdjust(this)" style="border: none; outline: none; resize: none; overflow:hidden" class="form-control no-border" id="descriptionA' + rowCountA + '" required></textarea></div></td>';
 
         tr += '<td><div class="col-sm-10"><input type="number" name="weight" class="form-control no-border" id="weight_' + rowCountA + '" onblur= handleChange(this); required></div></td>';
 
@@ -517,4 +526,9 @@ function handleChange(input) {
         input.value = 0;
     if (input.value > 100)
         input.value = 100;
+}
+
+function textAreaAdjust(o) {
+    o.style.height = "1px";
+    o.style.height = (25 + o.scrollHeight) + "px";
 }

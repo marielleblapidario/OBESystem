@@ -15,6 +15,6 @@ function appendDashboard(posID){
     if(posID == 4){
         divDashboard.append('<iframe src="https://app.powerbi.com/view?r=eyJrIjoiYmY4NDY0ZjMtYWM5NC00NjNhLWEyOGUtZDFkZjZmMDMwODM2IiwidCI6ImYzNGEzNWJkLWE2NWQtNDYwNS1iMGZhLWQyNTcxZjgzMWY1ZSIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>');
     } else {
-        divDashboard.append('<iframe src="https://app.powerbi.com/view?r=eyJrIjoiOTc3MjIyMzktM2QwOC00OTRmLTljNDYtNmI3YTc3YTg5OTJiIiwidCI6ImYzNGEzNWJkLWE2NWQtNDYwNS1iMGZhLWQyNTcxZjgzMWY1ZSIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>');
+        divDashboard.append('<iframe src="https://app.powerbi.com/view?r=eyJrIjoiNTkyMDZkZGUtZTM5ZS00ZTliLWJmYWUtYzZmYTExOWNmYjA4IiwidCI6ImYzNGEzNWJkLWE2NWQtNDYwNS1iMGZhLWQyNTcxZjgzMWY1ZSIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>');
     }
 }

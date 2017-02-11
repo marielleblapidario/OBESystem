@@ -37,10 +37,10 @@
             <div class="content-wrapper">
                 <!-- Main content -->
                 <section class="content">
-                    <form action="EncodeAssessment" method="post" id="EncodeAssessment" name="EncodeAssessment">
+                    <form action="EditSyllabus" method="post" id="EncodeAssessment" name="EditSyllabus">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Create Syllabus</h3>
+                                <h3 class="box-title">Edit Syllabus</h3>
                                 <a href="#" id="syllabus-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
                                     <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
                                 </a>  
@@ -51,16 +51,14 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Curriculum Followed</label>
                                     <input type="hidden" name="mapCurID" class="readonlyWhite" id="hidden-mapCurID" />
-                                    <div class="col-sm-10">
-                                        <select name="curriculumID" id="select-curriculum" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                        </select>
+                                    <div  class="col-sm-10">
+                                        <input name="curriculum-title" type="text" class="form-control" id="curriculum-title" readOnly>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Course</label>
-                                    <div class="col-sm-10">
-                                        <select name="courseID" id="select-course" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                        </select>
+                                    <div  class="col-sm-10">
+                                        <input name="course-title" type="text" class="form-control" id="course-title" readOnly>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -100,10 +98,7 @@
                                     <h4 class="box-title">Add Course Outcome</h4>
                                     <a href="#" id="co-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
                                         <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
-                                    </a> 
-                                    <a href="#" id="pi-description" data-toggle="popover" data-trigger="focus" data-placement="right">
-                                        <button type="button" class="btn btn-success btn-xs"><i class="fa fa-info"></i></button>
-                                    </a>
+                                    </a>  
                                 </div>
                                 <div class="box-body table-responsive">
                                     <table id="data" class="table table-hover">
@@ -149,7 +144,7 @@
                                     <h6>*enter the weight of each assessment to the corresponding CO assigned to it. The sum of the assessment weights under a CO should not exceed 100, else the system will alert you of the invalid input. (e.g. CO-01 has AS-01 and AS-03 mapped to it. AS-01 has a weight of 40. AS-03 has a weight of 60. The sum of these two equals 100.)</h6>
                                     <table id="data-assessment" class="table table-hover">
                                         <tr>
-                                            
+
                                             <th id="as-code">Code</th>
                                             <th id="as-type">
                                                 <div class="col-sm-10">
@@ -225,8 +220,8 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!--self made-->
-        <script src="/OBESystem/js/create_syllabus.js"></script>
-        <script src="/OBESystem/js/instructions.js"></script>
+        <!--        <script src="/OBESystem/js/create_syllabus.js"></script>
+                <script src="/OBESystem/js/instructions.js"></script>-->
         <!-- Page script -->
         <script>
             $(function () {

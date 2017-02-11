@@ -13,10 +13,7 @@ var totalUnits = 0;
 var program;
 
 $(document).ready(function () {
-    function1().done(function () {
-        function2().done(function () {
-        });
-    });
+    getSpecificCurriculum(codeCurriculum);
 
     $("#button-add").click(function () {
         var selectedCourse = $("#select-course option:selected").val();
@@ -135,11 +132,62 @@ function getSpecificCurriculum(codeCurriculum) {
             $("#to").val(data.endYear);
             $("#description").val(data.description);
             program = data.program;
-            getAllCourse(program);
-            getAllTerm();
-            getAllYearLevel();
+            
+            //get all courses
+            $.ajax({
+                type: "GET",
+                url: "/OBESystem/GetCoursesOnProgram?SelectedProgram=" + program,
+                dataType: 'json',
+                success: function (gcp) {
+                    console.log("entered get COURSES");
+                    console.log(gcp);
+                    for (var x = 0; x < gcp.length; x++) {
+                        var course = {courseID: gcp[x].courseID, title: gcp[x].codeCourse};
+                        courseList.push(course);
+                        arrPreRequisite.push(course);
+                    }
+                        //get all terms
+                        $.ajax({
+                            type: "GET",
+                            url: "/OBESystem/GetAllTrimester",
+                            dataType: 'json',
+                            success: function (gat) {
+                                 console.log("entered get TERMS");
+                                console.log(gat);
+                                for (var x = 0; x < gat.length; x++) {
+                                    arrTerm.push(gat[x]);
+                                }
+                                //get all yearlevel
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/OBESystem/GetAllYearLevel",
+                                    dataType: 'json',
+                                    success: function (gayl) {
+                                         console.log("entered get LEVELS");
+                                        console.log(gayl);
+                                        for (var x = 0; x < gayl.length; x++) {
+                                            arrYearLevel.push(gayl[x]);
+                                        }
+                                        //get all courses in curriculum
+                                         getSpecificMapCurriculumToCourse(codeCurriculum);
+                                    },
+                                    error: function (response) {
+                                        console.log(response);
+                                    }
+                                }
+                                );
+                            },
+                            error: function (response) {
+                                console.log(response);
+                            }
+                        });
 
-
+                    
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
         },
         error: function (response) {
             console.log(response);
@@ -159,10 +207,12 @@ function getSpecificMapCurriculumToCourse(codeCurriculum) {
                 list.push();
             }
             //remove existing courses inside courseList
+           console.log("courseList size: ", courseList.length);
             for (var i = courseList.length - 1; i >= 0; i--) {
                 for (var j = 0; j < data.length; j++) {
                     if (courseList[i].courseID == data[j].courseID) {
                         courseList.splice(i, 1);
+                        break;
                     }
                 }
             }
@@ -183,26 +233,27 @@ function addRow(data) {
     var term = data.term;
     var yearLevel = data.yearLevel;
     var preRequisite = data.preRequisite;
-    
-    var rowCourse = {count: rowCount, courseID: courseID, title:courseTitle, units: units};
-            arrRowCount.push(rowCourse);
-            
+
+    var rowCourse = {count: rowCount, courseID: courseID, title: courseTitle, units: units};
+    arrRowCount.push(rowCourse);
+
     totalUnits = totalUnits + parseInt(units);
 
     var appendTr =
             '<tr id =tr' + rowCount + '>' +
             '<td>' + data.codeCourse
             + '<input type="hidden" name="codeCourse" class="readonlyWhite" value="' + codeCourse + '" />'
-            + '<input type="hidden" name="courseID" class="readonlyWhite" value="' +courseID + '" />'
+            + '<input type="hidden" name="courseID" class="readonlyWhite" value="' + courseID + '" />'
             + '</td>'
-            + '<td>' + data.title
+            + '<td>' + courseTitle
             + '<input type="hidden" name="title" class="readonlyWhite"  value="' + courseTitle + '" />'
             + '</td>'
             + '<td>' + units
             + '<input type="hidden" name="title" class="readonlyWhite"  value="' + units + '" />'
             + '</td>'
             + '<td><select name="yearLevel" class="form-control">';
-    for (var x = 0; x < arrYearLevel.lenth; x++) {
+    for (var x = 0; x < arrYearLevel.length; x++) {
+        console.log("YL first: " + arrYearLevel[x].yearLevel + " vs " + yearLevel);
         if (arrYearLevel[x].yearLevel == yearLevel) {
             appendTr += '<option value=' + arrYearLevel[x].yearLevel + ' selected>' + arrYearLevel[x].yearLevel + '</option>';
         } else {
@@ -212,83 +263,35 @@ function addRow(data) {
     appendTr += '</select></td>';
     appendTr += '<td><select name="term" class="form-control">';
     for (var x = 0; x < arrTerm.length; x++) {
-        if (arrTerm[x.term] == term) {
-            appendTr += '<option value=' + arrTerm[x].term + ' selected>' + arrTerm[x].term + '</option>';
+        if (arrTerm[x].term == term) {
+            appendTr += '<option value=' + term + ' selected>' + term + '</option>';
         } else {
             appendTr += '<option value=' + arrTerm[x].term + '>' + arrTerm[x].term + '</option>';
         }
     }
     appendTr += '</select></td>';
-    check = false;
     appendTr += '<td><select name="prerequisite" class="form-control">';
-    for (var x = 0; x < arrPreRequisite.length; x++) {
-        if (arrPreRequisite[x].courseID == preRequisite) {
-            appendTr += '<option value=' + arrPreRequisite[x].courseID + ' selected>' + arrPreRequisite[x].title + '</option>';
-        } else {
-            appendTr += '<option value=' + arrPreRequisite[x].courseID + '>' + arrPreRequisite[x].title + '</option>';
+    if (preRequisite == -1) {
+        appendTr += "<option selected value=\"-1\"> -- select an option -- </option>"
+        for (var x = 0; x < arrPreRequisite.length; x++) {
+            appendTr += '<option value=' + arrPreRequisite[x].courseID + '>' + arrPreRequisite[x].courseID.title + '</option>';
+        }
+    } else
+    {
+        for (var x = 0; x < arrPreRequisite.length; x++) {
+            console.log("PreReq compare: " + arrPreRequisite[x].courseID + " vs " + preRequisite);
+            if (arrPreRequisite[x].courseID == preRequisite) {
+                appendTr += '<option value=' + arrPreRequisite[x].courseID + ' selected>' + arrPreRequisite[x].title + '</option>';
+            } else {
+                appendTr += '<option value=' + arrPreRequisite[x].courseID + '>' + arrPreRequisite[x].title + '</option>';
+            }
         }
     }
     appendTr += '</select></td>';
+    appendTr += '<td><button title="delete" type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button></td>';
     appendTr += '</tr>';
     table.append(appendTr);
     rowCount++;
-}
-
-function getAllCourse(program) {
-    $.ajax({
-        type: "GET",
-        url: "/OBESystem/GetCoursesOnProgram?SelectedProgram=" + program,
-        dataType: 'json',
-        success: function (data) {
-            console.log(data);
-            for (var x = 0; x < data.length; x++) {
-                var course = {courseID: data[x].courseID, title: data[x].codeCourse};
-                courseList.push(course);
-                arrPreRequisite.push(course);
-
-            }
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
-}
-
-function getAllTerm() {
-    $.ajax({
-        type: "GET",
-        url: "/OBESystem/GetAllTrimester",
-        dataType: 'json',
-        success: function (data) {
-            console.log(data);
-            for (var x = 0; x < data.length; x++) {
-                arrTerm.push(data[x]);
-            }
-            showCourses();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
-}
-
-function getAllYearLevel() {
-    $.ajax({
-        type: "GET",
-        url: "/OBESystem/GetAllYearLevel",
-        dataType: 'json',
-        success: function (data) {
-            console.log(data);
-            for (var x = 0; x < data.length; x++) {
-                arrYearLevel.push(data[x]);
-            }
-            showCourses();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    }
-    );
 }
 
 function showCourses() {
@@ -299,27 +302,4 @@ function showCourses() {
         var s = "<option value=" + courseList[x].courseID + ">" + courseList[x].title + "</option>";
         dropDownCourse.append(s);
     }
-}
-
-function function1() {
-    var dfrd1 = $.Deferred();
-    setTimeout(function () {
-        // doing async stuff
-        getSpecificCurriculum(codeCurriculum);
-        console.log('task 1 in function1 is done!');
-        dfrd1.resolve();
-    }, 1000);
-
-    return dfrd1.promise();
-}
-
-function function2() {
-    var dfrd1 = $.Deferred();
-    setTimeout(function () {
-        // doing async stuff
-        getSpecificMapCurriculumToCourse(codeCurriculum);
-        console.log('task 1 in function2 is done!');
-        dfrd1.resolve();
-    }, 2000);
-    return dfrd1.promise();
 }

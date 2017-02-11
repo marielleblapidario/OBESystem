@@ -369,7 +369,7 @@ function test(data) {
     for (var x = 0; x < yearLevel.length; x++) {
         console.log("first: " + yearLevel[x].yearLevel + " vs " + yearLevelV);
         if (yearLevel[x].yearLevel == yearLevelV) {
-            appendTr += '<option value=' + yearLevelV + ' selected>' + yearLevelV + '</option>';
+            appendTr += '<option value=' + yearLevel[x].yearLevel + ' selected>' + yearLevel[x].yearLevel + '</option>';
         } else {
             appendTr += '<option value=' + yearLevel[x].yearLevel + '>' + yearLevel[x].yearLevel + '</option>';
         }

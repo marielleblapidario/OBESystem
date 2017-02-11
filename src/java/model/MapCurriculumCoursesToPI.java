@@ -14,6 +14,8 @@ public class MapCurriculumCoursesToPI {
     private int curriculumID;
     private int courseID;
     private String codePI;
+    
+    private String description;
 
     /**
      * @return the curriculumID
@@ -69,6 +71,20 @@ public class MapCurriculumCoursesToPI {
      */
     public void setMapCurID(int mapCurID) {
         this.mapCurID = mapCurID;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

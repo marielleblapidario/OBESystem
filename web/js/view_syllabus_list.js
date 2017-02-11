@@ -1,11 +1,12 @@
-var example1 = $("#example1").DataTable();
+var example1 = $("#example1").DataTable({"order": []});
 var examaple2 = $('#example2').DataTable({
     "paging": true,
     "lengthChange": false,
     "searching": false,
     "ordering": true,
     "info": true,
-    "autoWidth": false
+    "autoWidth": false,
+    "order": []
 });
 var rowCount = 0;
 var arrSyllabusID = [];
@@ -46,7 +47,7 @@ function addRow(data) {
     var tools;
 
     if (posID == 7 || posID == 1) {
-        tools = "<button onclick=\"save('" + rowCount + "')\" title=\"edit\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button>\n\
+        tools = "<a href=\"/OBESystem/RedirectToEditSyllabus\"><button onclick=\"save('" + rowCount + "')\" title=\"edit\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>\n\
 <a href=\"/OBESystem/RedirectToViewSyllabus\"><button onclick=\"save('" + rowCount + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
     } else {
         tools = "<a href=\"/OBESystem/RedirectToViewSyllabus\"><button onclick=\"save('" + rowCount + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
