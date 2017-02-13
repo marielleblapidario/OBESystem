@@ -20,6 +20,7 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
+        <link rel="stylesheet" href="/OBESystem/js/background.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="/OBESystem/js/printing.css"  media="print">
     </head>
@@ -42,12 +43,6 @@
                         </div>
                         <div id="powerbi" class="box-body">
                             <div id="powerbi-include" style="zoom: 3.55">
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Remark</label>
-                                <div class="col-sm-10">
-                                    <textarea name="remarks" class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                                </div>
                             </div>
                         </div>
                         <div class="box-footer">

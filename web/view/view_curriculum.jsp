@@ -120,7 +120,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">  
                                 <a href="/OBESystem/ViewCurriculumList"><button id="back" type="button" class="btn btn-default pull-right">Back</button></a>
-                                <a href="/OBESystem/RedirectToEditCurriculum"><button type="button" class="btn btn-success pull-right">Edit</button></a>
+                                
                             </div>
                             <!-- /.box-footer -->
                         </div>

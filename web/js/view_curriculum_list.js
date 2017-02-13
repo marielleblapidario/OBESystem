@@ -25,7 +25,7 @@ $(document).ready(function () {
         success: function (data) {
             console.log(data);
             data.forEach(addRow);
-            $(".main-sidebar").trigger("create");
+        
         },
         error: function (response) {
             console.log(response);
@@ -46,8 +46,7 @@ function addRow(data) {
 
     console.log("rowCount: " + rowCount);
     if (posID == 6 || posID == 1) {
-        tools = "<a href=\"/OBESystem/RedirectToEditCurriculum\"><button onclick=\"save('" + codeCurriculum + "')\" title=\"edit\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>" +
-                "<a href=\"/OBESystem/RedirectToViewCurriculum\"><button  onclick=\"save('" + codeCurriculum + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>" +
+        tools = "<a href=\"/OBESystem/RedirectToViewCurriculum\"><button  onclick=\"save('" + codeCurriculum + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>" +
                 "<a href=\"/OBESystem/RedirectToMapCurriculum\"><button onclick=\"save('" + codeCurriculum + "')\" title=\"map\" type=\"button\" class=\"btn bg-orange btn-xs\"><i class=\"fa  fa-map-o\"></i></button></a>";
 
     } else {

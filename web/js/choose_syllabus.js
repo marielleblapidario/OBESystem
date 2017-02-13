@@ -13,7 +13,7 @@ var arrSyllabusID = [];
 $(document).ready(function () {
     $.ajax({
         type: "GET",
-        url: "/OBESystem/GetAllSyllabus",
+        url: "/OBESystem/GetCurrentSyllabus",
         dataType: 'json',
         success: function (data) {
             console.log(data);

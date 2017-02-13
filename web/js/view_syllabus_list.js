@@ -25,7 +25,7 @@ $(document).ready(function () {
     }
     $.ajax({
         type: "GET",
-        url: "/OBESystem/getCurrentSyllabus",
+        url: "/OBESystem/GetCurrentSyllabus",
         dataType: 'json',
         success: function (data) {
             console.log(data);
@@ -64,8 +64,7 @@ function addRow(data) {
     var tools;
 
     if (posID == 7 || posID == 1) {
-        tools = "<a href=\"/OBESystem/RedirectToEditSyllabus\"><button onclick=\"save('" + rowCount + "')\" title=\"edit\" type=\"button\" class=\"btn btn-success btn-xs\"><i class=\"fa fa-edit\"></i></button></a>\n\
-<a href=\"/OBESystem/RedirectToViewSyllabus\"><button onclick=\"save('" + rowCount + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
+        tools = "<a href=\"/OBESystem/RedirectToViewSyllabus\"><button onclick=\"save('" + rowCount + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
     } else {
         tools = "<a href=\"/OBESystem/RedirectToViewSyllabus\"><button onclick=\"save('" + rowCount + "')\" title=\"view\" type=\"button\" class=\"btn bg-purple btn-xs\"><i class=\"fa  fa-eye\"></i></button></a>";
     }

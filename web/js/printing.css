@@ -19,15 +19,16 @@ img {
 
 @page {
     margin: 0.5cm;
+    size: landscape;
 }
 
 @media print {
     #powerbi-include {
-        -moz-transform: scale(0.70, 0.70); 
-        -webkit-transform: scale(0.70, 0.70); 
-        -o-transform: scale(0.70, 0.70);
-        -ms-transform: scale(0.70, 0.70);
-        transform: scale(0.70, 0.70); 
+        -moz-transform: scale(0.90, 0.90); 
+        -webkit-transform: scale(0.90, 0.90);
+        -o-transform: scale(0.90, 0.90);
+        -ms-transform: scale(0.90, 0.90);
+        transform: scale(0.90, 0.90);
         -moz-transform-origin: top left;
         -webkit-transform-origin: top left;
         -o-transform-origin: top left;

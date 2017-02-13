@@ -53,7 +53,7 @@ $("#button-import").click(function () {
     spanUnits.text(totalUnits);
     getSpecificMapCurriculumToCourse(codeCurriculum);
     $('#table').show();
-    $(".main-sidebar").trigger("create");
+    
 });
 
 //adds a course into the list of courses under the curriculum
@@ -144,7 +144,7 @@ $("#button-add").click(function () {
 
             totalUnits = totalUnits + parseInt(data.units);
             spanUnits.text(totalUnits);
-             $(".main-sidebar").trigger("create");
+             
         },
         error: function (response) {
             console.log(response);

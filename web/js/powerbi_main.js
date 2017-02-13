@@ -14,9 +14,9 @@ $(document).ready(function () {
 function appendDashboard(posID) {
     if (posID == 4) {
         divDashboard.append('<iframe src="https://app.powerbi.com/view?r=eyJrIjoiYmY4NDY0ZjMtYWM5NC00NjNhLWEyOGUtZDFkZjZmMDMwODM2IiwidCI6ImYzNGEzNWJkLWE2NWQtNDYwNS1iMGZhLWQyNTcxZjgzMWY1ZSIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>');
-        $(".main-sidebar").trigger("create");
+        
     } else {
         divDashboard.append('<iframe src="https://app.powerbi.com/view?r=eyJrIjoiNTkyMDZkZGUtZTM5ZS00ZTliLWJmYWUtYzZmYTExOWNmYjA4IiwidCI6ImYzNGEzNWJkLWE2NWQtNDYwNS1iMGZhLWQyNTcxZjgzMWY1ZSIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>');
-        $(".main-sidebar").trigger("create");
+        
     }
 }

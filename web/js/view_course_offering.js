@@ -79,6 +79,14 @@ function getSyllabus(offeringID) {
             strYear = data.startYear;
             strTerm = data.term;
             strCourse = data.codeCourse;
+            var currentYear = new Date().getFullYear();
+            console.log("currentyear: ", currentYear);
+            if(data.startYear < currentYear)
+            {
+                 document.getElementById("students-save").disabled = true;
+                 document.getElementById("grades-save").disabled = true;
+            }
+             
         },
         error: function (response) {
             console.log(response);

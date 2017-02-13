@@ -79,7 +79,7 @@ function getAllPI(program) {
             console.log("arrPO : ", arrPO.length);
             console.log("arrPI : ", arrPI.length);
             create_table(arrIGA, arrPA, arrPO, arrPI, 'data');
-            $(".main-sidebar").trigger("create");
+            
         },
         error: function (response) {
             console.log(response);
@@ -275,5 +275,5 @@ function create_table(IGA, PA, PO, PI, table_name)
     }
     table_name = "#" + table_name;
     $(table_name).find('tbody').append(table_string);
-    $(".main-sidebar").trigger("create");
+    
 }
