@@ -42,6 +42,7 @@
                                     <h3 class="box-title">View Courses for Enrollment List</h3>
                                     <br>
                                     <a href="/OBESystem/RedirectToChooseSyllabus"><button id="button-new" type="button" class="btn btn-success pull-right"><i class="fa fa-plus"></i> New Course for Enrollment</button></a>
+                                    <button type="button" id="button-past" class="btn btn-warning pull-right"><i class="fa fa-folder-open"></i> Show Old Records</button>
 
                                 </div>
 

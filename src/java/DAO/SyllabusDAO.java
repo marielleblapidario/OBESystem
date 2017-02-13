@@ -226,4 +226,86 @@ public class SyllabusDAO {
         rs.close();
         return i;
     }
+    
+    public ArrayList<Syllabus> getCurrentSyllabus() throws ParseException {
+        ArrayList<Syllabus> newSyllabus = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT S.syllabusID, S.mapCurID, S.curriculumID,\n"
+                    + "S.courseID, S.term, S.startYear, S.endYear, C.title as 'curriculumTitle',\n"
+                    + "CE.title as 'courseTitle', CE.codeCourse\n"
+                    + "FROM syllabus S\n"
+                    + "JOIN curriculum  C\n"
+                    + "ON S.curriculumID = C.curriculumID\n"
+                    + "JOIN course CE\n"
+                    + "ON S.courseID = CE.courseID \n"
+                    + "WHERE S.startYear >= YEAR(curdate()) \n"
+                    + "ORDER BY S.syllabusID DESC";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Syllabus temp = new Syllabus();
+                temp.setSyllabusID(rs.getInt("syllabusID"));
+                temp.setMapCurID(rs.getInt("mapCurID"));
+                temp.setCurriculumID(rs.getInt("curriculumID"));
+                temp.setCourseID(rs.getInt("courseID"));
+                temp.setTerm(rs.getInt("term"));
+                temp.setStartYear(rs.getInt("startYear"));
+                temp.setEndYear(rs.getInt("endYear"));
+                temp.setCourseTitle(rs.getString("courseTitle"));
+                temp.setCurriculumTitle(rs.getString("curriculumTitle"));
+                temp.setCodeCourse(rs.getString("codeCourse"));
+                newSyllabus.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return newSyllabus;
+        } catch (SQLException ex) {
+            Logger.getLogger(SyllabusDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<Syllabus> GetPastSyllabus() throws ParseException {
+        ArrayList<Syllabus> newSyllabus = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT S.syllabusID, S.mapCurID, S.curriculumID,\n"
+                    + "S.courseID, S.term, S.startYear, S.endYear, C.title as 'curriculumTitle',\n"
+                    + "CE.title as 'courseTitle', CE.codeCourse\n"
+                    + "FROM syllabus S\n"
+                    + "JOIN curriculum  C\n"
+                    + "ON S.curriculumID = C.curriculumID\n"
+                    + "JOIN course CE\n"
+                    + "ON S.courseID = CE.courseID \n"
+                    + "WHERE S.startYear <  YEAR(curdate()) \n"
+                    + "ORDER BY S.syllabusID DESC";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Syllabus temp = new Syllabus();
+                temp.setSyllabusID(rs.getInt("syllabusID"));
+                temp.setMapCurID(rs.getInt("mapCurID"));
+                temp.setCurriculumID(rs.getInt("curriculumID"));
+                temp.setCourseID(rs.getInt("courseID"));
+                temp.setTerm(rs.getInt("term"));
+                temp.setStartYear(rs.getInt("startYear"));
+                temp.setEndYear(rs.getInt("endYear"));
+                temp.setCourseTitle(rs.getString("courseTitle"));
+                temp.setCurriculumTitle(rs.getString("curriculumTitle"));
+                temp.setCodeCourse(rs.getString("codeCourse"));
+                newSyllabus.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return newSyllabus;
+        } catch (SQLException ex) {
+            Logger.getLogger(SyllabusDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

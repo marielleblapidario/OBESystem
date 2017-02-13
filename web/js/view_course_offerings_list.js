@@ -21,7 +21,7 @@ $(document).ready(function () {
         $('#button-new').hide();
         $.ajax({
             type: "GET",
-            url: "/OBESystem/GetOfferingsOfFaculty?userID=" + userID,
+            url: "/OBESystem/GetCurrentOfferingsOfFaculty?userID=" + userID,
             dataType: 'json',
             success: function (data) {
                 console.log(data);
@@ -34,7 +34,7 @@ $(document).ready(function () {
     } else {
         $.ajax({
             type: "GET",
-            url: "/OBESystem/GetAllOfferings",
+            url: "/OBESystem/GetCurrentOfferings",
             dataType: 'json',
             success: function (data) {
                 console.log(data);
@@ -45,6 +45,35 @@ $(document).ready(function () {
             }
         });
     }
+    $("#button-past").click(function(){
+       if(posID == 2){
+           $.ajax({
+            type: "GET",
+            url: "/OBESystem/GetPastOfferringsOfFaculty?userID=" + userID,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                data.forEach(addRow);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+       } else {
+           $.ajax({
+            type: "GET",
+            url: "/OBESystem/GetPastOfferings",
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                data.forEach(addRow);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+       }
+    });
 });
 
 function addRow(data) {

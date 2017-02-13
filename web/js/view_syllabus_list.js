@@ -25,7 +25,7 @@ $(document).ready(function () {
     }
     $.ajax({
         type: "GET",
-        url: "/OBESystem/GetAllSyllabus",
+        url: "/OBESystem/getCurrentSyllabus",
         dataType: 'json',
         success: function (data) {
             console.log(data);
@@ -34,6 +34,21 @@ $(document).ready(function () {
         error: function (response) {
             console.log(response);
         }
+    });
+
+    $("#button-past").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/OBESystem/GetPastSyllabus",
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                data.forEach(addRow);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
     });
 });
 
