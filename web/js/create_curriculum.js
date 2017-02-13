@@ -40,7 +40,7 @@ $(document).ready(function () {
     curriculumDropDown.change(function () {
         codeCurriculum = curriculumDropDown.val();
         console.log("codeCurriculum: ", codeCurriculum);
-    });  
+    });
 });
 //imports all the courses in an existing curriculum
 $("#button-import").click(function () {
@@ -53,6 +53,7 @@ $("#button-import").click(function () {
     spanUnits.text(totalUnits);
     getSpecificMapCurriculumToCourse(codeCurriculum);
     $('#table').show();
+    $(".main-sidebar").trigger("create");
 });
 
 //adds a course into the list of courses under the curriculum
@@ -76,7 +77,7 @@ $("#button-add").click(function () {
         success: function (data) {
             console.log(data);
             console.log("rowCount: " + rowCount);
-            
+
             //store the details of the specific row
             var rowCourse = {count: rowCount, courseID: data.courseID, title: data.title, units: data.units};
             arrRowCount.push(rowCourse);
@@ -143,6 +144,7 @@ $("#button-add").click(function () {
 
             totalUnits = totalUnits + parseInt(data.units);
             spanUnits.text(totalUnits);
+             $(".main-sidebar").trigger("create");
         },
         error: function (response) {
             console.log(response);
@@ -348,11 +350,11 @@ function test(data) {
     var yearLevelV = data.yearLevel;
     var termV = data.term;
     var preRequisiteV = data.preRequisite;
-    
+
     console.log("rowCount: " + rowCount);
-    var rowCourse = {count: rowCount, courseID: courseID, title:courseTitle, units: units};
-            arrRowCount.push(rowCourse);
-    
+    var rowCourse = {count: rowCount, courseID: courseID, title: courseTitle, units: units};
+    arrRowCount.push(rowCourse);
+
     var appendTr =
             '<tr id =tr' + rowCount + '>' +
             '<td>' + codeCourse
@@ -403,7 +405,7 @@ function test(data) {
     appendTr += '</select></td>';
     appendTr += '<td><button title="delete" type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button></td>';
     appendTr += '</tr>';
-    
+
     totalUnits = totalUnits + parseInt(units);
     table.append(appendTr);
     rowCount++;

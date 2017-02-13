@@ -19,7 +19,8 @@ $(document).ready(function () {
     $(document).on('click', '#deleteRow', function (event) {
         $(this).closest('tr').remove();
     });
-    if(posID == 1 || posID == 6){} else {
+    if (posID == 1 || posID == 6) {
+    } else {
         $('#save').hide();
         $('#addRowButton').hide();
     }
@@ -50,6 +51,7 @@ function getAllPO(program) {
         success: function (data) {
             console.log(data);
             data.forEach(addRow);
+            $(".main-sidebar").trigger("create");
         },
         error: function (response) {
             console.log(response);
@@ -68,16 +70,16 @@ function getLastPO(program) {
             var lastCodePO = data;
             console.log(lastCodePO);
             if (lastCodePO) {
-            count = parseFloat(lastCodePO.replace(/[^0-9\.]+/g, ''));
+                count = parseFloat(lastCodePO.replace(/[^0-9\.]+/g, ''));
             }
             console.log(count);
             $('#addRowButton').click(function () {
                 var newCodePO;
                 count += 1;
                 if (count > 9) {
-                    newCodePO = "PO-" + programCode + "-"+ count;
+                    newCodePO = "PO-" + programCode + "-" + count;
                 } else {
-                    newCodePO = "PO-" + programCode + "-0"+count;
+                    newCodePO = "PO-" + programCode + "-0" + count;
                 }
                 console.log(newCodePO);
                 console.log("rowCount: " + rowCount);
@@ -92,7 +94,7 @@ function getLastPO(program) {
                 var descriptionCell = document.createElement("td");
                 descriptionCell.innerHTML = '<div class="col-sm-10"><textarea onkeyup="textAreaAdjust(this)" style="border: none; outline: none; resize: none; overflow:hidden" name="description" class="form-control no-border" id="description' + rowCount + '" required></textarea></div>';
                 tr.appendChild(descriptionCell);
-                
+
                 var select = document.createElement("select");
                 select.name = "mapPA";
                 tr.appendChild(select);
@@ -114,11 +116,12 @@ function getLastPO(program) {
 
                 table.append(tr);
                 rowCount++;
+                $(".main-sidebar").trigger("create");
             });
-            },
-                    error: function (response) {
-                    console.log(response);
-                }
+        },
+        error: function (response) {
+            console.log(response);
+        }
     });
 }
 
@@ -141,10 +144,10 @@ function addRow(data) {
     var descriptionCell = document.createElement("td");
     descriptionCell.innerHTML = '<div class="col-sm-10"><textarea onkeyup="textAreaAdjust(this)" style="border: none; outline: none; resize: none; overflow:hidden"  name="description" class="form-control no-border" id="description' + rowCount + '" required readOnly>' + description + '</textarea></div>';
     tr.appendChild(descriptionCell);
-    
+
     var mapPACell = document.createElement("td");
     mapPACell.innerHTML = '<div class="col-sm-10"><div class="col-sm-10"><textAreaAdjust(this)" style="border: none; outline: none;  resize: none; overflow:hidden" id="mapPA' + rowCount + '" class="form-control no-border" required readOnly>' + titlePA + '</div>'
-     + '<input type="hidden" name="mapPA" class="readonlyWhite" value="' + codePA + '" />';
+            + '<input type="hidden" name="mapPA" class="readonlyWhite" value="' + codePA + '" />';
     tr.appendChild(mapPACell);
 
     var remarksCell = document.createElement("td");
@@ -152,9 +155,9 @@ function addRow(data) {
     tr.appendChild(remarksCell);
 
     var toolsCell = document.createElement("td");
-    if(posID == 1 || posID == 6){
+    if (posID == 1 || posID == 6) {
         toolsCell.innerHTML = '<button title="edit" type="button" id="edit' + rowCount + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"> </i></button>' +
-            '<button title="delete" type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button>';
+                '<button title="delete" type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button>';
     } else {
         toolsCell.innerHTML = '';
     }
@@ -192,8 +195,8 @@ function deleteRow(num) {
 }
 
 function textAreaAdjust(o) {
-  o.style.height = "1px";
-  o.style.height = (25+o.scrollHeight)+"px";
+    o.style.height = "1px";
+    o.style.height = (25 + o.scrollHeight) + "px";
 }
 
 function onTableLoad() {
@@ -202,7 +205,7 @@ function onTableLoad() {
         var description = "description" + x;
         var remarks = "remarks" + x;
         var mapIGA = "mapPA" + x;
-        
+
         console.log("desc: ", description);
         console.log("remark: ", remarks);
         document.getElementById(description).style.height = "1px";
@@ -218,7 +221,7 @@ function function1() {
     var dfrd1 = $.Deferred();
     setTimeout(function () {
         // doing async stuff
-       getAllPO(programCode);
+        getAllPO(programCode);
         console.log('task 1 in function1 is done!');
         dfrd1.resolve();
     }, 1000);

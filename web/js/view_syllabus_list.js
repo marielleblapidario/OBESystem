@@ -30,6 +30,7 @@ $(document).ready(function () {
         success: function (data) {
             console.log(data);
             data.forEach(addRow);
+             $(".main-sidebar").trigger("create");
         },
         error: function (response) {
             console.log(response);
@@ -44,6 +45,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 data.forEach(addRow);
+                 $(".main-sidebar").trigger("create");
             },
             error: function (response) {
                 console.log(response);

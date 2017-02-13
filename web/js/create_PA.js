@@ -30,6 +30,7 @@ function getAllPA(program) {
         success: function (data) {
             console.log(data);
             data.forEach(addRow);
+             $(".main-sidebar").trigger("create");
         },
         error: function (response) {
             console.log(response);
@@ -111,6 +112,7 @@ function getLastPA(program) {
 
                 table.append(tr);
                 rowCount++;
+                 $(".main-sidebar").trigger("create");
             });
         },
         error: function (response) {

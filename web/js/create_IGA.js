@@ -34,6 +34,7 @@ function getAllIGA() {
         success: function (data) {
             console.log(data);
             data.forEach(addRow);
+             $(".main-sidebar").trigger("create");
         },
         error: function (response) {
             console.log(response);
@@ -92,6 +93,7 @@ function getLastIGA() {
 
                 table.append(tr);
                 rowCount++;
+                 $(".main-sidebar").trigger("create");
             });
         },
         error: function (response) {

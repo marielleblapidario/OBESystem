@@ -33,6 +33,7 @@ $(document).ready(function () {
             });
         }
         getLastPI(codePO);
+         $(".main-sidebar").trigger("create");
     });
     $('#addRowButton').click(function () {
         dec = (dec * 1000 + 0.01 * 1000) / 1000;
@@ -63,6 +64,7 @@ $(document).ready(function () {
 
         inputs.append(div);
         rowCount++;
+         $(".main-sidebar").trigger("create");
     });
 });
 
@@ -97,6 +99,7 @@ function getAllPI(codePO) {
         success: function (data) {
             console.log(data);
             data.forEach(addRow);
+             $(".main-sidebar").trigger("create");
         },
         error: function (response) {
             console.log(response);
@@ -137,6 +140,7 @@ function addRow(data) {
     }
     inputs.append(div);
     rowCount++;
+     $(".main-sidebar").trigger("create");
 }
 
 function deleteRow(num) {
