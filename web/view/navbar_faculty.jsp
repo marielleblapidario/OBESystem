@@ -112,6 +112,9 @@
                                 <li><a href="/OBESystem/RedirectToOfferingsList"><i class="fa fa-circle-o"></i>Courses for Enrollment List</a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="/OBESystem/RedirectToPowerBI"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a>
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->

@@ -43,7 +43,7 @@
                     <section class="content">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Create Curriculum</h3>
+                                <h3 class="box-title">Update Curriculum</h3>
                                 <a href="#" id="curriculum-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
                                 <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
                                 </a>                                

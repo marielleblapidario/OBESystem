@@ -26,6 +26,11 @@ var endYear;
 var finalTerm;
 
 $(document).ready(function () {
+    $('[data-toggle="popover"]').popover({html: true});
+    $('[data-toggle="popover"]').on('click', function (e) {
+        e.preventDefault();
+        return true;
+    });
     divCO.hide();
     divAssessment.hide();
     getAllCurriculum();
@@ -144,13 +149,13 @@ function getAllPI(curriculumID, courseID) {
         success: function (data) {
             console.log(data);
             var desc = "";
-            var tit ="Performance Indicators";
+            var tit = "Performance Indicators";
             for (var x = 0; x < data.length; x++) {
                 arrPI.push(data[x]);
                 desc += data[x].codePI;
-                desc +=" : <br />"; 
+                desc += " : <br />";
                 desc += data[x].description;
-                desc += " <br /><br />";                
+                desc += " <br /><br />";
             }
             $('#pi-description').attr("title", tit);
             $('#pi-description').attr("data-content", desc);

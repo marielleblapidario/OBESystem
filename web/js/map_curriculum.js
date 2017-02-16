@@ -10,6 +10,16 @@ var arrCodePI = [];
 var arrCourseID = [];
 
 $(document).ready(function () {
+    $('#PI-labels').hide();
+    $('#btn-show').click(function(){
+        if ($('#PI-labels').css('display') == 'none'){
+            $("#btn-show").html('Hide PI');
+            $('#PI-labels').show();
+        } else {
+            $("#btn-show").html('Show PI');
+            $('#PI-labels').hide();
+        }
+    });
     function1().done(function () {
         function2().done(function () {
         });
@@ -107,13 +117,17 @@ function getSpecificCurriculum(codeCurriculum) {
                     var header = $("#table-header");
                     header.append("<th> Code </th>");
                     header.append("<th> Units  </th>");
-
-                    sizePI = data.length;
+                    
+                    var table2 = $("#tablePI");
 
                     for (var i = 0; i < data.length; i++) {
                         var a = "<th>" + data[i].codePI + " </th>";
                         header.append(a);
                         arrPI.push(data[i].codePI);
+                        
+                        //for instructions
+                        var t = '<tr><td>'+ data[i].codePI +'</td><td>'+data[i].description+'</td></tr>';
+                        table2.append(t);
                     }
                     header.append("</tr></thead>");
                     getCourses(codeCurriculum);

@@ -45,13 +45,23 @@
                         <div class="box-header">
                             <h3 class="box-title">Curriculum Mapping</h3><br>
                             <h5>Curriculum title: <span id = "title"></span></h5>
-                            <br>                            
+                            <button type="button" id="btn-show" class="btn btn-success pull-right">Show PI</button>
                         </div>
+                        
+                        <div id="PI-labels" class="box-body table-bordered" style="overflow-y:auto; height:300px;" >
+                            <table id="tablePI" class="table table-hover">
+                                <tr>
+                                    <th>Performance Indicator</th>
+                                    <th>Description</th>
+                                </tr>
+                            </table>
+                        </div>
+
                         <div id="table-div" class="box-body table-bordered" style="overflow-y: auto">    
                         </div>
                         <div class="box-footer">
                             <a href="/OBESystem/ViewCurriculumList"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
-                            <a href="/OBESystem/ViewCurriculumList"><button id="save-btn" type="button" class="btn btn-primary pull-right">Save</button></a>
+                            <a href="/OBESystem/ViewCurriculumList"><button id="save-btn" type="button" class="btn btn-success pull-right">Save</button></a>
                         </div>
                         <!-- /.box-footer -->
                     </div>

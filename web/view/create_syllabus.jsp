@@ -41,7 +41,7 @@
                     <form action="EncodeAssessment" method="post" id="EncodeAssessment" name="EncodeAssessment">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Create Syllabus</h3>
+                                <h3 class="box-title">Update Syllabus</h3>
                                 <a href="#" id="syllabus-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
                                     <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
                                 </a>  
