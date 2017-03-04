@@ -41,9 +41,9 @@
                     <form action="EncodeAssessment" method="post" id="EncodeAssessment" name="EncodeAssessment">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Update Syllabus</h3>
+                                <h3 class="box-title">Syllabus</h3>
                                 <a href="#" id="syllabus-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
-                                    <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                    <button type="button" class="btn btn-success btn-xs"><i class="fa fa-info"></i></button>
                                 </a>  
                             </div>
                             <!-- /.box-header -->
@@ -100,10 +100,13 @@
                                 <div class="box-header with-border">
                                     <h4 class="box-title">Add Course Outcome</h4>
                                     <a href="#" id="co-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
-                                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-question"></i></button>
+                                    </a> 
+                                    <a href="#" id="co-instruc" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                        <button type="button" class="btn btn-success btn-xs"><i class="fa fa-info"></i></button>
                                     </a> 
                                     <a href="#" id="pi-description" data-toggle="popover" data-trigger="focus" data-placement="right">
-                                        <button type="button" class="btn btn-success btn-xs"><i class="fa fa-info"></i></button>
+                                        <button type="button" class="btn btn-default btn-xs"><b>PI</b></button>
                                     </a>
                                 </div>
                                 <div class="box-body table-responsive">
@@ -143,11 +146,14 @@
                                 <div class="box-header with-border">
                                     <h4 class="box-title">Add Assessment</h4>
                                     <a href="#" id="assessment-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
-                                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-question"></i></button>
                                     </a>
+                                     <a href="#" id="assessment-instruc" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                        <button type="button" class="btn btn-success btn-xs"><i class="fa fa-info"></i></button>
+                                    </a> 
                                 </div>
                                 <div class="box-body table-responsive">
-                                    <h6>*enter the weight of each assessment to the corresponding CO assigned to it. The sum of the assessment weights under a CO should not exceed 100, else the system will alert you of the invalid input. (e.g. CO-01 has AS-01 and AS-03 mapped to it. AS-01 has a weight of 40. AS-03 has a weight of 60. The sum of these two equals 100.)</h6>
+                                    <h5>*enter the weight of each assessment to the corresponding CO assigned to it. The sum of the assessment weights under a CO should not exceed 100, else the system will alert you of the invalid input. (e.g. CO-01 has AS-01 and AS-03 mapped to it. AS-01 has a weight of 40. AS-03 has a weight of 60. The sum of these two equals 100.)</h5>
                                     <table id="data-assessment" class="table table-hover">
                                         <tr>
                                             

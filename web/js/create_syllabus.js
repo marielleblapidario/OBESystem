@@ -73,7 +73,7 @@ $(document).ready(function () {
     AddAssessment();
 
     $('#save-btn').click(function () {
-        var retVal = confirm("Are you sure you want to save this? Changes on the course outcome will after saving will no longer apply.");
+        var retVal = confirm("Are you sure you want to save this? Changes on the course outcome will no longer apply after saving.");
         if (retVal === true) {
             var saveMapCurID = "" + mapCurID;
             finalTerm = $("[name='term']").val();
@@ -261,36 +261,29 @@ function addCO() {
         console.log("rowCount: " + rowCount);
         arrRowCount.push(rowCount);
 
-        var tr = document.createElement("tr");
-        tr.id = 'tr' + rowCount;
-        var codeCOCell = document.createElement("td");
-        codeCOCell.innerHTML = newCodeCO
-                + '<input type="hidden" name="codeCO" class="readonlyWhite" id="codeCO' + rowCount + '" value="' + newCodeCO + '" />';
-        tr.appendChild(codeCOCell);
+        var tr = '<tr id =tr' + rowCount + '>';
+        tr += '<td>' + newCodeCO +
+                '<input type="hidden" name="codeCO" class="readonlyWhite" id="codeCO' + rowCount + '" value="' + newCodeCO + '" />' +
+                '</td>';
 
-        var descriptionCell = document.createElement("td");
-        descriptionCell.innerHTML = '<div class="col-sm-10"><textarea type="text" onkeyup="textAreaAdjust(this)" style="border: none; outline: none; resize: none; overflow:hidden" name="description" class="form-control no-border" id="description' + rowCount + '" required></textarea></div>';
-        tr.appendChild(descriptionCell);
-
-        var select = document.createElement("select");
-        select.name = "codePI";
-        tr.appendChild(select);
+        tr += '<td>' +
+                '<div class="col-sm-10"><textarea type="text" onkeyup="textAreaAdjust(this)" style="border: none; outline: none; resize: none; overflow:hidden" name="description" class="form-control no-border" id="description' + rowCount + '" required></textarea></div>' +
+                '</td>';
+        tr += '<td><select name="codePI" class="form-control">';
         for (var x = 0; x < arrPI.length; x++) {
-            var option = document.createElement("option");
-            option.label = arrPI[x].codePI;
-            option.value = arrPI[x].codePI;
-            select.appendChild(option);
+            tr += "<option value=" + arrPI[x].codePI + ">" + arrPI[x].codePI + "</option>";
         }
+        tr += '</select></td>';
 
-        var remarksCell = document.createElement("td");
-        remarksCell.innerHTML = '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '"></div>';
-        tr.appendChild(remarksCell);
-
-        var toolsCell = document.createElement("td");
-        toolsCell.innerHTML = '<button title="edit" type="button" id="edit' + rowCount + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"> </i></button>' +
-                '<button  title="delete" type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button>';
-        tr.appendChild(toolsCell);
-
+        tr += '<td>' +
+                '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '"></div>' +
+                '</td>';
+        
+        tr += '<td>' + 
+                '<button title="edit" type="button" id="edit' + rowCount + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"> </i></button>' +
+                '<button  title="delete" type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button>' +
+                '</td>';
+      
         table.append(tr);
         rowCount++;
     });
@@ -331,7 +324,7 @@ function AddAssessment() {
 
         tr += '<td><div class="col-sm-10"><input type="number" name="weight" class="form-control no-border" id="weight_' + rowCountA + '" onblur= handleChange(this); required></div></td>';
 
-        tr += '<td><div class="col-sm-10"><input type="number" name="leftWeight" class="form-control no-border" id="leftWeight_' + rowCountA + '" min = "0" max = "0" readOnly></div></td>';
+        tr += '<td><div class="col-sm-10"><input type="number" name="leftWeight" class="form-control no-border" id="leftWeight_' + rowCountA + '" min = "0" max = "0" value = "100" readOnly></div></td>';
 
         tr += '<td><button title="edit" type="button" id="editA' + rowCountA + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCountA + ')"><i class="fa fa-edit"> </i></button>' +
                 '<button title="delete" type="button" id="deleteA' + rowCountA + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCountA + ')"></i></button></td>';

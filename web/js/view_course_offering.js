@@ -645,7 +645,7 @@ function tableRow() {
                     for (var b = 0; b < arrGradesDisplay.length; b++) {
                         if (arrEnrolledStudents[x].studentID == arrGradesDisplay[b].studentID &&
                                 arrAssessment[a].codeAT == arrGradesDisplay[b].codeAT) {
-                            var c = '<td>' + arrGradesDisplay[b].grade + '</td>';
+                            var c = '<td>' + arrGradesDisplay[b].grade.toFixed(1) + '</td>';
                             row.append(c);
                         }
                     }
@@ -697,7 +697,7 @@ function modalRow() {
                         if (arrEnrolledStudents[x].studentID == arrCOGrades[b].studentID &&
                                 arrCO[a].codeCO == arrCOGrades[b].codeCO) {
                             console.log('entered if');
-                            var c = '<td>' + arrCOGrades[b].gradeCO + '</td>';
+                            var c = '<td>' + arrCOGrades[b].gradeCO.toFixed(1) + '</td>';
                             row.append(c);
                         }
                     }

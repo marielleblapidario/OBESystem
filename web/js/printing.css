@@ -1,3 +1,4 @@
+
 .box-footer {
     display: none;
 }
@@ -12,17 +13,32 @@
     display: block;
 }
 img {
-    height: 100px;
-    width: 100px;
+    height: 70px;
+    width: 70px;
     border: 0;
 }
 
 @page {
-    margin: 0.5cm;
+    margin: 2.54cm;
     size: landscape;
 }
 
 @media print {
+    @page :first{
+    margin: 1cm;}
+
+    ::-webkit-input-placeholder { /* WebKit browsers */
+        color: transparent;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: transparent;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: transparent;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: transparent;
+    }
     #powerbi-include {
         -moz-transform: scale(0.90, 0.90); 
         -webkit-transform: scale(0.90, 0.90);
@@ -34,5 +50,11 @@ img {
         -o-transform-origin: top left;
         -ms-transform-origin: top left;
         transform-origin: top left;
+    }
+    input,
+    textarea {
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
     }
 }

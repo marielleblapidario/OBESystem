@@ -17,23 +17,9 @@
         <!-- Ionicons -->
         <link rel="stylesheet" href="/OBESystem/resources/downloads/ionicons-2.0.1/css/ionicons.min.css">
         <!-- Theme style -->
-        <!-- daterange picker -->
-        <link rel="stylesheet" href="/OBESystem/resources/plugins/daterangepicker/daterangepicker.css">
-        <!-- bootstrap datepicker -->
-        <link rel="stylesheet" href="/OBESystem/resources/plugins/datepicker/datepicker3.css">
-        <!-- iCheck for checkboxes and radio inputs -->
-        <link rel="stylesheet" href="/OBESystem/resources/plugins/iCheck/all.css">
-        <!-- Bootstrap Color Picker -->
-        <link rel="stylesheet" href="/OBESystem/resources/plugins/colorpicker/bootstrap-colorpicker.min.css">
-        <!-- Bootstrap time Picker -->
-        <link rel="stylesheet" href="/OBESystem/resources/plugins/timepicker/bootstrap-timepicker.min.css">
-        <!-- Select2 -->
-        <link rel="stylesheet" href="/OBESystem/resources/plugins/select2/select2.min.css">
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/AdminLTE.min.css">
-        <!-- AdminLTE Skins. Choose a skin from the css/skins
-             folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="resources/dist/css/skins/_all-skins.min.css">
-        <link rel="stylesheet" href="/OBESystem/js/background.css">
+        <!-- iCheck -->
+        <link rel="stylesheet" href="/OBESystem/resources/plugins/iCheck/square/blue.css">
     </head>
     <body class="hold-transition login-page">
         <div class="login-box">

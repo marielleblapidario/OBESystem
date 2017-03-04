@@ -21,7 +21,7 @@
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
-         <link rel="stylesheet" href="/OBESystem/js/background.css">
+        <link rel="stylesheet" href="/OBESystem/js/background.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -36,7 +36,10 @@
                             <div class="box-header">
                                 <h3 class="box-title">Institutional Graduate Attribute</h3>
                                 <a href="#" id="iga-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
-                                <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                    <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-question"></i></button>
+                                </a>
+                                <a href="#" id="iga-instruc" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                    <button type="button" class="btn btn-success btn-xs"><i class="fa fa-info"></i></button>
                                 </a>
                                 <br>
                             </div>

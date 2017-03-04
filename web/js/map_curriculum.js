@@ -86,6 +86,7 @@ function getCourses(codeCurriculum) {
             table.append(s);
             data.forEach(appendTableRow);
             table.append('</tbody>');
+            stickT();
         },
         error: function (response) {
             console.log(response);
@@ -192,7 +193,7 @@ function function2() {
     var dfrd1 = $.Deferred();
     setTimeout(function () {
         // doing async stuff
-        stickT();
+        
         console.log('task 1 in function2 is done!');
         dfrd1.resolve();
     }, 2000);

@@ -64,7 +64,7 @@ public class SyllabusDAO {
                     + "ON S.curriculumID = C.curriculumID\n"
                     + "JOIN course CE\n"
                     + "ON S.courseID = CE.courseID \n"
-                    + "ORDER BY S.syllabusID DESC";
+                    + "ORDER BY S.syllabusID DESC LIMIT 20";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             ResultSet rs = pstmt.executeQuery();
@@ -282,7 +282,7 @@ public class SyllabusDAO {
                     + "JOIN course CE\n"
                     + "ON S.courseID = CE.courseID \n"
                     + "WHERE S.startYear <  YEAR(curdate()) \n"
-                    + "ORDER BY S.syllabusID DESC";
+                    + "ORDER BY S.syllabusID DESC LIMIT 20";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             ResultSet rs = pstmt.executeQuery();

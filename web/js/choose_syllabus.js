@@ -1,4 +1,4 @@
-var example1 = $("#example1").DataTable();
+var example1 = $("#example1").DataTable({"order": []});
 var examaple2 = $('#example2').DataTable({
     "paging": true,
     "lengthChange": false,

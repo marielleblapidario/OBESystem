@@ -33,16 +33,43 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Executive Dashboard</h3>
                             <a href="#" id="dashboard-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
-                                <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                <button type="button" class="btn btn-success btn-xs"><i class="fa fa-info"></i></button>
                             </a>
                         </div>
                         <div id="printheader">
                             <img src="/OBESystem/resources/dist/img/dlsuLogo.png">
                             <img src="/OBESystem/resources/dist/img/ccsLogo.png">
                             <h3 class="box-title">Executive Dashboard</h3>
+                            <h5>Created by: ${login.fullName}</h5>
                         </div>
                         <div id="powerbi" class="box-body">
                             <div id="powerbi-include" style="zoom: 3.55">
+                            </div>
+                        </div>
+                        <div id="powerbi-details">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Report For: </label>
+                                <div class="col-sm-10">
+                                    <input name="codeProgram" type="text" class="form-control" id="inputEmail3" placeholder="e.g. Dr. Theodre Tristan">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Report Title: </label>
+                                <div class="col-sm-10">
+                                    <input name="codeProgram" type="text" class="form-control" id="inputEmail3" placeholder="e.g. Decreasing Acheivement Result for SYSDEVE">
+                                </div>
+                            </div>
+                            <div class="form-group"><br>
+                                <label class="col-sm-2 control-label">Description: </label>
+                                <div class="col-sm-10">
+                                    <textarea name="description" class="form-control" rows="3" placeholder="Enter a brief context summary of the report"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group"><br>
+                                <label class="col-sm-2 control-label">Analysis: </label>
+                                <div class="col-sm-10">
+                                    <textarea name="description" class="form-control" rows="3" placeholder="Type in the analysis or interpration of the visuals"></textarea>
+                                </div>
                             </div>
                         </div>
                         <div class="box-footer">
@@ -66,6 +93,6 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <script src="/OBESystem/js/powerbi_main.js"></script>
-         <script src="/OBESystem/js/instructions.js"></script>
+        <script src="/OBESystem/js/instructions.js"></script>
     </body>
 </html>

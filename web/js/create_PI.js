@@ -123,7 +123,6 @@ function addRow(data) {
                 '<input name="description" id="description' + rowCount + '" type="text" class="form-control" value="' + description + '" readOnly>' +
                 '<span class="input-group-btn">' +
                 '<button title="edit" type="button" class="btn bg-green btn-flat" onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"></i></button>' +
-                '<button title="delete" onClick="deleteRow(' + rowCount + ')" type="button" class="btn btn-danger btn-flat"><i class="fa fa-times"></i></button>' +
                 '</span>' +
                 '</div>' +
                 '<br>' +

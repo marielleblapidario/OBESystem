@@ -250,7 +250,8 @@ public class CourseOfferingDAO {
                     + "ON CG.courseID = C.courseID\n"
                     + "JOIN USER U\n"
                     + "ON CG.faculty = U.userID\n"
-                    + "WHERE CG.faculty = ? AND startYear < YEAR(curdate());";
+                    + "WHERE CG.faculty = ? AND startYear < YEAR(curdate()) "
+                    + "ORDER BY CG.offeringID DESC LIMIT 20;";
             PreparedStatement pstmt = conn.prepareStatement(query);
              pstmt.setInt(1, userID);
 
@@ -377,7 +378,8 @@ public class CourseOfferingDAO {
                     + "ON CG.courseID = C.courseID\n"
                     + "JOIN USER U\n"
                     + "ON CG.faculty = U.userID "
-                    + "WHERE CG.startYear < YEAR(curdate());";
+                    + "WHERE CG.startYear < YEAR(curdate()) "
+                    + "ORDER BY CG.offeringID DESC LIMIT 20;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             ResultSet rs = pstmt.executeQuery();

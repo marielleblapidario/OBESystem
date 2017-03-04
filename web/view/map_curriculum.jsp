@@ -43,11 +43,15 @@
                     <div class="box box-success">
                         <!-- /.box-header -->
                         <div class="box-header">
-                            <h3 class="box-title">Curriculum Mapping</h3><br>
+                            <h3 class="box-title">Curriculum Mapping</h3>
+                            <a href="#" id="mapping-instruc" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                <button type="button" class="btn btn-success btn-xs"><i class="fa fa-info"></i></button>
+                            </a> 
+                            <br>
                             <h5>Curriculum title: <span id = "title"></span></h5>
                             <button type="button" id="btn-show" class="btn btn-success pull-right">Show PI</button>
                         </div>
-                        
+
                         <div id="PI-labels" class="box-body table-bordered" style="overflow-y:auto; height:300px;" >
                             <table id="tablePI" class="table table-hover">
                                 <tr>
@@ -102,6 +106,7 @@
         <script src="/OBESystem/resources/dist/js/demo.js"></script>
         <!-- Page script -->
         <script src="/OBESystem/js/map_curriculum.js"></script>
+        <script src="/OBESystem/js/instructions.js"></script>
         <!-- Font Awesome -->
         <link rel="stylesheet" href="/OBESystem/resources/downloads/font-awesome-4.7.0/css/font-awesome.min.css">
         <!-- Ionicons -->

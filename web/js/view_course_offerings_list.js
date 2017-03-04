@@ -17,7 +17,22 @@ console.log("userID: ", userID);
 
 
 $(document).ready(function () {
-    if (posID == 2) {
+    if (posID == 1 || posID == 4)
+    {
+        $.ajax({
+            type: "GET",
+            url: "/OBESystem/GetCurrentOfferings",
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                data.forEach(addRow);
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    }
+    else if (posID == 2) {
         $('#button-new').hide();
         $.ajax({
             type: "GET",
@@ -32,6 +47,7 @@ $(document).ready(function () {
             }
         });
     } else {
+        $('#button-new').hide();
         $.ajax({
             type: "GET",
             url: "/OBESystem/GetCurrentOfferings",

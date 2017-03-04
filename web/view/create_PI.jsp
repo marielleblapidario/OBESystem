@@ -45,7 +45,10 @@
                             <div class="box-header with-border">
                                 <h3 class="box-title">Create Performance Indicators</h3>
                                 <a href="#" id="pi-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
-                                    <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-info"></i></button>
+                                    <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-question"></i></button>
+                                </a>
+                                <a href="#" id="pi-instruc" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                    <button type="button" class="btn btn-success btn-xs"><i class="fa fa-info"></i></button>
                                 </a>
                                 <br>
                                 <h5>Program: <span id = "program-title"></span></h5>
