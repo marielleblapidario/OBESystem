@@ -226,6 +226,26 @@ public class SyllabusDAO {
         rs.close();
         return i;
     }
+    public ArrayList<Integer> getSylforCur(int curriculumID) throws ParseException {
+        ArrayList<Integer> arrSyllabus = new ArrayList();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select courseID from syllabus where curriculumID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, curriculumID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                arrSyllabus.add(rs.getInt("courseID"));
+            }
+            pstmt.close();
+            conn.close();
+            return arrSyllabus;
+        } catch (SQLException ex) {
+            Logger.getLogger(SyllabusDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     public ArrayList<Syllabus> getCurrentSyllabus() throws ParseException {
         ArrayList<Syllabus> newSyllabus = new ArrayList<>();

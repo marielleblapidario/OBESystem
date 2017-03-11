@@ -8,6 +8,7 @@ var mapping = [];
 var arrPI = [];
 var arrCodePI = [];
 var arrCourseID = [];
+var existingCourses = [];
 
 $(document).ready(function () {
     $('#PI-labels').hide();
@@ -69,7 +70,22 @@ function getMapping(codeCurriculum) {
                 arrCourseID.push(data[x].courseID);
                 arrCodePI.push(data[x].codePI);
             }
-            getSpecificCurriculum(codeCurriculum);
+
+            $.ajax({
+                type: "GET",
+                url: "/OBESystem/GetSylForCur?Selectedcurriculum=" + codeCurriculum,
+                dataType: 'json',
+                success: function (data) {
+                    for(var x = 0; x < data.length; x++){
+                        existingCourses.push(data[x]);
+                    }
+                    getSpecificCurriculum(codeCurriculum);
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+            
         },
         error: function (response) {
             console.log(response);
@@ -194,6 +210,7 @@ function appendTableRow(data) {
     for (var i = 0; i < arrPI.length; i++) {
         var codePI = mapCurID + "_" + courseID + "_" + arrPI[i].codePI;
         var checked = "";
+        var disabled = "";
         for (var x = 0; x < arrCodePI.length; x++) {
             if (courseID == arrCourseID[x]) {
                 if (arrPI[i].codePI == arrCodePI[x]) {
@@ -201,10 +218,15 @@ function appendTableRow(data) {
                 }
             }
         }
+        for(var x = 0; x < existingCourses.length; x++){
+            if(courseID == existingCourses[x]){
+                disabled = "disabled";
+            }
+        }
         var appendPI = "<td>"
                 + "<label class=''>"
                 + "<div style='position:relative;'>"
-                + "<input value='" + codePI + "' type='checkbox' class='checkbox'" + checked + "></div>"
+                + "<input value='" + codePI + "' type='checkbox' class='checkbox'" + checked+ " " + disabled + "></div>"
                 + "</label>"
                 + "</td>";
         row.append(appendPI);

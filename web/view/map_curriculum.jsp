@@ -58,24 +58,42 @@
                             <div class="non-print">                                
                                 <button type="button" id="btn-show" class="btn btn-success pull-right">Show PI</button>
                             </div>
-
                         </div>
-
-                        <div id="PI-labels" class="box-body table-bordered" style="overflow-y:auto; height:300px;" >
-                            <table id="tablePI" class="table table-hover">
-                                <tr>
-                                    <th>Performance Indicator</th>
-                                    <th>Description</th>
-                                </tr>
-                            </table>
+                        <div class="non-print">   
+                            <div id="PI-labels" class="box-body table-bordered" style="overflow-y:auto; height:300px;" >
+                                <table id="tablePI" class="table table-hover">
+                                    <tr>
+                                        <th>Performance Indicator</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-
                         <div id="table-div" class="box-body table-bordered" style="overflow-y: auto">    
                         </div>
                         <div class="box-footer">
                             <a href="/OBESystem/ViewCurriculumList"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
                             <button type="button" id="button-print" class="btn btn-success pull-right"><i class="fa fa-print"></i>  Print</button>
-                            <a href="/OBESystem/ViewCurriculumList"><button id="save-btn" type="button" class="btn btn-success pull-right">Save</button></a>
+                            <button id ="save" type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">Save</button>
+                        </div>
+                        <div id="myModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Confirmation Message</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to save this? Once a syllabus has been created you can no longer <b>delete</b> or <b>add</b> an entry to the said course.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Review entry</button>
+                                        <a href="/OBESystem/ViewCurriculumList"><button id="save-btn" type="button" class="btn btn-success">Yes, I am sure</button></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.box-footer -->
                         <div id="printheader">
