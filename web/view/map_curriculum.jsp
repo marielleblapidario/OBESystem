@@ -47,6 +47,7 @@
                             <div id="printheader">
                                 <img src="/OBESystem/resources/dist/img/dlsuLogo.png">
                                 <img src="/OBESystem/resources/dist/img/ccsLogo.png">
+                                <br>
                             </div>
                             <h3 class="box-title">Curriculum Mapping</h3>
                             <a href="#" id="mapping-instruc" data-toggle="popover" data-trigger="focus" data-placement="auto">

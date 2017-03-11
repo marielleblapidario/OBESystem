@@ -36,6 +36,7 @@
                                 <div id="printheader">
                                     <img src="/OBESystem/resources/dist/img/dlsuLogo.png">
                                     <img src="/OBESystem/resources/dist/img/ccsLogo.png">
+                                    <br>
                                 </div>
                                 <h3 class="box-title">Map Summary</h3><br>
                                 <h5>Program: <span id = "program-title"></span></h5>

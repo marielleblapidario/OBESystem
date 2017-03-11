@@ -1,0 +1,34 @@
+.box-footer {
+    display: none;
+}
+.box-success{
+    border: none;
+}
+.non-print{
+    display: none !important;
+}
+
+#printheader {
+    display: block;
+}
+img {
+    height: 70px;
+    width: 70px;
+    border: 0;
+}
+
+@media print {
+    input,
+    textarea {
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+    table {
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+}

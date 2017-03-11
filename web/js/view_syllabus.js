@@ -16,6 +16,9 @@ $(document).ready(function () {
     getSyllabus(syllabusID);
     getAllCO(syllabusID);
     getAllAssessment(syllabusID);
+    $("#button-print").click(function () {
+        window.print();
+    });
 });
 
 function getSyllabus(syllabusID) {
@@ -30,6 +33,11 @@ function getSyllabus(syllabusID) {
             startYear.val(data.startYear);
             endYear.val(data.endYear);
             term.val(data.term);
+            
+            $("#print-cf").text(data.curriculumTitle);
+            $("#print-c").text(data.courseTitle);
+            $("#print-ay").text(data.startYear + " - " +data.endYear);
+            $("#print-t").text(data.term);
         },
         error: function (response) {
             console.log(response);

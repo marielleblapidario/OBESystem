@@ -31,6 +31,7 @@
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="resources/dist/css/skins/_all-skins.min.css">
         <link rel="stylesheet" href="/OBESystem/js/background.css">
+        <link rel="stylesheet" href="/OBESystem/js/syllabus_printing.css"  media="print">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <!-- ./wrapper -->
@@ -39,12 +40,26 @@
                 <!-- Main content -->
                 <section class="content">
                     <div class="box box-success">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">View Syllabus</h3>
+                        <div class="box-header">
+                            <h3 class="box-title non-print">View Syllabus</h3>                            
                         </div>
+                        <div id="printheader">                               
+                            <img src="/OBESystem/resources/dist/img/dlsuLogo.png">
+                            <img src="/OBESystem/resources/dist/img/ccsLogo.png">
+                            <br>
+                            <h4><b>Syllabus</b></h4>
+                            <br>
+                            <div>
+                                <b>Curriculum Followed: </b><span id="print-cf"></span><br/>
+                                <b>Course: </b><span id="print-c"></span><br/>
+                                <b>Academic Year: </b><span id="print-ay"></span><br/>
+                                <b>Term: </b><span id="print-t"></span><br/>
+                            </div>
+                        </div>
+
                         <!-- /.box-header -->
                         <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
-                        <div class="box-body">
+                        <div class="box-body non-print">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Curriculum Followed</label>
                                 <input type="hidden" name="mapCurID" class="readonlyWhite" id="hidden-mapCurID" />
@@ -89,47 +104,37 @@
                         </div>
                         <!-- Add CO -->
                         <div class="box box-success" id="div-addCO">
-                            <div class="box-header with-border">
-                                <h4 class="box-title">Course Outcomes</h4>
+                            <div class="box-header">
+                                <h4><b>Course Outcomes</b></h4>
                             </div>
-                            <div class="box-body table-responsive">
-                                <table id="data" class="table table-hover">
-                                    <tr>
-                                        <th>Code</th>
-                                        <th>Course Outcome</th>
-                                        <th>Performance Indicator</th>
-                                        <th>Remarks</th>
-                                    </tr>
-                                </table>
-                                <br>
+                            <table id="data" class="table table-hover">
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Course Outcome</th>
+                                    <th>Mapped Performance Indicator</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </table>
+                            <div class="box-header">
+                                <h4><b>Assessments</b></h4>
                             </div>
-                        </div>
-                        <!-- /add CO -->
-                        <!-- Add Assessment -->
-                        <div class="box box-success" id="div-addAssessment">
-                            <div class="box-header with-border">
-                                <h4 class="box-title">Assessments</h4>
-                            </div>
-                            <div class="box-body table-responsive">
-                                <table id="data-assessment" class="table table-hover">
-                                    <tr>
-                                        <th>Code</th>
-                                        <th>Assessment</th>
-                                        <th>Course Outcome (CO)</th>
-                                        <th>Description</th>
-                                        <th>Weight of Assessment to CO</th>
-                                    </tr>
-                                </table>
-                                <br>
-                            </div>
+                            <table id="data-assessment" class="table table-hover">
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Assessment</th>
+                                    <th>Mapped Course Outcome</th>
+                                    <th>Description</th>
+                                    <th>Weight to CO</th>
+                                </tr>
+                            </table>
+                            <br/>
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <a href="/OBESystem/RedirectToViewSyllabusList"><button type="button" class="btn btn-default pull-right">Back</button></a>
+                                <button type="button" id="button-print" class="btn btn-success pull-right"><i class="fa fa-print"></i>  Print</button>
                             </div>
-                            <!-- /.box-footer -->
                         </div>
                     </div>
-                    <!-- /add Assessment -->
                 </section>
             </div>
         </div>
