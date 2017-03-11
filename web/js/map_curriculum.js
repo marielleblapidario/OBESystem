@@ -164,7 +164,9 @@ function appendTableRow(data) {
     //start for printing
     var print = "<tr id=print" + codeCourse + "> " +
             "<th>" + codeCourse + "</th>" +
-            "<td>" + units + "</td>";
+            "<td>" + units + "</td>" +
+            "<td>" + data.yearLevel + "</td>" +
+            "<td>" + data.term + "</td>";
     $('#table-print').append(print);
     var printRow = $("#print" + codeCourse);
     //append PIs in each course

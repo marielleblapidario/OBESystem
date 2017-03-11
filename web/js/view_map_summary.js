@@ -7,7 +7,9 @@ var arrPI = [];
 
 $(document).ready(function () {
     getAllIGA();
-
+    $("#button-print").click(function () {
+        window.print();
+    });
 });
 
 function getAllIGA() {
@@ -79,7 +81,7 @@ function getAllPI(program) {
             console.log("arrPO : ", arrPO.length);
             console.log("arrPI : ", arrPI.length);
             create_table(arrIGA, arrPA, arrPO, arrPI, 'data');
-            
+
         },
         error: function (response) {
             console.log(response);
@@ -117,8 +119,10 @@ function create_table(IGA, PA, PO, PI, table_name)
         po_rows = 0;
         iga_rows++;
 
+        var testIGA = "<b>" + IGA[i].codeIGA + ":</b> " + IGA[i].title;
+
         ret_arr.push({
-            "value": IGA[i]["codeIGA"],
+            "value": testIGA,
             "rowspan": 0,
             "column": "IGA"
         });
@@ -131,8 +135,10 @@ function create_table(IGA, PA, PO, PI, table_name)
                 pa_rows++;
                 current_pa = counter;
                 counter++;
+                var testPA = "<b>" + PA[j].codePA + ":</b> " + PA[j].description;
+
                 ret_arr.push({
-                    "value": PA[j]["codePA"],
+                    "value": testPA,
                     "rowspan": 0,
                     "column": "PA"
                 });
@@ -144,8 +150,11 @@ function create_table(IGA, PA, PO, PI, table_name)
                         current_po = counter;
                         counter++;
                         po_rows++;
+                        
+                        var testPO = "<b>" + PO[k].codePO + ":</b> " + PO[k].description;
+                        
                         ret_arr.push({
-                            "value": PO[k]["codePO"],
+                            "value": testPO,
                             "rowspan": 0,
                             "column": "PO"
                         });
@@ -156,8 +165,11 @@ function create_table(IGA, PA, PO, PI, table_name)
                             {
                                 counter++;
                                 pi_rows++;
+                                
+                                var testPI = "<b>" + PI[l].codePI + ":</b> " + PI[l].description;
+                                
                                 ret_arr.push({
-                                    "value": PI[l]["codePI"],
+                                    "value": testPI,
                                     "rowspan": 1,
                                     "column": "PI"
                                 });
@@ -275,5 +287,5 @@ function create_table(IGA, PA, PO, PI, table_name)
     }
     table_name = "#" + table_name;
     $(table_name).find('tbody').append(table_string);
-    
+
 }

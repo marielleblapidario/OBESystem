@@ -82,6 +82,8 @@
                                 <tr>
                                     <th>Course</th>
                                     <th>Units</th>
+                                    <th>Year</th>
+                                    <th>Term</th>
                                     <th>Mapped Performance Indicator</th>
                                 </tr>
                             </table>

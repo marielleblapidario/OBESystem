@@ -19,6 +19,7 @@
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
         <link rel="stylesheet" href="/OBESystem/js/background.css">
+        <link rel="stylesheet" href="/OBESystem/js/mapping_printing.css"  media="print">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -32,6 +33,10 @@
                         <div class="box box-success">
                             <!-- /.box-header -->
                             <div class="box-header">
+                                <div id="printheader">
+                                    <img src="/OBESystem/resources/dist/img/dlsuLogo.png">
+                                    <img src="/OBESystem/resources/dist/img/ccsLogo.png">
+                                </div>
                                 <h3 class="box-title">Map Summary</h3><br>
                                 <h5>Program: <span id = "program-title"></span></h5>
                                 <input class="hidden" id="hidden-program-title" name="program-title">
@@ -57,6 +62,7 @@
                             </div>
                             <div class="box-footer">
                                 <a href="/OBESystem/RedirectToSearchMapping"><button type="button" class="btn btn-default pull-right">Back</button></a>
+                                <button type="button" id="button-print" class="btn btn-success pull-right"><i class="fa fa-print"></i>  Print</button>
                             </div>
                             <!-- /.box-footer -->
                         </div>

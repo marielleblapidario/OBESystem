@@ -24,6 +24,10 @@ img {
     display: block !important;
 }
 
+@page {
+    size: landscape;
+}
+
 @media print {
     table {
         border-collapse: collapse;
