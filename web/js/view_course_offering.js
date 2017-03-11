@@ -53,6 +53,9 @@ $(window).load(function () {
     document.getElementById('grades-upload').addEventListener('change', uploadAssessments, false);
     saveStudents();
     saveGrades();
+    $("#button-print").click(function () {
+        window.print();
+    });
 });
 
 function getSyllabus(offeringID) {
@@ -76,17 +79,28 @@ function getSyllabus(offeringID) {
             time.val(data.time);
             faculty.val(data.facultyName);
 
+            $("#print-title").text(data.codeCourse + " - " + data.section);
+
+            $("#print-cf").text(data.curriculumTitle);
+            $("#print-c").text(data.courseTitle);
+            $("#print-ay").text(data.startYear + " - " + data.endYear);
+            $("#print-t").text(data.term);
+            $("#print-s").text(data.section);
+            $("#print-d").text(data.days);
+            $("#print-time").text(data.time);
+            $("#print-f").text(data.facultyName);
+
             strYear = data.startYear;
             strTerm = data.term;
             strCourse = data.codeCourse;
             var currentYear = new Date().getFullYear();
             console.log("currentyear: ", currentYear);
-            if(data.startYear < currentYear)
+            if (data.startYear < currentYear)
             {
-                 document.getElementById("students-save").disabled = true;
-                 document.getElementById("grades-save").disabled = true;
+                document.getElementById("students-save").disabled = true;
+                document.getElementById("grades-save").disabled = true;
             }
-             
+
         },
         error: function (response) {
             console.log(response);
@@ -223,7 +237,7 @@ function getCoGrades(offeringID) {
                 arrCOGrades.push(data[x]);
             }
             console.log("getGrades check arrCOGrades size: " + arrCOGrades.length);
-            if(arrEnrolledStudents.length > 0){
+            if (arrEnrolledStudents.length > 0) {
                 modal.empty();
                 modalHeader();
             }
@@ -622,7 +636,7 @@ function tableHeader() {
     header.append("<th>Middle Name</th>");
 
     for (var x = 0; x < arrAssessment.length; x++) {
-        var a = "<th title='"+ arrAssessment[x].typeName +"'>" + arrAssessment[x].codeAT + " </th>";
+        var a = "<th title='" + arrAssessment[x].typeName + "'>" + arrAssessment[x].codeAT + " </th>";
         header.append(a);
     }
     header.append("</tr>");
@@ -669,11 +683,21 @@ function modalHeader() {
     header.append("<th>First Name</th>");
     header.append("<th>Middle Name</th>");
 
+    var printTr = "<tr id='print-header'>";
+    $('#table-co').append(printTr);
+    var printHeader = $("#print-header");
+    printHeader.append("<th>Student ID</th>");
+    printHeader.append("<th>Last Name</th>");
+    printHeader.append("<th>First Name</th>");
+    printHeader.append("<th>Middle Name</th>");
+    
     for (var x = 0; x < arrCO.length; x++) {
-        var a = "<th title='"+arrCO[x].description+"'>" + arrCO[x].codeCO + " </th>";
+        var a = "<th title='" + arrCO[x].description + "'>" + arrCO[x].codeCO + " </th>";
         header.append(a);
+        printHeader.append(a);
     }
     header.append("</tr>");
+    printHeader.append("</tr>");
     modalRow();
 }
 
@@ -687,27 +711,39 @@ function modalRow() {
                     + '<td>' + arrEnrolledStudents[x].firstName + '</td>'
                     + '<td>' + arrEnrolledStudents[x].middleName + '</td>';
             modal.append(s);
+            
+            var printS = '<tr id= printTr' + x + '>'
+                    + '<td>' + arrEnrolledStudents[x].studentID + '</td>'
+                    + '<td>' + arrEnrolledStudents[x].lastName + '</td>'
+                    + '<td>' + arrEnrolledStudents[x].firstName + '</td>'
+                    + '<td>' + arrEnrolledStudents[x].middleName + '</td>';
+            $('#table-co').append(printS); 
+            var printRow = $('#printTr' + x);
+            
             var row = $('#modalTr' + x);
             for (var a = 0; a < arrCO.length; a++) {
                 if (arrCOGrades.length > 0) {
                     for (var b = 0; b < arrCOGrades.length; b++) {
-                        console.log('compare id: '+ arrEnrolledStudents[x].studentID
-                                + ' vs ' + arrCOGrades[b].studentID +" and "+
+                        console.log('compare id: ' + arrEnrolledStudents[x].studentID
+                                + ' vs ' + arrCOGrades[b].studentID + " and " +
                                 arrCO[a].codeCO + " vs " + arrCOGrades[b].codeCO);
                         if (arrEnrolledStudents[x].studentID == arrCOGrades[b].studentID &&
                                 arrCO[a].codeCO == arrCOGrades[b].codeCO) {
                             console.log('entered if');
                             var c = '<td>' + arrCOGrades[b].gradeCO.toFixed(1) + '</td>';
                             row.append(c);
+                            printRow.append(c);
                         }
                     }
                 } else {
                     var y = '<td></td>';
                     row.append(y);
+                    printRow.append(y);
                     console.log('entered else');
                 }
             }
             modal.append("</tr>");
+            $('#table-co').append("</tr>"); 
         }
     }
 }

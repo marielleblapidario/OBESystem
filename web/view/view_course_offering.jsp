@@ -31,6 +31,7 @@
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="resources/dist/css/skins/_all-skins.min.css">
         <link rel="stylesheet" href="/OBESystem/js/background.css">
+        <link rel="stylesheet" href="/OBESystem/js/syllabus_printing.css"  media="print">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <!-- ./wrapper -->
@@ -40,7 +41,27 @@
                 <form action="EncodeCourseOffering" method="post" name="EncodeCourseOffering">
                     <section class="content">
                         <div class="box box-success">
-                            <div class="box-header with-border">
+                            <div id="printheader">                               
+                                <img src="/OBESystem/resources/dist/img/dlsuLogo.png">
+                                <img src="/OBESystem/resources/dist/img/ccsLogo.png">
+                                <br>
+                                <h4><b><span id="print-title"></span></b></h4>
+                                <br>
+                                <div>
+                                    <b>Curriculum Followed: </b><span id="print-cf"></span><br/>
+                                    <b>Course: </b><span id="print-c"></span><br/>
+                                    <b>Academic Year: </b><span id="print-ay"></span><br/>
+                                    <b>Term: </b><span id="print-t"></span><br/>
+                                    <b>Section: </b><span id="print-s"></span><br/>
+                                    <b>Days: </b><span id="print-d"></span><br/>
+                                    <b>Time: </b><span id="print-time"></span><br/>
+                                    <b>Faculty: </b><span id="print-f"></span><br/>
+                                </div>
+                                <br>
+                                <h4><b>Student List</b></h4>
+                                <h5><b>Assessment Grades</b></h5>
+                            </div>
+                            <div class="box-header with-border non-print">
                                 <h3 class="box-title">View Specific Course Section</h3>
                                 <br>
                                 <div class="btn-group-vertical pull-left">
@@ -63,7 +84,7 @@
                             <!-- /.box-header -->
                             <!-- form start -->
                             <input type="hidden" name="contributor" class="readonlyWhite" id="contributor" value="${login.userID}" />
-                            <div class="box-body">
+                            <div class="box-body non-print">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Curriculum Followed</label>
                                     <input type="hidden" name="mapCurID" class="readonlyWhite" id="hidden-mapCurID" />
@@ -138,8 +159,15 @@
                                 <table id="data" class="table table-hover">
                                 </table>
                             </div>
+                             <!--display students-->
+                             <div id="printheader">
+                                 <h5><b>Course Outcomes Grades</b></h5>
+                                 <table id="table-co" class="table responsive">                                     
+                                 </table>
+                             </div>
                             <div class="box-footer">
                                 <a href="/OBESystem/RedirectToOfferingsList"><button type="button" class="btn btn-default pull-right">Back</button></a>
+                                <button type="button" id="button-print" class="btn btn-success pull-right"><i class="fa fa-print"></i>  Print</button>
                             </div>
                         </div>
                     </section>
