@@ -11,8 +11,8 @@ var arrCourseID = [];
 
 $(document).ready(function () {
     $('#PI-labels').hide();
-    $('#btn-show').click(function(){
-        if ($('#PI-labels').css('display') == 'none'){
+    $('#btn-show').click(function () {
+        if ($('#PI-labels').css('display') == 'none') {
             $("#btn-show").html('Hide PI');
             $('#PI-labels').show();
         } else {
@@ -52,6 +52,9 @@ $(document).ready(function () {
                 console.log(response);
             }
         });
+    });
+    $("#button-print").click(function () {
+        window.print();
     });
 });
 
@@ -118,16 +121,17 @@ function getSpecificCurriculum(codeCurriculum) {
                     var header = $("#table-header");
                     header.append("<th> Code </th>");
                     header.append("<th> Units  </th>");
-                    
+
                     var table2 = $("#tablePI");
 
                     for (var i = 0; i < data.length; i++) {
                         var a = "<th>" + data[i].codePI + " </th>";
                         header.append(a);
-                        arrPI.push(data[i].codePI);
-                        
+                        var piObj = {codePI: data[i].codePI, description: data[i].description};
+                        arrPI.push(piObj);
+
                         //for instructions
-                        var t = '<tr><td>'+ data[i].codePI +'</td><td>'+data[i].description+'</td></tr>';
+                        var t = '<tr><td>' + data[i].codePI + '</td><td>' + data[i].description + '</td></tr>';
                         table2.append(t);
                     }
                     header.append("</tr></thead>");
@@ -156,13 +160,41 @@ function appendTableRow(data) {
             + "<th>" + codeCourse + "</th>"
             + "<td>" + units + "</td>";
     table.append(s);
+
+    //start for printing
+    var print = "<tr id=print" + codeCourse + "> " +
+            "<th>" + codeCourse + "</th>" +
+            "<td>" + units + "</td>";
+    $('#table-print').append(print);
+    var printRow = $("#print" + codeCourse);
+    //append PIs in each course
+    var printPI = "<td>";
+
+    for (var x = 0; x < arrCodePI.length; x++) {
+        if (courseID == arrCourseID[x]) {
+            for (var i = 0; i < arrPI.length; i++) {
+                if (arrPI[i].codePI == arrCodePI[x]) {
+                    if (x == (arrCodePI.length - 1)) {
+                        printPI += "<b>" + arrCodePI[x] + ":</b> " + arrPI[i].description;
+                    } else {
+                        printPI += "<b>" + arrCodePI[x] + ":</b> " + arrPI[i].description + " <br />";
+                    }
+                }
+            }
+
+        }
+    }
+    printPI += "</td></tr>";
+    printRow.append(printPI);
+    //end for printing
+
     var row = $("#" + codeCourse);
     for (var i = 0; i < arrPI.length; i++) {
-        var codePI = mapCurID + "_" + courseID + "_" + arrPI[i];
+        var codePI = mapCurID + "_" + courseID + "_" + arrPI[i].codePI;
         var checked = "";
         for (var x = 0; x < arrCodePI.length; x++) {
             if (courseID == arrCourseID[x]) {
-                if (arrPI[i] == arrCodePI[x]) {
+                if (arrPI[i].codePI == arrCodePI[x]) {
                     checked = "checked";
                 }
             }
@@ -193,7 +225,7 @@ function function2() {
     var dfrd1 = $.Deferred();
     setTimeout(function () {
         // doing async stuff
-        
+
         console.log('task 1 in function2 is done!');
         dfrd1.resolve();
     }, 2000);

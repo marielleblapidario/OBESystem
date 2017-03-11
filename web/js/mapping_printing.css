@@ -1,0 +1,35 @@
+
+.box-footer{
+    display: none;
+}
+.non-print{
+    display: none;
+}
+.box-success{
+    border: none;
+}
+#PI-labels{
+    display: none;
+}
+#table-div{
+    display: none;
+}
+img {
+    height: 70px;
+    width: 70px;
+    border: 0;
+}
+
+#printheader{
+    display: block !important;
+}
+
+@media print {
+    table {
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+}

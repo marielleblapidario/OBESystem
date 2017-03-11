@@ -32,6 +32,7 @@
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
         <link rel="stylesheet" href="/OBESystem/js/background.css">
         <link rel="stylesheet" href="/OBESystem/table/fixed_rc.css">
+        <link rel="stylesheet" href="/OBESystem/js/mapping_printing.css"  media="print">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -43,13 +44,20 @@
                     <div class="box box-success">
                         <!-- /.box-header -->
                         <div class="box-header">
+                            <div id="printheader">
+                                <img src="/OBESystem/resources/dist/img/dlsuLogo.png">
+                                <img src="/OBESystem/resources/dist/img/ccsLogo.png">
+                            </div>
                             <h3 class="box-title">Curriculum Mapping</h3>
                             <a href="#" id="mapping-instruc" data-toggle="popover" data-trigger="focus" data-placement="auto">
-                                <button type="button" class="btn btn-success btn-xs"><i class="fa fa-info"></i></button>
+                                <button type="button" class="btn btn-success btn-xs non-print"><i class="fa fa-info"></i></button>
                             </a> 
                             <br>
                             <h5>Curriculum title: <span id = "title"></span></h5>
-                            <button type="button" id="btn-show" class="btn btn-success pull-right">Show PI</button>
+                            <div class="non-print">                                
+                                <button type="button" id="btn-show" class="btn btn-success pull-right">Show PI</button>
+                            </div>
+
                         </div>
 
                         <div id="PI-labels" class="box-body table-bordered" style="overflow-y:auto; height:300px;" >
@@ -65,9 +73,19 @@
                         </div>
                         <div class="box-footer">
                             <a href="/OBESystem/ViewCurriculumList"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
+                            <button type="button" id="button-print" class="btn btn-success pull-right"><i class="fa fa-print"></i>  Print</button>
                             <a href="/OBESystem/ViewCurriculumList"><button id="save-btn" type="button" class="btn btn-success pull-right">Save</button></a>
                         </div>
                         <!-- /.box-footer -->
+                        <div id="printheader">
+                            <table id="table-print">
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Units</th>
+                                    <th>Mapped Performance Indicator</th>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </section>
                 <!-- /.content -->

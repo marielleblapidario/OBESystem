@@ -146,6 +146,7 @@ function deleteRow(num) {
     var retVal = confirm("Are you sure you want to delete this row?");
     if (retVal === true) {
         var tr = 'inputs' + num;
+        dec = (dec * 1000 - 0.01 * 1000) / 1000;
         document.getElementById(tr).remove();
         rowCount--;
         count--;
