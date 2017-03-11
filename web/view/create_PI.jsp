@@ -30,7 +30,7 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="/OBESystem/resources/dist/css/skins/_all-skins.min.css">
-         <link rel="stylesheet" href="/OBESystem/js/background.css">
+        <link rel="stylesheet" href="/OBESystem/js/background.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <!-- ./wrapper -->
@@ -87,11 +87,30 @@
                                 <br><br>
                                 <div>
                                     <a href="/OBESystem/RedirectToSearchPI"><button type="button" class="btn btn-default pull-right">Cancel</button></a>
-                                    <button id="save" type="submit" class="btn btn-success pull-right">Save</button>
+                                    <button id ="save" type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">Save</button>
                                 </div>
                             </div>
                         </div>
                     </section>
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Confirmation Message</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to save this? You can no longer <b>delete</b> your entry once saved.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Review entry</button>
+                                    <button type="submit" class="btn btn-success">Yes, I am sure</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
