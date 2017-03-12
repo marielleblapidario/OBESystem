@@ -73,68 +73,65 @@ $(document).ready(function () {
     AddAssessment();
 
     $('#save-btn').click(function () {
-        var retVal = confirm("Are you sure you want to save this? Changes on the course outcome will no longer apply after saving.");
-        if (retVal === true) {
-            var saveMapCurID = "" + mapCurID;
-            finalTerm = $("[name='term']").val();
-            console.log("finalTerm: ", finalTerm);
-            startYear = $("[name='startYear']").val();
-            endYear = $("[name='endYear']").val();
-            var contributor = $("[name='contributor']").val();
-            var arrCodeCO = $("[name='codeCO']").map(function () {
-                return $(this).val();
-            }).get();
-            var arrDescription = $("[name='description']").map(function () {
-                return $(this).val();
-            }).get();
-            var arrCodePI = $("[name='codePI']").map(function () {
-                return $(this).val();
-            }).get();
-            var arrRemarks = $("[name='remarks']").map(function () {
-                return $(this).val();
-            }).get();
+        var saveMapCurID = "" + mapCurID;
+        finalTerm = $("[name='term']").val();
+        console.log("finalTerm: ", finalTerm);
+        startYear = $("[name='startYear']").val();
+        endYear = $("[name='endYear']").val();
+        var contributor = $("[name='contributor']").val();
+        var arrCodeCO = $("[name='codeCO']").map(function () {
+            return $(this).val();
+        }).get();
+        var arrDescription = $("[name='description']").map(function () {
+            return $(this).val();
+        }).get();
+        var arrCodePI = $("[name='codePI']").map(function () {
+            return $(this).val();
+        }).get();
+        var arrRemarks = $("[name='remarks']").map(function () {
+            return $(this).val();
+        }).get();
 
-            for (var i = 0; arrCodeCO[i]; i++) {
-                var createCO = {mapCurID: saveMapCurID, curriculumID: curriculumID, courseID: courseID,
-                    term: finalTerm, startYear: startYear, endYear: endYear, codeCO: arrCodeCO[i],
-                    description: arrDescription[i], codePI: arrCodePI[i], remarks: arrRemarks[i]};
-                arrCreateCO.push(createCO);
-            }
-            var jsonData = JSON.stringify(arrCreateCO);
-
-            $.ajax({
-                type: "GET",
-                url: "/OBESystem/EncodeSyllabus?mapCurID=" + mapCurID
-                        + "&curriculumID=" + curriculumID + "&courseID=" + courseID
-                        + "&term=" + finalTerm + "&startYear=" + startYear + "&endYear=" + endYear
-                        + "&contributor=" + contributor,
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                    arrCreateCO = [];
-                    $.ajax({
-                        type: "POST",
-                        url: "/OBESystem/EncodeCO",
-                        dataType: 'json',
-                        data: {'jsonData': jsonData},
-                        success: function (data) {
-                            console.log(data);
-                            getAllCO();
-                            console.log("arrCO size: " + arrCO.length);
-                            divAssessment.show();
-                            document.getElementById("addRowButton").disabled = true;
-                            document.getElementById("save-btn").disabled = true;
-                        },
-                        error: function (response) {
-                            console.log(response);
-                        }
-                    });
-                },
-                error: function (response) {
-                    console.log(response);
-                }
-            });
+        for (var i = 0; arrCodeCO[i]; i++) {
+            var createCO = {mapCurID: saveMapCurID, curriculumID: curriculumID, courseID: courseID,
+                term: finalTerm, startYear: startYear, endYear: endYear, codeCO: arrCodeCO[i],
+                description: arrDescription[i], codePI: arrCodePI[i], remarks: arrRemarks[i]};
+            arrCreateCO.push(createCO);
         }
+        var jsonData = JSON.stringify(arrCreateCO);
+
+        $.ajax({
+            type: "GET",
+            url: "/OBESystem/EncodeSyllabus?mapCurID=" + mapCurID
+                    + "&curriculumID=" + curriculumID + "&courseID=" + courseID
+                    + "&term=" + finalTerm + "&startYear=" + startYear + "&endYear=" + endYear
+                    + "&contributor=" + contributor,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                arrCreateCO = [];
+                $.ajax({
+                    type: "POST",
+                    url: "/OBESystem/EncodeCO",
+                    dataType: 'json',
+                    data: {'jsonData': jsonData},
+                    success: function (data) {
+                        console.log(data);
+                        getAllCO();
+                        console.log("arrCO size: " + arrCO.length);
+                        divAssessment.show();
+                       $("#addRowButton").hide();
+                        $("#save-co").hide();
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                });
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
     });
 });
 
@@ -278,12 +275,11 @@ function addCO() {
         tr += '<td>' +
                 '<div class="col-sm-10"><input type="text" name="remarks" class="form-control no-border" id="remarks' + rowCount + '"></div>' +
                 '</td>';
-        
-        tr += '<td>' + 
-                '<button title="edit" type="button" id="edit' + rowCount + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCount + ')"><i class="fa fa-edit"> </i></button>' +
+
+        tr += '<td>' +
                 '<button  title="delete" type="button" id="delete' + rowCount + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCount + ')"></i></button>' +
                 '</td>';
-      
+
         table.append(tr);
         rowCount++;
     });
@@ -302,7 +298,7 @@ function AddAssessment() {
         console.log("rowCount: " + rowCountA);
         arrRowCountA.push(rowCountA);
 
-        var tr = '<tr id =tr' + rowCountA + '>';
+        var tr = '<tr id =trAssess' + rowCountA + '>';
         tr += '<td>' + newCodeAT
                 + '<input type="hidden" name="codeAT" class="readonlyWhite" id="codeAT' + rowCountA + '" value="' + newCodeAT + '" />'
                 + '</td>';
@@ -326,8 +322,7 @@ function AddAssessment() {
 
         tr += '<td><div class="col-sm-10"><input type="number" name="leftWeight" class="form-control no-border" id="leftWeight_' + rowCountA + '" min = "0" max = "0" value = "100" readOnly></div></td>';
 
-        tr += '<td><button title="edit" type="button" id="editA' + rowCountA + '" class="btn btn-success btn-xs"  onClick="makeRowEditable(' + rowCountA + ')"><i class="fa fa-edit"> </i></button>' +
-                '<button title="delete" type="button" id="deleteA' + rowCountA + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRow(' + rowCountA + ')"></i></button></td>';
+        tr += '<td><button title="delete" type="button" id="deleteA' + rowCountA + '" class="btn btn-danger btn-xs"><i class="fa fa-trash" onClick="deleteRowAssess(' + rowCountA + ')"></i></button></td>';
 
         console.log(tr);
         tableA.append(tr);
@@ -449,6 +444,19 @@ function deleteRow(num) {
         var tr = 'tr' + num;
         document.getElementById(tr).remove();
         count--;
+        return true;
+    } else {
+        console.log("cancelled");
+        return false;
+    }
+}
+
+function deleteRowAssess(num) {
+    var retVal = confirm("Are you sure you want to delete this row?");
+    if (retVal === true) {
+        var tr = 'trAssess' + num;
+        document.getElementById(tr).remove();
+        countA--;
         return true;
     } else {
         console.log("cancelled");

@@ -30,7 +30,7 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="resources/dist/css/skins/_all-skins.min.css">
-         <link rel="stylesheet" href="/OBESystem/js/background.css">
+        <link rel="stylesheet" href="/OBESystem/js/background.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <!-- ./wrapper -->
@@ -136,9 +136,28 @@
                                 <!-- /.box-body -->
                                 <div class="box-footer">  
                                     <button id="addRowButton" type="button" class="btn btn-success pull-left"><i class="fa fa-plus"></i> Add Row</button>
-                                    <button id= "save-btn" type="button" class="btn btn-success pull-right">Save</button>
+                                    <button id="save-co" type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">Save</button>
                                 </div>
                                 <!-- /.box-footer -->
+                            </div>
+                            <div id="myModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Confirmation Message</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to <b>save</b> this? Changes on the course outcome forms will no longer apply after saving.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Review entry</button>
+                                            <button id="save-btn" type="button" class="btn btn-success" data-dismiss="modal">Yes, I am sure</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- /add CO -->
                             <!-- Add Assessment -->
@@ -148,7 +167,7 @@
                                     <a href="#" id="assessment-info" data-toggle="popover" data-trigger="focus" data-placement="auto">
                                         <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-question"></i></button>
                                     </a>
-                                     <a href="#" id="assessment-instruc" data-toggle="popover" data-trigger="focus" data-placement="auto">
+                                    <a href="#" id="assessment-instruc" data-toggle="popover" data-trigger="focus" data-placement="auto">
                                         <button type="button" class="btn btn-success btn-xs"><i class="fa fa-info"></i></button>
                                     </a> 
                                 </div>
@@ -156,7 +175,7 @@
                                     <h5>*enter the weight of each assessment to the corresponding CO assigned to it. The sum of the assessment weights under a CO should not exceed 100, else the system will alert you of the invalid input. (e.g. CO-01 has AS-01 and AS-03 mapped to it. AS-01 has a weight of 40. AS-03 has a weight of 60. The sum of these two equals 100.)</h5>
                                     <table id="data-assessment" class="table table-hover">
                                         <tr>
-                                            
+
                                             <th id="as-code">Code</th>
                                             <th id="as-type">
                                                 <div class="col-sm-10">
@@ -192,12 +211,31 @@
                                 <div class="box-footer">
                                     <button id="add-assessment" type="button" class="btn btn-success pull-left"><i class="fa fa-plus"></i> Add Row</button>
                                     <button type="button" class="btn btn-default pull-right">Cancel</button>
-                                    <button id="save-assessment" type="submit" class="btn btn-success pull-right">Save</button>
+                                    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#AssessModal">Save</button>
                                 </div>
                                 <!-- /.box-footer -->
                             </div>
                         </div>
                         <!-- /add Assessment -->
+                        <div id="AssessModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Confirmation Message</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to <b>save</b> this? You can no longer edit this syllabus once saved.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Review entry</button>
+                                            <button type="submit" class="btn btn-success">Yes, I am sure</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </form>
                 </section>
             </div>
