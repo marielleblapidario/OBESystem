@@ -38,7 +38,7 @@
         <div class="wrapper">
             <div class="content-wrapper">
                 <!-- Main content -->
-                <form action="EncodeCourseOffering" method="post" name="EncodeCourseOffering">
+                <form action="EditOffering" method="post" name="EditOffering">
                     <section class="content">
                         <div class="box box-success">
                             <div id="printheader">                               
@@ -63,13 +63,13 @@
                             </div>
                             <div class="box-header with-border non-print">
                                 <h3 class="box-title">View Specific Course Section</h3>
-                                <button type="button" id="button-print" class="btn btn-success btn-xs"><i class="fa fa-print"></i></button>
+                                <button type="button" id="button-print" class="btn btn-success btn-xs" title="print"><i class="fa fa-print"></i></button>
                                 <br>
                                 <div class="btn-group-vertical pull-left">
-                                    <button id="grades-format" type="button" class="btn btn-default"><i class="fa  fa-download"></i>  Encode Grades Template</button>
-                                    <button id="download-co" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa  fa-eye"></i>  View CO Grades</button>
+                                    <button id="grades-format" type="button" style="display: none;" class="btn btn-default"><i class="fa  fa-download"></i>  Encode Grades Template</button>
+                                    <button id="download-co" type="button" class="btn btn-success" data-toggle="modal" data-target="#myCO"><i class="fa  fa-eye"></i>  View CO Grades</button>
                                 </div>
-                                <div class="btn-group-vertical pull-right">
+                                <div id="div-uploads" class="btn-group-vertical pull-right" style="display: none;">
                                     <div class="form-group">
                                         <label class="control-label">Student List Upload</label>
                                         <input id="students-upload" type="file">
@@ -93,6 +93,7 @@
                                         <input name="curriculum-title" type="text" class="form-control" id="curriculum-title" readOnly>
                                         <input name="curriculumID" type="hidden" class="form-control" id="hidden-curriculum-title">
                                         <input name="syllabusID" type="hidden" class="form-control" id="hidden-syllabusID">
+                                        <input name="offeringID" type="hidden" class="form-control" id="hidden-offeringID">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -151,7 +152,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Faculty</label>
                                     <div class="col-sm-10">
-                                        <input name="faculty" type="text" class="form-control" id="faculty" readOnly>
+                                        <select id="faculty" name="faculty" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" disabled>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -167,9 +169,10 @@
                                 </table>
                             </div>
                             <div class="box-footer">
-                                <a href="/OBESystem/RedirectToOfferingsList"><button type="button" class="btn btn-default pull-right">Back</button></a>
-                                
-                                <button id ="firstDelete" type="button" style="display: none;" class="btn btn-danger pull-right" data-toggle="modal" data-target="#myModal">Delete</button>
+                                <a href="/OBESystem/RedirectToOfferingsList"><button type="button" class="btn btn-default pull-right">Back</button></a>                                
+                                <button id ="firstDelete" type="button" style="display: none;" class="btn btn-danger pull-right" data-toggle="modal" data-target="#myModal">Delete</button>                                
+                                <button id = "edit" type="button" style="display: none;" class="btn btn-success pull-right">Edit</button>
+                                <button id = "edit-save" type="button" style="display: none;" class="btn btn-primary pull-right" data-toggle="modal" data-target="#saveModal">Save</button>
                             </div>
                         </div>
                     </section>
@@ -192,10 +195,29 @@
                             </div>
                         </div>
                     </div>
+                    <div id="saveModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Confirmation Message</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to <b>save</b> this edit?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Review edit</button>
+                                    <button id="delete" type="submit" class="btn btn-primary">Yes, I am sure</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
-        <div class="modal modal-success" id="myModal" role="dialog">
+        <div class="modal modal-success" id="myCO" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

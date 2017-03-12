@@ -52,6 +52,31 @@ public class CourseOfferingDAO {
         return false;
     }
 
+    public boolean updateOffering(CourseOffering newOffering) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "UPDATE courseoffering \n"
+                    + "SET section = ?, days = ?, time= ?, faculty = ? \n"
+                    + "WHERE offeringID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            
+            pstmt.setString(1, newOffering.getSection());
+            pstmt.setString(2, newOffering.getDays());
+            pstmt.setString(3, newOffering.getTime());
+            pstmt.setInt(4, newOffering.getFaculty());
+            pstmt.setInt(5, newOffering.getOfferingID());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseOfferingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     public ArrayList<CourseOffering> getAllOfferings() throws ParseException {
         ArrayList<CourseOffering> newOffering = new ArrayList<>();
         try {
@@ -160,7 +185,7 @@ public class CourseOfferingDAO {
                     + "ON CG.faculty = U.userID\n"
                     + "WHERE CG.faculty = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-             pstmt.setInt(1, userID);
+            pstmt.setInt(1, userID);
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -189,7 +214,7 @@ public class CourseOfferingDAO {
         }
         return null;
     }
-    
+
     public ArrayList<CourseOffering> getCurrentOfferingsOfFaculty(int userID) throws ParseException {
         ArrayList<CourseOffering> newOffering = new ArrayList<>();
         try {
@@ -206,7 +231,7 @@ public class CourseOfferingDAO {
                     + "ON CG.faculty = U.userID\n"
                     + "WHERE CG.faculty = ? AND startYear >= YEAR(curdate());";
             PreparedStatement pstmt = conn.prepareStatement(query);
-             pstmt.setInt(1, userID);
+            pstmt.setInt(1, userID);
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -235,7 +260,7 @@ public class CourseOfferingDAO {
         }
         return null;
     }
-    
+
     public ArrayList<CourseOffering> getPastOfferingsOfFaculty(int userID) throws ParseException {
         ArrayList<CourseOffering> newOffering = new ArrayList<>();
         try {
@@ -253,7 +278,7 @@ public class CourseOfferingDAO {
                     + "WHERE CG.faculty = ? AND startYear < YEAR(curdate()) "
                     + "ORDER BY CG.offeringID DESC LIMIT 100;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-             pstmt.setInt(1, userID);
+            pstmt.setInt(1, userID);
 
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -318,7 +343,7 @@ public class CourseOfferingDAO {
         rs.close();
         return i;
     }
-    
+
     public ArrayList<CourseOffering> getCurrentOfferings() throws ParseException {
         ArrayList<CourseOffering> newOffering = new ArrayList<>();
         try {
@@ -363,7 +388,7 @@ public class CourseOfferingDAO {
         }
         return null;
     }
-    
+
     public ArrayList<CourseOffering> getPastOfferings() throws ParseException {
         ArrayList<CourseOffering> newOffering = new ArrayList<>();
         try {
@@ -409,8 +434,8 @@ public class CourseOfferingDAO {
         }
         return null;
     }
-    
-     public Integer getStudentCount(int offeringID) throws ParseException {
+
+    public Integer getStudentCount(int offeringID) throws ParseException {
         int count = 0;
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -420,7 +445,7 @@ public class CourseOfferingDAO {
             pstmt.setInt(1, offeringID);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-               count = rs.getInt("count");
+                count = rs.getInt("count");
             }
             pstmt.close();
             conn.close();
@@ -430,7 +455,8 @@ public class CourseOfferingDAO {
         }
         return null;
     }
-     public boolean deleteOffering(int offeringID) {
+
+    public boolean deleteOffering(int offeringID) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();

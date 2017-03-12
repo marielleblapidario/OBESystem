@@ -27,14 +27,16 @@ var strTerm;
 var strCourse;
 var strYear;
 var modal = $('#modal-co');
+var posID = sessionStorage.getItem("posID");
 
-$(window).load(function () {
+$(window).load(function () {    
     divTable.hide();
     console.log("offeringID: " + offeringID);
     console.log("syllabusID: " + syllabusID);
     getCount(offeringID);
     getSyllabus(offeringID);
     getEnrolledStudents(offeringID);
+    $('#hidden-offeringID').val(offeringID);
 
     $('#grades-format').click(function () {
         convertToCSV();
@@ -57,8 +59,23 @@ $(window).load(function () {
     $("#button-print").click(function () {
         window.print();
     });
-     $("#delete").click(function (){
+    $("#delete").click(function () {
         deleteOffering(offeringID);
+    });
+    $("#edit").click(function () {
+        if (document.getElementById("section").readOnly == true) {
+            document.getElementById("section").readOnly = false;
+            document.getElementById("days").readOnly = false;
+            document.getElementById("time").readOnly = false;
+            document.getElementById("faculty").disabled = false;
+            $('#edit-save').show();
+        } else {
+            document.getElementById("section").readOnly = true;
+            document.getElementById("days").readOnly = true;
+            document.getElementById("time").readOnly = true;
+            document.getElementById("faculty").disabled = true;
+            $('#edit-save').hide();
+        }        
     });
 });
 
@@ -81,7 +98,7 @@ function getSyllabus(offeringID) {
             strSection = data.section;
             days.val(data.days);
             time.val(data.time);
-            faculty.val(data.facultyName);
+            dropDown(data.faculty);
 
             $("#print-title").text(data.codeCourse + " - " + data.section);
 
@@ -99,10 +116,12 @@ function getSyllabus(offeringID) {
             strCourse = data.codeCourse;
             var currentYear = new Date().getFullYear();
             console.log("currentyear: ", currentYear);
-            if (data.startYear < currentYear)
+            if (data.startYear >= currentYear)
             {
-                document.getElementById("students-save").disabled = true;
-                document.getElementById("grades-save").disabled = true;
+                if (posID == 1 || posID == 2) {
+                    $('#grades-format').show();
+                    $('#div-uploads').show();
+                }
             }
 
         },
@@ -217,7 +236,6 @@ function getGrades(offeringID) {
             console.log("tableHeader check arrStudentData size: " + arrEnrolledStudents.length);
             console.log("getGrades check arrGradesDisplay size: " + arrGradesDisplay.length);
             if (arrEnrolledStudents.length > 0) {
-                console.log("entered first if");
                 table.empty();
                 tableHeader();
                 divTable.show();
@@ -243,7 +261,8 @@ function getCoGrades(offeringID) {
             console.log("getGrades check arrCOGrades size: " + arrCOGrades.length);
             if (arrEnrolledStudents.length > 0) {
                 modal.empty();
-                modalHeader();
+                $('#table-co').empty();
+                modalHeader();                                
             }
         },
         error: function (response) {
@@ -694,7 +713,7 @@ function modalHeader() {
     printHeader.append("<th>Last Name</th>");
     printHeader.append("<th>First Name</th>");
     printHeader.append("<th>Middle Name</th>");
-    
+
     for (var x = 0; x < arrCO.length; x++) {
         var a = "<th title='" + arrCO[x].description + "'>" + arrCO[x].codeCO + " </th>";
         header.append(a);
@@ -715,25 +734,21 @@ function modalRow() {
                     + '<td>' + arrEnrolledStudents[x].firstName + '</td>'
                     + '<td>' + arrEnrolledStudents[x].middleName + '</td>';
             modal.append(s);
-            
+
             var printS = '<tr id= printTr' + x + '>'
                     + '<td>' + arrEnrolledStudents[x].studentID + '</td>'
                     + '<td>' + arrEnrolledStudents[x].lastName + '</td>'
                     + '<td>' + arrEnrolledStudents[x].firstName + '</td>'
                     + '<td>' + arrEnrolledStudents[x].middleName + '</td>';
-            $('#table-co').append(printS); 
+            $('#table-co').append(printS);
             var printRow = $('#printTr' + x);
-            
+
             var row = $('#modalTr' + x);
             for (var a = 0; a < arrCO.length; a++) {
                 if (arrCOGrades.length > 0) {
                     for (var b = 0; b < arrCOGrades.length; b++) {
-                        console.log('compare id: ' + arrEnrolledStudents[x].studentID
-                                + ' vs ' + arrCOGrades[b].studentID + " and " +
-                                arrCO[a].codeCO + " vs " + arrCOGrades[b].codeCO);
                         if (arrEnrolledStudents[x].studentID == arrCOGrades[b].studentID &&
                                 arrCO[a].codeCO == arrCOGrades[b].codeCO) {
-                            console.log('entered if');
                             var c = '<td>' + arrCOGrades[b].gradeCO.toFixed(1) + '</td>';
                             row.append(c);
                             printRow.append(c);
@@ -747,21 +762,23 @@ function modalRow() {
                 }
             }
             modal.append("</tr>");
-            $('#table-co').append("</tr>"); 
+            $('#table-co').append("</tr>");
         }
     }
 }
 
-function getCount(offeringID){
+function getCount(offeringID) {
     $.ajax({
         type: "GET",
         url: "/OBESystem/GetStudentCount?offeringID=" + offeringID,
         dataType: 'json',
         success: function (data) {
-            if(data == 0)
-            {
-                console.log("COUNT: " + data);
-                $('#firstDelete').show();
+            if (posID == 1 || posID == 4) {
+                if (data == 0) {
+                    console.log("COUNT: " + data);
+                    $('#firstDelete').show();
+                    $('#edit').show();
+                }
             }
         },
         error: function (response) {
@@ -770,12 +787,39 @@ function getCount(offeringID){
     });
 }
 
-function deleteOffering(offeringID){
+function deleteOffering(offeringID) {
     $.ajax({
         type: "GET",
         url: "/OBESystem/DeleteOffering?offeringID=" + offeringID,
         dataType: 'json',
         success: function (data) {
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+function dropDown(facultyID) {
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/GetAllFaculty",
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            var tr;
+            for (var x = 0; x < data.length; x++) {
+                console.log(facultyID + " vs " + data[x].userID);
+                if (facultyID == data[x].userID) {
+                    console.log("entered if");
+                    var s = "<option value=" + data[x].userID + " selected>" + data[x].fullName + "</option>";
+                    tr += s;
+                } else {
+                    var s = "<option value=" + data[x].userID + ">" + data[x].fullName + "</option>";
+                    tr += s;
+                }
+            }
+            faculty.append(tr);
         },
         error: function (response) {
             console.log(response);
