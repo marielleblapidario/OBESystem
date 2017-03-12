@@ -32,6 +32,7 @@ $(window).load(function () {
     divTable.hide();
     console.log("offeringID: " + offeringID);
     console.log("syllabusID: " + syllabusID);
+    getCount(offeringID);
     getSyllabus(offeringID);
     getEnrolledStudents(offeringID);
 
@@ -55,6 +56,9 @@ $(window).load(function () {
     saveGrades();
     $("#button-print").click(function () {
         window.print();
+    });
+     $("#delete").click(function (){
+        deleteOffering(offeringID);
     });
 });
 
@@ -746,4 +750,35 @@ function modalRow() {
             $('#table-co').append("</tr>"); 
         }
     }
+}
+
+function getCount(offeringID){
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/GetStudentCount?offeringID=" + offeringID,
+        dataType: 'json',
+        success: function (data) {
+            if(data == 0)
+            {
+                console.log("COUNT: " + data);
+                $('#firstDelete').show();
+            }
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+function deleteOffering(offeringID){
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/DeleteOffering?offeringID=" + offeringID,
+        dataType: 'json',
+        success: function (data) {
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
 }

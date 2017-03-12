@@ -270,7 +270,7 @@ public class SyllabusDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select count(syllabusID) as 'count' from courseoffering where syllabusID = ?;;";
+            String query = "select count(syllabusID) as 'count' from courseoffering where syllabusID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, syllabusID);
             ResultSet rs = pstmt.executeQuery();

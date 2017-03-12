@@ -409,4 +409,42 @@ public class CourseOfferingDAO {
         }
         return null;
     }
+    
+     public Integer getStudentCount(int offeringID) throws ParseException {
+        int count = 0;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select count(studentID) as 'count' from enrolledstudent where offeringID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, offeringID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+               count = rs.getInt("count");
+            }
+            pstmt.close();
+            conn.close();
+            return count;
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseOfferingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+     public boolean deleteOffering(int offeringID) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "delete from courseoffering where offeringID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setInt(1, offeringID);
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseOfferingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }
