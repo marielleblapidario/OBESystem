@@ -50,6 +50,24 @@ public class SyllabusDAO {
         }
         return false;
     }
+    
+    public boolean deleteSyllabus(int syllabusID) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "delete from syllabus where syllabusID = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setInt(1, syllabusID);
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(SyllabusDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     public ArrayList<Syllabus> getAllSyllabus() throws ParseException {
         ArrayList<Syllabus> newSyllabus = new ArrayList<>();
@@ -241,6 +259,27 @@ public class SyllabusDAO {
             pstmt.close();
             conn.close();
             return arrSyllabus;
+        } catch (SQLException ex) {
+            Logger.getLogger(SyllabusDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public Integer getSyllabusCount(int syllabusID) throws ParseException {
+        int count = 0;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select count(syllabusID) as 'count' from courseoffering where syllabusID = ?;;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, syllabusID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+               count = rs.getInt("count");
+            }
+            pstmt.close();
+            conn.close();
+            return count;
         } catch (SQLException ex) {
             Logger.getLogger(SyllabusDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

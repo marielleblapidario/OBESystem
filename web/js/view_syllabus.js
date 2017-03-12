@@ -15,9 +15,14 @@ $(document).ready(function () {
     console.log("syllabusID: ", syllabusID);
     getSyllabus(syllabusID);
     getAllCO(syllabusID);
+    getCount(syllabusID);
     getAllAssessment(syllabusID);
     $("#button-print").click(function () {
         window.print();
+    });
+    //delete the syllabus
+    $("#delete").click(function (){
+        deleteSyllabus(syllabusID);
     });
 });
 
@@ -109,4 +114,35 @@ function getAssessment(data) {
             + '<tr>';
     tableA.append(s);
     rowCountA++;
+}
+
+function deleteSyllabus(syllabusID){
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/DeleteSyllabus?syllabusID=" + syllabusID,
+        dataType: 'json',
+        success: function (data) {
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+//once there is a course offering made user can no longer delete the syllabus
+function getCount(syllabusID){
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/GetSyllabusCount?syllabusID=" + syllabusID,
+        dataType: 'json',
+        success: function (data) {
+            if(data == 0)
+            {
+                $('#firstDelete').show();
+            }
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
 }
