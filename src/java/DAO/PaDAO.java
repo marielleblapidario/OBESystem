@@ -54,7 +54,7 @@ public class PaDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE PA\n"
-                    + "SET description = ?, remarks = ?, dateUpdated = ?, contributor = ?\n"
+                    + "SET description = ?, remarks = ?, dateUpdated = ?, editor = ?\n"
                     + "WHERE codePA = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 

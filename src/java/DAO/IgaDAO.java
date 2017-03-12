@@ -54,7 +54,7 @@ public class IgaDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE  IGA\n"
-                    + "SET title = ?, description = ?, remarks = ?, dateUpdated =?, contributor =?\n"
+                    + "SET title = ?, description = ?, remarks = ?, dateUpdated =?, editor =?\n"
                     + "WHERE codeIGA = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, newIGA.getTitle());

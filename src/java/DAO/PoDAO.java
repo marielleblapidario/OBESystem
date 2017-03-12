@@ -53,7 +53,7 @@ public class PoDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE PO\n"
-                    + "SET description = ?, remarks = ?, dateUpdated = ?, contributor = ?\n"
+                    + "SET description = ?, remarks = ?, dateUpdated = ?, editor = ?\n"
                     + "WHERE codePO = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 

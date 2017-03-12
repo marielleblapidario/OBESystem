@@ -54,7 +54,7 @@ public class PiDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE PI\n"
-                    + "SET description = ?, remarks = ?, dateUpdated = ?, contributor = ?\n"
+                    + "SET description = ?, remarks = ?, dateUpdated = ?, editor = ?\n"
                     + "WHERE codePI = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
