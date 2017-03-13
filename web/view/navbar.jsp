@@ -118,6 +118,9 @@
                         <li>
                             <a href="/OBESystem/RedirectToPowerBI"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a>
                         </li>
+                        <li>
+                            <a href="/OBESystem/RedirectToViewAudits"><i class="fa fa-history"></i> <span>Audit Log</span></a>
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
