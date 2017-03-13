@@ -458,13 +458,16 @@ public class CourseOfferingDAO {
         return null;
     }
 
-    public boolean deleteOffering(int offeringID) {
+    public boolean deleteOffering(int contributor, int offeringID) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "delete from courseoffering where offeringID = ?;";
+            String query = "set @userID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-
+            pstmt.setInt(1, contributor);
+            pstmt.execute();
+            query = "delete from courseoffering where offeringID = ?;";
+            pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, offeringID);
             pstmt.executeUpdate();
             pstmt.close();

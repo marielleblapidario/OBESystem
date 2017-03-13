@@ -107,13 +107,18 @@ public class MapCurriculumToPiDAO {
         return null;
     }
 
-    public boolean deleteMapping(MapCurriculumCoursesToPI newMapping) {
+    public boolean deleteMapping(int contributor, MapCurriculumCoursesToPI newMapping) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "DELETE FROM mapcurriculumcoursestopi\n"
-                    + "WHERE curriculumID = ? AND courseID = ? AND codePI = ?;";
+            String query = "set @userID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, contributor);
+            pstmt.execute();
+            
+            query = "DELETE FROM mapcurriculumcoursestopi\n"
+                    + "WHERE curriculumID = ? AND courseID = ? AND codePI = ?;";
+            pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newMapping.getCurriculumID());
             pstmt.setInt(2, newMapping.getCourseID());

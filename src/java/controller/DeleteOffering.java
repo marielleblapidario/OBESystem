@@ -33,8 +33,9 @@ public class DeleteOffering extends BaseServlet {
         Gson g = new Gson();
         String s = null;
         int offeringID = Integer.parseInt(request.getParameter("offeringID"));
+        int contributor = Integer.parseInt(request.getParameter("contributor"));
         System.out.println("selected syllabusID: " + offeringID);
-        s = g.toJson(new CourseOfferingDAO().deleteOffering(offeringID));
+        s = g.toJson(new CourseOfferingDAO().deleteOffering(contributor,offeringID));
         
         PrintWriter out = response.getWriter();
         out.print(s);

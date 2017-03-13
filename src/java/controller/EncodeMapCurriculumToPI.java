@@ -123,7 +123,7 @@ public class EncodeMapCurriculumToPI extends BaseServlet {
             }
             //delete map
             for (int a = 0; a < arrDeleteMap.size(); a++) {
-                if (dao.deleteMapping(arrDeleteMap.get(a))) {
+                if (dao.deleteMapping(contributor, arrDeleteMap.get(a))) {
                 } else {
                     x = false;
                 }

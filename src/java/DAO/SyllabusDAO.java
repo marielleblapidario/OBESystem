@@ -51,12 +51,17 @@ public class SyllabusDAO {
         return false;
     }
     
-    public boolean deleteSyllabus(int syllabusID) {
+    public boolean deleteSyllabus(int contributor, int syllabusID) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "delete from syllabus where syllabusID = ?;";
+            String query = "set @userID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, contributor);
+            pstmt.execute();
+            
+            query = "delete from syllabus where syllabusID = ?;";
+            pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, syllabusID);
             pstmt.executeUpdate();

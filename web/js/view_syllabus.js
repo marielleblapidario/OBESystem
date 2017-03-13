@@ -8,6 +8,7 @@ var divAssessment = $("#div-addAssessment");
 var table = $("#data");
 var tableA = $("#data-assessment");
 var syllabusID = sessionStorage.getItem("syllabusID");
+var userID = sessionStorage.getItem("userID");
 var rowCount = 0;
 var rowCountA = 0;
 
@@ -119,7 +120,7 @@ function getAssessment(data) {
 function deleteSyllabus(syllabusID){
     $.ajax({
         type: "GET",
-        url: "/OBESystem/DeleteSyllabus?syllabusID=" + syllabusID,
+        url: "/OBESystem/DeleteSyllabus?contributor=" + userID + "&syllabusID=" + syllabusID,
         dataType: 'json',
         success: function (data) {
         },

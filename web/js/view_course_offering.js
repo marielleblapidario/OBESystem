@@ -791,7 +791,7 @@ function getCount(offeringID) {
 function deleteOffering(offeringID) {
     $.ajax({
         type: "GET",
-        url: "/OBESystem/DeleteOffering?offeringID=" + offeringID,
+        url: "/OBESystem/DeleteOffering?contributor=" + userID + "&offeringID=" + offeringID,
         dataType: 'json',
         success: function (data) {
         },

@@ -36,8 +36,9 @@ public class DeleteSyllabus extends BaseServlet {
         Gson g = new Gson();
         String s = null;
         int syllabusID = Integer.parseInt(request.getParameter("syllabusID"));
+        int contributor = Integer.parseInt(request.getParameter("contributor"));
         System.out.println("selected syllabusID: " + syllabusID);
-        s = g.toJson(new SyllabusDAO().deleteSyllabus(syllabusID));
+        s = g.toJson(new SyllabusDAO().deleteSyllabus(contributor, syllabusID));
         
         PrintWriter out = response.getWriter();
         out.print(s);
