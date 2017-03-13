@@ -50,6 +50,7 @@ public class EncodeCourseOffering extends BaseServlet {
         String startYears = request.getParameter("startYear");
         String endYears = request.getParameter("endYear");
         String syllabusIDs = request.getParameter("syllabusID");
+        String contributorS = request.getParameter("contributor");
         
         String section = request.getParameter("section");
         String days = request.getParameter("days");
@@ -73,6 +74,7 @@ public class EncodeCourseOffering extends BaseServlet {
         int faculty = Integer.parseInt(facultys);
         int startYear = Integer.parseInt(startYears);
         int endYear = Integer.parseInt(endYears);
+        int contributor = Integer.parseInt(contributorS);
         
         offering.setSyllabusID(syllabusID);
         offering.setCurriculumID(curriculumID);
@@ -84,6 +86,7 @@ public class EncodeCourseOffering extends BaseServlet {
         offering.setDays(days);
         offering.setTime(time);
         offering.setFaculty(faculty);
+        offering.setContributor(contributor);
         
         if (offeringDAO.encodeOffering(offering)) {
         } else {

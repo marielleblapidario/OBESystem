@@ -27,6 +27,7 @@ public class CourseOffering {
     private String facultyName;
     private String codeCourse;
     private String status;
+    private int contributor;
 
     /**
      * @return the curriculumID
@@ -250,5 +251,19 @@ public class CourseOffering {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the contributor
+     */
+    public int getContributor() {
+        return contributor;
+    }
+
+    /**
+     * @param contributor the contributor to set
+     */
+    public void setContributor(int contributor) {
+        this.contributor = contributor;
     }
 }

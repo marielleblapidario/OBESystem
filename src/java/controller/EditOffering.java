@@ -41,6 +41,7 @@ public class EditOffering extends BaseServlet {
         String section = request.getParameter("section");
         String days = request.getParameter("days");
         String time = request.getParameter("time");
+        String contributorS = request.getParameter("contributor");
         
         System.out.println("faculty: " + facultys);
         System.out.println("section: " + section);
@@ -49,12 +50,14 @@ public class EditOffering extends BaseServlet {
 
         int faculty = Integer.parseInt(facultys);
         int offeringID = Integer.parseInt(offeringIDs);
+        int contributor = Integer.parseInt(contributorS);
         
         offering.setOfferingID(offeringID);
         offering.setSection(section);
         offering.setDays(days);
         offering.setTime(time);
         offering.setFaculty(faculty);
+        offering.setContributor(contributor);
                 
         if (offeringDAO.updateOffering(offering)) {
         } else {

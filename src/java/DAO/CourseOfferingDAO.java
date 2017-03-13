@@ -27,8 +27,8 @@ public class CourseOfferingDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "INSERT INTO courseoffering (syllabusID, curriculumID, "
-                    + "courseID, term, startYear, endYear, section, days, time, faculty)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?);";
+                    + "courseID, term, startYear, endYear, section, days, time, faculty, contributor)\n"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newOffering.getSyllabusID());
@@ -41,6 +41,7 @@ public class CourseOfferingDAO {
             pstmt.setString(8, newOffering.getDays());
             pstmt.setString(9, newOffering.getTime());
             pstmt.setInt(10, newOffering.getFaculty());
+            pstmt.setInt(11, newOffering.getContributor());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -57,7 +58,7 @@ public class CourseOfferingDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE courseoffering \n"
-                    + "SET section = ?, days = ?, time= ?, faculty = ? \n"
+                    + "SET section = ?, days = ?, time= ?, faculty = ?, editor = ? \n"
                     + "WHERE offeringID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             
@@ -65,7 +66,8 @@ public class CourseOfferingDAO {
             pstmt.setString(2, newOffering.getDays());
             pstmt.setString(3, newOffering.getTime());
             pstmt.setInt(4, newOffering.getFaculty());
-            pstmt.setInt(5, newOffering.getOfferingID());
+            pstmt.setInt(5, newOffering.getContributor());
+            pstmt.setInt(6, newOffering.getOfferingID());
 
             pstmt.executeUpdate();
             pstmt.close();
