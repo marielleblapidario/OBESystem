@@ -82,7 +82,7 @@ public class EncodeStudentGrades extends BaseServlet {
                     syllabusID = Integer.parseInt(syllabusIDs);
                 }
             }
-            boolean delete = gradeDAO.deleteGrades(arrOfferingID.get(0));
+            boolean delete = gradeDAO.deleteGrades(contributor, arrOfferingID.get(0));
             System.out.println("deleted: " + delete);
             System.out.println("syllabusID: " + syllabusID);
             AssessmentDAO assessDAO = new AssessmentDAO();
@@ -116,7 +116,7 @@ public class EncodeStudentGrades extends BaseServlet {
 
             //calculates and encode the CO grade based on the assessment grade
             GradeCoDAO gradeCoDAO = new GradeCoDAO();
-            if (gradeCoDAO.deleteGrades(arrOfferingID.get(0))) {
+            if (gradeCoDAO.deleteGrades(contributor, arrOfferingID.get(0))) {
                 ArrayList<Grade> arrTemp = new ArrayList<>();
                 ArrayList<Integer> arrCO = new ArrayList<>();
                 //get students in Offering

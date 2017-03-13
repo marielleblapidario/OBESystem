@@ -168,13 +168,18 @@ public class GradeDAO {
         return assessmentID;
     }
 
-    public boolean deleteGrades(int offeringID) {
+    public boolean deleteGrades(int contributor, int offeringID) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "DELETE FROM grade\n"
-                    + "WHERE offeringID = ?;";
+            String query = "set @userID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, contributor);
+            pstmt.execute();
+            
+            query = "DELETE FROM grade\n"
+                    + "WHERE offeringID = ?;";
+            pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, offeringID);
             pstmt.executeUpdate();
