@@ -73,7 +73,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input name="startYear" type="text" class="form-control pull-right" id="from">
+                                            <input name="startYear" type="text" class="form-control pull-right" id="from" required>
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input name="endYear" type="text" class="form-control pull-right" id="to">
+                                            <input name="endYear" type="text" class="form-control pull-right" id="to" required>
                                         </div>
                                     </div>
                                 </div>

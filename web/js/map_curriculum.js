@@ -9,6 +9,7 @@ var arrPI = [];
 var arrCodePI = [];
 var arrCourseID = [];
 var existingCourses = [];
+var userID = sessionStorage.getItem("userID");
 
 $(document).ready(function () {
     $('#PI-labels').hide();
@@ -35,7 +36,7 @@ $(document).ready(function () {
                 var mapCurID = value[0];
                 var courseID = value[1];
                 var PI = value[2];
-                var mapCombo = {mapCurID: mapCurID, courseID: courseID, codePI: PI, curriculumID: codeCurriculum};
+                var mapCombo = {mapCurID: mapCurID, courseID: courseID, codePI: PI, curriculumID: codeCurriculum, contributor: userID};
                 mapping.push(mapCombo);
                 console.log(courseID + " is checked on " + PI + " curriculumID: " + codeCurriculum + "mapCurID: " + mapCurID);
             }

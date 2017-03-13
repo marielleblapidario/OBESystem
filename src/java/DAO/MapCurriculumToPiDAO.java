@@ -26,14 +26,15 @@ public class MapCurriculumToPiDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO mapcurriculumcoursestopi (mapCurID, codePI, curriculumID, courseID)\n"
-                    + "VALUES (?,?,?,?);";
+            String query = "INSERT INTO mapcurriculumcoursestopi (mapCurID, codePI, curriculumID, courseID, contributor)\n"
+                    + "VALUES (?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newMapping.getMapCurID());
             pstmt.setString(2, newMapping.getCodePI());
             pstmt.setInt(3, newMapping.getCurriculumID());
             pstmt.setInt(4, newMapping.getCourseID());
+            pstmt.setInt(5, newMapping.getContributor());
 
             pstmt.executeUpdate();
             pstmt.close();

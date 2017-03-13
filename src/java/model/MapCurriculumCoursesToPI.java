@@ -16,6 +16,7 @@ public class MapCurriculumCoursesToPI {
     private String codePI;
     
     private String description;
+    private int contributor;
 
     /**
      * @return the curriculumID
@@ -85,6 +86,20 @@ public class MapCurriculumCoursesToPI {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * @return the contributor
+     */
+    public int getContributor() {
+        return contributor;
+    }
+
+    /**
+     * @param contributor the contributor to set
+     */
+    public void setContributor(int contributor) {
+        this.contributor = contributor;
     }
 
 }

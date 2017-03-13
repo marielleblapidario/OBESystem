@@ -43,6 +43,7 @@ public class EncodeMapCurriculumToPI extends BaseServlet {
         ArrayList<Integer> arrMapCurID = new ArrayList<>();
         ArrayList<Integer> arrCourseID = new ArrayList<>();
         ArrayList<String> arrCodePI = new ArrayList<>();
+        int contributor = 0;
         int arrCurriculumID = 0;
         boolean checkIfExist = false;
         boolean x = true;
@@ -57,14 +58,16 @@ public class EncodeMapCurriculumToPI extends BaseServlet {
 
             for (int a = 0; a < jsonArray.size(); a++) {
                 JSONObject jsonObject = (JSONObject) jsonArray.get(a);
-                 String mapCurID = (String) jsonObject.get("mapCurID");
+                String mapCurID = (String) jsonObject.get("mapCurID");
                 String courseID = (String) jsonObject.get("courseID");
                 String codePI = (String) jsonObject.get("codePI");
                 String curriculumID = (String) jsonObject.get("curriculumID");
+                String contributorS = (String) jsonObject.get("contributor");
                 arrMapCurID.add(Integer.parseInt(mapCurID));
                 arrCourseID.add(Integer.parseInt(courseID));
                 arrCodePI.add(codePI);
                 arrCurriculumID = Integer.parseInt(curriculumID);
+                contributor = Integer.parseInt(contributorS);
             }
 
             try {
@@ -86,6 +89,7 @@ public class EncodeMapCurriculumToPI extends BaseServlet {
                     mapping.setCourseID(arrCourseID.get(y));
                     mapping.setCodePI(arrCodePI.get(y));
                     mapping.setMapCurID(arrMapCurID.get(y));
+                    mapping.setContributor(contributor);
                     if (dao.encodeMapCurriculumToCourse(mapping)) {
                     } else {
                         x = false;
@@ -112,6 +116,7 @@ public class EncodeMapCurriculumToPI extends BaseServlet {
                     deleteMap.setCurriculumID(arrCurriculumID);
                     deleteMap.setCourseID(existingMapping.get(a).getCourseID());
                     deleteMap.setCodePI(existingMapping.get(a).getCodePI());
+                    deleteMap.setContributor(contributor);
                     arrDeleteMap.add(deleteMap);
                 }
                 exist = false;
