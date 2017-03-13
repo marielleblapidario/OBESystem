@@ -28,6 +28,7 @@ public class CO {
     private String checkerName;
     private String codePI;
     private int mapCurID;
+    private int contributor;
 
     /**
      * @return the codeCO
@@ -209,5 +210,19 @@ public class CO {
      */
     public void setEndYear(int endYear) {
         this.endYear = endYear;
+    }
+
+    /**
+     * @return the contributor
+     */
+    public int getContributor() {
+        return contributor;
+    }
+
+    /**
+     * @param contributor the contributor to set
+     */
+    public void setContributor(int contributor) {
+        this.contributor = contributor;
     }
 }

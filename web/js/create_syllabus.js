@@ -95,7 +95,7 @@ $(document).ready(function () {
         for (var i = 0; arrCodeCO[i]; i++) {
             var createCO = {mapCurID: saveMapCurID, curriculumID: curriculumID, courseID: courseID,
                 term: finalTerm, startYear: startYear, endYear: endYear, codeCO: arrCodeCO[i],
-                description: arrDescription[i], codePI: arrCodePI[i], remarks: arrRemarks[i]};
+                description: arrDescription[i], codePI: arrCodePI[i], remarks: arrRemarks[i], contributor: contributor};
             arrCreateCO.push(createCO);
         }
         var jsonData = JSON.stringify(arrCreateCO);

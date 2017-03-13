@@ -26,6 +26,7 @@ public class Assessment {
     private int endYear;
     
     private String typeName;
+    private int contributor;
     
     
     /**
@@ -236,6 +237,20 @@ public class Assessment {
      */
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    /**
+     * @return the contributor
+     */
+    public int getContributor() {
+        return contributor;
+    }
+
+    /**
+     * @param contributor the contributor to set
+     */
+    public void setContributor(int contributor) {
+        this.contributor = contributor;
     }
     
 }

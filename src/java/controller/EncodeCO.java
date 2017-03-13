@@ -60,6 +60,7 @@ public class EncodeCO extends BaseServlet {
             int arrTerm = -1;
             int arrStartYear = -1;
             int arrEndYear = -1;
+            int contributor = -1;
 
             Object obj;
             String data = request.getParameter("jsonData");
@@ -81,6 +82,7 @@ public class EncodeCO extends BaseServlet {
                 String description = (String) jsonObject.get("description");
                 String codePI = (String) jsonObject.get("codePI");
                 String remarks = (String) jsonObject.get("remarks");
+                String contributorS = (String) jsonObject.get("contributor");
                 arrCodeCO.add(codeCO);
                 arrDescription.add(description);
                 arrCodePI.add(codePI);
@@ -91,6 +93,7 @@ public class EncodeCO extends BaseServlet {
                 arrTerm = Integer.parseInt(term);
                 arrStartYear = Integer.parseInt(startYear);
                 arrEndYear = Integer.parseInt(endYear);
+                contributor = Integer.parseInt(contributorS);
             }
 
             //get syllabusID
@@ -113,6 +116,7 @@ public class EncodeCO extends BaseServlet {
                 co.setCodeCO(arrCodeCO.get(y));
                 co.setDescription(arrDescription.get(y));
                 co.setRemarks(arrRemarks.get(y));
+                co.setContributor(contributor);
                 if (coDAO.encodeCO(co)) {
                 } else {
                     x = false;

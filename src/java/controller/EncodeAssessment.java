@@ -45,6 +45,7 @@ public class EncodeAssessment extends BaseServlet {
         String term = request.getParameter("term");
         String startYear = request.getParameter("startYear");
         String endYear = request.getParameter("endYear");
+        String contributor =request.getParameter("contributor");
         String[] coID = request.getParameterValues("codeCOA");
         String[] codeAT = request.getParameterValues("codeAT");
         String[] type = request.getParameterValues("type");
@@ -85,6 +86,7 @@ public class EncodeAssessment extends BaseServlet {
             as.setCoID(Integer.parseInt(coID[y]));
             as.setDescription(description[y]);
             as.setWeight(Double.parseDouble(weight[y]));
+            as.setContributor(Integer.parseInt(contributor));
             if (aDAO.encodeAssessment(as)) {
             } else {
                 x = false;

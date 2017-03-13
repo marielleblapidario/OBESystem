@@ -27,8 +27,8 @@ public class CoDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "INSERT INTO CO (mapCurID, codePI, syllabusID, curriculumID, "
-                    + "courseID, term, codeCO, description, remarks, startYear, endYear)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+                    + "courseID, term, codeCO, description, remarks, startYear, endYear, contributor)\n"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newCO.getMapCurID());
@@ -42,6 +42,7 @@ public class CoDAO {
             pstmt.setString(9, newCO.getRemarks());
             pstmt.setInt(10, newCO.getStartYear());
             pstmt.setInt(11, newCO.getEndYear());
+            pstmt.setInt(12, newCO.getContributor());
             pstmt.executeUpdate();
             pstmt.close();
             conn.close();
