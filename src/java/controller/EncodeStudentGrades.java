@@ -49,6 +49,7 @@ public class EncodeStudentGrades extends BaseServlet {
             ArrayList<Integer> arrOfferingID = new ArrayList<>();
             ArrayList<Grade> arrTempGrade = new ArrayList<>();
             int syllabusID = -1;
+            int contributor = 0;
 
             Object obj;
             String data = request.getParameter("jsonData");
@@ -65,6 +66,8 @@ public class EncodeStudentGrades extends BaseServlet {
                 String syllabusIDs = (String) jsonObject.get("syllabusID");
                 String type = (String) jsonObject.get("type");
                 String grade = (String) jsonObject.get("grade");
+                String contributorS = (String) jsonObject.get("contributor");
+                contributor = Integer.parseInt(contributorS);
                 if (!studentID.isEmpty()) {
                     Grade temp = new Grade();
                     temp.setStudentID(Integer.parseInt(studentID));
@@ -72,6 +75,7 @@ public class EncodeStudentGrades extends BaseServlet {
                     temp.setSyllabusID(syllabusID);
                     temp.setTypeName(type);
                     temp.setGrade(Double.parseDouble(grade));
+                    temp.setContributor(contributor);
 
                     arrTempGrade.add(temp);
                     arrOfferingID.add(Integer.parseInt(offeringID));
@@ -93,6 +97,7 @@ public class EncodeStudentGrades extends BaseServlet {
                 Grade temp = new Grade();
                 temp.setStudentID(arrTempGrade.get(y).getStudentID());
                 temp.setOfferingID(arrTempGrade.get(y).getOfferingID());
+                temp.setContributor(contributor);
                 //sets the grades of each assessment
                 for (int a = 0; a < arrAssess.size(); a++) {
                     System.out.println("typeName: " + arrAssess.get(a).getTypeName()
@@ -151,6 +156,7 @@ public class EncodeStudentGrades extends BaseServlet {
                         temp.setOfferingID(arrOfferingID.get(0));
                         temp.setCoID(arrCO.get(b));
                         temp.setGradeCO(gradeCO);
+                        temp.setContributor(contributor);
                         if (gradeCoDAO.encodeGrade(temp)) {
                         } else {
                             x = false;

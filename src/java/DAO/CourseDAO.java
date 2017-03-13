@@ -56,7 +56,7 @@ public class CourseDAO {
             Connection conn = myFactory.getConnection();
             String query = "UPDATE course \n"
                     + "SET codeCourse = ?, title = ?, units = ?, description = ?, "
-                    + "dateUpdated = ?, contributor = ?\n"
+                    + "dateUpdated = ?, editor = ?\n"
                     + "WHERE courseID = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 

@@ -25,14 +25,15 @@ public class GradeCoDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO gradeco (studentID, offeringID, coID, gradeCO)\n"
-                    + "VALUES (?,?,?,?);";
+            String query = "INSERT INTO gradeco (studentID, offeringID, coID, gradeCO, contributor)\n"
+                    + "VALUES (?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newStudent.getStudentID());
             pstmt.setInt(2, newStudent.getOfferingID());
             pstmt.setInt(3, newStudent.getCoID());
             pstmt.setDouble(4, newStudent.getGradeCO());
+            pstmt.setInt(5, newStudent.getContributor());
 
             pstmt.executeUpdate();
             pstmt.close();

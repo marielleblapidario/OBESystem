@@ -10,15 +10,17 @@ package model;
  * @author mariellelapidario
  */
 public class GradeCO {
+
     private int studentID;
     private int offeringID;
     private int coID;
     private double gradeCO;
-    
+
     private String codeCO;
     private String lastName;
     private String firstName;
     private String middleName;
+    private int contributor;
 
     /**
      * @return the studentID
@@ -130,5 +132,19 @@ public class GradeCO {
      */
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
+    }
+
+    /**
+     * @return the contributor
+     */
+    public int getContributor() {
+        return contributor;
+    }
+
+    /**
+     * @param contributor the contributor to set
+     */
+    public void setContributor(int contributor) {
+        this.contributor = contributor;
     }
 }

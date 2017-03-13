@@ -28,6 +28,7 @@ var strCourse;
 var strYear;
 var modal = $('#modal-co');
 var posID = sessionStorage.getItem("posID");
+var userID = sessionStorage.getItem("userID");
 
 $(window).load(function () {    
     divTable.hide();
@@ -583,7 +584,7 @@ function uploadAssessments(evt)
                         var tempGrade = currentline[j].replace('\r', '').replace('\n', '');
                         var grades = {studentID: studentData[(i - 1)].studentID,
                             offeringID: offeringID, type: tempType, grade: tempGrade,
-                            syllabusID: syllabusID};
+                            syllabusID: syllabusID, contributor: userID};
                         arrGrades.push(grades);
                     }
                 }

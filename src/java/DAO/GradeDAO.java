@@ -26,14 +26,15 @@ public class GradeDAO {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO grade (studentID, offeringID, assessmentID, grade)\n"
-                    + "VALUES (?,?,?,?);";
+            String query = "INSERT INTO grade (studentID, offeringID, assessmentID, grade, contributor)\n"
+                    + "VALUES (?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, newStudent.getStudentID());
             pstmt.setInt(2, newStudent.getOfferingID());
             pstmt.setInt(3, newStudent.getAssessmentID());
             pstmt.setDouble(4, newStudent.getGrade());
+            pstmt.setInt(5, newStudent.getContributor());
 
             pstmt.executeUpdate();
             pstmt.close();
