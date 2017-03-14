@@ -25,6 +25,7 @@ public class PI {
 
     private String contributorName;
     private String codePO;
+    private int count;
 
     /**
      * @return the codePI
@@ -167,6 +168,20 @@ public class PI {
      */
     public void setCodePO(String codePO) {
         this.codePO = codePO;
+    }
+
+    /**
+     * @return the count
+     */
+    public int getCount() {
+        return count;
+    }
+
+    /**
+     * @param count the count to set
+     */
+    public void setCount(int count) {
+        this.count = count;
     }
 
 }

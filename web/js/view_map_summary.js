@@ -4,6 +4,7 @@ var arrIGA = [];
 var arrPA = [];
 var arrPO = [];
 var arrPI = [];
+var arrPICount = [];
 
 $(document).ready(function () {
     getAllIGA();
@@ -81,6 +82,38 @@ function getAllPI(program) {
             console.log("arrPO : ", arrPO.length);
             console.log("arrPI : ", arrPI.length);
             create_table(arrIGA, arrPA, arrPO, arrPI, 'data');
+            GetPICount(program);
+
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+function GetPICount(program) {
+    $.ajax({
+        type: "GET",
+        url: "/OBESystem/GetPICount?SelectedProgram=" + program,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            for (var i = 0; i < arrPI.length; i++) {
+                var td = '<tr><td><b>' + arrPI[i].codePI + "</b></td>";
+                var check = false; 
+                for (var x = 0; x < data.length; x++) {
+                    if(arrPI[i].codePI == data[x].codePI){
+                        td += '<td>' + data[x].count + '</td></tr>';
+                        check = true;
+                    }
+                }
+                if(check == false)
+                {
+                     td += '<td>0</td></tr>';
+                }
+                $('#piCount').append(td);
+            }
+
 
         },
         error: function (response) {
@@ -150,9 +183,9 @@ function create_table(IGA, PA, PO, PI, table_name)
                         current_po = counter;
                         counter++;
                         po_rows++;
-                        
+
                         var testPO = "<b>" + PO[k].codePO + ":</b> " + PO[k].description;
-                        
+
                         ret_arr.push({
                             "value": testPO,
                             "rowspan": 0,
@@ -165,9 +198,9 @@ function create_table(IGA, PA, PO, PI, table_name)
                             {
                                 counter++;
                                 pi_rows++;
-                                
+
                                 var testPI = "<b>" + PI[l].codePI + ":</b> " + PI[l].description;
-                                
+
                                 ret_arr.push({
                                     "value": testPI,
                                     "rowspan": 1,

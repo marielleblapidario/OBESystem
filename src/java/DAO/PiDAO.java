@@ -207,4 +207,31 @@ public class PiDAO {
         }
         return null;
     }
+
+    public ArrayList<PI> GetPICount(String program) throws ParseException {
+        ArrayList<PI> newPA = new ArrayList<>();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select codePI, COUNT(codePI)as 'count' from co c \n"
+                    + "join curriculum cur \n"
+                    + "on c.curriculumID = cur.curriculumID where cur.program = ? group by codePI;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, program);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                PI temp = new PI();
+                temp.setCodePI(rs.getString("codePI"));
+                temp.setCount(rs.getInt("count"));
+                newPA.add(temp);
+            }
+            pstmt.close();
+            conn.close();
+            return newPA;
+        } catch (SQLException ex) {
+            Logger.getLogger(PiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

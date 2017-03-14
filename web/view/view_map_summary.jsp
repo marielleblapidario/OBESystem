@@ -59,6 +59,18 @@
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
+                                </table>                                
+                            </div>
+                            <div id="printheader" class="box-body">
+                                <h4>Performance Indicator Usage</h4>
+                                <table id="piCount" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Performance Indicator</th>
+                                            <th>Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
                                 </table>
                             </div>
                             <div class="box-footer">
